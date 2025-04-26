@@ -1,5 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @keyframes svelte-75jc8m-fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.animate-fadeIn.svelte-75jc8m{animation:svelte-75jc8m-fadeIn 0.5s ease-out forwards}
 .hide-scrollbar.svelte-1r0mlyh{scrollbar-width:none;-ms-overflow-style:none}.hide-scrollbar.svelte-1r0mlyh::-webkit-scrollbar{display:none}

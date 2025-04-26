@@ -6,6 +6,35 @@
 
         <title>Yoya Coffee Menu</title>
 
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+          tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                  'coffee': {
+                    50: '#f9f5f0',
+                    100: '#f1e8df',
+                    200: '#e3d1c0',
+                    300: '#d4b8a0',
+                    400: '#c69f81',
+                    500: '#b78661',
+                    600: '#9a6b4e',
+                    700: '#7d5640',
+                    800: '#634532',
+                    900: '#4a3425',
+                  },
+                },
+                fontFamily: {
+                  'sans': ['Poppins', 'sans-serif'],
+                  'serif': ['Playfair Display', 'serif'],
+                }
+              }
+            }
+          }
+        </script>
+
         <link rel="stylesheet" href="global.css">
         <link rel="stylesheet" href="build/bundle.css">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
