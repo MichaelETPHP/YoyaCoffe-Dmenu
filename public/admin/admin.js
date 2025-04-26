@@ -58,7 +58,8 @@ document.getElementById('login-form').addEventListener('submit', async function(
     
     if (response.ok) {
       const data = await response.json();
-      currentUser = data.user;
+      // Handle both response formats (data.user or direct user object)
+      currentUser = data.user || data;
       showAdminDashboard();
       loadDashboardStats();
       

@@ -437,7 +437,13 @@
     </div>
   </div>
   
-  <script src="/admin/admin.js"></script>
   <script src="/build/admin.js"></script>
+  <script src="/admin/admin.js"></script>
+  <script>
+    // Initialize admin application if available
+    if (typeof adminApp !== 'undefined' && adminApp.init) {
+      adminApp.init();
+    }
+  </script>
 </body>
 </html>

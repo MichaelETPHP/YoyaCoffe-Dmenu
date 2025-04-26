@@ -60,21 +60,26 @@ const server = http.createServer((req, res) => {
       req.on('end', () => {
         try {
           const credentials = JSON.parse(body);
+          console.log('Login attempt:', credentials.username);
           
           // Check if credentials match the default admin
           if (credentials.username === 'admin' && credentials.password === 'admin123') {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({
+            const user = {
               id: 1,
               username: 'admin',
               email: 'admin@yoyacoffee.com',
               role: 'admin'
-            }));
+            };
+            console.log('Login successful for admin');
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(user));
           } else {
+            console.log('Login failed: invalid credentials');
             res.writeHead(401, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Invalid credentials' }));
           }
         } catch (e) {
+          console.error('Login error:', e);
           res.writeHead(400, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ error: 'Invalid request format' }));
         }
