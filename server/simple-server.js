@@ -20,6 +20,17 @@ const MIME_TYPES = {
 
 // Simple file server
 const server = http.createServer((req, res) => {
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:5000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200);
+    return res.end();
+  }
   const parsedUrl = url.parse(req.url, true);
   let pathname = parsedUrl.pathname;
   
@@ -158,10 +169,10 @@ const server = http.createServer((req, res) => {
     else if (pathname === '/api/menu/stats/dashboard') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({
-        totalItems: 3,
+        totalMenuItems: 3,
+        totalCategories: 3,
         totalLikes: 85,
-        totalDislikes: 6,
-        mostLiked: {
+        mostLikedItem: {
           id: 2,
           name: 'Cappuccino',
           likes: 42

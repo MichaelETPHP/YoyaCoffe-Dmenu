@@ -5,7 +5,7 @@ let currentUser = null;
 
 // API Base URL - change to production URL when deployed
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname.includes('replit')
-  ? '' // Use relative URLs in development
+  ? 'http://localhost:5001' // Use backend server URL in development
   : 'https://menu.yoyacoffee.com';
 
 // Check if user is logged in
