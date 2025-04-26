@@ -19,9 +19,9 @@
     </div>
     
     <div class="hidden md:flex space-x-6">
-      <a href="#" class="hover:text-amber-200 transition-colors">About</a>
-      <a href="#" class="hover:text-amber-200 transition-colors">Locations</a>
-      <a href="#" class="hover:text-amber-200 transition-colors">Contact</a>
+      <a href="/#about" class="hover:text-amber-200 transition-colors">About</a>
+      <a href="/#locations" class="hover:text-amber-200 transition-colors">Locations</a>
+      <a href="/#contact" class="hover:text-amber-200 transition-colors">Contact</a>
     </div>
     
     <!-- Mobile menu button -->
