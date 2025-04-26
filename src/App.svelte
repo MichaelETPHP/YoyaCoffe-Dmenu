@@ -8,7 +8,7 @@
   import CategoryFilter from './components/CategoryFilter.svelte';
   import MusicPlayer from './components/MusicPlayer.svelte';
   import ModeToggle from './components/ModeToggle.svelte';
-  import AcademySection from './components/AcademySection.svelte';
+  import SplashScreen from './components/SplashScreen.svelte';
   
   let searchQuery = '';
   let searchResults = [];
@@ -16,6 +16,7 @@
   let activeCategory = null;
   let isMobile = false;
   let currentMode = 'menu';
+  let showSplash = true; // Control the splash screen visibility
   
   // Handle search query changes
   $: {
@@ -56,15 +57,15 @@
   }
 </script>
 
+<!-- Splash Screen -->
+<SplashScreen duration={2500} />
+
 <div class="min-h-screen flex flex-col bg-amber-50">
   <Header />
   
   <!-- Featured slider removed as requested -->
   
   <main class="flex-1 w-full">
-    <!-- Academy section -->
-    <AcademySection />
-    
     <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
       <!-- Sidebar with categories for desktop -->
       {#if !isMobile}
