@@ -8,6 +8,8 @@
   import CategoryFilter from './components/CategoryFilter.svelte';
   import MusicPlayer from './components/MusicPlayer.svelte';
   import ModeToggle from './components/ModeToggle.svelte';
+  import FeaturedSlider from './components/FeaturedSlider.svelte';
+  import AcademySection from './components/AcademySection.svelte';
   
   let searchQuery = '';
   let searchResults = [];
@@ -58,8 +60,14 @@
 <div class="min-h-screen flex flex-col bg-amber-50">
   <Header />
   
-  <main class="flex-1 max-w-7xl mx-auto px-4 py-6 w-full">
-    <div class="flex flex-col md:flex-row gap-6">
+  <!-- Featured Slider - Ads section for most popular menu items -->
+  <FeaturedSlider />
+  
+  <main class="flex-1 w-full">
+    <!-- Academy section -->
+    <AcademySection />
+    
+    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
       <!-- Sidebar with categories for desktop -->
       {#if !isMobile}
         <aside class="w-full md:w-64 shrink-0">
