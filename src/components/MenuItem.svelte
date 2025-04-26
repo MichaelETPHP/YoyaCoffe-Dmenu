@@ -1,5 +1,13 @@
 <script>
+  import { onMount } from 'svelte';
+  
   export let item;
+  
+  // Like/dislike state
+  let liked = false;
+  let disliked = false;
+  let feedbackMessage = "";
+  let showFeedback = false;
   
   // Generate icon based on item type
   function getIconForItem(itemId) {
@@ -33,9 +41,33 @@
   }
   
   const icon = getIconForItem(item.id);
+  
+  function handleLike() {
+    if (disliked) disliked = false; // Remove dislike if it was set
+    
+    liked = !liked; // Toggle like state
+    
+    if (liked) {
+      feedbackMessage = "Thank you for loving our " + item.name + "! 💕";
+      showFeedback = true;
+      setTimeout(() => { showFeedback = false; }, 3000);
+    }
+  }
+  
+  function handleDislike() {
+    if (liked) liked = false; // Remove like if it was set
+    
+    disliked = !disliked; // Toggle dislike state
+    
+    if (disliked) {
+      feedbackMessage = "We'll work to improve our " + item.name + "! 🙏";
+      showFeedback = true;
+      setTimeout(() => { showFeedback = false; }, 3000);
+    }
+  }
 </script>
 
-<div class="menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100 animate-fade-in">
+<div class="menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100 animate-fade-in relative">
   <!-- Steam animation for hot drinks -->
   {#if icon === 'coffee'}
     <div class="absolute top-0 right-3 z-10">
@@ -48,26 +80,27 @@
     </div>
   {/if}
 
+  <!-- Feedback message -->
+  {#if showFeedback}
+    <div class="absolute top-2 left-0 right-0 mx-auto text-center z-20 animate-fade-in-out">
+      <div class="bg-coffee-800 text-white px-3 py-2 rounded-full inline-block shadow-lg text-sm">
+        {feedbackMessage}
+      </div>
+    </div>
+  {/if}
+
   <!-- Coffee Image -->
   <div class="w-full h-48 overflow-hidden">
     <img src={item.image} alt={item.name} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
   </div>
 
   <div class="p-5">
-    <!-- Item header with rating -->
+    <!-- Item header -->
     <div class="flex justify-between items-start">
       <!-- Title and description -->
       <div class="flex-1 pr-3">
         <h3 class="font-semibold text-lg sm:text-xl text-coffee-800 heading-serif group-hover:text-coffee-600 transition-colors">{item.name}</h3>
         <p class="text-coffee-600 text-sm mt-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">{item.description}</p>
-      </div>
-      
-      <!-- Rating display -->
-      <div class="flex items-center bg-amber-50 px-2 py-1 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-        <span class="ml-1 text-sm font-medium text-coffee-800">{item.rating}</span>
       </div>
     </div>
     
@@ -98,17 +131,31 @@
     <!-- Divider with gradient and animation -->
     <div class="my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent group-hover:via-coffee-300 transition-colors duration-500"></div>
     
-    <!-- Price only (no add button) -->
+    <!-- Price and like/dislike system -->
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
         <span class="text-coffee-800 font-bold text-lg group-hover:text-coffee-900 transition-colors duration-300 transform group-hover:scale-105">{item.price} ETB</span>
       </div>
-      <!-- Rating display at the bottom -->
-      <div class="flex items-center bg-amber-50 px-3 py-1 rounded-full group-hover:bg-amber-100 transition-colors duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500 group-hover:text-yellow-600 transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-        <span class="ml-1 text-sm font-medium text-coffee-800 group-hover:text-coffee-900 transition-colors duration-300">{item.rating}</span>
+      
+      <!-- Like/Dislike Buttons -->
+      <div class="flex space-x-2">
+        <!-- Like Button -->
+        <button 
+          on:click={handleLike}
+          class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {liked ? 'bg-red-100 text-red-500 scale-110' : 'bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400'}"
+          aria-label="Like this item"
+        >
+          <span class="text-lg">❤️</span>
+        </button>
+        
+        <!-- Dislike Button -->
+        <button 
+          on:click={handleDislike}
+          class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {disliked ? 'bg-gray-200 text-gray-700 scale-110' : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'}"
+          aria-label="Dislike this item"
+        >
+          <span class="text-lg">👎</span>
+        </button>
       </div>
     </div>
   </div>
@@ -119,6 +166,10 @@
     animation: fadeIn 0.8s ease-out forwards;
   }
   
+  .animate-fade-in-out {
+    animation: fadeInOut 3s ease-out forwards;
+  }
+  
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -127,6 +178,25 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
     }
   }
   

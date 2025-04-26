@@ -52,9 +52,6 @@
     
     <!-- Desktop navigation with modern micro-interactions -->
     <nav class="hidden md:flex items-center space-x-8">
-      <a href="/#about" class="text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium">About</a>
-      <a href="/#locations" class="text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium">Locations</a>
-      <a href="/#contact" class="text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium">Contact</a>
       <button 
         on:click={openTicTacToe}
         class="text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium flex items-center"
@@ -89,9 +86,6 @@
   {#if isMenuOpen}
     <div class="md:hidden bg-coffee-700 overflow-hidden">
       <div class="px-4 pt-2 pb-4 space-y-3 animate-slide-down">
-        <a href="/#about" class="block text-cream-100 hover:text-cream-300 py-2 text-base font-medium">About</a>
-        <a href="/#locations" class="block text-cream-100 hover:text-cream-300 py-2 text-base font-medium">Locations</a>
-        <a href="/#contact" class="block text-cream-100 hover:text-cream-300 py-2 text-base font-medium">Contact</a>
         <button 
           on:click={openTicTacToe}
           class="w-full text-left text-cream-100 hover:text-cream-300 py-2 text-base font-medium flex items-center"
