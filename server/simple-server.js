@@ -205,8 +205,10 @@ const server = http.createServer((req, res) => {
   }
   
   // Normalize path and handle root or admin requests
-  if (pathname === '/' || pathname === '/admin' || pathname.startsWith('/admin/')) {
-    pathname = pathname === '/' ? '/index.html' : '/admin.html';
+  if (pathname === '/') {
+    pathname = '/index.html';
+  } else if (pathname === '/admin') {
+    pathname = '/admin-login.html';
   }
   
   // Construct the file path

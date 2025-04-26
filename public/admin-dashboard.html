@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoya Coffee Admin Dashboard</title>
+  <link rel="stylesheet" href="/global.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f9f5f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .sidebar {
+      background-color: #382716;
+      color: white;
+      min-height: 100vh;
+      width: 250px;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 1.5rem;
+    }
+    .nav-link {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .card {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-primary {
+      background-color: #7c5e3f;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: #63492f;
+    }
+    .stat-card {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 1.25rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      font-weight: 600;
+      color: #666;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        z-index: 10;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .mobile-header {
+        display: flex;
+      }
+    }
+    .mobile-header {
+      display: none;
+      background-color: #382716;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="p-4 text-center">
+        <h1 class="text-xl font-bold">Yoya Coffee Admin</h1>
+      </div>
+      
+      <nav class="mt-6">
+        <a href="#" class="nav-link active" data-page="dashboard">
+          <span class="mr-2">📊</span> Dashboard
+        </a>
+        <a href="#" class="nav-link" data-page="menu">
+          <span class="mr-2">☕</span> Menu Items
+        </a>
+        <a href="#" class="nav-link" data-page="categories">
+          <span class="mr-2">📑</span> Categories
+        </a>
+        <a href="#" class="nav-link" data-page="users">
+          <span class="mr-2">👤</span> Users
+        </a>
+        <a href="#" class="nav-link" id="logout-link">
+          <span class="mr-2">🚪</span> Logout
+        </a>
+      </nav>
+    </div>
+    
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+      <button id="menu-toggle" class="mr-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <h1 class="font-bold">Yoya Coffee Admin</h1>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Dashboard Page -->
+      <div id="dashboard-page" class="page active">
+        <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="stat-card">
+            <h3 class="text-sm text-gray-500 mb-1">Total Menu Items</h3>
+            <p class="text-2xl font-semibold" id="total-items">3</p>
+          </div>
+          
+          <div class="stat-card">
+            <h3 class="text-sm text-gray-500 mb-1">Categories</h3>
+            <p class="text-2xl font-semibold" id="total-categories">3</p>
+          </div>
+          
+          <div class="stat-card">
+            <h3 class="text-sm text-gray-500 mb-1">Total Likes</h3>
+            <p class="text-2xl font-semibold" id="total-likes">85</p>
+          </div>
+          
+          <div class="stat-card">
+            <h3 class="text-sm text-gray-500 mb-1">Most Popular Item</h3>
+            <p class="text-xl font-semibold" id="popular-item">Cappuccino</p>
+            <p class="text-sm text-gray-500" id="popular-item-likes">42 likes</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-lg font-semibold mb-3">Quick Actions</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="#" class="bg-blue-50 hover:bg-blue-100 p-3 rounded flex items-center transition-colors" data-page="menu">
+              <span class="text-2xl mr-3">☕</span>
+              <div>
+                <h4 class="font-medium">Add Menu Item</h4>
+                <p class="text-sm text-gray-600">Create a new coffee item</p>
+              </div>
+            </a>
+            
+            <a href="#" class="bg-green-50 hover:bg-green-100 p-3 rounded flex items-center transition-colors" data-page="categories">
+              <span class="text-2xl mr-3">📑</span>
+              <div>
+                <h4 class="font-medium">Manage Categories</h4>
+                <p class="text-sm text-gray-600">Add or edit categories</p>
+              </div>
+            </a>
+            
+            <a href="#" class="bg-purple-50 hover:bg-purple-100 p-3 rounded flex items-center transition-colors" data-page="users">
+              <span class="text-2xl mr-3">👤</span>
+              <div>
+                <h4 class="font-medium">Manage Users</h4>
+                <p class="text-sm text-gray-600">Add or edit users</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Menu Items Page -->
+      <div id="menu-page" class="page">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Menu Items</h2>
+          <button class="btn-primary">Add New Item</button>
+        </div>
+        
+        <div class="card">
+          <div class="overflow-x-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Featured</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="menu-items-table">
+                <!-- Menu items will be loaded here via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Categories Page -->
+      <div id="categories-page" class="page">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Categories</h2>
+          <button class="btn-primary">Add New Category</button>
+        </div>
+        
+        <div class="card">
+          <div class="overflow-x-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Items Count</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="categories-table">
+                <!-- Categories will be loaded here via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Users Page -->
+      <div id="users-page" class="page">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Users</h2>
+          <button class="btn-primary">Add New User</button>
+        </div>
+        
+        <div class="card">
+          <div class="overflow-x-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-table">
+                <!-- Users will be loaded here via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // API settings
+    const API_URL = 'http://localhost:5001';
+    
+    // DOM elements
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
+    const logoutLink = document.getElementById('logout-link');
+    
+    // Menu items table
+    const menuItemsTable = document.getElementById('menu-items-table');
+    const categoriesTable = document.getElementById('categories-table');
+    const usersTable = document.getElementById('users-table');
+    
+    // Dashboard elements
+    const totalItems = document.getElementById('total-items');
+    const totalCategories = document.getElementById('total-categories');
+    const totalLikes = document.getElementById('total-likes');
+    const popularItem = document.getElementById('popular-item');
+    const popularItemLikes = document.getElementById('popular-item-likes');
+    
+    // Toggle mobile menu
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+    
+    // Navigation and page switching
+    navLinks.forEach(link => {
+      if (link.getAttribute('id') !== 'logout-link') {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Remove active class from all links and pages
+          navLinks.forEach(l => l.classList.remove('active'));
+          pages.forEach(p => p.classList.remove('active'));
+          
+          // Add active class to clicked link
+          link.classList.add('active');
+          
+          // Show corresponding page
+          const pageId = link.getAttribute('data-page');
+          document.getElementById(`${pageId}-page`).classList.add('active');
+          
+          // Close sidebar on mobile
+          if (window.innerWidth < 768) {
+            sidebar.classList.remove('open');
+          }
+          
+          // Load data for the page
+          if (pageId === 'menu') {
+            loadMenuItems();
+          } else if (pageId === 'categories') {
+            loadCategories();
+          } else if (pageId === 'users') {
+            loadUsers();
+          } else if (pageId === 'dashboard') {
+            loadDashboardStats();
+          }
+        });
+      }
+    });
+    
+    // Quick action links
+    document.querySelectorAll('[data-page]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const pageId = link.getAttribute('data-page');
+        
+        // Simulate clicking the corresponding nav link
+        document.querySelector(`.nav-link[data-page="${pageId}"]`).click();
+      });
+    });
+    
+    // Logout functionality
+    logoutLink.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        await fetch(`${API_URL}/api/auth/logout`, {
+          method: 'POST',
+          credentials: 'include'
+        });
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+      
+      // Redirect to login page
+      window.location.href = '/admin-login.html';
+    });
+    
+    // Load dashboard stats
+    async function loadDashboardStats() {
+      try {
+        const response = await fetch(`${API_URL}/api/menu/stats/dashboard`);
+        if (response.ok) {
+          const stats = await response.json();
+          
+          totalItems.textContent = stats.totalMenuItems;
+          totalCategories.textContent = stats.totalCategories;
+          totalLikes.textContent = stats.totalLikes;
+          
+          if (stats.mostLikedItem) {
+            popularItem.textContent = stats.mostLikedItem.name;
+            popularItemLikes.textContent = `${stats.mostLikedItem.likes} likes`;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading dashboard stats:', error);
+      }
+    }
+    
+    // Load menu items
+    async function loadMenuItems() {
+      try {
+        const response = await fetch(`${API_URL}/api/menu`);
+        if (response.ok) {
+          const items = await response.json();
+          
+          menuItemsTable.innerHTML = '';
+          
+          items.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="flex items-center">
+                ${item.image ? `<img src="${item.image}" alt="${item.name}" class="w-10 h-10 rounded-full mr-2 object-cover">` : ''}
+                <div>
+                  <div class="font-medium">${item.name}</div>
+                  <div class="text-sm text-gray-500">${item.description ? (item.description.length > 30 ? item.description.substring(0, 30) + '...' : item.description) : ''}</div>
+                </div>
+              </td>
+              <td>${item.categoryName}</td>
+              <td>$${item.formattedPrice}</td>
+              <td>${item.featured ? '★' : '☆'}</td>
+              <td>
+                <button class="text-blue-600 hover:text-blue-800 mr-2">Edit</button>
+                <button class="text-red-600 hover:text-red-800">Delete</button>
+              </td>
+            `;
+            menuItemsTable.appendChild(row);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading menu items:', error);
+      }
+    }
+    
+    // Load categories
+    async function loadCategories() {
+      try {
+        const response = await fetch(`${API_URL}/api/categories/stats/counts`);
+        if (response.ok) {
+          const categories = await response.json();
+          
+          categoriesTable.innerHTML = '';
+          
+          categories.forEach(category => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="font-medium">${category.name}</td>
+              <td>${category.description}</td>
+              <td>${category.item_count}</td>
+              <td>
+                <button class="text-blue-600 hover:text-blue-800 mr-2">Edit</button>
+                <button class="text-red-600 hover:text-red-800">Delete</button>
+              </td>
+            `;
+            categoriesTable.appendChild(row);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      }
+    }
+    
+    // Load users
+    async function loadUsers() {
+      try {
+        const response = await fetch(`${API_URL}/api/users`);
+        if (response.ok) {
+          const users = await response.json();
+          
+          usersTable.innerHTML = '';
+          
+          users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="font-medium">${user.username}</td>
+              <td>${user.email}</td>
+              <td>${user.role}</td>
+              <td>
+                <button class="text-blue-600 hover:text-blue-800 mr-2">Edit</button>
+                <button class="text-red-600 hover:text-red-800">Delete</button>
+              </td>
+            `;
+            usersTable.appendChild(row);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading users:', error);
+      }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load dashboard stats initially
+      loadDashboardStats();
+    });
+  </script>
+</body>
+</html>
