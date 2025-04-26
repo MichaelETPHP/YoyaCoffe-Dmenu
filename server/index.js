@@ -6,6 +6,7 @@ import { pool } from './db.js';
 import authRoutes from './routes/auth.js';
 import menuRoutes from './routes/menu.js';
 import categoryRoutes from './routes/categories.js';
+import userRoutes from './routes/users.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -40,24 +41,23 @@ app.use(session({
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/users', userRoutes);
 
-// Frontend paths (for production)
-if (process.env.NODE_ENV === 'production') {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const staticPath = path.join(__dirname, '../public');
-  
-  app.use(express.static(staticPath));
-  
-  // Admin UI route
-  app.get('/admin*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'admin.html'));
-  });
-  
-  // All other routes go to the main index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
-  });
-}
+// Frontend paths
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const staticPath = path.join(__dirname, '../public');
+
+app.use(express.static(staticPath));
+
+// Admin UI route
+app.get('/admin*', (req, res) => {
+  res.sendFile(path.join(staticPath, 'admin.html'));
+});
+
+// All other routes go to the main index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
+});
 
 // Start the server
 app.listen(PORT, () => {
