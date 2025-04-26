@@ -20,8 +20,8 @@ const MIME_TYPES = {
 
 // Simple file server
 const server = http.createServer((req, res) => {
-  // Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:5000');
+  // Add CORS headers for local development (you can disable in production)
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -209,6 +209,8 @@ const server = http.createServer((req, res) => {
     pathname = '/index.html';
   } else if (pathname === '/admin') {
     pathname = '/admin-login.html';
+  } else if (pathname === '/admin-dashboard') {
+    pathname = '/admin-dashboard.html';
   }
   
   // Construct the file path

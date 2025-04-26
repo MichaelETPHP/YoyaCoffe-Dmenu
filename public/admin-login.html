@@ -89,8 +89,8 @@
         const password = document.getElementById('password').value;
         
         try {
-          // Use our backend server
-          const response = await fetch('http://localhost:5001/api/auth/login', {
+          // Use relative URL for API endpoint
+          const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
