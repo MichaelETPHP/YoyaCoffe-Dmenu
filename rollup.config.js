@@ -29,14 +29,16 @@ function serve() {
   };
 }
 
-export default {
-  input: 'src/main.js',
-  output: {
-    sourcemap: true,
-    format: 'iife',
-    name: 'app',
-    file: 'public/build/bundle.js'
-  },
+export default [
+  // Main application build
+  {
+    input: 'src/main.js',
+    output: {
+      sourcemap: true,
+      format: 'iife',
+      name: 'app',
+      file: 'public/build/bundle.js'
+    },
   plugins: [
     svelte({
       preprocess: sveltePreprocess({
@@ -78,4 +80,25 @@ export default {
   watch: {
     clearScreen: false
   }
-};
+},
+// Admin application build
+{
+  input: 'src/admin-main.js',
+  output: {
+    sourcemap: true,
+    format: 'iife',
+    name: 'adminApp',
+    file: 'public/build/admin.js'
+  },
+  plugins: [
+    resolve({
+      browser: true
+    }),
+    commonjs(),
+    !production && livereload('public'),
+    production && terser()
+  ],
+  watch: {
+    clearScreen: false
+  }
+}];
