@@ -1,8 +1,8 @@
-import express from 'express';
-import { eq, sql } from 'drizzle-orm';
-import { db } from '../db.js';
-import { categories, menuItems } from '../models/schema.js';
-import { isAdminOrStaff } from '../middleware/auth.js';
+const express = require('express');
+const { eq, sql } = require('drizzle-orm');
+const { db } = require('../db.js');
+const { categories, menuItems } = require('../models/schema.js');
+const { isAdminOrStaff } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -153,4 +153,4 @@ router.get('/stats/counts', isAdminOrStaff, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

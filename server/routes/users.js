@@ -1,9 +1,9 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import { eq } from 'drizzle-orm';
-import { db } from '../db.js';
-import { users } from '../models/schema.js';
-import { isAdmin } from '../middleware/auth.js';
+const express = require('express');
+const bcrypt = require('bcrypt');
+const { eq, sql } = require('drizzle-orm');
+const { db } = require('../db.js');
+const { users } = require('../models/schema.js');
+const { isAdmin } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -177,11 +177,11 @@ router.delete('/:id', isAdmin, async (req, res) => {
     
     // Prevent deleting the last admin
     if (existingUser[0].role === 'admin') {
-      const adminCount = await db.select({ count: { value: sql`count(*)` } })
+      const adminCount = await db.select({ count: sql`count(*)` })
         .from(users)
         .where(eq(users.role, 'admin'));
       
-      if (adminCount[0].count.value <= 1) {
+      if (parseInt(adminCount[0].count) <= 1) {
         return res.status(400).json({ error: 'Cannot delete the last admin user' });
       }
     }
@@ -196,4 +196,4 @@ router.delete('/:id', isAdmin, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

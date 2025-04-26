@@ -1,9 +1,9 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import { eq } from 'drizzle-orm';
-import { db } from '../db.js';
-import { users } from '../models/schema.js';
-import { isAuthenticated, isAdmin } from '../middleware/auth.js';
+const express = require('express');
+const bcrypt = require('bcrypt');
+const { eq } = require('drizzle-orm');
+const { db } = require('../db.js');
+const { users } = require('../models/schema.js');
+const { isAuthenticated, isAdmin } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -130,4 +130,4 @@ router.post('/init', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

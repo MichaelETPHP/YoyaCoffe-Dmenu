@@ -1,11 +1,11 @@
-import { pgTable, serial, text, varchar, integer, timestamp, boolean, pgEnum } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+const { pgTable, serial, text, varchar, integer, timestamp, boolean, pgEnum } = require('drizzle-orm/pg-core');
+const { relations } = require('drizzle-orm');
 
 // Create Role enum type
-export const userRoleEnum = pgEnum('user_role', ['admin', 'staff']);
+const userRoleEnum = pgEnum('user_role', ['admin', 'staff']);
 
 // Users table
-export const users = pgTable('users', {
+const users = pgTable('users', {
   id: serial('id').primaryKey(),
   username: varchar('username', { length: 50 }).notNull().unique(),
   email: varchar('email', { length: 100 }).notNull().unique(),
@@ -16,7 +16,7 @@ export const users = pgTable('users', {
 });
 
 // Categories table
-export const categories = pgTable('categories', {
+const categories = pgTable('categories', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 50 }).notNull().unique(),
   description: text('description'),
@@ -25,7 +25,7 @@ export const categories = pgTable('categories', {
 });
 
 // Menu items table
-export const menuItems = pgTable('menu_items', {
+const menuItems = pgTable('menu_items', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 100 }).notNull(),
   description: text('description'),
@@ -40,7 +40,7 @@ export const menuItems = pgTable('menu_items', {
 });
 
 // Sessions table for user authentication
-export const sessions = pgTable('sessions', {
+const sessions = pgTable('sessions', {
   id: varchar('id', { length: 255 }).primaryKey(),
   userId: integer('user_id').references(() => users.id),
   data: text('data').notNull(),
@@ -48,24 +48,36 @@ export const sessions = pgTable('sessions', {
 });
 
 // Define relations
-export const usersRelations = relations(users, ({ many }) => ({
+const usersRelations = relations(users, ({ many }) => ({
   sessions: many(sessions),
 }));
 
-export const categoriesRelations = relations(categories, ({ many }) => ({
+const categoriesRelations = relations(categories, ({ many }) => ({
   menuItems: many(menuItems),
 }));
 
-export const menuItemsRelations = relations(menuItems, ({ one }) => ({
+const menuItemsRelations = relations(menuItems, ({ one }) => ({
   category: one(categories, {
     fields: [menuItems.categoryId],
     references: [categories.id],
   }),
 }));
 
-export const sessionsRelations = relations(sessions, ({ one }) => ({
+const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
     references: [users.id],
   }),
 }));
+
+module.exports = {
+  userRoleEnum,
+  users,
+  categories,
+  menuItems,
+  sessions,
+  usersRelations,
+  categoriesRelations,
+  menuItemsRelations,
+  sessionsRelations
+};
