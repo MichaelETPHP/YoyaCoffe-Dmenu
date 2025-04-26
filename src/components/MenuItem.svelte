@@ -35,15 +35,19 @@
   const icon = getIconForItem(item.id);
 </script>
 
-<div class="menu-item bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-  <div class="p-4">
+<div class="menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100">
+  <div class="p-5">
+    <!-- Item header with icon -->
     <div class="flex justify-between items-start">
-      <div class="flex-1">
-        <h3 class="font-semibold text-lg text-gray-800">{item.name}</h3>
-        <p class="text-gray-600 text-sm mt-1">{item.description}</p>
+      <!-- Title and description -->
+      <div class="flex-1 pr-3">
+        <h3 class="font-semibold text-lg sm:text-xl text-coffee-800 heading-serif group-hover:text-coffee-600 transition-colors">{item.name}</h3>
+        <p class="text-coffee-600 text-sm mt-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">{item.description}</p>
       </div>
-      <div class="ml-4 flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600">
+      
+      <!-- Coffee icon with fancy hover animation -->
+      <div class="ml-2 flex-shrink-0 bg-coffee-100 p-3 rounded-full transform group-hover:rotate-12 transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-coffee-600 group-hover:text-coffee-700">
           {#if icon === 'coffee'}
             <path d="M18 8h1a4 4 0 010 8h-1"></path>
             <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path>
@@ -64,10 +68,23 @@
         </svg>
       </div>
     </div>
-    <div class="mt-4 flex justify-between items-center">
-      <span class="text-amber-700 font-bold">${item.price.toFixed(2)}</span>
-      <button class="px-3 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors text-sm">
-        Add
+    
+    <!-- Divider with gradient -->
+    <div class="my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent"></div>
+    
+    <!-- Price and action button -->
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col">
+        <span class="text-coffee-800 font-bold text-lg">${item.price.toFixed(2)}</span>
+        <span class="text-coffee-500 text-xs">Tax included</span>
+      </div>
+      
+      <button class="px-4 py-2 bg-cream-600 text-coffee-900 font-medium rounded-lg hover:bg-cream-500 transition-all duration-300 transform hover:scale-105 hover:shadow-md flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>Add</span>
       </button>
     </div>
   </div>
