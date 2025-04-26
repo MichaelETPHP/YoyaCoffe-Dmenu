@@ -219,8 +219,201 @@
     </main>
   </div>
 
-  <!-- Modals Placeholder -->
-  <div id="modal-container"></div>
+  <!-- Modals -->
+  <!-- Add Menu Item Modal -->
+  <div id="add-menu-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Add New Menu Item</h3>
+        <button class="text-gray-400 hover:text-gray-500 close-modal" data-modal="add-menu-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <form id="add-menu-form" class="space-y-4">
+        <div>
+          <label for="menu-name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="menu-name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="menu-price" class="block text-sm font-medium text-gray-700">Price ($)</label>
+          <input type="number" id="menu-price" name="price" step="0.01" min="0.01" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="menu-category" class="block text-sm font-medium text-gray-700">Category</label>
+          <select id="menu-category" name="categoryId" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+            <option value="">Select a category</option>
+            <!-- Categories will be loaded here -->
+          </select>
+        </div>
+        
+        <div>
+          <label for="menu-description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="menu-description" name="description" rows="3" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"></textarea>
+        </div>
+        
+        <div>
+          <label for="menu-image" class="block text-sm font-medium text-gray-700">Image URL</label>
+          <input type="url" id="menu-image" name="image" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox" id="menu-featured" name="featured" class="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded">
+          <label for="menu-featured" class="ml-2 block text-sm text-gray-900">Featured Item</label>
+        </div>
+        
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 close-modal" data-modal="add-menu-modal">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Add Category Modal -->
+  <div id="add-category-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Add New Category</h3>
+        <button class="text-gray-400 hover:text-gray-500 close-modal" data-modal="add-category-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <form id="add-category-form" class="space-y-4">
+        <div>
+          <label for="category-name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="category-name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="category-description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="category-description" name="description" rows="3" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"></textarea>
+        </div>
+        
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 close-modal" data-modal="add-category-modal">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Add Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Edit Menu Item Modal -->
+  <div id="edit-menu-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Edit Menu Item</h3>
+        <button class="text-gray-400 hover:text-gray-500 close-modal" data-modal="edit-menu-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <form id="edit-menu-form" class="space-y-4">
+        <input type="hidden" id="edit-menu-id" name="id">
+        
+        <div>
+          <label for="edit-menu-name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="edit-menu-name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="edit-menu-price" class="block text-sm font-medium text-gray-700">Price ($)</label>
+          <input type="number" id="edit-menu-price" name="price" step="0.01" min="0.01" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="edit-menu-category" class="block text-sm font-medium text-gray-700">Category</label>
+          <select id="edit-menu-category" name="categoryId" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+            <option value="">Select a category</option>
+            <!-- Categories will be loaded here -->
+          </select>
+        </div>
+        
+        <div>
+          <label for="edit-menu-description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="edit-menu-description" name="description" rows="3" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"></textarea>
+        </div>
+        
+        <div>
+          <label for="edit-menu-image" class="block text-sm font-medium text-gray-700">Image URL</label>
+          <input type="url" id="edit-menu-image" name="image" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox" id="edit-menu-featured" name="featured" class="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded">
+          <label for="edit-menu-featured" class="ml-2 block text-sm text-gray-900">Featured Item</label>
+        </div>
+        
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 close-modal" data-modal="edit-menu-modal">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Update Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Edit Category Modal -->
+  <div id="edit-category-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Edit Category</h3>
+        <button class="text-gray-400 hover:text-gray-500 close-modal" data-modal="edit-category-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <form id="edit-category-form" class="space-y-4">
+        <input type="hidden" id="edit-category-id" name="id">
+        
+        <div>
+          <label for="edit-category-name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="edit-category-name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+        </div>
+        
+        <div>
+          <label for="edit-category-description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="edit-category-description" name="description" rows="3" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"></textarea>
+        </div>
+        
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 close-modal" data-modal="edit-category-modal">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Update Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Confirm Delete Modal -->
+  <div id="confirm-delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-900" id="confirm-delete-title">Confirm Delete</h3>
+        <button class="text-gray-400 hover:text-gray-500 close-modal" data-modal="confirm-delete-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <p id="confirm-delete-message" class="mb-6 text-gray-600">Are you sure you want to delete this item?</p>
+      
+      <div class="flex justify-end space-x-3">
+        <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 close-modal" data-modal="confirm-delete-modal">Cancel</button>
+        <button id="confirm-delete-button" type="button" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Toast Container -->
   <div class="toast-container"></div>
@@ -230,6 +423,9 @@
 
     // Global state
     let currentUser = null;
+    let allMenuItems = [];
+    let allCategories = [];
+    let deleteCallbackFunction = null;
     
     async function init() {
       // Setup event listeners
@@ -239,6 +435,39 @@
       // Navigation links
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', handleNavigation);
+      });
+      
+      // Modal actions
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const modalId = btn.getAttribute('data-modal');
+          toggleModal(modalId, false);
+        });
+      });
+      
+      // Setup add menu button
+      document.getElementById('add-menu-item-btn')?.addEventListener('click', () => {
+        loadCategoriesForSelect('menu-category');
+        toggleModal('add-menu-modal', true);
+      });
+      
+      // Setup add category button
+      document.getElementById('add-category-btn')?.addEventListener('click', () => {
+        toggleModal('add-category-modal', true);
+      });
+      
+      // Form submissions
+      document.getElementById('add-menu-form')?.addEventListener('submit', handleAddMenuItem);
+      document.getElementById('add-category-form')?.addEventListener('submit', handleAddCategory);
+      document.getElementById('edit-menu-form')?.addEventListener('submit', handleEditMenuItemSubmit);
+      document.getElementById('edit-category-form')?.addEventListener('submit', handleEditCategorySubmit);
+      
+      // Confirm delete button
+      document.getElementById('confirm-delete-button')?.addEventListener('click', () => {
+        if (deleteCallbackFunction) {
+          deleteCallbackFunction();
+        }
+        toggleModal('confirm-delete-modal', false);
       });
       
       // Check if user is already logged in
@@ -404,15 +633,15 @@
       try {
         const response = await fetch('/api/menu');
         if (response.ok) {
-          const menuItems = await response.json();
+          allMenuItems = await response.json();
           
-          if (menuItems.length === 0) {
+          if (allMenuItems.length === 0) {
             menuItemsList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">No menu items found</li>';
             return;
           }
           
           menuItemsList.innerHTML = '';
-          menuItems.forEach(item => {
+          allMenuItems.forEach(item => {
             const listItem = document.createElement('li');
             listItem.className = 'px-6 py-4 flex items-center justify-between';
             
@@ -476,15 +705,15 @@
       try {
         const response = await fetch('/api/categories/stats/counts');
         if (response.ok) {
-          const categories = await response.json();
+          allCategories = await response.json();
           
-          if (categories.length === 0) {
+          if (allCategories.length === 0) {
             categoriesList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">No categories found</li>';
             return;
           }
           
           categoriesList.innerHTML = '';
-          categories.forEach(category => {
+          allCategories.forEach(category => {
             const listItem = document.createElement('li');
             listItem.className = 'px-6 py-4 flex items-center justify-between';
             
@@ -502,12 +731,19 @@
             actions.className = 'flex space-x-2';
             actions.innerHTML = `
               <button class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-md hover:bg-yellow-200 edit-category-btn" data-id="${category.id}">Edit</button>
-              <button class="px-3 py-1 bg-red-100 text-red-800 rounded-md hover:bg-red-200 delete-category-btn" data-id="${category.id}">Delete</button>
+              <button class="px-3 py-1 bg-red-100 text-red-800 rounded-md hover:bg-red-200 delete-category-btn" data-id="${category.id}" ${category.item_count > 0 ? 'disabled' : ''}>Delete</button>
             `;
             
             listItem.appendChild(categoryInfo);
             listItem.appendChild(actions);
             categoriesList.appendChild(listItem);
+            
+            // If category has items, disable delete button
+            if (category.item_count > 0) {
+              const deleteBtn = actions.querySelector('.delete-category-btn');
+              deleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+              deleteBtn.title = 'Cannot delete a category with items';
+            }
           });
           
           // Add event listeners for the edit and delete buttons
@@ -516,7 +752,9 @@
           });
           
           document.querySelectorAll('.delete-category-btn').forEach(btn => {
-            btn.addEventListener('click', handleDeleteCategory);
+            if (!btn.hasAttribute('disabled')) {
+              btn.addEventListener('click', handleDeleteCategory);
+            }
           });
           
         } else {
@@ -570,25 +808,338 @@
         usersList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Error loading users</li>';
       }
     }
-
+    
+    // Modal management
+    function toggleModal(modalId, show) {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+      
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+    
+    // Categories for select dropdowns
+    async function loadCategoriesForSelect(selectId) {
+      const selectElement = document.getElementById(selectId);
+      if (!selectElement) return;
+      
+      // Clear options except the first one
+      const firstOption = selectElement.querySelector('option:first-child');
+      selectElement.innerHTML = '';
+      selectElement.appendChild(firstOption);
+      
+      try {
+        // Use cached categories if available
+        let categories = allCategories;
+        
+        // If not available, fetch them
+        if (!categories || categories.length === 0) {
+          const response = await fetch('/api/categories');
+          if (response.ok) {
+            categories = await response.json();
+          } else {
+            console.error('Failed to load categories for select');
+            return;
+          }
+        }
+        
+        // Add options
+        categories.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category.id;
+          option.textContent = category.name;
+          selectElement.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Error loading categories for select:', error);
+      }
+    }
+    
+    // CRUD Operations
+    async function handleAddMenuItem(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const formData = new FormData(form);
+      
+      // Convert form data to object
+      const menuItem = {
+        name: formData.get('name'),
+        price: parseFloat(formData.get('price')) * 100, // Convert to cents
+        categoryId: parseInt(formData.get('categoryId')),
+        description: formData.get('description'),
+        image: formData.get('image'),
+        featured: formData.get('featured') ? true : false,
+        likes: 0,
+        dislikes: 0
+      };
+      
+      // Format price for display
+      menuItem.formattedPrice = (menuItem.price / 100).toFixed(2);
+      
+      // Get category name
+      const category = allCategories.find(cat => cat.id === menuItem.categoryId);
+      if (category) {
+        menuItem.categoryName = category.name;
+      }
+      
+      // Add to local array and re-render
+      menuItem.id = allMenuItems.length > 0 ? Math.max(...allMenuItems.map(item => item.id)) + 1 : 1;
+      allMenuItems.push(menuItem);
+      
+      // Close modal and reset form
+      toggleModal('add-menu-modal', false);
+      form.reset();
+      
+      // Reload menu page
+      if (document.getElementById('menu-page').classList.contains('hidden')) {
+        showPage('menu');
+      } else {
+        loadMenuPage();
+      }
+      
+      showToast(`Added new menu item: ${menuItem.name}`);
+    }
+    
+    async function handleAddCategory(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const formData = new FormData(form);
+      
+      // Convert form data to object
+      const category = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        item_count: 0
+      };
+      
+      // Add to local array
+      category.id = allCategories.length > 0 ? Math.max(...allCategories.map(cat => cat.id)) + 1 : 1;
+      allCategories.push(category);
+      
+      // Close modal and reset form
+      toggleModal('add-category-modal', false);
+      form.reset();
+      
+      // Reload categories page
+      if (document.getElementById('categories-page').classList.contains('hidden')) {
+        showPage('categories');
+      } else {
+        loadCategoriesPage();
+      }
+      
+      showToast(`Added new category: ${category.name}`);
+    }
+    
     function handleEditMenuItem(event) {
-      const itemId = event.target.getAttribute('data-id');
-      showToast(`Edit menu item ${itemId} functionality not implemented yet`);
+      const itemId = parseInt(event.target.getAttribute('data-id'));
+      const menuItem = allMenuItems.find(item => item.id === itemId);
+      
+      if (!menuItem) {
+        showToast('Menu item not found', 'error');
+        return;
+      }
+      
+      // Fill the form
+      document.getElementById('edit-menu-id').value = menuItem.id;
+      document.getElementById('edit-menu-name').value = menuItem.name;
+      document.getElementById('edit-menu-price').value = (menuItem.price / 100).toFixed(2);
+      document.getElementById('edit-menu-description').value = menuItem.description;
+      document.getElementById('edit-menu-image').value = menuItem.image;
+      document.getElementById('edit-menu-featured').checked = menuItem.featured;
+      
+      // Load categories and set selected
+      loadCategoriesForSelect('edit-menu-category').then(() => {
+        document.getElementById('edit-menu-category').value = menuItem.categoryId;
+      });
+      
+      // Show modal
+      toggleModal('edit-menu-modal', true);
     }
-
-    function handleDeleteMenuItem(event) {
-      const itemId = event.target.getAttribute('data-id');
-      showToast(`Delete menu item ${itemId} functionality not implemented yet`);
+    
+    async function handleEditMenuItemSubmit(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const formData = new FormData(form);
+      
+      const itemId = parseInt(formData.get('id'));
+      const index = allMenuItems.findIndex(item => item.id === itemId);
+      
+      if (index === -1) {
+        showToast('Menu item not found', 'error');
+        return;
+      }
+      
+      // Update item
+      const updatedItem = {
+        ...allMenuItems[index],
+        name: formData.get('name'),
+        price: parseFloat(formData.get('price')) * 100, // Convert to cents
+        categoryId: parseInt(formData.get('categoryId')),
+        description: formData.get('description'),
+        image: formData.get('image'),
+        featured: formData.get('featured') ? true : false
+      };
+      
+      // Format price for display
+      updatedItem.formattedPrice = (updatedItem.price / 100).toFixed(2);
+      
+      // Get category name
+      const category = allCategories.find(cat => cat.id === updatedItem.categoryId);
+      if (category) {
+        updatedItem.categoryName = category.name;
+      }
+      
+      // Update in local array
+      allMenuItems[index] = updatedItem;
+      
+      // Close modal and reset form
+      toggleModal('edit-menu-modal', false);
+      form.reset();
+      
+      // Reload menu page
+      loadMenuPage();
+      
+      showToast(`Updated menu item: ${updatedItem.name}`);
     }
-
+    
     function handleEditCategory(event) {
-      const categoryId = event.target.getAttribute('data-id');
-      showToast(`Edit category ${categoryId} functionality not implemented yet`);
+      const categoryId = parseInt(event.target.getAttribute('data-id'));
+      const category = allCategories.find(cat => cat.id === categoryId);
+      
+      if (!category) {
+        showToast('Category not found', 'error');
+        return;
+      }
+      
+      // Fill the form
+      document.getElementById('edit-category-id').value = category.id;
+      document.getElementById('edit-category-name').value = category.name;
+      document.getElementById('edit-category-description').value = category.description;
+      
+      // Show modal
+      toggleModal('edit-category-modal', true);
     }
-
+    
+    async function handleEditCategorySubmit(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const formData = new FormData(form);
+      
+      const categoryId = parseInt(formData.get('id'));
+      const index = allCategories.findIndex(cat => cat.id === categoryId);
+      
+      if (index === -1) {
+        showToast('Category not found', 'error');
+        return;
+      }
+      
+      // Update category
+      const updatedCategory = {
+        ...allCategories[index],
+        name: formData.get('name'),
+        description: formData.get('description')
+      };
+      
+      // Update in local array
+      allCategories[index] = updatedCategory;
+      
+      // Update related menu items
+      allMenuItems.forEach(item => {
+        if (item.categoryId === categoryId) {
+          item.categoryName = updatedCategory.name;
+        }
+      });
+      
+      // Close modal and reset form
+      toggleModal('edit-category-modal', false);
+      form.reset();
+      
+      // Reload categories page
+      loadCategoriesPage();
+      
+      showToast(`Updated category: ${updatedCategory.name}`);
+    }
+    
+    function handleDeleteMenuItem(event) {
+      const itemId = parseInt(event.target.getAttribute('data-id'));
+      const menuItem = allMenuItems.find(item => item.id === itemId);
+      
+      if (!menuItem) {
+        showToast('Menu item not found', 'error');
+        return;
+      }
+      
+      // Setup confirm dialog
+      document.getElementById('confirm-delete-title').textContent = 'Delete Menu Item';
+      document.getElementById('confirm-delete-message').textContent = `Are you sure you want to delete "${menuItem.name}"?`;
+      
+      deleteCallbackFunction = () => {
+        // Remove from local array
+        const index = allMenuItems.findIndex(item => item.id === itemId);
+        if (index !== -1) {
+          allMenuItems.splice(index, 1);
+          
+          // Update category item counts
+          const categoryId = menuItem.categoryId;
+          const categoryIndex = allCategories.findIndex(cat => cat.id === categoryId);
+          if (categoryIndex !== -1) {
+            allCategories[categoryIndex].item_count--;
+          }
+          
+          // Reload menu page
+          loadMenuPage();
+          
+          showToast(`Deleted menu item: ${menuItem.name}`);
+        }
+      };
+      
+      // Show confirm dialog
+      toggleModal('confirm-delete-modal', true);
+    }
+    
     function handleDeleteCategory(event) {
-      const categoryId = event.target.getAttribute('data-id');
-      showToast(`Delete category ${categoryId} functionality not implemented yet`);
+      const categoryId = parseInt(event.target.getAttribute('data-id'));
+      const category = allCategories.find(cat => cat.id === categoryId);
+      
+      if (!category) {
+        showToast('Category not found', 'error');
+        return;
+      }
+      
+      // Check if category has items
+      if (category.item_count > 0) {
+        showToast('Cannot delete a category with items', 'error');
+        return;
+      }
+      
+      // Setup confirm dialog
+      document.getElementById('confirm-delete-title').textContent = 'Delete Category';
+      document.getElementById('confirm-delete-message').textContent = `Are you sure you want to delete "${category.name}"?`;
+      
+      deleteCallbackFunction = () => {
+        // Remove from local array
+        const index = allCategories.findIndex(cat => cat.id === categoryId);
+        if (index !== -1) {
+          allCategories.splice(index, 1);
+          
+          // Reload categories page
+          loadCategoriesPage();
+          
+          showToast(`Deleted category: ${category.name}`);
+        }
+      };
+      
+      // Show confirm dialog
+      toggleModal('confirm-delete-modal', true);
     }
 
     function showToast(message, type = 'success') {
