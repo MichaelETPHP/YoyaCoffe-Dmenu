@@ -3,446 +3,607 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yoya Coffee Admin Dashboard</title>
-  <link rel="stylesheet" href="/global.css">
-  <link rel="stylesheet" href="/admin/admin.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Yoya Coffee Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .dashboard-card {
+      transition: all 0.3s ease;
+    }
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .loader {
+      border-top-color: #3498db;
+      animation: spinner 1.5s linear infinite;
+    }
+    @keyframes spinner {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .modal {
+      transition: opacity 0.25s ease;
+    }
+    .toast-container {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+    }
+    .toast {
+      animation: slide-in 0.3s ease-out, fade-out 0.5s ease-out 2.5s forwards;
+    }
+    @keyframes slide-in {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fade-out {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
-  <div id="app" class="flex min-h-screen">
-    <!-- Sidebar -->
-    <div class="w-64 bg-gray-800 text-white min-h-screen p-4 hidden md:block">
-      <div class="flex items-center justify-center my-6">
-        <h1 class="text-xl font-bold">Yoya Coffee Admin</h1>
+
+  <!-- Login Form -->
+  <div id="login-container" class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-md">
+      <div>
+        <img class="mx-auto h-12 w-auto" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9IiM4MjU0MDAiLz4KICA8cGF0aCBkPSJNMzAgMzBINzBWNjBDNzAgNzEgNjAgODAgNTAgODBDNDAgODAgMzAgNzEgMzAgNjBWMzBaIiBmaWxsPSIjRDREMEMxIi8+CiAgPHBhdGggZD0iTTMwIDIwSDcwVjMwSDMwVjIwWiIgZmlsbD0iI0VERURFRCIvPgogIDxwYXRoIGQ9Ik03NSAyMEM3NSAyMi43NjE0IDcyLjc2MTQgMjUgNzAgMjVDNjcuMjM4NiAyNSA2NSAyMi43NjE0IDY1IDIwQzY1IDE3LjIzODYgNjcuMjM4NiAxNSA3MCAxNUM3Mi43NjE0IDE1IDc1IDE3LjIzODYgNzUgMjBaIiBmaWxsPSIjNjc0RTA2Ii8+CiAgPHBhdGggZD0iTTUwIDc1QzQ0LjQ3NzIgNzUgNDAgNjkuNTIyOCA0MCA2NEg2MEM2MCA2OS41MjI4IDU1LjUyMjggNzUgNTAgNzVaIiBmaWxsPSIjQTc3NDBDII+PC9wYXRoPgo8L3N2Zz4K" alt="Yoya Coffee Admin">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Admin Login
+        </h2>
       </div>
-      <nav class="mt-8">
-        <div class="px-4 py-2 text-gray-400 uppercase text-xs">Main</div>
-        <a href="#dashboard" class="nav-link active" data-target="dashboard">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">📊</span>
-            Dashboard
+      <form id="login-form" class="mt-8 space-y-6">
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="username" class="sr-only">Username</label>
+            <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-brown-500 focus:border-brown-500 focus:z-10 sm:text-sm" placeholder="Username">
           </div>
-        </a>
-        <a href="#menu" class="nav-link" data-target="menu">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">☕</span>
-            Menu Items
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-brown-500 focus:border-brown-500 focus:z-10 sm:text-sm" placeholder="Password">
           </div>
-        </a>
-        <a href="#categories" class="nav-link" data-target="categories">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">📑</span>
-            Categories
-          </div>
-        </a>
-        <div class="px-4 py-2 mt-4 text-gray-400 uppercase text-xs">Account</div>
-        <a href="#users" class="nav-link" data-target="users">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">👥</span>
-            Manage Users
-          </div>
-        </a>
-        <a href="#" id="logout-btn">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">🚪</span>
-            Logout
-          </div>
-        </a>
-      </nav>
+        </div>
+
+        <div>
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-800 hover:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-yellow-600 group-hover:text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            Sign in
+          </button>
+        </div>
+        <div id="login-error" class="text-red-600 text-center hidden">
+          Invalid credentials. Please try again.
+        </div>
+      </form>
     </div>
-    
-    <!-- Mobile header -->
-    <div class="md:hidden fixed top-0 w-full bg-gray-800 text-white p-4 z-10 flex justify-between items-center">
-      <h1 class="text-xl font-bold">Yoya Coffee Admin</h1>
-      <button id="mobile-menu-toggle" class="text-2xl">☰</button>
-    </div>
-    
-    <!-- Mobile sidebar overlay -->
-    <div id="mobile-sidebar" class="fixed inset-0 bg-gray-800 text-white z-20 hidden md:hidden p-4 flex flex-col">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-xl font-bold">Yoya Coffee Admin</h1>
-        <button id="mobile-close" class="text-2xl">✕</button>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard-container" class="hidden">
+    <!-- Navigation -->
+    <nav class="bg-yellow-800 shadow-lg">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+          <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex-shrink-0 flex items-center">
+              <img class="h-8 w-auto" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9IiM4MjU0MDAiLz4KICA8cGF0aCBkPSJNMzAgMzBINzBWNjBDNzAgNzEgNjAgODAgNTAgODBDNDAgODAgMzAgNzEgMzAgNjBWMzBaIiBmaWxsPSIjRDREMEMxIi8+CiAgPHBhdGggZD0iTTMwIDIwSDcwVjMwSDMwVjIwWiIgZmlsbD0iI0VERURFRCIvPgogIDxwYXRoIGQ9Ik03NSAyMEM3NSAyMi43NjE0IDcyLjc2MTQgMjUgNzAgMjVDNjcuMjM4NiAyNSA2NSAyMi43NjE0IDY1IDIwQzY1IDE3LjIzODYgNjcuMjM4NiAxNSA3MCAxNUM3Mi43NjE0IDE1IDc1IDE3LjIzODYgNzUgMjBaIiBmaWxsPSIjNjc0RTA2Ii8+CiAgPHBhdGggZD0iTTUwIDc1QzQ0LjQ3NzIgNzUgNDAgNjkuNTIyOCA0MCA2NEg2MEM2MCA2OS41MjI4IDU1LjUyMjggNzUgNTAgNzVaIiBmaWxsPSIjQTc3NDBDII+PC9wYXRoPgo8L3N2Zz4K" alt="Yoya Coffee Admin">
+              <span class="text-white font-bold ml-2">Yoya Coffee Admin</span>
+            </div>
+            <div class="hidden sm:block sm:ml-6">
+              <div class="flex space-x-4">
+                <a href="#dashboard" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium" data-page="dashboard">Dashboard</a>
+                <a href="#menu" class="nav-link text-gray-300 hover:bg-yellow-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-page="menu">Menu Items</a>
+                <a href="#categories" class="nav-link text-gray-300 hover:bg-yellow-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-page="categories">Categories</a>
+                <a href="#users" class="nav-link text-gray-300 hover:bg-yellow-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-page="users">Users</a>
+              </div>
+            </div>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div class="ml-3 relative">
+              <div>
+                <button id="logout-button" type="button" class="bg-yellow-900 hover:bg-yellow-800 text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <nav>
-        <div class="px-4 py-2 text-gray-400 uppercase text-xs">Main</div>
-        <a href="#dashboard" class="mobile-nav-link" data-target="dashboard">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">📊</span>
-            Dashboard
-          </div>
-        </a>
-        <a href="#menu" class="mobile-nav-link" data-target="menu">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">☕</span>
-            Menu Items
-          </div>
-        </a>
-        <a href="#categories" class="mobile-nav-link" data-target="categories">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">📑</span>
-            Categories
-          </div>
-        </a>
-        <div class="px-4 py-2 mt-4 text-gray-400 uppercase text-xs">Account</div>
-        <a href="#users" class="mobile-nav-link" data-target="users">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">👥</span>
-            Manage Users
-          </div>
-        </a>
-        <a href="#" id="mobile-logout-btn">
-          <div class="px-4 py-2 text-white hover:bg-gray-700 rounded flex items-center">
-            <span class="mr-2">🚪</span>
-            Logout
-          </div>
-        </a>
-      </nav>
-    </div>
-    
-    <!-- Main content -->
-    <div class="flex-1 flex flex-col">
-      <!-- Login screen -->
-      <div id="login-container" class="flex items-center justify-center w-full h-screen bg-gray-100 p-4">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-          <div class="flex justify-center mb-8">
-            <img src="/logo.svg" alt="Yoya Coffee Logo" class="h-20">
-          </div>
-          <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
-          <div id="login-error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 hidden"></div>
-          <form id="login-form">
-            <div class="mb-4">
-              <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-              <input type="text" id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      
+      <!-- Dashboard Page -->
+      <div id="dashboard-page" class="page">
+        <div class="px-4 py-6 sm:px-0">
+          <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+          
+          <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- Dashboard Cards -->
+            <div class="bg-white overflow-hidden shadow rounded-lg dashboard-card">
+              <div class="px-4 py-5 sm:p-6">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">Total Menu Items</dt>
+                  <dd class="mt-1 text-3xl font-semibold text-gray-900" id="total-menu-items">-</dd>
+                </dl>
+              </div>
             </div>
-            <div class="mb-6">
-              <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-              <input type="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            
+            <div class="bg-white overflow-hidden shadow rounded-lg dashboard-card">
+              <div class="px-4 py-5 sm:p-6">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">Total Categories</dt>
+                  <dd class="mt-1 text-3xl font-semibold text-gray-900" id="total-categories">-</dd>
+                </dl>
+              </div>
             </div>
-            <div class="flex items-center justify-between">
-              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-                Sign In
-              </button>
+            
+            <div class="bg-white overflow-hidden shadow rounded-lg dashboard-card">
+              <div class="px-4 py-5 sm:p-6">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">Total Likes</dt>
+                  <dd class="mt-1 text-3xl font-semibold text-gray-900" id="total-likes">-</dd>
+                </dl>
+              </div>
             </div>
-          </form>
+            
+            <div class="bg-white overflow-hidden shadow rounded-lg dashboard-card">
+              <div class="px-4 py-5 sm:p-6">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">Most Liked Item</dt>
+                  <dd class="mt-1 text-3xl font-semibold text-gray-900" id="most-liked-item">-</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
-      <!-- Dashboard content -->
-      <div id="content-container" class="flex-1 p-4 md:p-8 mt-16 md:mt-0 hidden">
-        <!-- Dashboard Page -->
-        <div id="dashboard" class="page active">
-          <h2 class="text-2xl font-semibold mb-4">Dashboard</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div class="bg-white p-4 rounded-lg shadow">
-              <h3 class="text-gray-500 text-sm font-medium">Total Menu Items</h3>
-              <p class="text-3xl font-bold" id="total-menu-items">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-              <h3 class="text-gray-500 text-sm font-medium">Total Categories</h3>
-              <p class="text-3xl font-bold" id="total-categories">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-              <h3 class="text-gray-500 text-sm font-medium">Total Likes</h3>
-              <p class="text-3xl font-bold" id="total-likes">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-              <h3 class="text-gray-500 text-sm font-medium">Most Liked Item</h3>
-              <p class="text-xl font-bold" id="most-liked-item">-</p>
-              <p class="text-sm text-gray-500" id="most-liked-count"></p>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-4 mb-8">
-            <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <a href="#menu" class="quick-nav" data-target="menu">
-                <div class="bg-blue-50 hover:bg-blue-100 p-4 rounded-lg flex items-center">
-                  <span class="text-2xl mr-3">☕</span>
-                  <div>
-                    <h4 class="font-medium">Add Menu Item</h4>
-                    <p class="text-sm text-gray-600">Create a new coffee item</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#categories" class="quick-nav" data-target="categories">
-                <div class="bg-green-50 hover:bg-green-100 p-4 rounded-lg flex items-center">
-                  <span class="text-2xl mr-3">📑</span>
-                  <div>
-                    <h4 class="font-medium">Manage Categories</h4>
-                    <p class="text-sm text-gray-600">Add or edit categories</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#users" class="quick-nav" data-target="users">
-                <div class="bg-purple-50 hover:bg-purple-100 p-4 rounded-lg flex items-center">
-                  <span class="text-2xl mr-3">👥</span>
-                  <div>
-                    <h4 class="font-medium">Manage Users</h4>
-                    <p class="text-sm text-gray-600">Add or edit staff accounts</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Menu Items Page -->
-        <div id="menu" class="page hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold">Menu Items</h2>
-            <button id="add-menu-item-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
-              <span class="mr-2">+</span> Add Item
+      <!-- Menu Items Page -->
+      <div id="menu-page" class="page hidden">
+        <div class="px-4 py-6 sm:px-0">
+          <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Menu Items</h1>
+            <button id="add-menu-item-btn" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700">
+              Add New Item
             </button>
           </div>
           
-          <div class="bg-white rounded-lg shadow overflow-hidden mb-4">
-            <div class="p-4 border-b flex flex-col md:flex-row justify-between items-center">
-              <div class="mb-2 md:mb-0">
-                <select id="category-filter" class="px-3 py-2 border rounded mr-2">
-                  <option value="">All Categories</option>
-                </select>
-              </div>
-              <div class="relative w-full md:w-64">
-                <input type="text" id="menu-search" placeholder="Search menu items..." class="w-full px-3 py-2 pr-10 border rounded">
-                <span class="absolute right-3 top-2">🔍</span>
-              </div>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="min-w-full">
-                <thead>
-                  <tr class="bg-gray-50">
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Featured</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="menu-items-table-body" class="bg-white divide-y divide-gray-200">
-                  <!-- Menu items will be populated here -->
-                  <tr>
-                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading menu items...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
+            <ul id="menu-items-list" class="divide-y divide-gray-200">
+              <!-- Menu items will be loaded here -->
+              <li class="px-6 py-4 text-center text-gray-500">Loading menu items...</li>
+            </ul>
           </div>
         </div>
-        
-        <!-- Categories Page -->
-        <div id="categories" class="page hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold">Categories</h2>
-            <button id="add-category-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
-              <span class="mr-2">+</span> Add Category
+      </div>
+      
+      <!-- Categories Page -->
+      <div id="categories-page" class="page hidden">
+        <div class="px-4 py-6 sm:px-0">
+          <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Categories</h1>
+            <button id="add-category-btn" class="px-4 py-2 bg-yellow-700 text-white rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700">
+              Add New Category
             </button>
           </div>
           
-          <div class="bg-white rounded-lg shadow overflow-hidden mb-4">
-            <div class="overflow-x-auto">
-              <table class="min-w-full">
-                <thead>
-                  <tr class="bg-gray-50">
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Items Count</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="categories-table-body" class="bg-white divide-y divide-gray-200">
-                  <!-- Categories will be populated here -->
-                  <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">Loading categories...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
+            <ul id="categories-list" class="divide-y divide-gray-200">
+              <!-- Categories will be loaded here -->
+              <li class="px-6 py-4 text-center text-gray-500">Loading categories...</li>
+            </ul>
           </div>
         </div>
-        
-        <!-- Users Page -->
-        <div id="users" class="page hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold">Users</h2>
-            <button id="add-user-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
-              <span class="mr-2">+</span> Add User
-            </button>
-          </div>
+      </div>
+      
+      <!-- Users Page -->
+      <div id="users-page" class="page hidden">
+        <div class="px-4 py-6 sm:px-0">
+          <h1 class="text-2xl font-semibold text-gray-900">Users</h1>
           
-          <div class="bg-white rounded-lg shadow overflow-hidden mb-4">
-            <div class="overflow-x-auto">
-              <table class="min-w-full">
-                <thead>
-                  <tr class="bg-gray-50">
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="users-table-body" class="bg-white divide-y divide-gray-200">
-                  <!-- Users will be populated here -->
-                  <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">Loading users...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
+            <ul id="users-list" class="divide-y divide-gray-200">
+              <!-- Users will be loaded here -->
+              <li class="px-6 py-4 text-center text-gray-500">Loading users...</li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
-  
-  <!-- Modals -->
-  <!-- Add/Edit Menu Item Modal -->
-  <div id="menu-item-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold" id="menu-item-modal-title">Add Menu Item</h3>
-        <button class="modal-close text-2xl">&times;</button>
-      </div>
-      <form id="menu-item-form">
-        <input type="hidden" id="menu-item-id">
-        <div class="mb-4">
-          <label for="menu-item-name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
-          <input type="text" id="menu-item-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-          <label for="menu-item-description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-          <textarea id="menu-item-description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="3"></textarea>
-        </div>
-        <div class="mb-4">
-          <label for="menu-item-price" class="block text-gray-700 text-sm font-bold mb-2">Price ($)</label>
-          <input type="number" id="menu-item-price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" step="0.01" min="0" required>
-        </div>
-        <div class="mb-4">
-          <label for="menu-item-category" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-          <select id="menu-item-category" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            <option value="">Select Category</option>
-          </select>
-        </div>
-        <div class="mb-4">
-          <label for="menu-item-image" class="block text-gray-700 text-sm font-bold mb-2">Image URL</label>
-          <input type="text" id="menu-item-image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-        <div class="mb-4 flex items-center">
-          <input type="checkbox" id="menu-item-featured" class="mr-2">
-          <label for="menu-item-featured" class="text-gray-700 text-sm font-bold">Featured Item</label>
-        </div>
-        <div class="flex justify-end">
-          <button type="button" class="modal-close bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-            Cancel
-          </button>
-          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Add/Edit Category Modal -->
-  <div id="category-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold" id="category-modal-title">Add Category</h3>
-        <button class="modal-close text-2xl">&times;</button>
-      </div>
-      <form id="category-form">
-        <input type="hidden" id="category-id">
-        <div class="mb-4">
-          <label for="category-name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
-          <input type="text" id="category-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-          <label for="category-description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-          <textarea id="category-description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="3"></textarea>
-        </div>
-        <div class="flex justify-end">
-          <button type="button" class="modal-close bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-            Cancel
-          </button>
-          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Add/Edit User Modal -->
-  <div id="user-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold" id="user-modal-title">Add User</h3>
-        <button class="modal-close text-2xl">&times;</button>
-      </div>
-      <form id="user-form">
-        <input type="hidden" id="user-id">
-        <div class="mb-4">
-          <label for="user-username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-          <input type="text" id="user-username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-          <label for="user-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-          <input type="email" id="user-email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-          <label for="user-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-          <input type="password" id="user-password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-          <label for="user-role" class="block text-gray-700 text-sm font-bold mb-2">Role</label>
-          <select id="user-role" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            <option value="staff">Staff</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-        <div class="flex justify-end">
-          <button type="button" class="modal-close bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-            Cancel
-          </button>
-          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Confirmation Modal -->
-  <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold" id="confirm-modal-title">Confirm Action</h3>
-        <button class="modal-close text-2xl">&times;</button>
-      </div>
-      <p id="confirm-modal-message" class="mb-6">Are you sure you want to perform this action?</p>
-      <div class="flex justify-end">
-        <button type="button" class="modal-close bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-          Cancel
-        </button>
-        <button type="button" id="confirm-action-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Confirm
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white p-4 rounded shadow-lg transform transition-transform duration-300 translate-y-full opacity-0">
-    <div class="flex items-center">
-      <span id="toast-icon" class="mr-2">✓</span>
-      <span id="toast-message">Action completed successfully</span>
-    </div>
-  </div>
-  
-  <script src="/build/admin.js"></script>
-  <script src="/admin/admin.js"></script>
+
+  <!-- Modals Placeholder -->
+  <div id="modal-container"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
   <script>
-    // Initialize admin application if available
-    if (typeof adminApp !== 'undefined' && adminApp.init) {
-      adminApp.init();
+    document.addEventListener('DOMContentLoaded', init);
+
+    // Global state
+    let currentUser = null;
+    
+    async function init() {
+      // Setup event listeners
+      document.getElementById('login-form').addEventListener('submit', handleLogin);
+      document.getElementById('logout-button').addEventListener('click', handleLogout);
+      
+      // Navigation links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', handleNavigation);
+      });
+      
+      // Check if user is already logged in
+      await checkAuthStatus();
+    }
+
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch('/api/auth/me');
+        
+        if (response.ok) {
+          currentUser = await response.json();
+          showDashboard();
+          loadInitialPage();
+        } else {
+          showLoginForm();
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        showLoginForm();
+      }
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        
+        if (response.ok) {
+          currentUser = await response.json();
+          showDashboard();
+          loadDashboardPage();
+          showToast('Login successful!');
+        } else {
+          document.getElementById('login-error').classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
+        document.getElementById('login-error').classList.remove('hidden');
+      }
+    }
+
+    async function handleLogout() {
+      try {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        currentUser = null;
+        showLoginForm();
+        showToast('Logout successful!');
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    }
+
+    function showLoginForm() {
+      document.getElementById('login-container').classList.remove('hidden');
+      document.getElementById('dashboard-container').classList.add('hidden');
+      document.getElementById('login-error').classList.add('hidden');
+    }
+
+    function showDashboard() {
+      document.getElementById('login-container').classList.add('hidden');
+      document.getElementById('dashboard-container').classList.remove('hidden');
+    }
+
+    function handleNavigation(event) {
+      event.preventDefault();
+      
+      const pageName = event.target.getAttribute('data-page');
+      showPage(pageName);
+      
+      // Update active navigation link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('data-page') === pageName) {
+          link.classList.add('text-white');
+          link.classList.remove('text-gray-300', 'hover:bg-yellow-700', 'hover:text-white');
+        } else {
+          link.classList.remove('text-white');
+          link.classList.add('text-gray-300', 'hover:bg-yellow-700', 'hover:text-white');
+        }
+      });
+    }
+
+    function showPage(pageName) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.add('hidden');
+      });
+      
+      // Show the selected page
+      const pageElement = document.getElementById(`${pageName}-page`);
+      if (pageElement) {
+        pageElement.classList.remove('hidden');
+        
+        // Load page specific data
+        switch(pageName) {
+          case 'dashboard':
+            loadDashboardPage();
+            break;
+          case 'menu':
+            loadMenuPage();
+            break;
+          case 'categories':
+            loadCategoriesPage();
+            break;
+          case 'users':
+            loadUsersPage();
+            break;
+        }
+      }
+    }
+
+    function loadInitialPage() {
+      // Determine which page to load based on URL hash or default to dashboard
+      const hash = window.location.hash.substring(1) || 'dashboard';
+      showPage(hash);
+      
+      // Update active navigation link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('data-page') === hash) {
+          link.classList.add('text-white');
+          link.classList.remove('text-gray-300', 'hover:bg-yellow-700', 'hover:text-white');
+        }
+      });
+    }
+
+    async function loadDashboardPage() {
+      try {
+        const response = await fetch('/api/menu/stats/dashboard');
+        if (response.ok) {
+          const stats = await response.json();
+          
+          document.getElementById('total-menu-items').textContent = stats.totalMenuItems;
+          document.getElementById('total-categories').textContent = stats.totalCategories;
+          document.getElementById('total-likes').textContent = stats.totalLikes;
+          
+          if (stats.mostLikedItem) {
+            document.getElementById('most-liked-item').textContent = stats.mostLikedItem.name;
+          } else {
+            document.getElementById('most-liked-item').textContent = 'N/A';
+          }
+        } else {
+          console.error('Failed to load dashboard stats');
+        }
+      } catch (error) {
+        console.error('Error loading dashboard stats:', error);
+      }
+    }
+
+    async function loadMenuPage() {
+      const menuItemsList = document.getElementById('menu-items-list');
+      menuItemsList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Loading menu items...</li>';
+      
+      try {
+        const response = await fetch('/api/menu');
+        if (response.ok) {
+          const menuItems = await response.json();
+          
+          if (menuItems.length === 0) {
+            menuItemsList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">No menu items found</li>';
+            return;
+          }
+          
+          menuItemsList.innerHTML = '';
+          menuItems.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.className = 'px-6 py-4 flex items-center justify-between';
+            
+            const itemInfo = document.createElement('div');
+            itemInfo.className = 'flex items-center';
+            
+            // Create thumbnail
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'h-12 w-12 bg-gray-200 rounded-md overflow-hidden mr-4';
+            const img = document.createElement('img');
+            img.src = item.image || 'placeholder.jpg';
+            img.alt = item.name;
+            img.className = 'h-full w-full object-cover';
+            thumbnail.appendChild(img);
+            
+            // Create item details
+            const details = document.createElement('div');
+            details.innerHTML = `
+              <div class="text-md font-medium text-yellow-800">${item.name}</div>
+              <div class="text-sm text-gray-500">${item.categoryName}</div>
+              <div class="text-sm font-semibold mt-1">$${item.formattedPrice}</div>
+            `;
+            
+            // Create actions
+            const actions = document.createElement('div');
+            actions.className = 'flex space-x-2';
+            actions.innerHTML = `
+              <button class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-md hover:bg-yellow-200 edit-menu-btn" data-id="${item.id}">Edit</button>
+              <button class="px-3 py-1 bg-red-100 text-red-800 rounded-md hover:bg-red-200 delete-menu-btn" data-id="${item.id}">Delete</button>
+            `;
+            
+            itemInfo.appendChild(thumbnail);
+            itemInfo.appendChild(details);
+            listItem.appendChild(itemInfo);
+            listItem.appendChild(actions);
+            menuItemsList.appendChild(listItem);
+          });
+          
+          // Add event listeners for the edit and delete buttons
+          document.querySelectorAll('.edit-menu-btn').forEach(btn => {
+            btn.addEventListener('click', handleEditMenuItem);
+          });
+          
+          document.querySelectorAll('.delete-menu-btn').forEach(btn => {
+            btn.addEventListener('click', handleDeleteMenuItem);
+          });
+          
+        } else {
+          menuItemsList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Failed to load menu items</li>';
+        }
+      } catch (error) {
+        console.error('Error loading menu items:', error);
+        menuItemsList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Error loading menu items</li>';
+      }
+    }
+
+    async function loadCategoriesPage() {
+      const categoriesList = document.getElementById('categories-list');
+      categoriesList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Loading categories...</li>';
+      
+      try {
+        const response = await fetch('/api/categories/stats/counts');
+        if (response.ok) {
+          const categories = await response.json();
+          
+          if (categories.length === 0) {
+            categoriesList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">No categories found</li>';
+            return;
+          }
+          
+          categoriesList.innerHTML = '';
+          categories.forEach(category => {
+            const listItem = document.createElement('li');
+            listItem.className = 'px-6 py-4 flex items-center justify-between';
+            
+            const categoryInfo = document.createElement('div');
+            
+            // Create category details
+            categoryInfo.innerHTML = `
+              <div class="text-md font-medium text-yellow-800">${category.name}</div>
+              <div class="text-sm text-gray-500">${category.description}</div>
+              <div class="text-sm mt-1">${category.item_count} items</div>
+            `;
+            
+            // Create actions
+            const actions = document.createElement('div');
+            actions.className = 'flex space-x-2';
+            actions.innerHTML = `
+              <button class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-md hover:bg-yellow-200 edit-category-btn" data-id="${category.id}">Edit</button>
+              <button class="px-3 py-1 bg-red-100 text-red-800 rounded-md hover:bg-red-200 delete-category-btn" data-id="${category.id}">Delete</button>
+            `;
+            
+            listItem.appendChild(categoryInfo);
+            listItem.appendChild(actions);
+            categoriesList.appendChild(listItem);
+          });
+          
+          // Add event listeners for the edit and delete buttons
+          document.querySelectorAll('.edit-category-btn').forEach(btn => {
+            btn.addEventListener('click', handleEditCategory);
+          });
+          
+          document.querySelectorAll('.delete-category-btn').forEach(btn => {
+            btn.addEventListener('click', handleDeleteCategory);
+          });
+          
+        } else {
+          categoriesList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Failed to load categories</li>';
+        }
+      } catch (error) {
+        console.error('Error loading categories:', error);
+        categoriesList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Error loading categories</li>';
+      }
+    }
+
+    async function loadUsersPage() {
+      const usersList = document.getElementById('users-list');
+      usersList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Loading users...</li>';
+      
+      try {
+        const response = await fetch('/api/users');
+        if (response.ok) {
+          const users = await response.json();
+          
+          if (users.length === 0) {
+            usersList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">No users found</li>';
+            return;
+          }
+          
+          usersList.innerHTML = '';
+          users.forEach(user => {
+            const listItem = document.createElement('li');
+            listItem.className = 'px-6 py-4 flex items-center justify-between';
+            
+            const userInfo = document.createElement('div');
+            
+            // Create user details
+            userInfo.innerHTML = `
+              <div class="text-md font-medium text-yellow-800">${user.username}</div>
+              <div class="text-sm text-gray-500">${user.email}</div>
+              <div class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 mt-1">
+                ${user.role}
+              </div>
+            `;
+            
+            listItem.appendChild(userInfo);
+            usersList.appendChild(listItem);
+          });
+          
+        } else {
+          usersList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Failed to load users</li>';
+        }
+      } catch (error) {
+        console.error('Error loading users:', error);
+        usersList.innerHTML = '<li class="px-6 py-4 text-center text-gray-500">Error loading users</li>';
+      }
+    }
+
+    function handleEditMenuItem(event) {
+      const itemId = event.target.getAttribute('data-id');
+      showToast(`Edit menu item ${itemId} functionality not implemented yet`);
+    }
+
+    function handleDeleteMenuItem(event) {
+      const itemId = event.target.getAttribute('data-id');
+      showToast(`Delete menu item ${itemId} functionality not implemented yet`);
+    }
+
+    function handleEditCategory(event) {
+      const categoryId = event.target.getAttribute('data-id');
+      showToast(`Edit category ${categoryId} functionality not implemented yet`);
+    }
+
+    function handleDeleteCategory(event) {
+      const categoryId = event.target.getAttribute('data-id');
+      showToast(`Delete category ${categoryId} functionality not implemented yet`);
+    }
+
+    function showToast(message, type = 'success') {
+      const toastContainer = document.querySelector('.toast-container');
+      
+      const toast = document.createElement('div');
+      toast.className = `toast px-4 py-3 rounded-lg shadow-md mb-3 ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+      toast.textContent = message;
+      
+      toastContainer.appendChild(toast);
+      
+      // Remove the toast after animation completes
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
     }
   </script>
 </body>
