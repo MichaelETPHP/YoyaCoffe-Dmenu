@@ -8,7 +8,6 @@
   import CategoryFilter from './components/CategoryFilter.svelte';
   import MusicPlayer from './components/MusicPlayer.svelte';
   import ModeToggle from './components/ModeToggle.svelte';
-  import FeaturedSlider from './components/FeaturedSlider.svelte';
   import AcademySection from './components/AcademySection.svelte';
   
   let searchQuery = '';
@@ -60,8 +59,7 @@
 <div class="min-h-screen flex flex-col bg-amber-50">
   <Header />
   
-  <!-- Featured Slider - Ads section for most popular menu items -->
-  <FeaturedSlider />
+  <!-- Featured slider removed as requested -->
   
   <main class="flex-1 w-full">
     <!-- Academy section -->

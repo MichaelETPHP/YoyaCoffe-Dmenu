@@ -57,12 +57,7 @@
           <span class="text-sm">PROFESSIONAL TRAINING</span>
         </div>
         
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-14 h-14 bg-[#c29666] rounded-full flex items-center justify-center overflow-hidden">
-            <img src="/images/yoya-logo.svg" alt="Yoya Coffee Logo" class="w-12 h-12" />
-          </div>
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold">Coffee Academy</h2>
-        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">Yoya Coffee Academy</h2>
         
         <p class="text-cream-200 text-lg mb-8 leading-relaxed">
           Elevate your coffee knowledge and skills with our professional training programs. 

@@ -37,15 +37,16 @@
     <div class="flex items-center space-x-3">
       <!-- Logo with subtle animation on hover -->
       <div class="transform transition-transform duration-300 hover:scale-105 animate-bounce-slow">
-        <div class="w-12 h-12 bg-[#c29666] rounded-full flex items-center justify-center overflow-hidden">
-          <img src="/images/yoya-logo.svg" alt="Yoya Coffee Logo" class="w-10 h-10" />
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-cream-300">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 1v3M10 1v3M14 1v3" />
+        </svg>
       </div>
       
       <!-- Brand identity with serif font for elegance -->
       <div class="animate-slide-in">
         <h1 class="heading-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-wide">Yoya Coffee</h1>
-        <p class="text-xs md:text-sm text-cream-200 font-light tracking-wider">SPECIALTY COFFEE ROASTERS</p>
+        <p class="text-xs md:text-sm text-cream-200 font-light tracking-wider">SPECIALTY COFFEE & PASTRIES</p>
       </div>
     </div>
     
