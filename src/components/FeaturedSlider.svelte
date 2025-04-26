@@ -50,13 +50,20 @@
 
 <div class="relative overflow-hidden bg-coffee-900 text-cream-100">
   <!-- Special banner for Yoya Coffee Academy -->
-  <div class="absolute top-0 right-0 z-20 bg-cream-600 text-coffee-900 font-bold py-1 px-4 rounded-bl-lg transform rotate-0 shadow-lg">
-    <span class="text-xs md:text-sm">YOYA COFFEE ACADEMY</span>
+  <div class="absolute top-0 right-0 z-20 bg-cream-600 text-coffee-900 font-bold py-1 px-3 rounded-bl-lg transform rotate-0 shadow-lg">
+    <span class="text-xs">COFFEE ACADEMY</span>
   </div>
   
-  <!-- Featured Slider -->
+  <!-- Yoya Logo at the top -->
+  <div class="absolute top-4 left-4 z-20 w-16 h-16 flex items-center justify-center">
+    <div class="w-16 h-16 bg-c29666 rounded-full flex items-center justify-center overflow-hidden">
+      <img src="/images/yoya-logo.svg" alt="Yoya Coffee Logo" class="w-14 h-14" />
+    </div>
+  </div>
+  
+  <!-- Featured Slider - Smaller height for mobile optimization -->
   <div 
-    class="slider-container relative w-full h-[70vh] overflow-hidden"
+    class="slider-container relative w-full h-[40vh] md:h-[45vh] overflow-hidden"
     bind:this={sliderContainer}
   >
     <!-- Slides -->
@@ -69,16 +76,16 @@
             <div class="absolute inset-0 bg-gradient-to-t from-coffee-900 via-coffee-900/70 to-transparent"></div>
           </div>
           
-          <!-- Content -->
-          <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-10 mb-12">
+          <!-- Content - More mobile friendly with less text -->
+          <div class="absolute bottom-0 left-0 w-full p-4 md:p-8 z-10 mb-12">
             <div class="animate-slide-up" class:active={index === currentIndex}>
-              <h2 class="text-2xl md:text-4xl font-serif font-bold text-cream-100 mb-2">{item.name}</h2>
-              <p class="max-w-2xl text-base md:text-lg text-cream-200 mb-4">{item.description}</p>
-              <div class="flex items-center gap-4">
-                <span class="bg-cream-600 text-coffee-900 px-3 py-1 rounded-full font-bold">{item.price} ETB</span>
-                <a href="#menu" class="inline-flex items-center bg-coffee-700 hover:bg-coffee-600 text-cream-100 px-4 py-2 rounded-full transition-colors duration-300">
-                  <span>View on Menu</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+              <h2 class="text-xl md:text-3xl font-serif font-bold text-cream-100 mb-1">{item.name}</h2>
+              <p class="max-w-2xl text-sm md:text-base text-cream-200 mb-2 line-clamp-2">{item.description}</p>
+              <div class="flex items-center gap-2">
+                <span class="bg-cream-600 text-coffee-900 px-2 py-1 rounded-full text-xs font-bold">{item.price} ETB</span>
+                <a href="#menu" class="inline-flex items-center bg-coffee-700 hover:bg-coffee-600 text-cream-100 px-3 py-1 rounded-full transition-colors duration-300 text-sm">
+                  <span>View Item</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L12.586 11H5a1 1 0 1 1 0-2h7.586l-2.293-2.293a1 1 0 0 1 0-1.414z" clip-rule="evenodd" />
                   </svg>
                 </a>
@@ -89,45 +96,44 @@
       {/each}
     </div>
     
-    <!-- Yoya Coffee Academy Section -->
-    <div class="absolute bottom-0 left-0 right-0 bg-coffee-800 p-4 md:p-6 z-10">
-      <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
-        <div class="mb-3 md:mb-0">
-          <h3 class="text-lg md:text-xl font-bold text-cream-100">Yoya Coffee Academy</h3>
-          <p class="text-xs md:text-sm text-cream-300">Learn the art of coffee from our expert baristas</p>
+    <!-- Compact Yoya Coffee Academy Section -->
+    <div class="absolute bottom-0 left-0 right-0 bg-coffee-800 p-3 z-10">
+      <div class="flex items-center justify-between max-w-7xl mx-auto">
+        <div class="flex-1">
+          <p class="text-xs md:text-sm text-cream-100 font-bold">Yoya Coffee Academy</p>
         </div>
-        <a href="#" class="bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center">
-          <span>Join Our Classes</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+        <a href="#academy" class="bg-cream-600 hover:bg-cream-500 text-coffee-900 px-2 py-1 rounded text-xs font-medium transition-colors duration-300 flex items-center">
+          <span>Learn More</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L12.586 11H5a1 1 0 1 1 0-2h7.586l-2.293-2.293a1 1 0 0 1 0-1.414z" clip-rule="evenodd" />
           </svg>
         </a>
       </div>
     </div>
     
-    <!-- Navigation Arrows -->
+    <!-- Navigation Arrows - Smaller and more subtle -->
     <button 
-      class="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-coffee-900/50 text-cream-100 hover:bg-coffee-700 flex items-center justify-center z-10 transition-colors duration-300"
+      class="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-coffee-900/50 text-cream-100 hover:bg-coffee-700 flex items-center justify-center z-10 transition-colors duration-300"
       on:click={() => { prevSlide(); resetInterval(); }}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
       </svg>
     </button>
     <button 
-      class="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-coffee-900/50 text-cream-100 hover:bg-coffee-700 flex items-center justify-center z-10 transition-colors duration-300"
+      class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-coffee-900/50 text-cream-100 hover:bg-coffee-700 flex items-center justify-center z-10 transition-colors duration-300"
       on:click={() => { nextSlide(); resetInterval(); }}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
       </svg>
     </button>
     
-    <!-- Pagination Dots -->
-    <div class="absolute bottom-24 left-0 right-0 flex justify-center gap-2 z-10">
+    <!-- Pagination Dots - Smaller and closer to bottom -->
+    <div class="absolute bottom-12 left-0 right-0 flex justify-center gap-1 z-10">
       {#each featuredItems as _, index}
         <button 
-          class="h-2 w-2 rounded-full transition-all duration-300 {index === currentIndex ? 'bg-cream-100 w-8' : 'bg-cream-100/50 hover:bg-cream-100/70'}"
+          class="h-1.5 rounded-full transition-all duration-300 {index === currentIndex ? 'bg-cream-100 w-6' : 'bg-cream-100/50 hover:bg-cream-100/70 w-1.5'}"
           on:click={() => gotoSlide(index)}
           aria-label="Go to slide {index + 1}"
         ></button>
