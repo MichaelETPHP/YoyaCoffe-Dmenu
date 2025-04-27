@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { menuData, searchItems } from './data/menu.js';
   import Header from './components/Header.svelte';
   import MenuCategory from './components/MenuCategory.svelte';
   import Search from './components/Search.svelte';
@@ -12,11 +11,67 @@
   
   let searchQuery = '';
   let searchResults = [];
-  let categories = menuData.categories;
+  let categories = [];
+  let menuItems = [];
+  let isLoading = true;
+  let loadingError = null;
   let activeCategory = null;
   let isMobile = false;
   let currentMode = 'menu';
   let showSplash = true; // Control the splash screen visibility
+  
+  // Function to fetch all categories from the API
+  async function fetchCategories() {
+    try {
+      const response = await fetch('/api/categories');
+      if (!response.ok) {
+        throw new Error(`Failed to load categories: ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      loadingError = error.message;
+      return [];
+    }
+  }
+  
+  // Function to fetch all menu items from the API
+  async function fetchMenuItems() {
+    try {
+      const response = await fetch('/api/menu');
+      if (!response.ok) {
+        throw new Error(`Failed to load menu items: ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching menu items:', error);
+      loadingError = error.message;
+      return [];
+    }
+  }
+  
+  // Function to organize menu items by category
+  function organizeItemsByCategory(categories, items) {
+    return categories.map(category => {
+      const categoryItems = items.filter(item => item.categoryId === category.id);
+      return {
+        ...category,
+        id: category.id.toString(), // Ensure ID is a string for component compatibility
+        items: categoryItems
+      };
+    });
+  }
+  
+  // Function to search menu items
+  function searchItems(query) {
+    if (!query) return [];
+    
+    const searchTerm = query.toLowerCase();
+    return menuItems.filter(item => 
+      item.name.toLowerCase().includes(searchTerm) || 
+      item.description.toLowerCase().includes(searchTerm)
+    );
+  }
   
   // Handle search query changes
   $: {
@@ -43,9 +98,31 @@
   }
   
   // Check for mobile screen on mount and window resize
-  onMount(() => {
+  onMount(async () => {
     checkMobileScreen();
     window.addEventListener('resize', checkMobileScreen);
+    
+    // Fetch data from API
+    isLoading = true;
+    loadingError = null;
+    
+    try {
+      const [categoriesData, menuItemsData] = await Promise.all([
+        fetchCategories(),
+        fetchMenuItems()
+      ]);
+      
+      menuItems = menuItemsData;
+      
+      // Organize menu items by category
+      categories = organizeItemsByCategory(categoriesData, menuItemsData);
+      
+      isLoading = false;
+    } catch (error) {
+      console.error('Error loading data:', error);
+      loadingError = error.message;
+      isLoading = false;
+    }
     
     return () => {
       window.removeEventListener('resize', checkMobileScreen);
@@ -149,15 +226,50 @@
           </div>
         {/if}
         
-        <!-- Menu categories -->
+        <!-- Loading, Error, and Menu Categories -->
         {#if !searchQuery.trim()}
-          <div class="space-y-12">
-            {#each categories as category}
-              <div id={category.id}>
-                <MenuCategory {category} />
+          {#if isLoading}
+            <div class="py-12 text-center">
+              <div class="inline-block relative w-20 h-20">
+                <div class="absolute top-0 left-0 w-full h-full">
+                  <div class="coffee-loading"></div>
+                </div>
+                <div class="mt-28 text-coffee-700">Loading menu...</div>
               </div>
-            {/each}
-          </div>
+            </div>
+          {:else if loadingError}
+            <div class="mt-8 p-6 bg-white rounded-2xl shadow-md border border-red-100">
+              <div class="flex items-center text-red-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="font-medium">Error Loading Menu</h3>
+              </div>
+              <p class="text-coffee-700 mb-4">{loadingError}</p>
+              <button 
+                on:click={() => window.location.reload()} 
+                class="px-4 py-2 bg-coffee-600 text-white rounded-lg hover:bg-coffee-700 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          {:else if categories.length === 0}
+            <div class="mt-8 p-8 bg-white rounded-2xl shadow-md text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-coffee-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <h3 class="text-xl font-semibold text-coffee-800 mb-2">No Menu Categories Found</h3>
+              <p class="text-coffee-600">Our menu is being updated. Please check back soon!</p>
+            </div>
+          {:else}
+            <div class="space-y-12">
+              {#each categories as category}
+                <div id={category.id}>
+                  <MenuCategory {category} />
+                </div>
+              {/each}
+            </div>
+          {/if}
         {/if}
       </div>
     </div>
@@ -243,6 +355,49 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  
+  /* Coffee cup loading animation */
+  .coffee-loading {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    position: relative;
+    border-radius: 50%;
+    background: #8B4513; /* Coffee brown color */
+    box-shadow: 0 0 0 5px #8B451333;
+    overflow: hidden;
+  }
+  
+  .coffee-loading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 0;
+    background: #FFFAF0; /* Cream color */
+    animation: fillCoffee 2.5s infinite;
+    border-radius: 50%;
+  }
+  
+  @keyframes fillCoffee {
+    0% {
+      height: 0;
+    }
+    25% {
+      height: 40%;
+    }
+    50% {
+      height: 60%;
+    }
+    75% {
+      height: 85%;
+    }
+    100% {
+      height: 0;
     }
   }
 </style>

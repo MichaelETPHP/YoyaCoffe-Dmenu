@@ -3,15 +3,26 @@
   
   export let item;
   
-  // Like/dislike state
-  let liked = false;
-  let disliked = false;
+  // State for feedback and UI
+  let likeInProgress = false;
+  let dislikeInProgress = false;
   let feedbackMessage = "";
   let showFeedback = false;
+  let errorMessage = null;
   
-  // Generate icon based on item type
-  function getIconForItem(itemId) {
-    // Map of item types to suitable Feather icons
+  // Determine icon based on item properties or ID
+  function determineItemIcon(item) {
+    // First try to use categoryName if available
+    if (item.categoryName) {
+      const category = item.categoryName.toLowerCase();
+      if (category.includes('hot')) return 'coffee';
+      if (category.includes('cold') || category.includes('iced')) return 'thermometer';
+      if (category.includes('espresso')) return 'coffee';
+      if (category.includes('pastry') || category.includes('bakery')) return 'triangle';
+      if (category.includes('sandwich')) return 'square';
+    }
+    
+    // Fallback to ID-based mapping
     const iconMap = {
       'espresso': 'coffee',
       'americano': 'coffee',
@@ -37,32 +48,96 @@
       'turkey-sandwich': 'square'
     };
     
-    return iconMap[itemId] || 'circle';
+    // Try to match based on name if id-based mapping fails
+    if (!iconMap[item.id]) {
+      const name = item.name.toLowerCase();
+      if (name.includes('coffee') || name.includes('latte') || name.includes('espresso')) return 'coffee';
+      if (name.includes('cold') || name.includes('iced')) return 'thermometer';
+      if (name.includes('croissant') || name.includes('pastry')) return 'triangle';
+      if (name.includes('sandwich') || name.includes('toast')) return 'square';
+      if (name.includes('muffin') || name.includes('cookie')) return 'circle';
+    }
+    
+    return iconMap[item.id] || 'circle';
   }
   
-  const icon = getIconForItem(item.id);
+  const icon = determineItemIcon(item);
   
-  function handleLike() {
-    if (disliked) disliked = false; // Remove dislike if it was set
+  // Function to like an item via API
+  async function handleLike() {
+    if (likeInProgress) return; // Prevent multiple clicks
+    likeInProgress = true;
     
-    liked = !liked; // Toggle like state
-    
-    if (liked) {
+    try {
+      const response = await fetch(`/api/menu/${item.id}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to like item: ${response.statusText}`);
+      }
+      
+      const updatedItem = await response.json();
+      
+      // Update the item with the new like count
+      item.likes = updatedItem.likes;
+      
+      // Show feedback message
       feedbackMessage = "Thank you for loving our " + item.name + "! 💕";
       showFeedback = true;
       setTimeout(() => { showFeedback = false; }, 3000);
+      
+      // Clear any error
+      errorMessage = null;
+      
+    } catch (error) {
+      console.error('Error liking item:', error);
+      errorMessage = "Couldn't save your like. Please try again.";
+      setTimeout(() => { errorMessage = null; }, 3000);
+    } finally {
+      likeInProgress = false;
     }
   }
   
-  function handleDislike() {
-    if (liked) liked = false; // Remove like if it was set
+  // Function to dislike an item via API
+  async function handleDislike() {
+    if (dislikeInProgress) return; // Prevent multiple clicks
+    dislikeInProgress = true;
     
-    disliked = !disliked; // Toggle dislike state
-    
-    if (disliked) {
+    try {
+      const response = await fetch(`/api/menu/${item.id}/dislike`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to dislike item: ${response.statusText}`);
+      }
+      
+      const updatedItem = await response.json();
+      
+      // Update the item with the new dislike count
+      item.dislikes = updatedItem.dislikes;
+      
+      // Show feedback message
       feedbackMessage = "We'll work to improve our " + item.name + "! 🙏";
       showFeedback = true;
       setTimeout(() => { showFeedback = false; }, 3000);
+      
+      // Clear any error
+      errorMessage = null;
+      
+    } catch (error) {
+      console.error('Error disliking item:', error);
+      errorMessage = "Couldn't save your feedback. Please try again.";
+      setTimeout(() => { errorMessage = null; }, 3000);
+    } finally {
+      dislikeInProgress = false;
     }
   }
 </script>
@@ -85,6 +160,15 @@
     <div class="absolute top-2 left-0 right-0 mx-auto text-center z-20 animate-fade-in-out">
       <div class="bg-coffee-800 text-white px-3 py-2 rounded-full inline-block shadow-lg text-sm">
         {feedbackMessage}
+      </div>
+    </div>
+  {/if}
+  
+  <!-- Error message -->
+  {#if errorMessage}
+    <div class="absolute top-2 left-0 right-0 mx-auto text-center z-20 animate-fade-in-out">
+      <div class="bg-red-600 text-white px-3 py-2 rounded-full inline-block shadow-lg text-sm">
+        {errorMessage}
       </div>
     </div>
   {/if}
@@ -139,22 +223,34 @@
       
       <!-- Like/Dislike Buttons -->
       <div class="flex space-x-2">
-        <!-- Like Button -->
+        <!-- Like Button with count -->
         <button 
           on:click={handleLike}
-          class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {liked ? 'bg-red-100 text-red-500 scale-110' : 'bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400'}"
+          class="group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {likeInProgress ? 'opacity-70 cursor-wait' : 'hover:bg-red-50'} bg-gray-100"
           aria-label="Like this item"
+          disabled={likeInProgress || dislikeInProgress}
         >
-          <span class="text-lg">❤️</span>
+          <span class="text-lg group-hover:scale-110 transition-transform duration-200">❤️</span>
+          {#if item.likes && item.likes > 0}
+            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {item.likes}
+            </span>
+          {/if}
         </button>
         
-        <!-- Dislike Button -->
+        <!-- Dislike Button with count -->
         <button 
           on:click={handleDislike}
-          class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {disliked ? 'bg-gray-200 text-gray-700 scale-110' : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'}"
+          class="group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 {dislikeInProgress ? 'opacity-70 cursor-wait' : 'hover:bg-gray-200'} bg-gray-100"
           aria-label="Dislike this item"
+          disabled={likeInProgress || dislikeInProgress}
         >
-          <span class="text-lg">👎</span>
+          <span class="text-lg group-hover:scale-110 transition-transform duration-200">👎</span>
+          {#if item.dislikes && item.dislikes > 0}
+            <span class="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {item.dislikes}
+            </span>
+          {/if}
         </button>
       </div>
     </div>
