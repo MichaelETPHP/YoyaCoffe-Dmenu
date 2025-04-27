@@ -408,14 +408,20 @@ function setupCategoryForm() {
         // Update existing category
         response = await fetch(`/api/categories/${id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify({ name })
         });
       } else {
         // Create new category
         response = await fetch('/api/categories', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify({ name })
         });
       }
@@ -929,7 +935,10 @@ function showConfirmDeleteModal(itemType, itemName, itemId, deleteFunction) {
 async function deleteMenuItem(itemId) {
   try {
     const response = await fetch(`/api/menu/${itemId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     });
     
     if (response.ok) {
@@ -943,7 +952,9 @@ async function deleteMenuItem(itemId) {
       // Show success message
       showToast('Menu item deleted successfully');
     } else {
-      showToast('Error deleting menu item', 'error');
+      // Try to get error message from response
+      const errorData = await response.json().catch(() => ({ message: 'Error deleting menu item' }));
+      showToast(errorData.message || 'Error deleting menu item', 'error');
     }
   } catch (error) {
     console.error('Error deleting menu item:', error);
@@ -954,7 +965,10 @@ async function deleteMenuItem(itemId) {
 async function deleteCategory(categoryId) {
   try {
     const response = await fetch(`/api/categories/${categoryId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     });
     
     if (response.ok) {
@@ -968,7 +982,7 @@ async function deleteCategory(categoryId) {
       // Show success message
       showToast('Category deleted successfully');
     } else {
-      const errorData = await response.json();
+      const errorData = await response.json().catch(() => ({ message: 'Error deleting category' }));
       showToast(errorData.message || 'Error deleting category', 'error');
     }
   } catch (error) {
