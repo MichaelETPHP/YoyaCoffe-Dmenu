@@ -40,7 +40,7 @@
             Yoya Coffee
           </h1>
           <p class="text-sm text-cream-200 tracking-wider italic font-light animate-reveal-delay">
-            Sip The sprint of connection!
+            Sip The spirit of connection!
           </p>
         </div>
       </div>
