@@ -28,7 +28,7 @@
       <div class="flex flex-col items-center">
         <div class="relative w-48 h-48 mb-2">
           <img 
-            src="/images/yoya-logo-transparent.png" 
+            src="/images/yoya-logo-transparent.png?v={Date.now()}" 
             alt="Yoya Coffee Logo" 
             class="w-full h-full object-contain animate-bounce-slow"
           />
