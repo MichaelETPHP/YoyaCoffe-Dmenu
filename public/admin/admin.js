@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 // Global variables
 let currentUser = null;
+let token = null;
 let allMenuItems = [];
 let allCategories = [];
 let allUsers = [];
@@ -24,17 +25,31 @@ async function init() {
 }
 
 async function checkAuth() {
-  try {
-    const response = await fetch('/api/user');
-    
-    if (response.ok) {
-      currentUser = await response.json();
-      showDashboard();
-    } else {
+  // Check for token in localStorage
+  token = localStorage.getItem('yoyaAdminToken');
+  
+  if (token) {
+    try {
+      const response = await fetch('/api/user', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.ok) {
+        currentUser = await response.json();
+        showDashboard();
+      } else {
+        // Token invalid or expired
+        localStorage.removeItem('yoyaAdminToken');
+        token = null;
+        showLoginScreen();
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
       showLoginScreen();
     }
-  } catch (error) {
-    console.error('Auth check error:', error);
+  } else {
     showLoginScreen();
   }
 }
@@ -59,7 +74,13 @@ function setupUI() {
         });
         
         if (response.ok) {
-          currentUser = await response.json();
+          const data = await response.json();
+          token = data.token;
+          currentUser = data.user;
+          
+          // Store token in localStorage
+          localStorage.setItem('yoyaAdminToken', token);
+          
           showDashboard();
         } else {
           document.getElementById('login-error').classList.remove('hidden');
@@ -93,8 +114,18 @@ function setupUI() {
   if (logoutButton) {
     logoutButton.addEventListener('click', async () => {
       try {
-        await fetch('/api/logout', { method: 'POST' });
+        await fetch('/api/logout', { 
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        // Clear token and user data
+        localStorage.removeItem('yoyaAdminToken');
+        token = null;
         currentUser = null;
+        
         showLoginScreen();
       } catch (error) {
         console.error('Logout error:', error);
@@ -314,14 +345,20 @@ function setupMenuItemForm() {
         // Update existing item
         response = await fetch(`/api/menu/${id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify(menuItem)
         });
       } else {
         // Create new item
         response = await fetch('/api/menu', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify(menuItem)
         });
       }

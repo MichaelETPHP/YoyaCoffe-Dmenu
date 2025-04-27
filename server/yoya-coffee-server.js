@@ -57,7 +57,7 @@ let categories = [
 
 // User credentials (for demo purposes)
 const users = [
-  { id: 1, username: 'admin', password: 'admin123', is_admin: true }
+  { id: 1, username: 'admin', password: 'admin123', isAdmin: true }
 ];
 
 // Session management (simplified for demo)
@@ -100,13 +100,13 @@ app.post('/api/login', (req, res) => {
   // Create a simple session token
   const token = Math.random().toString(36).substring(2);
   sessions[token] = {
-    user: { id: user.id, username: user.username, isAdmin: user.is_admin },
+    user: { id: user.id, username: user.username, isAdmin: user.isAdmin },
     expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
   };
   
   res.json({ 
     token,
-    user: { id: user.id, username: user.username, isAdmin: user.is_admin }
+    user: { id: user.id, username: user.username, isAdmin: user.isAdmin }
   });
 });
 
@@ -152,6 +152,7 @@ app.get('/api/menu/:id', (req, res) => {
   res.json(menuItem);
 });
 
+// Like a menu item
 app.post('/api/menu/:id/like', (req, res) => {
   const id = parseInt(req.params.id);
   const menuItem = menuItems.find(item => item.id === id);
@@ -164,6 +165,7 @@ app.post('/api/menu/:id/like', (req, res) => {
   res.json(menuItem);
 });
 
+// Dislike a menu item
 app.post('/api/menu/:id/dislike', (req, res) => {
   const id = parseInt(req.params.id);
   const menuItem = menuItems.find(item => item.id === id);
@@ -184,7 +186,7 @@ app.post('/api/menu', isAuthenticated, (req, res) => {
   const id = menuItems.length > 0 ? Math.max(...menuItems.map(item => item.id)) + 1 : 1;
   
   // Get category name
-  const category = categories.find(c => c.id === categoryId);
+  const category = categories.find(c => c.id === parseInt(categoryId));
   const categoryName = category ? category.name : 'Uncategorized';
   
   // Create new menu item
@@ -194,7 +196,7 @@ app.post('/api/menu', isAuthenticated, (req, res) => {
     description,
     price: parseFloat(price),
     formattedPrice: parseFloat(price).toFixed(2),
-    categoryId,
+    categoryId: parseInt(categoryId),
     categoryName,
     image,
     featured: featured || false,
@@ -216,7 +218,7 @@ app.put('/api/menu/:id', isAuthenticated, (req, res) => {
   }
   
   // Get category name
-  const category = categories.find(c => c.id === categoryId);
+  const category = categories.find(c => c.id === parseInt(categoryId));
   const categoryName = category ? category.name : 'Uncategorized';
   
   // Update menu item
@@ -224,7 +226,7 @@ app.put('/api/menu/:id', isAuthenticated, (req, res) => {
   menuItem.description = description;
   menuItem.price = parseFloat(price);
   menuItem.formattedPrice = parseFloat(price).toFixed(2);
-  menuItem.categoryId = categoryId;
+  menuItem.categoryId = parseInt(categoryId);
   menuItem.categoryName = categoryName;
   menuItem.image = image;
   menuItem.featured = featured || false;
@@ -316,3 +318,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Yoya Coffee server running at http://0.0.0.0:${PORT}/`);
 });
+
+module.exports = app;
