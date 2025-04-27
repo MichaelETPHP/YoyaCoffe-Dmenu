@@ -2,6 +2,7 @@ modules = ["nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["mysql80"]
 
 [workflows]
 runButton = "Project"
@@ -13,15 +14,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "YoyaCoffeeServer"
+args = "YoyaCoffeeMySQLServer"
 
 [[workflows.workflow]]
-name = "YoyaCoffeeServer"
+name = "YoyaCoffeeMySQLServer"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node server/yoya-coffee-server.js"
+args = "node server/mysql-coffee-server.js"
 waitForPort = 5000
 
 [deployment]
