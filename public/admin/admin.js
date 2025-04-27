@@ -525,7 +525,7 @@ function renderMenuItems() {
   // Category filter
   const categoryFilter = document.getElementById('menu-category-filter');
   if (categoryFilter && categoryFilter.value !== 'all') {
-    filteredItems = filteredItems.filter(item => item.category_id == categoryFilter.value);
+    filteredItems = filteredItems.filter(item => item.categoryId == categoryFilter.value);
   }
   
   // Search filter
@@ -551,7 +551,7 @@ function renderMenuItems() {
   
   // Create and append table rows
   filteredItems.forEach(item => {
-    const categoryName = allCategories.find(c => c.id === item.category_id)?.name || 'Uncategorized';
+    const categoryName = allCategories.find(c => c.id === item.categoryId)?.name || 'Uncategorized';
     
     const tr = document.createElement('tr');
     tr.className = 'hover:bg-amber-50 transition-colors duration-200';
@@ -619,8 +619,8 @@ async function loadCategories() {
       // Calculate item counts
       categoryItemCounts = {};
       allMenuItems.forEach(item => {
-        if (item.category_id) {
-          categoryItemCounts[item.category_id] = (categoryItemCounts[item.category_id] || 0) + 1;
+        if (item.categoryId) {
+          categoryItemCounts[item.categoryId] = (categoryItemCounts[item.categoryId] || 0) + 1;
         }
       });
       
@@ -866,7 +866,7 @@ function showMenuItemModal(itemId = null) {
       nameInput.value = item.name;
       descriptionInput.value = item.description;
       priceInput.value = item.price;
-      categoryInput.value = item.category_id || '';
+      categoryInput.value = item.categoryId || '';
       imageInput.value = item.image;
       featuredInput.checked = item.featured;
     }
@@ -1042,7 +1042,7 @@ function populatePopularItemsTable() {
   
   // Add rows
   topItems.forEach(item => {
-    const categoryName = allCategories.find(c => c.id === item.category_id)?.name || 'Uncategorized';
+    const categoryName = allCategories.find(c => c.id === item.categoryId)?.name || 'Uncategorized';
     
     const tr = document.createElement('tr');
     tr.className = 'hover:bg-amber-50 transition-colors duration-200';
