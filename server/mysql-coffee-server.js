@@ -41,32 +41,60 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// Simple auth middleware
+// Enhanced auth middleware
 const isAuthenticated = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized - No authorization header' });
   }
   
-  const token = authHeader.split(' ')[1];
+  const parts = authHeader.split(' ');
+  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    return res.status(401).json({ message: 'Unauthorized - Invalid authorization format' });
+  }
+  
+  const token = parts[1];
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized - No token provided' });
+  }
   
   try {
     // Get session from database
     const session = await dbStorage.getSession(token);
     
-    if (!session || Date.now() > session.expires) {
-      if (session) {
-        // Delete expired session
+    if (!session) {
+      return res.status(401).json({ message: 'Unauthorized - Invalid token' });
+    }
+    
+    if (Date.now() > session.expires) {
+      // Delete expired session
+      try {
         await dbStorage.deleteSession(token);
+      } catch (deleteError) {
+        console.error('Error deleting expired session:', deleteError);
       }
       return res.status(401).json({ message: 'Session expired' });
     }
     
-    req.user = session.userData;
+    // Handle case where userData might not be properly parsed
+    if (session.userData && typeof session.userData === 'object') {
+      req.user = session.userData;
+    } else if (session.userData && typeof session.userData === 'string') {
+      try {
+        req.user = JSON.parse(session.userData);
+      } catch (parseError) {
+        console.error('Error parsing user data in session:', parseError);
+        return res.status(500).json({ message: 'Error processing session data' });
+      }
+    } else {
+      console.error('Invalid user data in session:', session);
+      return res.status(500).json({ message: 'Invalid session data' });
+    }
+    
     next();
   } catch (error) {
     console.error('Authentication error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error during authentication' });
   }
 };
 
@@ -77,7 +105,30 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   
   try {
-    const user = await dbStorage.getUserByUsername(username);
+    // Check if user exists in the database
+    let user = await dbStorage.getUserByUsername(username);
+    
+    // For demo purposes: If this is the first login and admin user doesn't exist, create it
+    if (!user && username === 'admin' && password === 'admin123') {
+      try {
+        // Create default admin user
+        await pool.query(
+          'INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)',
+          ['admin', 'admin123', 1]
+        );
+        
+        // Get the newly created user
+        user = await dbStorage.getUserByUsername('admin');
+        console.log('Created default admin user');
+      } catch (err) {
+        // Handle potential race condition if another request created the user
+        if (!err.message.includes('Duplicate entry')) {
+          throw err;
+        }
+        // Try to get the user again
+        user = await dbStorage.getUserByUsername('admin');
+      }
+    }
     
     if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -89,7 +140,12 @@ app.post('/api/login', async (req, res) => {
     const expiresTimestamp = Date.now() + (24 * 60 * 60 * 1000); // 24 hours
     
     // Store session in database
-    await dbStorage.createSession(token, user.id, userData, expiresTimestamp);
+    try {
+      await dbStorage.createSession(token, user.id, userData, expiresTimestamp);
+    } catch (sessionError) {
+      console.error('Error creating session:', sessionError);
+      return res.status(500).json({ message: 'Error creating session' });
+    }
     
     res.json({ 
       token,

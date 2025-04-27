@@ -149,21 +149,41 @@ class DatabaseStorage {
   
   // Session management
   async createSession(token, userId, userData, expiresTimestamp) {
-    await pool.query(
-      'INSERT INTO sessions (token, userId, expires, userData) VALUES (?, ?, ?, ?)',
-      [token, userId, expiresTimestamp, JSON.stringify(userData)]
-    );
+    try {
+      const userDataStr = typeof userData === 'string' ? userData : JSON.stringify(userData);
+      await pool.query(
+        'INSERT INTO sessions (token, userId, expires, userData) VALUES (?, ?, ?, ?)',
+        [token, userId, expiresTimestamp, userDataStr]
+      );
+    } catch (error) {
+      console.error('Error creating session:', error);
+      throw error;
+    }
   }
   
   async getSession(token) {
-    const [rows] = await pool.query('SELECT * FROM sessions WHERE token = ?', [token]);
-    if (rows.length === 0) return null;
-    
-    const session = rows[0];
-    // Parse the JSON userData
-    session.userData = JSON.parse(session.userData);
-    
-    return session;
+    try {
+      const [rows] = await pool.query('SELECT * FROM sessions WHERE token = ?', [token]);
+      if (rows.length === 0) return null;
+      
+      const session = rows[0];
+      
+      // Parse the JSON userData if it's a string
+      if (session.userData && typeof session.userData === 'string') {
+        try {
+          session.userData = JSON.parse(session.userData);
+        } catch (error) {
+          console.error('Error parsing session userData:', error);
+          // Fallback to original value if parsing fails
+          console.log('Original userData:', session.userData);
+        }
+      }
+      
+      return session;
+    } catch (error) {
+      console.error('Error getting session:', error);
+      throw error;
+    }
   }
   
   async deleteSession(token) {
