@@ -124,9 +124,7 @@
           </li>
         </ul>
         
-        <a href="/#order" class="mt-6 inline-block px-5 py-3 bg-cream-600 hover:bg-cream-500 text-coffee-900 rounded-lg font-medium text-sm transition-colors">
-          Order Online
-        </a>
+        <!-- Contact us through social media or email -->
       </div>
     </div>
     
@@ -135,11 +133,9 @@
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-coffee-300 text-sm">&copy; {new Date().getFullYear()} Yoya Coffee. All rights reserved.</p>
         
-        <!-- Footer links -->
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="/#privacy" class="text-coffee-300 hover:text-cream-200 text-sm">Privacy Policy</a>
-          <a href="/#terms" class="text-coffee-300 hover:text-cream-200 text-sm">Terms of Service</a>
-          <a href="/#accessibility" class="text-coffee-300 hover:text-cream-200 text-sm">Accessibility</a>
+        <!-- Designer credit -->
+        <div class="mt-4 md:mt-0">
+          <p class="text-coffee-300 text-sm italic">Designed by Michael. T</p>
         </div>
       </div>
     </div>
