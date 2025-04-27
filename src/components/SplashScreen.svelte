@@ -23,25 +23,15 @@
   <div 
     class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out {fadeOut ? 'opacity-0' : 'opacity-100'}"
   >
-    <div class="w-full max-w-xs transform transition-all animate-fade-in-up">
-      <!-- Coffee cup with steam animation -->
+    <div class="w-full max-w-sm transform transition-all animate-fade-in-up">
+      <!-- Logo image -->
       <div class="flex flex-col items-center">
-        <div class="relative w-24 h-24 mb-3">
-          <!-- Coffee cup -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-            class="w-full h-full text-cream-300 animate-bounce-slow">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M6 1v3M10 1v3M14 1v3" />
-          </svg>
-          
-          <!-- Steam animations -->
-          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 flex space-x-1">
-            <div class="w-1 h-3 bg-cream-200 rounded-full opacity-0 animate-steam-1"></div>
-            <div class="w-1 h-4 bg-cream-200 rounded-full opacity-0 animate-steam-2"></div>
-            <div class="w-1 h-2 bg-cream-200 rounded-full opacity-0 animate-steam-3"></div>
-          </div>
+        <div class="relative w-48 h-48 mb-2">
+          <img 
+            src="/images/yoya-logo.jpg" 
+            alt="Yoya Coffee Logo" 
+            class="w-full h-full object-contain animate-bounce-slow rounded-lg shadow-lg"
+          />
         </div>
         
         <!-- Brand name with animated reveal -->
@@ -49,8 +39,8 @@
           <h1 class="font-serif text-3xl md:text-4xl font-bold mb-1 animate-reveal">
             Yoya Coffee
           </h1>
-          <p class="text-xs text-cream-300 tracking-wider font-light animate-reveal-delay">
-            SPECIALTY COFFEE & PASTRIES
+          <p class="text-sm text-cream-200 tracking-wider italic font-light animate-reveal-delay">
+            Sip The spirit of connection!
           </p>
         </div>
       </div>

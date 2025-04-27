@@ -54,12 +54,11 @@
     <nav class="hidden md:flex items-center space-x-8">
       <button 
         on:click={openTicTacToe}
-        class="text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium flex items-center"
+        class="bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-0.5 flex items-center"
       >
         <span>Play Game</span>
-        <span class="ml-1 text-yellow-300">🎮</span>
+        <span class="ml-1">🎮</span>
       </button>
-      <a href="/#order" class="bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-0.5">Order Online</a>
     </nav>
     
     <!-- Mobile menu button with animation -->
@@ -88,12 +87,11 @@
       <div class="px-4 pt-2 pb-4 space-y-3 animate-slide-down">
         <button 
           on:click={openTicTacToe}
-          class="w-full text-left text-cream-100 hover:text-cream-300 py-2 text-base font-medium flex items-center"
+          class="w-full block bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 my-2 rounded-lg font-medium text-center flex items-center justify-center"
         >
           <span>Play Tic-Tac-Toe</span>
-          <span class="ml-2 text-yellow-300 animate-pulse-slow">🎮</span>
+          <span class="ml-2 animate-pulse-slow">🎮</span>
         </button>
-        <a href="/#order" class="block bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 my-2 rounded-lg font-medium text-center">Order Online</a>
       </div>
     </div>
   {/if}
