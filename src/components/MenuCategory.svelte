@@ -5,8 +5,19 @@
   export let category;
   let isExpanded = true;
   
+  // Check if the category has items
+  $: hasItems = category.items && category.items.length > 0;
+  
   function toggleExpanded() {
     isExpanded = !isExpanded;
+  }
+  
+  // Handle keyboard events for accessibility
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleExpanded();
+    }
   }
 </script>
 
@@ -15,6 +26,9 @@
   <div 
     class="group flex items-center justify-between cursor-pointer mb-6"
     on:click={toggleExpanded}
+    on:keydown={handleKeyDown}
+    role="button"
+    tabindex="0"
     aria-expanded={isExpanded}
     aria-controls="category-items-{category.id}"
   >
@@ -31,6 +45,13 @@
       <h2 class="heading-serif text-2xl sm:text-3xl font-bold text-coffee-800 group-hover:text-coffee-600 transition-colors">
         {category.name}
       </h2>
+      
+      <!-- Item count badge -->
+      {#if hasItems}
+        <span class="ml-3 px-2.5 py-1 bg-coffee-200 text-coffee-800 rounded-full text-xs font-medium">
+          {category.items.length} {category.items.length === 1 ? 'item' : 'items'}
+        </span>
+      {/if}
     </div>
     
     <!-- Toggle indicator with animation -->
@@ -47,15 +68,25 @@
   
   <!-- Grid of menu items with expand/collapse animation -->
   {#if isExpanded}
-    <div 
-      id="category-items-{category.id}" 
-      class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fadeIn"
-      transition:slide={{ duration: 300 }}
-    >
-      {#each category.items as item}
-        <MenuItem {item} />
-      {/each}
-    </div>
+    {#if hasItems}
+      <div 
+        id="category-items-{category.id}" 
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fadeIn"
+        transition:slide={{ duration: 300 }}
+      >
+        {#each category.items as item}
+          <MenuItem {item} />
+        {/each}
+      </div>
+    {:else}
+      <div class="bg-coffee-50 p-6 rounded-xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-coffee-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-coffee-600">No items in this category yet.</p>
+        <p class="text-coffee-500 text-sm mt-1">Check back soon for updates!</p>
+      </div>
+    {/if}
   {/if}
 </section>
 

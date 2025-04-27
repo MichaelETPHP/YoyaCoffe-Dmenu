@@ -161,7 +161,24 @@ app.post('/api/menu/:id/like', (req, res) => {
     return res.status(404).json({ message: 'Menu item not found' });
   }
   
+  // Initialize likes if not present
+  if (menuItem.likes === undefined) {
+    menuItem.likes = 0;
+  }
+  
+  // Increment likes count
   menuItem.likes += 1;
+  
+  // Add timestamp for analytics (optional)
+  const likeEvent = {
+    itemId: id,
+    timestamp: new Date(),
+    type: 'like'
+  };
+  
+  // For a real app, we would save this to a database
+  console.log('Like event:', likeEvent);
+  
   res.json(menuItem);
 });
 
@@ -174,7 +191,24 @@ app.post('/api/menu/:id/dislike', (req, res) => {
     return res.status(404).json({ message: 'Menu item not found' });
   }
   
+  // Initialize dislikes if not present
+  if (menuItem.dislikes === undefined) {
+    menuItem.dislikes = 0;
+  }
+  
+  // Increment dislikes count
   menuItem.dislikes += 1;
+  
+  // Add timestamp for analytics (optional)
+  const dislikeEvent = {
+    itemId: id,
+    timestamp: new Date(),
+    type: 'dislike'
+  };
+  
+  // For a real app, we would save this to a database
+  console.log('Dislike event:', dislikeEvent);
+  
   res.json(menuItem);
 });
 
