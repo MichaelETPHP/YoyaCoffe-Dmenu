@@ -6,7 +6,8 @@
   
   // Game state
   let board = Array(9).fill(null);
-  let currentPlayer = '☕'; // Coffee cup for player, cookie for computer
+  let currentPlayer = '☕'; // Coffee cup for player, company logo for computer
+  let companyPlayer = '🥤'; // Using a cup emoji as a placeholder, will be replaced with logo image
   let winner = null;
   let gameStatus = 'Play a relaxing game while you enjoy your coffee!';
   let winningLine = [];
@@ -57,7 +58,7 @@
     
     if (!winner) {
       // Switch players
-      currentPlayer = currentPlayer === '☕' ? '🍪' : '☕';
+      currentPlayer = currentPlayer === '☕' ? companyPlayer : '☕';
     }
   }
   
@@ -76,7 +77,7 @@
     // First try to win
     for (let i = 0; i < 9; i++) {
       if (!board[i]) {
-        board[i] = '🍪';
+        board[i] = companyPlayer;
         if (calculateWinner().winner) {
           board[i] = null; // Reset
           return i;
@@ -125,7 +126,7 @@
         gameStatus = "You won! ☕ rules!";
       } else {
         computerScore++;
-        gameStatus = "The coffee shop won! 🍪 rules!";
+        gameStatus = "The coffee shop won! Yoya rules!";
       }
     } else if (isBoardFull()) {
       gameOver = true;
@@ -133,7 +134,7 @@
     } else {
       gameStatus = isPlayerTurn 
         ? "Your turn - place your ☕"
-        : "The coffee shop is thinking... 🍪";
+        : "The coffee shop is thinking...";
     }
   }
   
@@ -227,13 +228,17 @@
       {#each board as cell, i}
         <button 
           on:click={() => handleClick(i)}
-          class="w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center text-3xl
+          class="w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center
             {cells[i] ? 'scale-100 opacity-100' : 'scale-90 opacity-0'} 
             {isWinningCell(i) && winAnimation ? 'bg-coffee-200 animate-pulse' : ''}
             hover:bg-coffee-100 hover:shadow-md"
           disabled={!isPlayerTurn || gameOver}
         >
-          {cell ?? ''}
+          {#if cell === companyPlayer}
+            <img src="/images/yoya-logo-transparent.png" alt="Yoya Logo" class="w-8 h-8 object-contain" />
+          {:else if cell}
+            <span class="text-3xl">{cell}</span>
+          {/if}
         </button>
       {/each}
     </div>

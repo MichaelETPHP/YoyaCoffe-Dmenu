@@ -105,6 +105,12 @@ const isAuthenticated = async (req, res, next) => {
   }
 };
 
+// Set proper content type for all API responses
+app.use('/api', (req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
+});
+
 // API Routes
 
 // Login endpoint

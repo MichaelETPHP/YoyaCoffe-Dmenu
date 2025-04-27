@@ -69,15 +69,29 @@
     likeInProgress = true;
     
     try {
-      const response = await fetch(`/api/menu/${item.id}/like`, {
+      // Add timestamp to prevent caching
+      const timestamp = new Date().getTime();
+      const response = await fetch(`/api/menu/${item.id}/like?_=${timestamp}`, {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
         }
       });
       
       if (!response.ok) {
         throw new Error(`Failed to like item: ${response.statusText}`);
+      }
+      
+      // Check for JSON content type
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Server returned non-JSON response:', text);
+        throw new Error('Server returned invalid data format. Please try again later.');
       }
       
       const updatedItem = await response.json();
@@ -108,15 +122,29 @@
     dislikeInProgress = true;
     
     try {
-      const response = await fetch(`/api/menu/${item.id}/dislike`, {
+      // Add timestamp to prevent caching
+      const timestamp = new Date().getTime();
+      const response = await fetch(`/api/menu/${item.id}/dislike?_=${timestamp}`, {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
         }
       });
       
       if (!response.ok) {
         throw new Error(`Failed to dislike item: ${response.statusText}`);
+      }
+      
+      // Check for JSON content type
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Server returned non-JSON response:', text);
+        throw new Error('Server returned invalid data format. Please try again later.');
       }
       
       const updatedItem = await response.json();

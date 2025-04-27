@@ -23,14 +23,34 @@
   // Function to fetch all categories from the API
   async function fetchCategories() {
     try {
-      const response = await fetch('/api/categories');
+      // Add a timestamp to prevent caching
+      const timestamp = new Date().getTime();
+      const response = await fetch(`/api/categories?_=${timestamp}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      });
+      
       if (!response.ok) {
         throw new Error(`Failed to load categories: ${response.statusText}`);
       }
+      
+      // Try to parse the response as JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Server returned non-JSON response:', text);
+        throw new Error('Server returned invalid data format. Please try again later.');
+      }
+      
       return await response.json();
     } catch (error) {
       console.error('Error fetching categories:', error);
-      loadingError = error.message;
+      loadingError = `Error Loading Categories: ${error.message}`;
       return [];
     }
   }
@@ -38,14 +58,34 @@
   // Function to fetch all menu items from the API
   async function fetchMenuItems() {
     try {
-      const response = await fetch('/api/menu');
+      // Add a timestamp to prevent caching
+      const timestamp = new Date().getTime();
+      const response = await fetch(`/api/menu?_=${timestamp}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      });
+      
       if (!response.ok) {
         throw new Error(`Failed to load menu items: ${response.statusText}`);
       }
+      
+      // Try to parse the response as JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Server returned non-JSON response:', text);
+        throw new Error('Server returned invalid data format. Please try again later.');
+      }
+      
       return await response.json();
     } catch (error) {
       console.error('Error fetching menu items:', error);
-      loadingError = error.message;
+      loadingError = `Error Loading Menu: ${error.message}`;
       return [];
     }
   }
