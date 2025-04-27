@@ -32,30 +32,6 @@ const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-// Initialize database
-async function initDb() {
-  try {
-    // Check if tables exist
-    const tablesExist = await pool.query(`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_name = 'users'
-      )`
-    );
-    
-    if (!tablesExist.rows[0].exists) {
-      console.log('Tables not found, initializing database...');
-      // Run database initialization
-      require('./init-db');
-    }
-  } catch (err) {
-    console.error('Error checking database tables:', err);
-  }
-}
-
-// Run database initialization
-initDb();
-
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.userId) {
@@ -117,16 +93,12 @@ app.post('/api/logout', (req, res) => {
   });
 });
 
-app.get('/api/user', (req, res) => {
-  if (req.session && req.session.userId) {
-    res.json({
-      id: req.session.userId,
-      username: req.session.username,
-      isAdmin: req.session.isAdmin
-    });
-  } else {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
+app.get('/api/user', isAuthenticated, (req, res) => {
+  res.json({
+    id: req.session.userId,
+    username: req.session.username,
+    isAdmin: req.session.isAdmin
+  });
 });
 
 // Menu items endpoints
@@ -408,16 +380,10 @@ app.post('/api/users', isAuthenticated, async (req, res) => {
 
 // Catch-all route to serve the main app
 app.get('*', (req, res) => {
-  // Handle admin routes
-  if (req.path.startsWith('/admin')) {
-    return res.sendFile(path.join(__dirname, '../public/admin/index.html'));
-  }
-  
-  // Otherwise serve the main index.html
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Yoya Coffee server running at http://0.0.0.0:${PORT}/`);
+  console.log(`Yoya Coffee Dashboard server running at http://0.0.0.0:${PORT}/`);
 });

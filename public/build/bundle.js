@@ -1,2 +1,7915 @@
-var app=function(){"use strict";function e(){}const t=e=>e;function n(e){return e()}function o(){return Object.create(null)}function r(e){e.forEach(n)}function s(e){return"function"==typeof e}function i(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}let a;function l(e,t){return a||(a=document.createElement("a")),a.href=t,e===a.href}const c="undefined"!=typeof window;let d=c?()=>window.performance.now():()=>Date.now(),f=c?e=>requestAnimationFrame(e):e;const u=new Set;function m(e){u.forEach((t=>{t.c(e)||(u.delete(t),t.f())})),0!==u.size&&f(m)}function h(e,t){e.appendChild(t)}function p(e){if(!e)return document;const t=e.getRootNode?e.getRootNode():e.ownerDocument;return t&&t.host?t:e.ownerDocument}function g(e){const t=y("style");return function(e,t){h(e.head||e,t),t.sheet}(p(e),t),t.sheet}function x(e,t,n){e.insertBefore(t,n||null)}function w(e){e.parentNode&&e.parentNode.removeChild(e)}function v(e,t){for(let n=0;n<e.length;n+=1)e[n]&&e[n].d(t)}function y(e){return document.createElement(e)}function b(e){return document.createElementNS("http://www.w3.org/2000/svg",e)}function k(e){return document.createTextNode(e)}function $(){return k(" ")}function C(){return k("")}function M(e,t,n,o){return e.addEventListener(t,n,o),()=>e.removeEventListener(t,n,o)}function j(e,t,n){null==n?e.removeAttribute(t):e.getAttribute(t)!==n&&e.setAttribute(t,n)}function T(e,t){t=""+t,e.data!==t&&(e.data=t)}function z(e,t){e.value=null==t?"":t}function E(e,t,{bubbles:n=!1,cancelable:o=!1}={}){const r=document.createEvent("CustomEvent");return r.initCustomEvent(e,n,o,t),r}const B=new Map;let S,L=0;function A(e,t,n,o,r,s,i,a=0){const l=16.666/o;let c="{\n";for(let e=0;e<=1;e+=l){const o=t+(n-t)*s(e);c+=100*e+`%{${i(o,1-o)}}\n`}const d=c+`100% {${i(n,1-n)}}\n}`,f=`__svelte_${function(e){let t=5381,n=e.length;for(;n--;)t=(t<<5)-t^e.charCodeAt(n);return t>>>0}(d)}_${a}`,u=p(e),{stylesheet:m,rules:h}=B.get(u)||function(e,t){const n={stylesheet:g(t),rules:{}};return B.set(e,n),n}(u,e);h[f]||(h[f]=!0,m.insertRule(`@keyframes ${f} ${d}`,m.cssRules.length));const x=e.style.animation||"";return e.style.animation=`${x?`${x}, `:""}${f} ${o}ms linear ${r}ms 1 both`,L+=1,f}function P(e,t){const n=(e.style.animation||"").split(", "),o=n.filter(t?e=>e.indexOf(t)<0:e=>-1===e.indexOf("__svelte")),r=n.length-o.length;r&&(e.style.animation=o.join(", "),L-=r,L||f((()=>{L||(B.forEach((e=>{const{ownerNode:t}=e.stylesheet;t&&w(t)})),B.clear())})))}function H(e){S=e}function _(){if(!S)throw new Error("Function called outside component initialization");return S}function I(e){_().$$.on_mount.push(e)}function V(){const e=_();return(t,n,{cancelable:o=!1}={})=>{const r=e.$$.callbacks[t];if(r){const s=E(t,n,{cancelable:o});return r.slice().forEach((t=>{t.call(e,s)})),!s.defaultPrevented}return!0}}const F=[],Y=[];let q=[];const O=[],N=Promise.resolve();let R=!1;function D(e){q.push(e)}function Q(e){O.push(e)}const W=new Set;let J,G=0;function U(){if(0!==G)return;const e=S;do{try{for(;G<F.length;){const e=F[G];G++,H(e),Z(e.$$)}}catch(e){throw F.length=0,G=0,e}for(H(null),F.length=0,G=0;Y.length;)Y.pop()();for(let e=0;e<q.length;e+=1){const t=q[e];W.has(t)||(W.add(t),t())}q.length=0}while(F.length);for(;O.length;)O.pop()();R=!1,W.clear(),H(e)}function Z(e){if(null!==e.fragment){e.update(),r(e.before_update);const t=e.dirty;e.dirty=[-1],e.fragment&&e.fragment.p(e.ctx,t),e.after_update.forEach(D)}}function K(e,t,n){e.dispatchEvent(E(`${t?"intro":"outro"}${n}`))}const X=new Set;let ee;function te(){ee={r:0,c:[],p:ee}}function ne(){ee.r||r(ee.c),ee=ee.p}function oe(e,t){e&&e.i&&(X.delete(e),e.i(t))}function re(e,t,n,o){if(e&&e.o){if(X.has(e))return;X.add(e),ee.c.push((()=>{X.delete(e),o&&(n&&e.d(1),o())})),e.o(t)}else o&&o()}const se={duration:0};function ie(n,o,i,a){const l={direction:"both"};let c=o(n,i,l),h=a?0:1,p=null,g=null,x=null;function w(){x&&P(n,x)}function v(e,t){const n=e.b-h;return t*=Math.abs(n),{a:h,b:e.b,d:n,duration:t,start:e.start,end:e.start+t,group:e.group}}function y(o){const{delay:s=0,duration:i=300,easing:a=t,tick:l=e,css:y}=c||se,b={start:d()+s,b:o};o||(b.group=ee,ee.r+=1),p||g?g=b:(y&&(w(),x=A(n,h,o,i,s,a,y)),o&&l(0,1),p=v(b,i),D((()=>K(n,o,"start"))),function(e){let t;0===u.size&&f(m),new Promise((n=>{u.add(t={c:e,f:n})}))}((e=>{if(g&&e>g.start&&(p=v(g,i),g=null,K(n,p.b,"start"),y&&(w(),x=A(n,h,p.b,p.duration,0,a,c.css))),p)if(e>=p.end)l(h=p.b,1-h),K(n,p.b,"end"),g||(p.b?w():--p.group.r||r(p.group.c)),p=null;else if(e>=p.start){const t=e-p.start;h=p.a+p.d*a(t/p.duration),l(h,1-h)}return!(!p&&!g)})))}return{run(e){s(c)?(J||(J=Promise.resolve(),J.then((()=>{J=null}))),J).then((()=>{c=c(l),y(e)})):y(e)},end(){w(),p=g=null}}}function ae(e,t,n){const o=e.$$.props[t];void 0!==o&&(e.$$.bound[o]=n,n(e.$$.ctx[o]))}function le(e){e&&e.c()}function ce(e,t,o,i){const{fragment:a,after_update:l}=e.$$;a&&a.m(t,o),i||D((()=>{const t=e.$$.on_mount.map(n).filter(s);e.$$.on_destroy?e.$$.on_destroy.push(...t):r(t),e.$$.on_mount=[]})),l.forEach(D)}function de(e,t){const n=e.$$;null!==n.fragment&&(!function(e){const t=[],n=[];q.forEach((o=>-1===e.indexOf(o)?t.push(o):n.push(o))),n.forEach((e=>e())),q=t}(n.after_update),r(n.on_destroy),n.fragment&&n.fragment.d(t),n.on_destroy=n.fragment=null,n.ctx=[])}function fe(e,t){-1===e.$$.dirty[0]&&(F.push(e),R||(R=!0,N.then(U)),e.$$.dirty.fill(0)),e.$$.dirty[t/31|0]|=1<<t%31}function ue(t,n,s,i,a,l,c,d=[-1]){const f=S;H(t);const u=t.$$={fragment:null,ctx:[],props:l,update:e,not_equal:a,bound:o(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(n.context||(f?f.$$.context:[])),callbacks:o(),dirty:d,skip_bound:!1,root:n.target||f.$$.root};c&&c(u.root);let m=!1;if(u.ctx=s?s(t,n.props||{},((e,n,...o)=>{const r=o.length?o[0]:n;return u.ctx&&a(u.ctx[e],u.ctx[e]=r)&&(!u.skip_bound&&u.bound[e]&&u.bound[e](r),m&&fe(t,e)),n})):[],u.update(),m=!0,r(u.before_update),u.fragment=!!i&&i(u.ctx),n.target){if(n.hydrate){const e=function(e){return Array.from(e.childNodes)}(n.target);u.fragment&&u.fragment.l(e),e.forEach(w)}else u.fragment&&u.fragment.c();n.intro&&oe(t.$$.fragment),ce(t,n.target,n.anchor,n.customElement),U()}H(f)}class me{$destroy(){de(this,1),this.$destroy=e}$on(t,n){if(!s(n))return e;const o=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return o.push(n),()=>{const e=o.indexOf(n);-1!==e&&o.splice(e,1)}}$set(e){var t;this.$$set&&(t=e,0!==Object.keys(t).length)&&(this.$$.skip_bound=!0,this.$$set(e),this.$$.skip_bound=!1)}}function he(){const e=["https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&q=80","https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80","https://images.unsplash.com/photo-1501747315-124a0eaca060?w=500&q=80","https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=80","https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=500&q=80","https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&q=80","https://images.unsplash.com/photo-1596951096923-7069c2c09d77?w=500&q=80","https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=80"];return e[Math.floor(Math.random()*e.length)]}function pe(){return(4+Math.random()).toFixed(1)}const ge={categories:[{id:"hot-drinks",name:"Hot Drinks",items:[{id:"espresso",name:"Espresso",description:"Our signature blend with rich, bold flavor. Perfect for coffee enthusiasts.",price:120,image:he(),rating:pe()},{id:"americano",name:"Americano",description:"Espresso diluted with hot water. A smooth and satisfying classic.",price:130,image:he(),rating:pe()},{id:"cappuccino",name:"Cappuccino",description:"Equal parts espresso, steamed milk, and milk foam. Italian coffee tradition.",price:150,image:he(),rating:pe()},{id:"latte",name:"Latte",description:"Espresso with steamed milk and a light layer of foam. Creamy and balanced.",price:160,image:he(),rating:pe()},{id:"mocha",name:"Mocha",description:"Espresso with chocolate and steamed milk. Perfect treat for chocolate lovers.",price:170,image:he(),rating:pe()},{id:"hot-chocolate",name:"Hot Chocolate",description:"Rich chocolate with steamed milk and whipped cream. Comforting and indulgent.",price:140,image:he(),rating:pe()}]},{id:"cold-drinks",name:"Cold Drinks",items:[{id:"iced-coffee",name:"Iced Coffee",description:"Our signature blend served cold over ice. Refreshing on any hot day.",price:135,image:he(),rating:pe()},{id:"cold-brew",name:"Cold Brew",description:"Slow-steeped for 12 hours, smooth and refreshing. Less acidic than regular coffee.",price:160,image:he(),rating:pe()},{id:"iced-latte",name:"Iced Latte",description:"Espresso with cold milk and ice. Cool, creamy, and energizing.",price:165,image:he(),rating:pe()},{id:"iced-mocha",name:"Iced Mocha",description:"Espresso, chocolate, cold milk, and ice. A refreshing chocolate delight.",price:175,image:he(),rating:pe()},{id:"frappe",name:"Frappe",description:"Blended coffee with ice, milk, and whipped cream. The ultimate frozen treat.",price:185,image:he(),rating:pe()}]},{id:"specialty-drinks",name:"Specialty Drinks",items:[{id:"caramel-macchiato",name:"Caramel Macchiato",description:"Vanilla-flavored espresso with caramel drizzle. Sweet and sophisticated.",price:175,image:he(),rating:pe()},{id:"vanilla-latte",name:"Vanilla Latte",description:"Espresso with steamed milk and vanilla syrup. Simple yet delightful.",price:170,image:he(),rating:pe()},{id:"chai-latte",name:"Chai Latte",description:"Spiced tea concentrate with steamed milk. Aromatic and warming.",price:160,image:he(),rating:pe()},{id:"matcha-latte",name:"Matcha Latte",description:"Japanese green tea powder with steamed milk. Earthy and energizing.",price:170,image:he(),rating:pe()}]},{id:"pastries",name:"Pastries",items:[{id:"croissant",name:"Butter Croissant",description:"Flaky, buttery pastry, baked fresh daily. The perfect breakfast companion.",price:120,image:he(),rating:pe()},{id:"chocolate-croissant",name:"Chocolate Croissant",description:"Butter croissant with rich chocolate filling. Indulgent and satisfying.",price:135,image:he(),rating:pe()},{id:"muffin",name:"Blueberry Muffin",description:"Moist muffin packed with fresh blueberries. A fruity breakfast treat.",price:125,image:he(),rating:pe()},{id:"cinnamon-roll",name:"Cinnamon Roll",description:"Soft roll with cinnamon swirl and cream cheese frosting. Aromatic and sweet.",price:145,image:he(),rating:pe()}]},{id:"sandwiches",name:"Sandwiches",items:[{id:"avocado-toast",name:"Avocado Toast",description:"Whole grain toast topped with avocado, sea salt, and pepper. Healthy and filling.",price:250,image:he(),rating:pe()},{id:"egg-sandwich",name:"Egg Sandwich",description:"Fried egg with cheddar on a toasted English muffin. Classic breakfast option.",price:225,image:he(),rating:pe()},{id:"turkey-sandwich",name:"Turkey & Swiss",description:"Smoked turkey with Swiss cheese, lettuce, and tomato. Protein-packed lunch.",price:280,image:he(),rating:pe()}]}]};function xe(e){if(!e)return[];const t=e.toLowerCase();return function(){let e=[];return ge.categories.forEach((t=>{t.items.forEach((n=>{e.push({...n,category:t.id})}))})),e}().filter((e=>e.name.toLowerCase().includes(t)||e.description.toLowerCase().includes(t)))}function we(e){const t=e-1;return t*t*t+1}function ve(e,{delay:n=0,duration:o=400,easing:r=t}={}){const s=+getComputedStyle(e).opacity;return{delay:n,duration:o,easing:r,css:e=>"opacity: "+e*s}}function ye(e,{delay:t=0,duration:n=400,easing:o=we,axis:r="y"}={}){const s=getComputedStyle(e),i=+s.opacity,a="y"===r?"height":"width",l=parseFloat(s[a]),c="y"===r?["top","bottom"]:["left","right"],d=c.map((e=>`${e[0].toUpperCase()}${e.slice(1)}`)),f=parseFloat(s[`padding${d[0]}`]),u=parseFloat(s[`padding${d[1]}`]),m=parseFloat(s[`margin${d[0]}`]),h=parseFloat(s[`margin${d[1]}`]),p=parseFloat(s[`border${d[0]}Width`]),g=parseFloat(s[`border${d[1]}Width`]);return{delay:t,duration:n,easing:o,css:e=>`overflow: hidden;opacity: ${Math.min(20*e,1)*i};${a}: ${e*l}px;padding-${c[0]}: ${e*f}px;padding-${c[1]}: ${e*u}px;margin-${c[0]}: ${e*m}px;margin-${c[1]}: ${e*h}px;border-${c[0]}-width: ${e*p}px;border-${c[1]}-width: ${e*g}px;`}}function be(e,t,n){const o=e.slice();return o[25]=t[n],o[27]=n,o}function ke(e){let t,n,o,r,s,i,a,l=(e[25]??"")+"";function c(){return e[13](e[27])}return{c(){t=y("button"),n=k(l),o=$(),j(t,"class",r="w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center text-3xl "+(e[7][e[27]]?"scale-100 opacity-100":"scale-90 opacity-0")+" "+(e[12](e[27])&&e[8]?"bg-coffee-200 animate-pulse":"")+" hover:bg-coffee-100 hover:shadow-md svelte-1dmibil"),t.disabled=s=!e[5]||e[2]},m(e,r){x(e,t,r),h(t,n),h(t,o),i||(a=M(t,"click",c),i=!0)},p(o,i){e=o,1&i&&l!==(l=(e[25]??"")+"")&&T(n,l),384&i&&r!==(r="w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center text-3xl "+(e[7][e[27]]?"scale-100 opacity-100":"scale-90 opacity-0")+" "+(e[12](e[27])&&e[8]?"bg-coffee-200 animate-pulse":"")+" hover:bg-coffee-100 hover:shadow-md svelte-1dmibil")&&j(t,"class",r),36&i&&s!==(s=!e[5]||e[2])&&(t.disabled=s)},d(e){e&&w(t),i=!1,a()}}}function $e(t){let n,o,s,i,a,l,c,d,f,u,m,p,g,b,C,z,E,B,S,L,A,P,H,_,I,V,F,Y,q,O,N,R=t[0],D=[];for(let e=0;e<R.length;e+=1)D[e]=ke(be(t,R,e));return{c(){n=y("div"),o=y("div"),s=y("div"),i=y("h2"),i.textContent="Yoya Coffee Tic-Tac-Toe",a=$(),l=y("button"),l.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>',c=$(),d=y("div"),f=y("p"),u=k(t[1]),m=$(),p=y("div"),g=y("div"),b=y("p"),b.textContent="You",C=$(),z=y("p"),E=k(t[3]),B=$(),S=y("div"),L=y("p"),L.textContent="Coffee Shop",A=$(),P=y("p"),H=k(t[4]),_=$(),I=y("div");for(let e=0;e<D.length;e+=1)D[e].c();V=$(),F=y("div"),Y=y("button"),Y.textContent="Play Again",j(i,"class","text-xl font-serif font-bold text-coffee-800"),j(l,"class","text-coffee-500 hover:text-coffee-700 transition-colors svelte-1dmibil"),j(s,"class","flex justify-between items-center mb-6"),j(f,"class","text-coffee-700 font-medium"),j(d,"class","text-center mb-4"),j(b,"class","text-coffee-600"),j(z,"class","text-2xl font-bold text-coffee-800"),j(g,"class","text-center"),j(L,"class","text-coffee-600"),j(P,"class","text-2xl font-bold text-coffee-800"),j(S,"class","text-center"),j(p,"class","flex justify-center gap-6 mb-6"),j(I,"class","grid grid-cols-3 gap-3 mb-6 mx-auto max-w-xs"),j(Y,"class","px-6 py-2 bg-coffee-600 text-white font-medium rounded-lg hover:bg-coffee-700 transition-colors transform hover:scale-105 duration-200 svelte-1dmibil"),j(F,"class","text-center"),j(o,"class",q="relative bg-coffee-50 rounded-2xl shadow-2xl max-w-md w-full mx-auto p-5 transform transition-all duration-500 "+(t[6]?"translate-y-0 opacity-100":"translate-y-8 opacity-0")),j(n,"class","fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4")},m(e,r){x(e,n,r),h(n,o),h(o,s),h(s,i),h(s,a),h(s,l),h(o,c),h(o,d),h(d,f),h(f,u),h(o,m),h(o,p),h(p,g),h(g,b),h(g,C),h(g,z),h(z,E),h(p,B),h(p,S),h(S,L),h(S,A),h(S,P),h(P,H),h(o,_),h(o,I);for(let e=0;e<D.length;e+=1)D[e]&&D[e].m(I,null);h(o,V),h(o,F),h(F,Y),O||(N=[M(l,"click",t[11]),M(Y,"click",t[10])],O=!0)},p(e,[t]){if(2&t&&T(u,e[1]),8&t&&T(E,e[3]),16&t&&T(H,e[4]),5029&t){let n;for(R=e[0],n=0;n<R.length;n+=1){const o=be(e,R,n);D[n]?D[n].p(o,t):(D[n]=ke(o),D[n].c(),D[n].m(I,null))}for(;n<D.length;n+=1)D[n].d(1);D.length=R.length}64&t&&q!==(q="relative bg-coffee-50 rounded-2xl shadow-2xl max-w-md w-full mx-auto p-5 transform transition-all duration-500 "+(e[6]?"translate-y-0 opacity-100":"translate-y-8 opacity-0"))&&j(o,"class",q)},i:e,o:e,d(e){e&&w(n),v(D,e),O=!1,r(N)}}}function Ce(e,t,n){const o=V();let r=Array(9).fill(null),s="☕",i=null,a="Play a relaxing game while you enjoy your coffee!",l=[],c=!1,d=0,f=0,u=!0,m=!1,h=Array(9).fill(!1),p=!1;function g(){for(let e=0;e<9;e++)setTimeout((()=>{n(7,h[e]=!0,h),n(7,h=[...h])}),100*e)}function x(e){r[e]||i||!u||(w(e),i||b()||(n(5,u=!1),setTimeout(v,700)))}function w(e){n(0,r[e]=s,r),n(0,r=[...r]),function(){const e=y();i=e.winner,l=e.line,i?(n(8,p=!0),n(2,c=!0),"☕"===i?(n(3,d++,d),n(1,a="You won! ☕ rules!")):(n(4,f++,f),n(1,a="The coffee shop won! 🍪 rules!"))):b()?(n(2,c=!0),n(1,a="It's a draw! Another round?")):n(1,a=u?"Your turn - place your ☕":"The coffee shop is thinking... 🍪")}(),i||(s="☕"===s?"🍪":"☕")}function v(){if(i||b())return;w(function(){for(let e=0;e<9;e++)if(!r[e]){if(n(0,r[e]="🍪",r),y().winner)return n(0,r[e]=null,r),e;n(0,r[e]=null,r)}for(let e=0;e<9;e++)if(!r[e]){if(n(0,r[e]="☕",r),y().winner)return n(0,r[e]=null,r),e;n(0,r[e]=null,r)}if(!r[4])return 4;const e=[0,2,6,8].filter((e=>!r[e]));if(e.length>0)return e[Math.floor(Math.random()*e.length)];const t=r.map(((e,t)=>null===e?t:null)).filter((e=>null!==e));return t[Math.floor(Math.random()*t.length)]}()),n(5,u=!0)}function y(){const e=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(const t of e){const[e,n,o]=t;if(r[e]&&r[e]===r[n]&&r[e]===r[o])return{winner:r[e],line:t}}return{winner:null,line:[]}}function b(){return r.every((e=>null!==e))}I((()=>{setTimeout((()=>{n(6,m=!0),g()}),300)}));return[r,a,c,d,f,u,m,h,p,x,function(){n(0,r=Array(9).fill(null)),s="☕",i=null,n(1,a="Play a relaxing game while you enjoy your coffee!"),l=[],n(2,c=!1),n(5,u=!0),n(8,p=!1),n(7,h=Array(9).fill(!1)),setTimeout((()=>{g()}),300)},function(){o("close")},function(e){return l.includes(e)},e=>x(e)]}class Me extends me{constructor(e){super(),ue(this,e,Ce,$e,i,{})}}function je(t){let n,o,r,s,i,a,l;return{c(){n=y("div"),o=y("div"),r=y("button"),r.innerHTML='<span>Play Tic-Tac-Toe</span> \n          <span class="ml-2 text-yellow-300 animate-pulse-slow svelte-y1hk5h">🎮</span>',s=$(),i=y("a"),i.textContent="Order Online",j(r,"class","w-full text-left text-cream-100 hover:text-cream-300 py-2 text-base font-medium flex items-center"),j(i,"href","/#order"),j(i,"class","block bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 my-2 rounded-lg font-medium text-center"),j(o,"class","px-4 pt-2 pb-4 space-y-3 animate-slide-down svelte-y1hk5h"),j(n,"class","md:hidden bg-coffee-700 overflow-hidden")},m(e,c){x(e,n,c),h(n,o),h(o,r),h(o,s),h(o,i),a||(l=M(r,"click",t[4]),a=!0)},p:e,d(e){e&&w(n),a=!1,l()}}}function Te(t){let n,o,r,s;return o=new Me({}),o.$on("close",t[3]),{c(){n=y("div"),le(o.$$.fragment)},m(e,t){x(e,n,t),ce(o,n,null),s=!0},p:e,i(e){s||(oe(o.$$.fragment,e),D((()=>{s&&(r||(r=ie(n,ve,{},!0)),r.run(1))})),s=!0)},o(e){re(o.$$.fragment,e),r||(r=ie(n,ve,{},!1)),r.run(0),s=!1},d(e){e&&w(n),de(o),e&&r&&r.end()}}}function ze(e){let t,n,o,s,i,a,l,c,d,f,u,m,p,g,v,b,k,T,z,E,B,S,L,A,P,H=e[0]&&je(e),_=e[1]&&Te(e);return{c(){t=y("header"),n=y("div"),o=y("div"),o.innerHTML='<div class="transform transition-transform duration-300 hover:scale-105 animate-bounce-slow svelte-y1hk5h"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-cream-300"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 1v3M10 1v3M14 1v3"></path></svg></div> \n      \n      \n      <div class="animate-slide-in svelte-y1hk5h"><h1 class="heading-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-wide">Yoya Coffee</h1> \n        <p class="text-xs md:text-sm text-cream-200 font-light tracking-wider">SPECIALTY COFFEE &amp; PASTRIES</p></div>',s=$(),i=y("nav"),a=y("button"),a.innerHTML='<span>Play Game</span> \n        <span class="ml-1 text-yellow-300">🎮</span>',l=$(),c=y("a"),c.textContent="Order Online",d=$(),f=y("button"),u=y("div"),m=y("span"),g=$(),v=y("span"),k=$(),T=y("span"),E=$(),H&&H.c(),B=$(),_&&_.c(),S=C(),j(o,"class","flex items-center space-x-3"),j(a,"class","text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium flex items-center"),j(c,"href","/#order"),j(c,"class","bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-0.5"),j(i,"class","hidden md:flex items-center space-x-8"),j(m,"class",p="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"rotate-45":"-translate-y-2")),j(v,"class",b="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"opacity-0":"opacity-100")),j(T,"class",z="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"-rotate-45":"translate-y-2")),j(u,"class","w-6 h-6 relative flex justify-center items-center overflow-hidden"),j(f,"class","md:hidden text-white focus:outline-none p-2 rounded-lg hover:bg-coffee-700 transition-all duration-300"),j(f,"aria-label","Toggle menu"),j(n,"class","max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between"),j(t,"class","bg-coffee-800 text-white shadow-soft sticky top-0 z-50")},m(r,p){x(r,t,p),h(t,n),h(n,o),h(n,s),h(n,i),h(i,a),h(i,l),h(i,c),h(n,d),h(n,f),h(f,u),h(u,m),h(u,g),h(u,v),h(u,k),h(u,T),h(t,E),H&&H.m(t,null),x(r,B,p),_&&_.m(r,p),x(r,S,p),L=!0,A||(P=[M(a,"click",e[4]),M(f,"click",e[5])],A=!0)},p(e,[n]){(!L||4&n&&p!==(p="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"rotate-45":"-translate-y-2")))&&j(m,"class",p),(!L||4&n&&b!==(b="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"opacity-0":"opacity-100")))&&j(v,"class",b),(!L||4&n&&z!==(z="absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out "+(e[2]?"-rotate-45":"translate-y-2")))&&j(T,"class",z),e[0]?H?H.p(e,n):(H=je(e),H.c(),H.m(t,null)):H&&(H.d(1),H=null),e[1]?_?(_.p(e,n),2&n&&oe(_,1)):(_=Te(e),_.c(),oe(_,1),_.m(S.parentNode,S)):_&&(te(),re(_,1,1,(()=>{_=null})),ne())},i(e){L||(oe(_),L=!0)},o(e){re(_),L=!1},d(e){e&&w(t),H&&H.d(),e&&w(B),_&&_.d(e),e&&w(S),A=!1,r(P)}}}function Ee(e,t,n){V();let o=!1,r=!1;function s(){n(0,o=!o)}let i=!1;return[o,r,i,function(){n(1,r=!1)},function(){n(1,r=!0),o&&s()},function(){n(2,i=!i),setTimeout((()=>{s()}),100)}]}class Be extends me{constructor(e){super(),ue(this,e,Ee,ze,i,{})}}function Se(e){let t,n,o;return{c(){t=y("div"),n=y("div"),o=k(e[3]),j(n,"class","bg-coffee-800 text-white px-3 py-2 rounded-full inline-block shadow-lg text-sm"),j(t,"class","absolute top-2 left-0 right-0 mx-auto text-center z-20 animate-fade-in-out svelte-ehwjkt")},m(e,r){x(e,t,r),h(t,n),h(n,o)},p(e,t){8&t&&T(o,e[3])},d(e){e&&w(t)}}}function Le(e){let t;return{c(){t=b("circle"),j(t,"cx","12"),j(t,"cy","12"),j(t,"r","10")},m(e,n){x(e,t,n)},d(e){e&&w(t)}}}function Ae(e){let t;return{c(){t=b("rect"),j(t,"x","3"),j(t,"y","3"),j(t,"width","18"),j(t,"height","18"),j(t,"rx","2"),j(t,"ry","2")},m(e,n){x(e,t,n)},d(e){e&&w(t)}}}function Pe(e){let t;return{c(){t=b("path"),j(t,"d","M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z")},m(e,n){x(e,t,n)},d(e){e&&w(t)}}}function He(e){let t;return{c(){t=b("path"),j(t,"d","M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z")},m(e,n){x(e,t,n)},d(e){e&&w(t)}}}function _e(e){let t;return{c(){t=b("path"),j(t,"d","M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z")},m(e,n){x(e,t,n)},d(e){e&&w(t)}}}function Ie(e){let t,n,o,r,s;return{c(){t=b("path"),n=b("path"),o=b("line"),r=b("line"),s=b("line"),j(t,"d","M18 8h1a4 4 0 010 8h-1"),j(n,"d","M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"),j(o,"x1","6"),j(o,"y1","1"),j(o,"x2","6"),j(o,"y2","4"),j(r,"x1","10"),j(r,"y1","1"),j(r,"x2","10"),j(r,"y2","4"),j(s,"x1","14"),j(s,"y1","1"),j(s,"x2","14"),j(s,"y2","4")},m(e,i){x(e,t,i),x(e,n,i),x(e,o,i),x(e,r,i),x(e,s,i)},d(e){e&&w(t),e&&w(n),e&&w(o),e&&w(r),e&&w(s)}}}function Ve(t){let n,o,s,i,a,c,d,f,u,m,p,g,v,C,z,E,B,S,L,A,P,H,_,I,V,F,Y,q,O,N,R,D,Q,W,J,G,U,Z,K,X,ee=t[0].name+"",te=t[0].description+"",ne=t[0].price+"",oe="coffee"===t[5]&&function(){let e;return{c(){e=y("div"),e.innerHTML='<div class="steam-container svelte-ehwjkt"><div class="steam steam-one svelte-ehwjkt"></div> \n        <div class="steam steam-two svelte-ehwjkt"></div> \n        <div class="steam steam-three svelte-ehwjkt"></div> \n        <div class="steam steam-four svelte-ehwjkt"></div></div>',j(e,"class","absolute top-0 right-3 z-10")},m(t,n){x(t,e,n)},d(t){t&&w(e)}}}(),re=t[4]&&Se(t);let se=function(e){return"coffee"===e[5]?Ie:"thermometer"===e[5]?_e:"droplet"===e[5]?He:"triangle"===e[5]?Pe:"square"===e[5]?Ae:Le}(t),ie=se(t);return{c(){n=y("div"),oe&&oe.c(),o=$(),re&&re.c(),s=$(),i=y("div"),a=y("img"),f=$(),u=y("div"),m=y("div"),p=y("div"),g=y("h3"),v=k(ee),C=$(),z=y("p"),E=k(te),B=$(),S=y("div"),L=b("svg"),ie.c(),A=$(),P=y("span"),P.textContent=`${t[5].charAt(0).toUpperCase()+t[5].slice(1)}`,H=$(),_=y("div"),I=$(),V=y("div"),F=y("div"),Y=y("span"),q=k(ne),O=k(" ETB"),N=$(),R=y("div"),D=y("button"),Q=y("span"),Q.textContent="❤️",J=$(),G=y("button"),U=y("span"),U.textContent="👎",l(a.src,c=t[0].image)||j(a,"src",c),j(a,"alt",d=t[0].name),j(a,"class","w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"),j(i,"class","w-full h-48 overflow-hidden"),j(g,"class","font-semibold text-lg sm:text-xl text-coffee-800 heading-serif group-hover:text-coffee-600 transition-colors"),j(z,"class","text-coffee-600 text-sm mt-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300"),j(p,"class","flex-1 pr-3"),j(m,"class","flex justify-between items-start"),j(L,"xmlns","http://www.w3.org/2000/svg"),j(L,"width","16"),j(L,"height","16"),j(L,"viewBox","0 0 24 24"),j(L,"fill","none"),j(L,"stroke","currentColor"),j(L,"stroke-width","2"),j(L,"stroke-linecap","round"),j(L,"stroke-linejoin","round"),j(L,"class","text-coffee-600 mr-1 group-hover:text-coffee-800 transition-colors duration-300 group-hover:rotate-12 transform"),j(P,"class","text-xs text-coffee-700 group-hover:text-coffee-900 transition-colors duration-300"),j(S,"class","mt-2 inline-flex items-center px-2 py-1 bg-coffee-100 rounded-full group-hover:bg-coffee-200 transition-colors duration-300"),j(_,"class","my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent group-hover:via-coffee-300 transition-colors duration-500"),j(Y,"class","text-coffee-800 font-bold text-lg group-hover:text-coffee-900 transition-colors duration-300 transform group-hover:scale-105"),j(F,"class","flex flex-col"),j(Q,"class","text-lg"),j(D,"class",W="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 "+(t[1]?"bg-red-100 text-red-500 scale-110":"bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400")),j(D,"aria-label","Like this item"),j(U,"class","text-lg"),j(G,"class",Z="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 "+(t[2]?"bg-gray-200 text-gray-700 scale-110":"bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600")),j(G,"aria-label","Dislike this item"),j(R,"class","flex space-x-2"),j(V,"class","flex justify-between items-center"),j(u,"class","p-5"),j(n,"class","menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100 animate-fade-in relative svelte-ehwjkt")},m(e,r){x(e,n,r),oe&&oe.m(n,null),h(n,o),re&&re.m(n,null),h(n,s),h(n,i),h(i,a),h(n,f),h(n,u),h(u,m),h(m,p),h(p,g),h(g,v),h(p,C),h(p,z),h(z,E),h(u,B),h(u,S),h(S,L),ie.m(L,null),h(S,A),h(S,P),h(u,H),h(u,_),h(u,I),h(u,V),h(V,F),h(F,Y),h(Y,q),h(Y,O),h(V,N),h(V,R),h(R,D),h(D,Q),h(R,J),h(R,G),h(G,U),K||(X=[M(D,"click",t[6]),M(G,"click",t[7])],K=!0)},p(e,[t]){e[4]?re?re.p(e,t):(re=Se(e),re.c(),re.m(n,s)):re&&(re.d(1),re=null),1&t&&!l(a.src,c=e[0].image)&&j(a,"src",c),1&t&&d!==(d=e[0].name)&&j(a,"alt",d),1&t&&ee!==(ee=e[0].name+"")&&T(v,ee),1&t&&te!==(te=e[0].description+"")&&T(E,te),1&t&&ne!==(ne=e[0].price+"")&&T(q,ne),2&t&&W!==(W="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 "+(e[1]?"bg-red-100 text-red-500 scale-110":"bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400"))&&j(D,"class",W),4&t&&Z!==(Z="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 "+(e[2]?"bg-gray-200 text-gray-700 scale-110":"bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600"))&&j(G,"class",Z)},i:e,o:e,d(e){e&&w(n),oe&&oe.d(),re&&re.d(),ie.d(),K=!1,r(X)}}}function Fe(e,t,n){let{item:o}=t,r=!1,s=!1,i="",a=!1;const l={espresso:"coffee",americano:"coffee",cappuccino:"coffee",latte:"coffee",mocha:"coffee","hot-chocolate":"coffee","iced-coffee":"thermometer","cold-brew":"droplet","iced-latte":"thermometer","iced-mocha":"thermometer",frappe:"thermometer","caramel-macchiato":"coffee","vanilla-latte":"coffee","chai-latte":"coffee","matcha-latte":"coffee",croissant:"triangle","chocolate-croissant":"triangle",muffin:"circle","cinnamon-roll":"circle","avocado-toast":"square","egg-sandwich":"square","turkey-sandwich":"square"}[o.id]||"circle";return e.$$set=e=>{"item"in e&&n(0,o=e.item)},[o,r,s,i,a,l,function(){s&&n(2,s=!1),n(1,r=!r),r&&(n(3,i="Thank you for loving our "+o.name+"! 💕"),n(4,a=!0),setTimeout((()=>{n(4,a=!1)}),3e3))},function(){r&&n(1,r=!1),n(2,s=!s),s&&(n(3,i="We'll work to improve our "+o.name+"! 🙏"),n(4,a=!0),setTimeout((()=>{n(4,a=!1)}),3e3))}]}class Ye extends me{constructor(e){super(),ue(this,e,Fe,Ve,i,{item:0})}}function qe(e,t,n){const o=e.slice();return o[3]=t[n],o}function Oe(e){let t,n,o,r,s=e[0].items,i=[];for(let t=0;t<s.length;t+=1)i[t]=Ne(qe(e,s,t));const a=e=>re(i[e],1,1,(()=>{i[e]=null}));return{c(){t=y("div");for(let e=0;e<i.length;e+=1)i[e].c();j(t,"id",n="category-items-"+e[0].id),j(t,"class","grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fadeIn svelte-75jc8m")},m(e,n){x(e,t,n);for(let e=0;e<i.length;e+=1)i[e]&&i[e].m(t,null);r=!0},p(e,o){if(1&o){let n;for(s=e[0].items,n=0;n<s.length;n+=1){const r=qe(e,s,n);i[n]?(i[n].p(r,o),oe(i[n],1)):(i[n]=Ne(r),i[n].c(),oe(i[n],1),i[n].m(t,null))}for(te(),n=s.length;n<i.length;n+=1)a(n);ne()}(!r||1&o&&n!==(n="category-items-"+e[0].id))&&j(t,"id",n)},i(e){if(!r){for(let e=0;e<s.length;e+=1)oe(i[e]);D((()=>{r&&(o||(o=ie(t,ye,{duration:300},!0)),o.run(1))})),r=!0}},o(e){i=i.filter(Boolean);for(let e=0;e<i.length;e+=1)re(i[e]);o||(o=ie(t,ye,{duration:300},!1)),o.run(0),r=!1},d(e){e&&w(t),v(i,e),e&&o&&o.end()}}}function Ne(e){let t,n;return t=new Ye({props:{item:e[3]}}),{c(){le(t.$$.fragment)},m(e,o){ce(t,e,o),n=!0},p(e,n){const o={};1&n&&(o.item=e[3]),t.$set(o)},i(e){n||(oe(t.$$.fragment,e),n=!0)},o(e){re(t.$$.fragment,e),n=!1},d(e){de(t,e)}}}function Re(e){let t,n,o,r,s,i,a,l,c,d,f,u,m,p,g,v,C,z,E,B,S,L,A,P=e[0].name+"",H=e[1]?"Hide":"Show",_=e[1]&&Oe(e);return{c(){t=y("section"),n=y("div"),o=y("div"),r=y("div"),r.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 transform transition-transform duration-500 group-hover:rotate-45"><path d="M6 11l3.05-1.75c.47-.27 1.15-.21 1.5.13l5.03 5.03c.49.49.51 1.3.04 1.8l-3.75 3.75c-.48.48-1.28.48-1.76 0l-4.02-4.02C5.57 15.42 5.57 14.57 6 14l0 0z"></path><path d="M10 6l1.95-1.95c.49-.49 1.28-.49 1.77 0l4.02 4.02c.49.49.49 1.28 0 1.77l-2 2"></path></svg>',s=$(),i=y("h2"),a=k(P),l=$(),c=y("div"),d=y("span"),f=k(H),u=$(),m=b("svg"),p=b("polyline"),C=$(),z=y("div"),E=$(),_&&_.c(),j(r,"class","hidden sm:flex mr-3 text-coffee-500"),j(i,"class","heading-serif text-2xl sm:text-3xl font-bold text-coffee-800 group-hover:text-coffee-600 transition-colors"),j(o,"class","flex items-center"),j(d,"class","mr-2 text-sm font-medium"),j(p,"points","6 9 12 15 18 9"),j(m,"xmlns","http://www.w3.org/2000/svg"),j(m,"viewBox","0 0 24 24"),j(m,"fill","none"),j(m,"stroke","currentColor"),j(m,"stroke-width","2"),j(m,"stroke-linecap","round"),j(m,"stroke-linejoin","round"),j(m,"class",g="w-5 h-5 transform transition-transform duration-300 "+(e[1]?"rotate-180":"")),j(c,"class","flex items-center text-coffee-500 group-hover:text-coffee-700 transition-colors"),j(n,"class","group flex items-center justify-between cursor-pointer mb-6"),j(n,"aria-expanded",e[1]),j(n,"aria-controls",v="category-items-"+e[0].id),j(z,"class","h-px bg-gradient-to-r from-coffee-200 via-coffee-300 to-coffee-200 mb-6 opacity-70"),j(t,"id",B=e[0].id),j(t,"class","menu-category mb-10")},m(g,w){x(g,t,w),h(t,n),h(n,o),h(o,r),h(o,s),h(o,i),h(i,a),h(n,l),h(n,c),h(c,d),h(d,f),h(c,u),h(c,m),h(m,p),h(t,C),h(t,z),h(t,E),_&&_.m(t,null),S=!0,L||(A=M(n,"click",e[2]),L=!0)},p(e,[o]){(!S||1&o)&&P!==(P=e[0].name+"")&&T(a,P),(!S||2&o)&&H!==(H=e[1]?"Hide":"Show")&&T(f,H),(!S||2&o&&g!==(g="w-5 h-5 transform transition-transform duration-300 "+(e[1]?"rotate-180":"")))&&j(m,"class",g),(!S||2&o)&&j(n,"aria-expanded",e[1]),(!S||1&o&&v!==(v="category-items-"+e[0].id))&&j(n,"aria-controls",v),e[1]?_?(_.p(e,o),2&o&&oe(_,1)):(_=Oe(e),_.c(),oe(_,1),_.m(t,null)):_&&(te(),re(_,1,1,(()=>{_=null})),ne()),(!S||1&o&&B!==(B=e[0].id))&&j(t,"id",B)},i(e){S||(oe(_),S=!0)},o(e){re(_),S=!1},d(e){e&&w(t),_&&_.d(),L=!1,A()}}}function De(e,t,n){let{category:o}=t,r=!0;return e.$$set=e=>{"category"in e&&n(0,o=e.category)},[o,r,function(){n(1,r=!r)}]}class Qe extends me{constructor(e){super(),ue(this,e,De,Re,i,{category:0})}}function We(t){let n,o,r;return{c(){n=y("button"),n.innerHTML='<div class="p-1 rounded-full hover:bg-coffee-100"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>',j(n,"class","absolute inset-y-0 right-0 pr-4 flex items-center text-coffee-400 hover:text-coffee-700 transition-colors"),j(n,"aria-label","Clear search")},m(e,s){x(e,n,s),o||(r=M(n,"click",t[3]),o=!0)},p:e,d(e){e&&w(n),o=!1,r()}}}function Je(t){let n,o,s,i,a,l,c,d,f,u,m,p,g,v,k,C,T,E,B=t[0]&&We(t);return{c(){n=y("div"),o=y("div"),s=y("label"),s.textContent="Find your favorite item",i=$(),a=y("div"),l=y("div"),c=b("svg"),d=b("circle"),f=b("line"),m=$(),p=y("input"),g=$(),B&&B.c(),k=$(),C=y("p"),C.textContent="Type the name of an item or ingredient to find it quickly",j(s,"for","menu-search"),j(s,"class","block text-coffee-700 font-medium mb-2 text-sm"),j(d,"cx","11"),j(d,"cy","11"),j(d,"r","8"),j(f,"x1","21"),j(f,"y1","21"),j(f,"x2","16.65"),j(f,"y2","16.65"),j(c,"xmlns","http://www.w3.org/2000/svg"),j(c,"width","20"),j(c,"height","20"),j(c,"viewBox","0 0 24 24"),j(c,"fill","none"),j(c,"stroke","currentColor"),j(c,"stroke-width","2"),j(c,"stroke-linecap","round"),j(c,"stroke-linejoin","round"),j(c,"class",u="text-coffee-400 "+(t[1]?"text-coffee-600":"")),j(l,"class","absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"),j(p,"id","menu-search"),j(p,"type","text"),j(p,"placeholder","Search for coffee, pastries, sandwiches..."),j(p,"class","block w-full bg-white border-2 border-coffee-200 rounded-xl py-3 pl-12 pr-12 placeholder-coffee-400 focus:outline-none focus:ring-2 focus:ring-cream-500 focus:border-cream-400 focus:shadow-soft text-coffee-800 font-medium transition-all duration-300"),j(a,"class",v="relative transition-all duration-300 "+(t[1]?"scale-[1.02]":"")),j(C,"class","mt-2 text-xs text-coffee-500 text-center"),j(o,"class","relative max-w-2xl mx-auto"),j(n,"class","w-full mb-8")},m(e,r){x(e,n,r),h(n,o),h(o,s),h(o,i),h(o,a),h(a,l),h(l,c),h(c,d),h(c,f),h(a,m),h(a,p),z(p,t[0]),h(a,g),B&&B.m(a,null),h(o,k),h(o,C),T||(E=[M(p,"input",t[6]),M(p,"input",t[2]),M(p,"focus",t[4]),M(p,"blur",t[5])],T=!0)},p(e,[t]){2&t&&u!==(u="text-coffee-400 "+(e[1]?"text-coffee-600":""))&&j(c,"class",u),1&t&&p.value!==e[0]&&z(p,e[0]),e[0]?B?B.p(e,t):(B=We(e),B.c(),B.m(a,null)):B&&(B.d(1),B=null),2&t&&v!==(v="relative transition-all duration-300 "+(e[1]?"scale-[1.02]":""))&&j(a,"class",v)},i:e,o:e,d(e){e&&w(n),B&&B.d(),T=!1,r(E)}}}function Ge(e,t,n){let{searchQuery:o=""}=t,r=!1;return e.$$set=e=>{"searchQuery"in e&&n(0,o=e.searchQuery)},[o,r,function(e){n(0,o=e.target.value)},function(){n(0,o="")},function(){n(1,r=!0)},function(){n(1,r=!1)},function(){o=this.value,n(0,o)}]}class Ue extends me{constructor(e){super(),ue(this,e,Ge,Je,i,{searchQuery:0})}}function Ze(t){let n,o,r,s,i,a,l,c,d,f,u,m,p;return{c(){n=y("footer"),o=y("div"),r=$(),s=y("div"),s.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path d="M6 1v3M10 1v3M14 1v3"></path><path d="M18 8h1a4 4 0 010 8h-1"></path></svg>',i=$(),a=y("div"),l=y("div"),l.innerHTML='<div class="lg:col-span-2"><div class="flex items-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cream-300 mr-3"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path d="M6 1v3M10 1v3M14 1v3"></path></svg> \n          <h3 class="heading-serif text-2xl font-bold text-cream-100">Yoya Coffee</h3></div> \n        <p class="text-coffee-200 text-sm leading-relaxed mb-6 max-w-md">Serving premium coffee and delicious food since 2015. Our mission is to create a warm, welcoming place for our community to gather, connect, and enjoy exceptional coffee experiences.</p> \n        \n        \n        <div class="flex space-x-4 mt-6"><a href="/#instagram" class="w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors"><span class="sr-only">Instagram</span> \n            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cream-200"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a> \n          <a href="/#facebook" class="w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors"><span class="sr-only">Facebook</span> \n            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cream-200"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a> \n          <a href="/#twitter" class="w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors"><span class="sr-only">Twitter</span> \n            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cream-200"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a></div></div> \n      \n      \n      <div><h3 class="heading-serif text-lg font-semibold mb-5 text-cream-100">Hours</h3> \n        <ul class="text-sm space-y-3 text-coffee-100"><li class="flex items-center"><span class="text-cream-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span> \n            <span>Monday - Friday: <span class="text-cream-300">6:30 AM - 8:00 PM</span></span></li> \n          <li class="flex items-center"><span class="text-cream-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span> \n            <span>Saturday: <span class="text-cream-300">7:00 AM - 8:00 PM</span></span></li> \n          <li class="flex items-center"><span class="text-cream-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span> \n            <span>Sunday: <span class="text-cream-300">8:00 AM - 6:00 PM</span></span></li></ul> \n        \n        <div class="mt-6 p-3 bg-coffee-800 rounded-lg"><p class="text-sm text-cream-200 italic">Holiday hours may vary. Check our social media for updates!</p></div></div> \n      \n      \n      <div><h3 class="heading-serif text-lg font-semibold mb-5 text-cream-100">Contact</h3> \n        <ul class="text-sm space-y-3 text-coffee-100"><li class="flex items-start"><span class="text-cream-400 mr-2 mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span> \n            <span>123 Coffee Street<br/>Seattle, WA 98101</span></li> \n          <li class="flex items-center"><span class="text-cream-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg></span> \n            <span>(555) 123-4567</span></li> \n          <li class="flex items-center"><span class="text-cream-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span> \n            <a href="mailto:info@yoyacoffee.com" class="text-cream-300 hover:text-cream-100 underline">info@yoyacoffee.com</a></li></ul> \n        \n        <a href="/#order" class="mt-6 inline-block px-5 py-3 bg-cream-600 hover:bg-cream-500 text-coffee-900 rounded-lg font-medium text-sm transition-colors">Order Online</a></div>',c=$(),d=y("div"),f=y("div"),u=y("p"),u.textContent=`© ${(new Date).getFullYear()} Yoya Coffee. All rights reserved.`,m=$(),p=y("div"),p.innerHTML='<a href="/#privacy" class="text-coffee-300 hover:text-cream-200 text-sm">Privacy Policy</a> \n          <a href="/#terms" class="text-coffee-300 hover:text-cream-200 text-sm">Terms of Service</a> \n          <a href="/#accessibility" class="text-coffee-300 hover:text-cream-200 text-sm">Accessibility</a>',j(o,"class","absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-cream-400 to-transparent opacity-60"),j(s,"class","absolute right-4 -top-10 text-coffee-800 opacity-10 hidden lg:block"),j(l,"class","grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"),j(u,"class","text-coffee-300 text-sm"),j(p,"class","flex space-x-6 mt-4 md:mt-0"),j(f,"class","flex flex-col md:flex-row justify-between items-center"),j(d,"class","mt-10 pt-6 border-t border-coffee-800"),j(a,"class","max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"),j(n,"class","bg-coffee-900 text-white mt-16 relative")},m(e,t){x(e,n,t),h(n,o),h(n,r),h(n,s),h(n,i),h(n,a),h(a,l),h(a,c),h(a,d),h(d,f),h(f,u),h(f,m),h(f,p)},p:e,i:e,o:e,d(e){e&&w(n)}}}class Ke extends me{constructor(e){super(),ue(this,e,null,Ze,i,{})}}function Xe(e,t,n){const o=e.slice();return o[8]=t[n],o}function et(e,t,n){const o=e.slice();return o[8]=t[n],o}function tt(e){let t,n,o,r,s,i,a,l,c,d,f,u,m,p,g,C,T,z,E,B,S,L,A,P,H,_,I,V=e[0],F=[];for(let t=0;t<V.length;t+=1)F[t]=ot(Xe(e,V,t));return{c(){t=y("div"),n=y("h3"),n.textContent="Menu Categories",o=$(),r=y("div"),r.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>',s=$(),i=y("ul"),a=y("li"),l=y("button"),c=y("div"),d=y("span"),f=b("svg"),u=b("line"),m=b("line"),p=b("line"),g=b("line"),C=b("line"),T=b("line"),E=k("\n            All Categories"),S=$();for(let e=0;e<F.length;e+=1)F[e].c();L=$(),A=y("div"),P=$(),H=y("p"),H.textContent="Choose a category to filter the menu",j(n,"class","heading-serif font-semibold text-xl text-coffee-800 mb-4"),j(r,"class","absolute top-4 right-4 text-coffee-400"),j(u,"x1","8"),j(u,"y1","6"),j(u,"x2","21"),j(u,"y2","6"),j(m,"x1","8"),j(m,"y1","12"),j(m,"x2","21"),j(m,"y2","12"),j(p,"x1","8"),j(p,"y1","18"),j(p,"x2","21"),j(p,"y2","18"),j(g,"x1","3"),j(g,"y1","6"),j(g,"x2","3.01"),j(g,"y2","6"),j(C,"x1","3"),j(C,"y1","12"),j(C,"x2","3.01"),j(C,"y2","12"),j(T,"x1","3"),j(T,"y1","18"),j(T,"x2","3.01"),j(T,"y2","18"),j(f,"xmlns","http://www.w3.org/2000/svg"),j(f,"viewBox","0 0 24 24"),j(f,"fill","none"),j(f,"stroke","currentColor"),j(f,"stroke-width","2"),j(f,"stroke-linecap","round"),j(f,"stroke-linejoin","round"),j(f,"class","w-4 h-4"),j(d,"class",z="mr-3 "+(e[1]?"text-coffee-400 group-hover:text-coffee-600":"text-coffee-800")),j(c,"class","flex items-center"),j(l,"class",B="group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 "+(e[1]?"text-coffee-800 hover:bg-coffee-50 hover:pl-5":"bg-cream-600 text-coffee-900 font-medium shadow-sm")),j(i,"class","space-y-2"),j(A,"class","mt-6 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent"),j(H,"class","mt-4 text-xs text-coffee-500 text-center"),j(t,"class","bg-white rounded-2xl shadow-soft p-5 border border-coffee-100 sticky top-24")},m(w,v){x(w,t,v),h(t,n),h(t,o),h(t,r),h(t,s),h(t,i),h(i,a),h(a,l),h(l,c),h(c,d),h(d,f),h(f,u),h(f,m),h(f,p),h(f,g),h(f,C),h(f,T),h(c,E),h(i,S);for(let e=0;e<F.length;e+=1)F[e]&&F[e].m(i,null);h(t,L),h(t,A),h(t,P),h(t,H),_||(I=M(l,"click",e[4]),_=!0)},p(e,t){if(2&t&&z!==(z="mr-3 "+(e[1]?"text-coffee-400 group-hover:text-coffee-600":"text-coffee-800"))&&j(d,"class",z),2&t&&B!==(B="group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 "+(e[1]?"text-coffee-800 hover:bg-coffee-50 hover:pl-5":"bg-cream-600 text-coffee-900 font-medium shadow-sm"))&&j(l,"class",B),11&t){let n;for(V=e[0],n=0;n<V.length;n+=1){const o=Xe(e,V,n);F[n]?F[n].p(o,t):(F[n]=ot(o),F[n].c(),F[n].m(i,null))}for(;n<F.length;n+=1)F[n].d(1);F.length=V.length}},d(e){e&&w(t),v(F,e),_=!1,I()}}}function nt(e){let t,n,o,r,s,i,a,l,c,d,f,u,m,p=e[0],g=[];for(let t=0;t<p.length;t+=1)g[t]=rt(et(e,p,t));return{c(){t=y("div"),n=y("div"),o=$(),r=y("div"),s=y("div"),i=y("button"),a=k("All Items"),c=$();for(let e=0;e<g.length;e+=1)g[e].c();d=$(),f=y("div"),j(n,"class","absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-coffee-50 to-transparent z-10 pointer-events-none"),j(i,"class",l="px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm "+(e[1]?"bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow":"bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300")),j(s,"class","flex space-x-3 min-w-max px-2"),j(r,"class","overflow-x-auto py-2 px-1 hide-scrollbar svelte-1r0mlyh"),j(f,"class","absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-coffee-50 to-transparent z-10 pointer-events-none"),j(t,"class","relative mb-6")},m(l,p){x(l,t,p),h(t,n),h(t,o),h(t,r),h(r,s),h(s,i),h(i,a),h(s,c);for(let e=0;e<g.length;e+=1)g[e]&&g[e].m(s,null);h(t,d),h(t,f),u||(m=M(i,"click",e[4]),u=!0)},p(e,t){if(2&t&&l!==(l="px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm "+(e[1]?"bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow":"bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300"))&&j(i,"class",l),11&t){let n;for(p=e[0],n=0;n<p.length;n+=1){const o=et(e,p,n);g[n]?g[n].p(o,t):(g[n]=rt(o),g[n].c(),g[n].m(s,null))}for(;n<g.length;n+=1)g[n].d(1);g.length=p.length}},d(e){e&&w(t),v(g,e),u=!1,m()}}}function ot(e){let t,n,o,r,s,i,a,l,c,d,f,u,m,p=e[8].name+"";function g(){return e[6](e[8])}return{c(){t=y("li"),n=y("button"),o=y("div"),r=y("span"),s=b("svg"),i=b("polyline"),l=$(),c=k(p),f=$(),j(i,"points","9 18 15 12 9 6"),j(s,"xmlns","http://www.w3.org/2000/svg"),j(s,"viewBox","0 0 24 24"),j(s,"fill","none"),j(s,"stroke","currentColor"),j(s,"stroke-width","2"),j(s,"stroke-linecap","round"),j(s,"stroke-linejoin","round"),j(s,"class","w-4 h-4"),j(r,"class",a="mr-3 "+(e[1]===e[8].id?"text-coffee-800":"text-coffee-400 group-hover:text-coffee-600")),j(o,"class","flex items-center"),j(n,"class",d="group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 "+(e[1]===e[8].id?"bg-cream-600 text-coffee-900 font-medium shadow-sm":"text-coffee-800 hover:bg-coffee-50 hover:pl-5"))},m(e,a){x(e,t,a),h(t,n),h(n,o),h(o,r),h(r,s),h(s,i),h(o,l),h(o,c),h(t,f),u||(m=M(n,"click",g),u=!0)},p(t,o){e=t,3&o&&a!==(a="mr-3 "+(e[1]===e[8].id?"text-coffee-800":"text-coffee-400 group-hover:text-coffee-600"))&&j(r,"class",a),1&o&&p!==(p=e[8].name+"")&&T(c,p),3&o&&d!==(d="group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 "+(e[1]===e[8].id?"bg-cream-600 text-coffee-900 font-medium shadow-sm":"text-coffee-800 hover:bg-coffee-50 hover:pl-5"))&&j(n,"class",d)},d(e){e&&w(t),u=!1,m()}}}function rt(e){let t,n,o,r,s,i,a=e[8].name+"";function l(){return e[5](e[8])}return{c(){t=y("button"),n=k(a),o=$(),j(t,"class",r="px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm "+(e[1]===e[8].id?"bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300":"bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow"))},m(e,r){x(e,t,r),h(t,n),h(t,o),s||(i=M(t,"click",l),s=!0)},p(o,s){e=o,1&s&&a!==(a=e[8].name+"")&&T(n,a),3&s&&r!==(r="px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm "+(e[1]===e[8].id?"bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300":"bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow"))&&j(t,"class",r)},d(e){e&&w(t),s=!1,i()}}}function st(t){let n;function o(e,t){return e[2]?nt:tt}let r=o(t),s=r(t);return{c(){s.c(),n=C()},m(e,t){s.m(e,t),x(e,n,t)},p(e,[t]){r===(r=o(e))&&s?s.p(e,t):(s.d(1),s=r(e),s&&(s.c(),s.m(n.parentNode,n)))},i:e,o:e,d(e){s.d(e),e&&w(n)}}}function it(e,t,n){let{categories:o=[]}=t,{activeCategory:r=null}=t,{isMobile:s=!1}=t;const i=V();function a(e){i("selectCategory",{category:e===r?null:e})}return e.$$set=e=>{"categories"in e&&n(0,o=e.categories),"activeCategory"in e&&n(1,r=e.activeCategory),"isMobile"in e&&n(2,s=e.isMobile)},[o,r,s,a,function(){window.scrollTo({top:0,behavior:"smooth"}),i("selectCategory",{category:null})},e=>a(e.id),e=>a(e.id)]}class at extends me{constructor(e){super(),ue(this,e,it,st,i,{categories:0,activeCategory:1,isMobile:2})}}function lt(e){let t,n,o,s,i,a,l,c,d,f,u,m,p,g,v,b,C,E,B,S,L,A,P,H,_,I,V,F,Y=(e[0]?e[5][e[1]].title:"Yoya Music")+"",q=e[1]+1+"",O=e[5].length+"";function N(e,t){return e[4]?ft:dt}let R=N(e),D=R(e);function Q(e,t){return e[0]?mt:ut}let W=Q(e),J=W(e);return{c(){t=y("div"),n=y("div"),D.c(),o=$(),s=y("div"),i=y("div"),a=k(Y),l=$(),c=y("div"),c.innerHTML='<div class="w-5 h-5 text-coffee-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg></div>',d=$(),f=y("div"),u=y("input"),m=$(),p=y("div"),g=y("button"),g.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-coffee-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>',v=$(),b=y("button"),J.c(),B=$(),S=y("button"),S.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-coffee-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>',L=$(),A=y("div"),P=k("Track "),H=k(q),_=k("/"),I=k(O),j(i,"class","text-sm font-medium text-coffee-800 truncate"),j(s,"class","flex-1 px-2 text-center"),j(c,"class","flex items-center"),j(n,"class","flex items-center justify-between mb-2"),j(u,"type","range"),j(u,"min","0"),j(u,"max","100"),j(u,"class","w-full h-1.5 bg-coffee-200 rounded-full appearance-none cursor-pointer outline-none svelte-1fzwxqa"),j(f,"class","w-full mb-3"),j(g,"class","w-10 h-10 flex items-center justify-center rounded-full hover:bg-coffee-100 transition-colors"),j(g,"aria-label","Previous track"),j(b,"class",C="w-12 h-12 flex items-center justify-center rounded-full "+(e[0]?"bg-coffee-200":"bg-coffee-100")+" hover:bg-coffee-300 transition-colors"),j(b,"aria-label",E=e[0]?"Pause music":"Play music"),j(S,"class","w-10 h-10 flex items-center justify-center rounded-full hover:bg-coffee-100 transition-colors"),j(S,"aria-label","Next track"),j(p,"class","flex justify-between items-center"),j(A,"class","text-xs text-coffee-600 text-center mt-2"),j(t,"class","bg-white bg-opacity-95 rounded-xl shadow-lg p-3 flex flex-col overflow-hidden relative transition-all duration-300 animate-fadeIn svelte-1fzwxqa")},m(r,w){x(r,t,w),h(t,n),D.m(n,null),h(n,o),h(n,s),h(s,i),h(i,a),h(n,l),h(n,c),h(t,d),h(t,f),h(f,u),z(u,e[2]),h(t,m),h(t,p),h(p,g),h(p,v),h(p,b),J.m(b,null),h(p,B),h(p,S),h(t,L),h(t,A),h(A,P),h(A,H),h(A,_),h(A,I),V||(F=[M(u,"change",e[12]),M(u,"input",e[12]),M(u,"input",e[13]),M(g,"click",e[9]),M(b,"click",e[6]),M(S,"click",e[8])],V=!0)},p(e,t){R===(R=N(e))&&D?D.p(e,t):(D.d(1),D=R(e),D&&(D.c(),D.m(n,o))),3&t&&Y!==(Y=(e[0]?e[5][e[1]].title:"Yoya Music")+"")&&T(a,Y),4&t&&z(u,e[2]),W!==(W=Q(e))&&(J.d(1),J=W(e),J&&(J.c(),J.m(b,null))),1&t&&C!==(C="w-12 h-12 flex items-center justify-center rounded-full "+(e[0]?"bg-coffee-200":"bg-coffee-100")+" hover:bg-coffee-300 transition-colors")&&j(b,"class",C),1&t&&E!==(E=e[0]?"Pause music":"Play music")&&j(b,"aria-label",E),2&t&&q!==(q=e[1]+1+"")&&T(H,q)},d(e){e&&w(t),D.d(),J.d(),V=!1,r(F)}}}function ct(t){let n,o,r,s;return{c(){n=y("div"),o=y("button"),o.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-coffee-800" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>',j(o,"class","w-12 h-12 flex items-center justify-center rounded-full bg-coffee-100 hover:bg-coffee-300 transition-colors"),j(o,"aria-label","Expand music player"),j(n,"class","bg-white bg-opacity-95 rounded-full shadow-lg p-2 transition-all duration-300 animate-fadeIn svelte-1fzwxqa")},m(e,i){x(e,n,i),h(n,o),r||(s=M(o,"click",t[10]),r=!0)},p:e,d(e){e&&w(n),r=!1,s()}}}function dt(t){let n;return{c(){n=y("div"),n.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 1v3M10 1v3M14 1v3"></path></svg>',j(n,"class","w-6 h-6 text-coffee-700")},m(e,t){x(e,n,t)},p:e,d(e){e&&w(n)}}}function ft(t){let n,o,r;return{c(){n=y("button"),n.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>',j(n,"class","w-6 h-6 flex items-center justify-center text-coffee-600 hover:text-coffee-800 transition-colors"),j(n,"aria-label","Collapse music player")},m(e,s){x(e,n,s),o||(r=M(n,"click",t[11]),o=!0)},p:e,d(e){e&&w(n),o=!1,r()}}}function ut(e){let t,n;return{c(){t=b("svg"),n=b("path"),j(n,"fill-rule","evenodd"),j(n,"d","M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"),j(n,"clip-rule","evenodd"),j(t,"xmlns","http://www.w3.org/2000/svg"),j(t,"class","h-6 w-6 text-coffee-800"),j(t,"viewBox","0 0 20 20"),j(t,"fill","currentColor")},m(e,o){x(e,t,o),h(t,n)},d(e){e&&w(t)}}}function mt(e){let t,n;return{c(){t=b("svg"),n=b("path"),j(n,"fill-rule","evenodd"),j(n,"d","M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"),j(n,"clip-rule","evenodd"),j(t,"xmlns","http://www.w3.org/2000/svg"),j(t,"class","h-6 w-6 text-coffee-800"),j(t,"viewBox","0 0 20 20"),j(t,"fill","currentColor")},m(e,o){x(e,t,o),h(t,n)},d(e){e&&w(t)}}}function ht(t){let n,o,r;function s(e,t){return e[3]&&e[4]?ct:lt}let i=s(t),a=i(t);return{c(){n=y("div"),a.c(),o=$(),r=y("div"),j(r,"id","youtube-player"),j(r,"class","hidden"),j(n,"class","fixed bottom-4 right-4 z-50 transition-all duration-300")},m(e,t){x(e,n,t),a.m(n,null),h(n,o),h(n,r)},p(e,[t]){i===(i=s(e))&&a?a.p(e,t):(a.d(1),a=i(e),a&&(a.c(),a.m(n,o)))},i:e,o:e,d(e){e&&w(n),a.d()}}}function pt(e,t,n){const o=[{id:"ytpl2_D_s8-Yg",title:"Coffee Shop Ambience"},{id:"1fueZCTYkpA",title:"Classical Piano"},{id:"JEsF1YSibHM",title:"Jazz Coffee"}];let r,s=!1,i=!1,a=0,l=20,c=!0,d=!1;function f(){n(4,d=window.innerWidth<768),d&&!i&&n(3,c=!0)}function u(e){s=!0,r.setVolume(l)}function m(e){n(0,i=e.data===YT.PlayerState.PLAYING),w(),e.data===YT.PlayerState.ENDED&&x()}function h(e){console.error("YouTube player error:",e.data),x()}function p(){s&&(i?r.pauseVideo():(r.playVideo(),n(3,c=!1)))}function g(e){s&&(n(2,l=e),r.setVolume(l),w())}function x(){s&&(n(1,a=(a+1)%o.length),r.loadVideoById(o[a].id),w())}function w(){localStorage.setItem("yoyaCoffeeMusic",JSON.stringify({playing:i,volume:l,track:a}))}var v;I((()=>{f(),window.addEventListener("resize",f);const e=localStorage.getItem("yoyaCoffeeMusic");if(e){const t=JSON.parse(e);n(2,l=t.volume||20),n(1,a=t.track||0),n(0,i=t.playing||!1),i&&n(3,c=!1)}const t=document.createElement("script");t.src="https://www.youtube.com/iframe_api";const s=document.getElementsByTagName("script")[0];return s.parentNode.insertBefore(t,s),window.onYouTubeIframeAPIReady=()=>{r=new YT.Player("youtube-player",{height:"0",width:"0",videoId:o[a].id,playerVars:{autoplay:0,controls:0,showinfo:0,rel:0,fs:0,modestbranding:1,loop:1},events:{onReady:u,onStateChange:m,onError:h}})},()=>{window.removeEventListener("resize",f)}})),v=()=>{r&&s&&(w(),r.stopVideo())},_().$$.on_destroy.push(v);return[i,a,l,c,d,o,p,g,x,function(){s&&(n(1,a=(a-1+o.length)%o.length),r.loadVideoById(o[a].id),w())},()=>{n(3,c=!1),i||p()},()=>n(3,c=!0),function(){var e;e=this.value,l=""===e?null:+e,n(2,l)},()=>g(l)]}class gt extends me{constructor(e){super(),ue(this,e,pt,ht,i,{})}}function xt(e){let t,n,o;return{c(){t=y("span"),n=k("💰"),j(t,"class",o="text-2xl transform "+(e[1]?"scale-125":"")+" transition-transform duration-300")},m(e,o){x(e,t,o),h(t,n)},p(e,n){2&n&&o!==(o="text-2xl transform "+(e[1]?"scale-125":"")+" transition-transform duration-300")&&j(t,"class",o)},d(e){e&&w(t)}}}function wt(e){let t,n,o;return{c(){t=y("span"),n=k("🤤"),j(t,"class",o="text-2xl transform "+(e[1]?"scale-125":"")+" transition-transform duration-300")},m(e,o){x(e,t,o),h(t,n)},p(e,n){2&n&&o!==(o="text-2xl transform "+(e[1]?"scale-125":"")+" transition-transform duration-300")&&j(t,"class",o)},d(e){e&&w(t)}}}function vt(t){let n,o,r,s,i,a,l,c,d,f,u="menu"===t[0]?"Menu Mode":"Payment Mode";function m(e,t){return"menu"===e[0]?wt:xt}let p=m(t),g=p(t);return{c(){n=y("div"),o=y("button"),r=y("div"),s=y("div"),g.c(),i=$(),a=y("div"),l=k(u),j(s,"class","w-10 h-10 flex items-center justify-center"),j(a,"class","ml-2 text-coffee-800 font-medium"),j(r,"class","flex items-center"),j(o,"class","bg-white rounded-full shadow-lg p-3 flex items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105"),j(o,"aria-label",c="menu"===t[0]?"Switch to payment mode":"Switch to menu mode"),j(n,"class","fixed bottom-4 left-4 z-50")},m(e,c){x(e,n,c),h(n,o),h(o,r),h(r,s),g.m(s,null),h(r,i),h(r,a),h(a,l),d||(f=M(o,"click",t[2]),d=!0)},p(e,[t]){p===(p=m(e))&&g?g.p(e,t):(g.d(1),g=p(e),g&&(g.c(),g.m(s,null))),1&t&&u!==(u="menu"===e[0]?"Menu Mode":"Payment Mode")&&T(l,u),1&t&&c!==(c="menu"===e[0]?"Switch to payment mode":"Switch to menu mode")&&j(o,"aria-label",c)},i:e,o:e,d(e){e&&w(n),g.d(),d=!1,f()}}}function yt(e,t,n){const o=V();let{mode:r="menu"}=t;let s=!1;return e.$$set=e=>{"mode"in e&&n(0,r=e.mode)},[r,s,function(){n(1,s=!0),setTimeout((()=>{n(1,s=!1)}),500),n(0,r="menu"===r?"payment":"menu"),o("modeChange",{mode:r})}]}class bt extends me{constructor(e){super(),ue(this,e,yt,vt,i,{mode:0})}}function kt(e){let t,n,o;return{c(){t=y("div"),n=y("div"),n.innerHTML='<div class="flex flex-col items-center"><div class="relative w-24 h-24 mb-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full text-cream-300 animate-bounce-slow svelte-x57mm7"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 1v3M10 1v3M14 1v3"></path></svg> \n          \n          \n          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 flex space-x-1"><div class="w-1 h-3 bg-cream-200 rounded-full opacity-0 animate-steam-1 svelte-x57mm7"></div> \n            <div class="w-1 h-4 bg-cream-200 rounded-full opacity-0 animate-steam-2 svelte-x57mm7"></div> \n            <div class="w-1 h-2 bg-cream-200 rounded-full opacity-0 animate-steam-3 svelte-x57mm7"></div></div></div> \n        \n        \n        <div class="text-center"><h1 class="font-serif text-3xl md:text-4xl font-bold mb-1 animate-reveal svelte-x57mm7">Yoya Coffee</h1> \n          <p class="text-xs text-cream-300 tracking-wider font-light animate-reveal-delay svelte-x57mm7">SPECIALTY COFFEE &amp; PASTRIES</p></div></div>',j(n,"class","w-full max-w-xs transform transition-all animate-fade-in-up svelte-x57mm7"),j(t,"class",o="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out "+(e[1]?"opacity-0":"opacity-100"))},m(e,o){x(e,t,o),h(t,n)},p(e,n){2&n&&o!==(o="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out "+(e[1]?"opacity-0":"opacity-100"))&&j(t,"class",o)},d(e){e&&w(t)}}}function $t(t){let n,o=t[0]&&kt(t);return{c(){o&&o.c(),n=C()},m(e,t){o&&o.m(e,t),x(e,n,t)},p(e,[t]){e[0]?o?o.p(e,t):(o=kt(e),o.c(),o.m(n.parentNode,n)):o&&(o.d(1),o=null)},i:e,o:e,d(e){o&&o.d(e),e&&w(n)}}}function Ct(e,t,n){let{duration:o=2500}=t,r=!0,s=!1;return I((()=>{setTimeout((()=>{n(1,s=!0)}),o-500),setTimeout((()=>{n(0,r=!1)}),o)})),e.$$set=e=>{"duration"in e&&n(2,o=e.duration)},[r,s,o]}class Mt extends me{constructor(e){super(),ue(this,e,Ct,$t,i,{duration:2})}}function jt(e,t,n){const o=e.slice();return o[13]=t[n],o}function Tt(e,t,n){const o=e.slice();return o[16]=t[n],o}function zt(e){let t,n,o,r;return o=new at({props:{categories:e[5],activeCategory:e[2]}}),o.$on("selectCategory",e[6]),{c(){t=y("aside"),n=y("div"),le(o.$$.fragment),j(n,"class","sticky top-4"),j(t,"class","w-full md:w-64 shrink-0")},m(e,s){x(e,t,s),h(t,n),ce(o,n,null),r=!0},p(e,t){const n={};4&t&&(n.activeCategory=e[2]),o.$set(n)},i(e){r||(oe(o.$$.fragment,e),r=!0)},o(e){re(o.$$.fragment,e),r=!1},d(e){e&&w(t),de(o)}}}function Et(e){let t,n,o,r,s,i,a,l,c,d;return{c(){t=y("div"),n=b("svg"),o=b("path"),r=$(),s=y("p"),i=k('No items found matching "'),a=k(e[0]),l=k('"'),c=$(),d=y("p"),d.textContent="Try a different search term or browse our menu categories",j(o,"stroke-linecap","round"),j(o,"stroke-linejoin","round"),j(o,"stroke-width","2"),j(o,"d","M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"),j(n,"xmlns","http://www.w3.org/2000/svg"),j(n,"class","h-12 w-12 mx-auto text-coffee-300 mb-4"),j(n,"fill","none"),j(n,"viewBox","0 0 24 24"),j(n,"stroke","currentColor"),j(s,"class","text-coffee-600 text-lg"),j(d,"class","text-coffee-400 mt-2"),j(t,"class","mt-6 text-center p-8 bg-white rounded-2xl shadow-soft")},m(e,f){x(e,t,f),h(t,n),h(n,o),h(t,r),h(t,s),h(s,i),h(s,a),h(s,l),h(t,c),h(t,d)},p(e,t){1&t&&T(a,e[0])},d(e){e&&w(t)}}}function Bt(e){let t,n,o,r,s=e[1],i=[];for(let t=0;t<s.length;t+=1)i[t]=St(Tt(e,s,t));return{c(){t=y("div"),n=y("h2"),n.textContent="Search Results",o=$(),r=y("div");for(let e=0;e<i.length;e+=1)i[e].c();j(n,"class","text-2xl font-semibold text-coffee-800 mb-4 font-serif"),j(r,"class","grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"),j(t,"class","mt-6")},m(e,s){x(e,t,s),h(t,n),h(t,o),h(t,r);for(let e=0;e<i.length;e+=1)i[e]&&i[e].m(r,null)},p(e,t){if(2&t){let n;for(s=e[1],n=0;n<s.length;n+=1){const o=Tt(e,s,n);i[n]?i[n].p(o,t):(i[n]=St(o),i[n].c(),i[n].m(r,null))}for(;n<i.length;n+=1)i[n].d(1);i.length=s.length}},d(e){e&&w(t),v(i,e)}}}function St(e){let t,n,o,r,s,i,a,c,d,f,u,m,p,g,v,C,M,z,E,B,S,L,A,P,H,_,I,V,F,Y,q,O,N,R,D,Q,W,J=e[16].name+"",G=e[16].description+"",U=e[16].rating+"",Z=e[16].price+"",K=e[16].rating+"";return{c(){t=y("div"),n=y("div"),o=y("img"),i=$(),a=y("div"),c=y("div"),d=y("div"),f=y("h3"),u=k(J),m=$(),p=y("p"),g=k(G),v=$(),C=y("div"),M=b("svg"),z=b("path"),E=$(),B=y("span"),S=k(U),L=$(),A=y("div"),P=$(),H=y("div"),_=y("div"),I=y("span"),V=k(Z),F=k(" ETB"),Y=$(),q=y("div"),O=b("svg"),N=b("path"),R=$(),D=y("span"),Q=k(K),W=$(),l(o.src,r=e[16].image)||j(o,"src",r),j(o,"alt",s=e[16].name),j(o,"class","w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"),j(n,"class","w-full h-48 overflow-hidden"),j(f,"class","font-semibold text-lg text-coffee-800"),j(p,"class","text-coffee-600 text-sm mt-1 line-clamp-2"),j(d,"class","flex-1 pr-3"),j(z,"d","M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"),j(M,"xmlns","http://www.w3.org/2000/svg"),j(M,"class","h-4 w-4 text-yellow-500"),j(M,"viewBox","0 0 20 20"),j(M,"fill","currentColor"),j(B,"class","ml-1 text-sm font-medium text-coffee-800"),j(C,"class","flex items-center bg-amber-50 px-2 py-1 rounded-full"),j(c,"class","flex justify-between items-start"),j(A,"class","my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent"),j(I,"class","text-coffee-800 font-bold text-lg"),j(_,"class","flex flex-col"),j(N,"d","M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"),j(O,"xmlns","http://www.w3.org/2000/svg"),j(O,"class","h-4 w-4 text-yellow-500"),j(O,"viewBox","0 0 20 20"),j(O,"fill","currentColor"),j(D,"class","ml-1 text-sm font-medium text-coffee-800"),j(q,"class","flex items-center bg-amber-50 px-3 py-1 rounded-full"),j(H,"class","flex justify-between items-center"),j(a,"class","p-5"),j(t,"class","menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100")},m(e,r){x(e,t,r),h(t,n),h(n,o),h(t,i),h(t,a),h(a,c),h(c,d),h(d,f),h(f,u),h(d,m),h(d,p),h(p,g),h(c,v),h(c,C),h(C,M),h(M,z),h(C,E),h(C,B),h(B,S),h(a,L),h(a,A),h(a,P),h(a,H),h(H,_),h(_,I),h(I,V),h(I,F),h(H,Y),h(H,q),h(q,O),h(O,N),h(q,R),h(q,D),h(D,Q),h(t,W)},p(e,t){2&t&&!l(o.src,r=e[16].image)&&j(o,"src",r),2&t&&s!==(s=e[16].name)&&j(o,"alt",s),2&t&&J!==(J=e[16].name+"")&&T(u,J),2&t&&G!==(G=e[16].description+"")&&T(g,G),2&t&&U!==(U=e[16].rating+"")&&T(S,U),2&t&&Z!==(Z=e[16].price+"")&&T(V,Z),2&t&&K!==(K=e[16].rating+"")&&T(Q,K)},d(e){e&&w(t)}}}function Lt(e){let t,n,o;return n=new at({props:{categories:e[5],activeCategory:e[2],isMobile:!0}}),n.$on("selectCategory",e[6]),{c(){t=y("div"),le(n.$$.fragment),j(t,"class","mb-6")},m(e,r){x(e,t,r),ce(n,t,null),o=!0},p(e,t){const o={};4&t&&(o.activeCategory=e[2]),n.$set(o)},i(e){o||(oe(n.$$.fragment,e),o=!0)},o(e){re(n.$$.fragment,e),o=!1},d(e){e&&w(t),de(n)}}}function At(e){let t,n,o=e[5],r=[];for(let t=0;t<o.length;t+=1)r[t]=Pt(jt(e,o,t));const s=e=>re(r[e],1,1,(()=>{r[e]=null}));return{c(){t=y("div");for(let e=0;e<r.length;e+=1)r[e].c();j(t,"class","space-y-12")},m(e,o){x(e,t,o);for(let e=0;e<r.length;e+=1)r[e]&&r[e].m(t,null);n=!0},p(e,n){if(32&n){let i;for(o=e[5],i=0;i<o.length;i+=1){const s=jt(e,o,i);r[i]?(r[i].p(s,n),oe(r[i],1)):(r[i]=Pt(s),r[i].c(),oe(r[i],1),r[i].m(t,null))}for(te(),i=o.length;i<r.length;i+=1)s(i);ne()}},i(e){if(!n){for(let e=0;e<o.length;e+=1)oe(r[e]);n=!0}},o(e){r=r.filter(Boolean);for(let e=0;e<r.length;e+=1)re(r[e]);n=!1},d(e){e&&w(t),v(r,e)}}}function Pt(t){let n,o,r,s;return o=new Qe({props:{category:t[13]}}),{c(){n=y("div"),le(o.$$.fragment),r=$(),j(n,"id",t[13].id)},m(e,t){x(e,n,t),ce(o,n,null),h(n,r),s=!0},p:e,i(e){s||(oe(o.$$.fragment,e),s=!0)},o(e){re(o.$$.fragment,e),s=!1},d(e){e&&w(n),de(o)}}}function Ht(t){let n,o,s,i,a,l,c,d,f,u,m,p;return{c(){n=y("div"),o=y("div"),s=y("div"),i=y("h2"),i.textContent="Payment Options",a=$(),l=y("button"),l.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>',c=$(),d=y("div"),d.innerHTML='<div class="flex items-center p-4 bg-coffee-50 rounded-xl"><div class="flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full"><span class="text-2xl">💳</span></div> \n            <div><h3 class="font-medium text-coffee-800">Credit/Debit Card</h3> \n              <p class="text-coffee-600 text-sm">Pay with any major card</p></div></div> \n          \n          <div class="flex items-center p-4 bg-coffee-50 rounded-xl"><div class="flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full"><span class="text-2xl">📱</span></div> \n            <div><h3 class="font-medium text-coffee-800">Mobile Money</h3> \n              <p class="text-coffee-600 text-sm">Pay with Telebirr or other mobile wallets</p></div></div> \n          \n          <div class="flex items-center p-4 bg-coffee-50 rounded-xl"><div class="flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full"><span class="text-2xl">💵</span></div> \n            <div><h3 class="font-medium text-coffee-800">Cash</h3> \n              <p class="text-coffee-600 text-sm">Pay in-store with cash</p></div></div>',f=$(),u=y("button"),u.textContent="Return to Menu",j(i,"class","text-2xl font-bold text-coffee-800"),j(l,"class","text-coffee-500 hover:text-coffee-700 transition-colors"),j(s,"class","flex justify-between items-center mb-6"),j(d,"class","space-y-4"),j(u,"class","mt-6 w-full py-3 bg-coffee-700 text-white font-medium rounded-xl hover:bg-coffee-800 transition-colors"),j(o,"class","bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full mx-4 transform transition-all duration-300 animate-fadeIn svelte-6rfibk"),j(n,"class","fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center")},m(e,r){x(e,n,r),h(n,o),h(o,s),h(s,i),h(s,a),h(s,l),h(o,c),h(o,d),h(o,f),h(o,u),m||(p=[M(l,"click",t[10]),M(u,"click",t[11])],m=!0)},p:e,d(e){e&&w(n),m=!1,r(p)}}}function _t(e){let t,n,o,r,s,i,a,l,c,d,f,u,m,p,g,v,b,k,C,M,T,z,E,B,S,L=!e[0].trim();t=new Mt({props:{duration:2500}}),r=new Be({});let A=!e[3]&&zt(e);function P(t){e[8](t)}let H={};function _(e,t){return 3&t&&(m=null),3&t&&(p=null),null==m&&(m=!!(e[0].trim()&&e[1].length>0)),m?Bt:(null==p&&(p=!(!e[0].trim()||0!==e[1].length)),p?Et:void 0)}void 0!==e[0]&&(H.searchQuery=e[0]),d=new Ue({props:H}),Y.push((()=>ae(d,"searchQuery",P)));let I=_(e,-1),V=I&&I(e),F=e[3]&&Lt(e),q=L&&At(e);function O(t){e[9](t)}k=new Ke({}),M=new gt({});let N={};void 0!==e[4]&&(N.mode=e[4]),z=new bt({props:N}),Y.push((()=>ae(z,"mode",O))),z.$on("modeChange",e[7]);let R="payment"===e[4]&&Ht(e);return{c(){le(t.$$.fragment),n=$(),o=y("div"),le(r.$$.fragment),s=$(),i=y("main"),a=y("div"),A&&A.c(),l=$(),c=y("div"),le(d.$$.fragment),u=$(),V&&V.c(),g=$(),F&&F.c(),v=$(),q&&q.c(),b=$(),le(k.$$.fragment),C=$(),le(M.$$.fragment),T=$(),le(z.$$.fragment),B=$(),R&&R.c(),j(c,"class","flex-1"),j(a,"class","max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6"),j(i,"class","flex-1 w-full"),j(o,"class","min-h-screen flex flex-col bg-amber-50")},m(e,f){ce(t,e,f),x(e,n,f),x(e,o,f),ce(r,o,null),h(o,s),h(o,i),h(i,a),A&&A.m(a,null),h(a,l),h(a,c),ce(d,c,null),h(c,u),V&&V.m(c,null),h(c,g),F&&F.m(c,null),h(c,v),q&&q.m(c,null),h(o,b),ce(k,o,null),h(o,C),ce(M,o,null),h(o,T),ce(z,o,null),h(o,B),R&&R.m(o,null),S=!0},p(e,[t]){e[3]?A&&(te(),re(A,1,1,(()=>{A=null})),ne()):A?(A.p(e,t),8&t&&oe(A,1)):(A=zt(e),A.c(),oe(A,1),A.m(a,l));const n={};!f&&1&t&&(f=!0,n.searchQuery=e[0],Q((()=>f=!1))),d.$set(n),I===(I=_(e,t))&&V?V.p(e,t):(V&&V.d(1),V=I&&I(e),V&&(V.c(),V.m(c,g))),e[3]?F?(F.p(e,t),8&t&&oe(F,1)):(F=Lt(e),F.c(),oe(F,1),F.m(c,v)):F&&(te(),re(F,1,1,(()=>{F=null})),ne()),1&t&&(L=!e[0].trim()),L?q?(q.p(e,t),1&t&&oe(q,1)):(q=At(e),q.c(),oe(q,1),q.m(c,null)):q&&(te(),re(q,1,1,(()=>{q=null})),ne());const r={};!E&&16&t&&(E=!0,r.mode=e[4],Q((()=>E=!1))),z.$set(r),"payment"===e[4]?R?R.p(e,t):(R=Ht(e),R.c(),R.m(o,null)):R&&(R.d(1),R=null)},i(e){S||(oe(t.$$.fragment,e),oe(r.$$.fragment,e),oe(A),oe(d.$$.fragment,e),oe(F),oe(q),oe(k.$$.fragment,e),oe(M.$$.fragment,e),oe(z.$$.fragment,e),S=!0)},o(e){re(t.$$.fragment,e),re(r.$$.fragment,e),re(A),re(d.$$.fragment,e),re(F),re(q),re(k.$$.fragment,e),re(M.$$.fragment,e),re(z.$$.fragment,e),S=!1},d(e){de(t,e),e&&w(n),e&&w(o),de(r),A&&A.d(),de(d),V&&V.d(),F&&F.d(),q&&q.d(),de(k),de(M),de(z),R&&R.d()}}}function It(e,t,n){let o="",r=[],s=ge.categories,i=null,a=!1,l="menu";function c(){n(3,a=window.innerWidth<768)}I((()=>(c(),window.addEventListener("resize",c),()=>{window.removeEventListener("resize",c)})));return e.$$.update=()=>{1&e.$$.dirty&&(o.trim()?n(1,r=xe(o)):n(1,r=[]))},[o,r,i,a,l,s,function(e){if(n(2,i=e.detail.category),i){const e=document.getElementById(i);e&&e.scrollIntoView({behavior:"smooth"})}},function(e){n(4,l=e.detail.mode)},function(e){o=e,n(0,o)},function(e){l=e,n(4,l)},()=>n(4,l="menu"),()=>n(4,l="menu")]}return new class extends me{constructor(e){super(),ue(this,e,It,_t,i,{})}}({target:document.getElementById("app"),props:{}})}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+var app = (function () {
+    'use strict';
+
+    function noop() { }
+    const identity = x => x;
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    let src_url_equal_anchor;
+    function src_url_equal(element_src, url) {
+        if (!src_url_equal_anchor) {
+            src_url_equal_anchor = document.createElement('a');
+        }
+        src_url_equal_anchor.href = url;
+        return element_src === src_url_equal_anchor.href;
+    }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
+    const globals = (typeof window !== 'undefined'
+        ? window
+        : typeof globalThis !== 'undefined'
+            ? globalThis
+            : global);
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function get_root_for_style(node) {
+        if (!node)
+            return document;
+        const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+        if (root && root.host) {
+            return root;
+        }
+        return node.ownerDocument;
+    }
+    function append_empty_stylesheet(node) {
+        const style_element = element('style');
+        append_stylesheet(get_root_for_style(node), style_element);
+        return style_element.sheet;
+    }
+    function append_stylesheet(node, style) {
+        append(node.head || node, style);
+        return style.sheet;
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        if (node.parentNode) {
+            node.parentNode.removeChild(node);
+        }
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function to_number(value) {
+        return value === '' ? null : +value;
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_input_value(input, value) {
+        input.value = value == null ? '' : value;
+    }
+    function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, bubbles, cancelable, detail);
+        return e;
+    }
+
+    // we need to store the information for multiple documents because a Svelte application could also contain iframes
+    // https://github.com/sveltejs/svelte/issues/3624
+    const managed_styles = new Map();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_style_information(doc, node) {
+        const info = { stylesheet: append_empty_stylesheet(node), rules: {} };
+        managed_styles.set(doc, info);
+        return info;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = get_root_for_style(node);
+        const { stylesheet, rules } = managed_styles.get(doc) || create_style_information(doc, node);
+        if (!rules[name]) {
+            rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            managed_styles.forEach(info => {
+                const { ownerNode } = info.stylesheet;
+                // there is no ownerNode if it runs on jsdom.
+                if (ownerNode)
+                    detach(ownerNode);
+            });
+            managed_styles.clear();
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+    function get_current_component() {
+        if (!current_component)
+            throw new Error('Function called outside component initialization');
+        return current_component;
+    }
+    /**
+     * The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM.
+     * It must be called during the component's initialisation (but doesn't need to live *inside* the component;
+     * it can be called from an external module).
+     *
+     * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
+     *
+     * https://svelte.dev/docs#run-time-svelte-onmount
+     */
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
+    }
+    /**
+     * Schedules a callback to run immediately before the component is unmounted.
+     *
+     * Out of `onMount`, `beforeUpdate`, `afterUpdate` and `onDestroy`, this is the
+     * only one that runs inside a server-side component.
+     *
+     * https://svelte.dev/docs#run-time-svelte-ondestroy
+     */
+    function onDestroy(fn) {
+        get_current_component().$$.on_destroy.push(fn);
+    }
+    /**
+     * Creates an event dispatcher that can be used to dispatch [component events](/docs#template-syntax-component-directives-on-eventname).
+     * Event dispatchers are functions that can take two arguments: `name` and `detail`.
+     *
+     * Component events created with `createEventDispatcher` create a
+     * [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
+     * These events do not [bubble](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
+     * The `detail` argument corresponds to the [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
+     * property and can contain any type of data.
+     *
+     * https://svelte.dev/docs#run-time-svelte-createeventdispatcher
+     */
+    function createEventDispatcher() {
+        const component = get_current_component();
+        return (type, detail, { cancelable = false } = {}) => {
+            const callbacks = component.$$.callbacks[type];
+            if (callbacks) {
+                // TODO are there situations where events could be dispatched
+                // in a server (non-DOM) environment?
+                const event = custom_event(type, detail, { cancelable });
+                callbacks.slice().forEach(fn => {
+                    fn.call(component, event);
+                });
+                return !event.defaultPrevented;
+            }
+            return true;
+        };
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    let render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = /* @__PURE__ */ Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    function add_flush_callback(fn) {
+        flush_callbacks.push(fn);
+    }
+    // flush() calls callbacks in this order:
+    // 1. All beforeUpdate callbacks, in order: parents before children
+    // 2. All bind:this callbacks, in reverse order: children before parents.
+    // 3. All afterUpdate callbacks, in order: parents before children. EXCEPT
+    //    for afterUpdates called during the initial onMount, which are called in
+    //    reverse order: children before parents.
+    // Since callbacks might update component values, which could trigger another
+    // call to flush(), the following steps guard against this:
+    // 1. During beforeUpdate, any updated components will be added to the
+    //    dirty_components array and will cause a reentrant call to flush(). Because
+    //    the flush index is kept outside the function, the reentrant call will pick
+    //    up where the earlier call left off and go through all dirty components. The
+    //    current_component value is saved and restored so that the reentrant call will
+    //    not interfere with the "parent" flush() call.
+    // 2. bind:this callbacks cannot trigger new flush() calls.
+    // 3. During afterUpdate, any updated components will NOT have their afterUpdate
+    //    callback called a second time; the seen_callbacks set, outside the flush()
+    //    function, guarantees this behavior.
+    const seen_callbacks = new Set();
+    let flushidx = 0; // Do *not* move this inside the flush() function
+    function flush() {
+        // Do not reenter flush while dirty components are updated, as this can
+        // result in an infinite loop. Instead, let the inner flush handle it.
+        // Reentrancy is ok afterwards for bindings etc.
+        if (flushidx !== 0) {
+            return;
+        }
+        const saved_component = current_component;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            try {
+                while (flushidx < dirty_components.length) {
+                    const component = dirty_components[flushidx];
+                    flushidx++;
+                    set_current_component(component);
+                    update(component.$$);
+                }
+            }
+            catch (e) {
+                // reset dirty state to not end up in a deadlocked state and then rethrow
+                dirty_components.length = 0;
+                flushidx = 0;
+                throw e;
+            }
+            set_current_component(null);
+            dirty_components.length = 0;
+            flushidx = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        seen_callbacks.clear();
+        set_current_component(saved_component);
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+    /**
+     * Useful for example to execute remaining `afterUpdate` callbacks before executing `destroy`.
+     */
+    function flush_render_callbacks(fns) {
+        const filtered = [];
+        const targets = [];
+        render_callbacks.forEach((c) => fns.indexOf(c) === -1 ? filtered.push(c) : targets.push(c));
+        targets.forEach((c) => c());
+        render_callbacks = filtered;
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+        else if (callback) {
+            callback();
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_bidirectional_transition(node, fn, params, intro) {
+        const options = { direction: 'both' };
+        let config = fn(node, params, options);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = (program.b - t);
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program || pending_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config(options);
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
+
+    function bind(component, name, callback) {
+        const index = component.$$.props[name];
+        if (index !== undefined) {
+            component.$$.bound[index] = callback;
+            callback(component.$$.ctx[index]);
+        }
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function mount_component(component, target, anchor, customElement) {
+        const { fragment, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        if (!customElement) {
+            // onMount happens before the initial afterUpdate
+            add_render_callback(() => {
+                const new_on_destroy = component.$$.on_mount.map(run).filter(is_function);
+                // if the component was destroyed immediately
+                // it will update the `$$.on_destroy` reference to `null`.
+                // the destructured on_destroy may still reference to the old array
+                if (component.$$.on_destroy) {
+                    component.$$.on_destroy.push(...new_on_destroy);
+                }
+                else {
+                    // Edge case - component was destroyed immediately,
+                    // most likely as a result of a binding initialising
+                    run_all(new_on_destroy);
+                }
+                component.$$.on_mount = [];
+            });
+        }
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            flush_render_callbacks($$.after_update);
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: [],
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            on_disconnect: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+            // everything else
+            callbacks: blank_object(),
+            dirty,
+            skip_bound: false,
+            root: options.target || parent_component.$$.root
+        };
+        append_styles && append_styles($$.root);
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, options.props || {}, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if (!$$.skip_bound && $$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor, options.customElement);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            if (!is_function(callback)) {
+                return noop;
+            }
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.59.2' }, detail), { bubbles: true }));
+    }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev('SvelteDOMRemove', { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation, has_stop_immediate_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        if (has_stop_immediate_propagation)
+            modifiers.push('stopImmediatePropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev('SvelteDOMSetProperty', { node, property, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    /**
+     * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+     */
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error("'target' is a required option");
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn('Component was already destroyed'); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    // Helper function to get random coffee image URLs
+    function getRandomCoffeeImage() {
+      const coffeeImages = [
+        "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&q=80",
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80",
+        "https://images.unsplash.com/photo-1501747315-124a0eaca060?w=500&q=80",
+        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=80",
+        "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=500&q=80",
+        "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&q=80",
+        "https://images.unsplash.com/photo-1596951096923-7069c2c09d77?w=500&q=80",
+        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=80"
+      ];
+      return coffeeImages[Math.floor(Math.random() * coffeeImages.length)];
+    }
+
+    // Helper function to generate a random rating between 4.0 and 5.0
+    function getRandomRating() {
+      return (4 + Math.random()).toFixed(1);
+    }
+
+    const menuData = {
+      categories: [
+        {
+          id: "hot-drinks",
+          name: "Hot Drinks",
+          items: [
+            {
+              id: "espresso",
+              name: "Espresso",
+              description: "Our signature blend with rich, bold flavor. Perfect for coffee enthusiasts.",
+              price: 120,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "americano",
+              name: "Americano",
+              description: "Espresso diluted with hot water. A smooth and satisfying classic.",
+              price: 130,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "cappuccino",
+              name: "Cappuccino",
+              description: "Equal parts espresso, steamed milk, and milk foam. Italian coffee tradition.",
+              price: 150,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "latte",
+              name: "Latte",
+              description: "Espresso with steamed milk and a light layer of foam. Creamy and balanced.",
+              price: 160,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "mocha",
+              name: "Mocha",
+              description: "Espresso with chocolate and steamed milk. Perfect treat for chocolate lovers.",
+              price: 170,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "hot-chocolate",
+              name: "Hot Chocolate",
+              description: "Rich chocolate with steamed milk and whipped cream. Comforting and indulgent.",
+              price: 140,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            }
+          ]
+        },
+        {
+          id: "cold-drinks",
+          name: "Cold Drinks",
+          items: [
+            {
+              id: "iced-coffee",
+              name: "Iced Coffee",
+              description: "Our signature blend served cold over ice. Refreshing on any hot day.",
+              price: 135,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "cold-brew",
+              name: "Cold Brew",
+              description: "Slow-steeped for 12 hours, smooth and refreshing. Less acidic than regular coffee.",
+              price: 160,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "iced-latte",
+              name: "Iced Latte",
+              description: "Espresso with cold milk and ice. Cool, creamy, and energizing.",
+              price: 165,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "iced-mocha",
+              name: "Iced Mocha",
+              description: "Espresso, chocolate, cold milk, and ice. A refreshing chocolate delight.",
+              price: 175,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "frappe",
+              name: "Frappe",
+              description: "Blended coffee with ice, milk, and whipped cream. The ultimate frozen treat.",
+              price: 185,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            }
+          ]
+        },
+        {
+          id: "specialty-drinks",
+          name: "Specialty Drinks",
+          items: [
+            {
+              id: "caramel-macchiato",
+              name: "Caramel Macchiato",
+              description: "Vanilla-flavored espresso with caramel drizzle. Sweet and sophisticated.",
+              price: 175,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "vanilla-latte",
+              name: "Vanilla Latte",
+              description: "Espresso with steamed milk and vanilla syrup. Simple yet delightful.",
+              price: 170,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "chai-latte",
+              name: "Chai Latte",
+              description: "Spiced tea concentrate with steamed milk. Aromatic and warming.",
+              price: 160,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "matcha-latte",
+              name: "Matcha Latte",
+              description: "Japanese green tea powder with steamed milk. Earthy and energizing.",
+              price: 170,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            }
+          ]
+        },
+        {
+          id: "pastries",
+          name: "Pastries",
+          items: [
+            {
+              id: "croissant",
+              name: "Butter Croissant",
+              description: "Flaky, buttery pastry, baked fresh daily. The perfect breakfast companion.",
+              price: 120,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "chocolate-croissant",
+              name: "Chocolate Croissant",
+              description: "Butter croissant with rich chocolate filling. Indulgent and satisfying.",
+              price: 135,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "muffin",
+              name: "Blueberry Muffin",
+              description: "Moist muffin packed with fresh blueberries. A fruity breakfast treat.",
+              price: 125,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "cinnamon-roll",
+              name: "Cinnamon Roll",
+              description: "Soft roll with cinnamon swirl and cream cheese frosting. Aromatic and sweet.",
+              price: 145,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            }
+          ]
+        },
+        {
+          id: "sandwiches",
+          name: "Sandwiches",
+          items: [
+            {
+              id: "avocado-toast",
+              name: "Avocado Toast",
+              description: "Whole grain toast topped with avocado, sea salt, and pepper. Healthy and filling.",
+              price: 250,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "egg-sandwich",
+              name: "Egg Sandwich",
+              description: "Fried egg with cheddar on a toasted English muffin. Classic breakfast option.",
+              price: 225,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            },
+            {
+              id: "turkey-sandwich",
+              name: "Turkey & Swiss",
+              description: "Smoked turkey with Swiss cheese, lettuce, and tomato. Protein-packed lunch.",
+              price: 280,
+              image: getRandomCoffeeImage(),
+              rating: getRandomRating()
+            }
+          ]
+        }
+      ]
+    };
+
+    // Function to get all items flattened for search
+    function getAllItems() {
+      let allItems = [];
+      menuData.categories.forEach(category => {
+        category.items.forEach(item => {
+          allItems.push({
+            ...item,
+            category: category.id
+          });
+        });
+      });
+      return allItems;
+    }
+
+    // Helper function for searching items
+    function searchItems(query) {
+      if (!query) return [];
+      
+      const searchTerm = query.toLowerCase();
+      return getAllItems().filter(item => 
+        item.name.toLowerCase().includes(searchTerm) || 
+        item.description.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+    function slide(node, { delay = 0, duration = 400, easing = cubicOut, axis = 'y' } = {}) {
+        const style = getComputedStyle(node);
+        const opacity = +style.opacity;
+        const primary_property = axis === 'y' ? 'height' : 'width';
+        const primary_property_value = parseFloat(style[primary_property]);
+        const secondary_properties = axis === 'y' ? ['top', 'bottom'] : ['left', 'right'];
+        const capitalized_secondary_properties = secondary_properties.map((e) => `${e[0].toUpperCase()}${e.slice(1)}`);
+        const padding_start_value = parseFloat(style[`padding${capitalized_secondary_properties[0]}`]);
+        const padding_end_value = parseFloat(style[`padding${capitalized_secondary_properties[1]}`]);
+        const margin_start_value = parseFloat(style[`margin${capitalized_secondary_properties[0]}`]);
+        const margin_end_value = parseFloat(style[`margin${capitalized_secondary_properties[1]}`]);
+        const border_width_start_value = parseFloat(style[`border${capitalized_secondary_properties[0]}Width`]);
+        const border_width_end_value = parseFloat(style[`border${capitalized_secondary_properties[1]}Width`]);
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => 'overflow: hidden;' +
+                `opacity: ${Math.min(t * 20, 1) * opacity};` +
+                `${primary_property}: ${t * primary_property_value}px;` +
+                `padding-${secondary_properties[0]}: ${t * padding_start_value}px;` +
+                `padding-${secondary_properties[1]}: ${t * padding_end_value}px;` +
+                `margin-${secondary_properties[0]}: ${t * margin_start_value}px;` +
+                `margin-${secondary_properties[1]}: ${t * margin_end_value}px;` +
+                `border-${secondary_properties[0]}-width: ${t * border_width_start_value}px;` +
+                `border-${secondary_properties[1]}-width: ${t * border_width_end_value}px;`
+        };
+    }
+
+    /* src\components\TicTacToe.svelte generated by Svelte v3.59.2 */
+    const file$a = "src\\components\\TicTacToe.svelte";
+
+    function get_each_context$3(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[25] = list[i];
+    	child_ctx[27] = i;
+    	return child_ctx;
+    }
+
+    // (227:6) {#each board as cell, i}
+    function create_each_block$3(ctx) {
+    	let button;
+    	let t0_value = (/*cell*/ ctx[25] ?? '') + "";
+    	let t0;
+    	let t1;
+    	let button_class_value;
+    	let button_disabled_value;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[13](/*i*/ ctx[27]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			t0 = text(t0_value);
+    			t1 = space();
+
+    			attr_dev(button, "class", button_class_value = "w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center text-3xl " + (/*cells*/ ctx[7][/*i*/ ctx[27]]
+    			? 'scale-100 opacity-100'
+    			: 'scale-90 opacity-0') + " " + (/*isWinningCell*/ ctx[12](/*i*/ ctx[27]) && /*winAnimation*/ ctx[8]
+    			? 'bg-coffee-200 animate-pulse'
+    			: '') + " hover:bg-coffee-100 hover:shadow-md" + " svelte-51f43d");
+
+    			button.disabled = button_disabled_value = !/*isPlayerTurn*/ ctx[5] || /*gameOver*/ ctx[2];
+    			add_location(button, file$a, 227, 8, 6217);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, t0);
+    			append_dev(button, t1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", click_handler, false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty & /*board*/ 1 && t0_value !== (t0_value = (/*cell*/ ctx[25] ?? '') + "")) set_data_dev(t0, t0_value);
+
+    			if (dirty & /*cells, winAnimation*/ 384 && button_class_value !== (button_class_value = "w-full aspect-square bg-white rounded-lg shadow transition-all duration-300 flex items-center justify-center text-3xl " + (/*cells*/ ctx[7][/*i*/ ctx[27]]
+    			? 'scale-100 opacity-100'
+    			: 'scale-90 opacity-0') + " " + (/*isWinningCell*/ ctx[12](/*i*/ ctx[27]) && /*winAnimation*/ ctx[8]
+    			? 'bg-coffee-200 animate-pulse'
+    			: '') + " hover:bg-coffee-100 hover:shadow-md" + " svelte-51f43d")) {
+    				attr_dev(button, "class", button_class_value);
+    			}
+
+    			if (dirty & /*isPlayerTurn, gameOver*/ 36 && button_disabled_value !== (button_disabled_value = !/*isPlayerTurn*/ ctx[5] || /*gameOver*/ ctx[2])) {
+    				prop_dev(button, "disabled", button_disabled_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$3.name,
+    		type: "each",
+    		source: "(227:6) {#each board as cell, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$a(ctx) {
+    	let div8;
+    	let div7;
+    	let div0;
+    	let h2;
+    	let t1;
+    	let button0;
+    	let svg;
+    	let path;
+    	let t2;
+    	let div1;
+    	let p0;
+    	let t3;
+    	let t4;
+    	let div4;
+    	let div2;
+    	let p1;
+    	let t6;
+    	let p2;
+    	let t7;
+    	let t8;
+    	let div3;
+    	let p3;
+    	let t10;
+    	let p4;
+    	let t11;
+    	let t12;
+    	let div5;
+    	let t13;
+    	let div6;
+    	let button1;
+    	let div7_class_value;
+    	let mounted;
+    	let dispose;
+    	let each_value = /*board*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div8 = element("div");
+    			div7 = element("div");
+    			div0 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Yoya Coffee Tic-Tac-Toe";
+    			t1 = space();
+    			button0 = element("button");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t2 = space();
+    			div1 = element("div");
+    			p0 = element("p");
+    			t3 = text(/*gameStatus*/ ctx[1]);
+    			t4 = space();
+    			div4 = element("div");
+    			div2 = element("div");
+    			p1 = element("p");
+    			p1.textContent = "You";
+    			t6 = space();
+    			p2 = element("p");
+    			t7 = text(/*playerScore*/ ctx[3]);
+    			t8 = space();
+    			div3 = element("div");
+    			p3 = element("p");
+    			p3.textContent = "Coffee Shop";
+    			t10 = space();
+    			p4 = element("p");
+    			t11 = text(/*computerScore*/ ctx[4]);
+    			t12 = space();
+    			div5 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t13 = space();
+    			div6 = element("div");
+    			button1 = element("button");
+    			button1.textContent = "Play Again";
+    			attr_dev(h2, "class", "text-xl font-serif font-bold text-coffee-800");
+    			add_location(h2, file$a, 196, 6, 5054);
+    			attr_dev(path, "stroke-linecap", "round");
+    			attr_dev(path, "stroke-linejoin", "round");
+    			attr_dev(path, "stroke-width", "2");
+    			attr_dev(path, "d", "M6 18L18 6M6 6l12 12");
+    			add_location(path, file$a, 202, 10, 5394);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-6 w-6");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "stroke", "currentColor");
+    			add_location(svg, file$a, 201, 8, 5273);
+    			attr_dev(button0, "class", "text-coffee-500 hover:text-coffee-700 transition-colors svelte-51f43d");
+    			add_location(button0, file$a, 197, 6, 5146);
+    			attr_dev(div0, "class", "flex justify-between items-center mb-6");
+    			add_location(div0, file$a, 195, 4, 4995);
+    			attr_dev(p0, "class", "text-coffee-700 font-medium");
+    			add_location(p0, file$a, 209, 6, 5605);
+    			attr_dev(div1, "class", "text-center mb-4");
+    			add_location(div1, file$a, 208, 4, 5568);
+    			attr_dev(p1, "class", "text-coffee-600");
+    			add_location(p1, file$a, 215, 8, 5785);
+    			attr_dev(p2, "class", "text-2xl font-bold text-coffee-800");
+    			add_location(p2, file$a, 216, 8, 5828);
+    			attr_dev(div2, "class", "text-center");
+    			add_location(div2, file$a, 214, 6, 5751);
+    			attr_dev(p3, "class", "text-coffee-600");
+    			add_location(p3, file$a, 219, 8, 5945);
+    			attr_dev(p4, "class", "text-2xl font-bold text-coffee-800");
+    			add_location(p4, file$a, 220, 8, 5996);
+    			attr_dev(div3, "class", "text-center");
+    			add_location(div3, file$a, 218, 6, 5911);
+    			attr_dev(div4, "class", "flex justify-center gap-6 mb-6");
+    			add_location(div4, file$a, 213, 4, 5700);
+    			attr_dev(div5, "class", "grid grid-cols-3 gap-3 mb-6 mx-auto max-w-xs");
+    			add_location(div5, file$a, 225, 4, 6119);
+    			attr_dev(button1, "class", "px-6 py-2 bg-coffee-600 text-white font-medium rounded-lg hover:bg-coffee-700 transition-colors transform hover:scale-105 duration-200 svelte-51f43d");
+    			add_location(button1, file$a, 242, 6, 6799);
+    			attr_dev(div6, "class", "text-center");
+    			add_location(div6, file$a, 241, 4, 6767);
+
+    			attr_dev(div7, "class", div7_class_value = "relative bg-coffee-50 rounded-2xl shadow-2xl max-w-md w-full mx-auto p-5 transform transition-all duration-500 " + (/*boardVisible*/ ctx[6]
+    			? 'translate-y-0 opacity-100'
+    			: 'translate-y-8 opacity-0'));
+
+    			add_location(div7, file$a, 191, 2, 4765);
+    			attr_dev(div8, "class", "fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4");
+    			add_location(div8, file$a, 190, 0, 4670);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, div7);
+    			append_dev(div7, div0);
+    			append_dev(div0, h2);
+    			append_dev(div0, t1);
+    			append_dev(div0, button0);
+    			append_dev(button0, svg);
+    			append_dev(svg, path);
+    			append_dev(div7, t2);
+    			append_dev(div7, div1);
+    			append_dev(div1, p0);
+    			append_dev(p0, t3);
+    			append_dev(div7, t4);
+    			append_dev(div7, div4);
+    			append_dev(div4, div2);
+    			append_dev(div2, p1);
+    			append_dev(div2, t6);
+    			append_dev(div2, p2);
+    			append_dev(p2, t7);
+    			append_dev(div4, t8);
+    			append_dev(div4, div3);
+    			append_dev(div3, p3);
+    			append_dev(div3, t10);
+    			append_dev(div3, p4);
+    			append_dev(p4, t11);
+    			append_dev(div7, t12);
+    			append_dev(div7, div5);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div5, null);
+    				}
+    			}
+
+    			append_dev(div7, t13);
+    			append_dev(div7, div6);
+    			append_dev(div6, button1);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*closeGame*/ ctx[11], false, false, false, false),
+    					listen_dev(button1, "click", /*resetGame*/ ctx[10], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*gameStatus*/ 2) set_data_dev(t3, /*gameStatus*/ ctx[1]);
+    			if (dirty & /*playerScore*/ 8) set_data_dev(t7, /*playerScore*/ ctx[3]);
+    			if (dirty & /*computerScore*/ 16) set_data_dev(t11, /*computerScore*/ ctx[4]);
+
+    			if (dirty & /*cells, isWinningCell, winAnimation, isPlayerTurn, gameOver, handleClick, board*/ 5029) {
+    				each_value = /*board*/ ctx[0];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$3(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$3(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div5, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+
+    			if (dirty & /*boardVisible*/ 64 && div7_class_value !== (div7_class_value = "relative bg-coffee-50 rounded-2xl shadow-2xl max-w-md w-full mx-auto p-5 transform transition-all duration-500 " + (/*boardVisible*/ ctx[6]
+    			? 'translate-y-0 opacity-100'
+    			: 'translate-y-8 opacity-0'))) {
+    				attr_dev(div7, "class", div7_class_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div8);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$a.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$a($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('TicTacToe', slots, []);
+    	const dispatch = createEventDispatcher();
+
+    	// Game state
+    	let board = Array(9).fill(null);
+
+    	let currentPlayer = '☕'; // Coffee cup for player, cookie for computer
+    	let winner = null;
+    	let gameStatus = 'Play a relaxing game while you enjoy your coffee!';
+    	let winningLine = [];
+    	let gameOver = false;
+    	let playerScore = 0;
+    	let computerScore = 0;
+    	let isPlayerTurn = true;
+
+    	// Animation states
+    	let boardVisible = false;
+
+    	let cells = Array(9).fill(false); // Tracks if each cell has animated in
+    	let winAnimation = false;
+
+    	onMount(() => {
+    		setTimeout(
+    			() => {
+    				$$invalidate(6, boardVisible = true);
+    				animateCellsSequentially();
+    			},
+    			300
+    		);
+    	});
+
+    	function animateCellsSequentially() {
+    		for (let i = 0; i < 9; i++) {
+    			setTimeout(
+    				() => {
+    					$$invalidate(7, cells[i] = true, cells);
+    					$$invalidate(7, cells = [...cells]); // Trigger reactivity
+    				},
+    				i * 100
+    			);
+    		}
+    	}
+
+    	function handleClick(index) {
+    		// Don't allow moves on filled squares or if game is over
+    		if (board[index] || winner || !isPlayerTurn) return;
+
+    		makeMove(index);
+
+    		// Computer's turn after a short delay
+    		if (!winner && !isBoardFull()) {
+    			$$invalidate(5, isPlayerTurn = false);
+    			setTimeout(computerMove, 700);
+    		}
+    	}
+
+    	function makeMove(index) {
+    		$$invalidate(0, board[index] = currentPlayer, board);
+    		$$invalidate(0, board = [...board]); // Force reactivity
+    		checkWinner();
+
+    		if (!winner) {
+    			// Switch players
+    			currentPlayer = currentPlayer === '☕' ? '🍪' : '☕';
+    		}
+    	}
+
+    	function computerMove() {
+    		if (winner || isBoardFull()) return;
+
+    		// Try to find a good move
+    		let index = findBestMove();
+
+    		// Make the move
+    		makeMove(index);
+
+    		$$invalidate(5, isPlayerTurn = true);
+    	}
+
+    	function findBestMove() {
+    		// First try to win
+    		for (let i = 0; i < 9; i++) {
+    			if (!board[i]) {
+    				$$invalidate(0, board[i] = '🍪', board);
+
+    				if (calculateWinner().winner) {
+    					$$invalidate(0, board[i] = null, board); // Reset
+    					return i;
+    				}
+
+    				$$invalidate(0, board[i] = null, board); // Reset
+    			}
+    		}
+
+    		// Then try to block
+    		for (let i = 0; i < 9; i++) {
+    			if (!board[i]) {
+    				$$invalidate(0, board[i] = '☕', board);
+
+    				if (calculateWinner().winner) {
+    					$$invalidate(0, board[i] = null, board); // Reset
+    					return i;
+    				}
+
+    				$$invalidate(0, board[i] = null, board); // Reset
+    			}
+    		}
+
+    		// Try center
+    		if (!board[4]) return 4;
+
+    		// Try corners
+    		const corners = [0, 2, 6, 8];
+
+    		const availableCorners = corners.filter(i => !board[i]);
+
+    		if (availableCorners.length > 0) {
+    			return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+    		}
+
+    		// Try any available space
+    		const available = board.map((cell, i) => cell === null ? i : null).filter(i => i !== null);
+
+    		return available[Math.floor(Math.random() * available.length)];
+    	}
+
+    	function checkWinner() {
+    		const result = calculateWinner();
+    		winner = result.winner;
+    		winningLine = result.line;
+
+    		if (winner) {
+    			$$invalidate(8, winAnimation = true);
+    			$$invalidate(2, gameOver = true);
+
+    			if (winner === '☕') {
+    				$$invalidate(3, playerScore++, playerScore);
+    				$$invalidate(1, gameStatus = "You won! ☕ rules!");
+    			} else {
+    				$$invalidate(4, computerScore++, computerScore);
+    				$$invalidate(1, gameStatus = "The coffee shop won! 🍪 rules!");
+    			}
+    		} else if (isBoardFull()) {
+    			$$invalidate(2, gameOver = true);
+    			$$invalidate(1, gameStatus = "It's a draw! Another round?");
+    		} else {
+    			$$invalidate(1, gameStatus = isPlayerTurn
+    			? "Your turn - place your ☕"
+    			: "The coffee shop is thinking... 🍪");
+    		}
+    	}
+
+    	function calculateWinner() {
+    		const lines = [
+    			[0, 1, 2],
+    			[3, 4, 5],
+    			[6, 7, 8],
+    			[0, 3, 6],
+    			[1, 4, 7],
+    			[2, 5, 8],
+    			[0, 4, 8],
+    			[2, 4, 6]
+    		]; // horizontals
+    		// verticals
+    		// diagonals
+
+    		for (const line of lines) {
+    			const [a, b, c] = line;
+
+    			if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+    				return { winner: board[a], line };
+    			}
+    		}
+
+    		return { winner: null, line: [] };
+    	}
+
+    	function isBoardFull() {
+    		return board.every(cell => cell !== null);
+    	}
+
+    	function resetGame() {
+    		$$invalidate(0, board = Array(9).fill(null));
+    		currentPlayer = '☕';
+    		winner = null;
+    		$$invalidate(1, gameStatus = 'Play a relaxing game while you enjoy your coffee!');
+    		winningLine = [];
+    		$$invalidate(2, gameOver = false);
+    		$$invalidate(5, isPlayerTurn = true);
+    		$$invalidate(8, winAnimation = false);
+
+    		// Reset cell animations
+    		$$invalidate(7, cells = Array(9).fill(false));
+
+    		setTimeout(
+    			() => {
+    				animateCellsSequentially();
+    			},
+    			300
+    		);
+    	}
+
+    	function closeGame() {
+    		dispatch('close');
+    	}
+
+    	// Helper to check if a cell is in the winning line
+    	function isWinningCell(index) {
+    		return winningLine.includes(index);
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<TicTacToe> was created with unknown prop '${key}'`);
+    	});
+
+    	const click_handler = i => handleClick(i);
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		createEventDispatcher,
+    		dispatch,
+    		board,
+    		currentPlayer,
+    		winner,
+    		gameStatus,
+    		winningLine,
+    		gameOver,
+    		playerScore,
+    		computerScore,
+    		isPlayerTurn,
+    		boardVisible,
+    		cells,
+    		winAnimation,
+    		animateCellsSequentially,
+    		handleClick,
+    		makeMove,
+    		computerMove,
+    		findBestMove,
+    		checkWinner,
+    		calculateWinner,
+    		isBoardFull,
+    		resetGame,
+    		closeGame,
+    		isWinningCell
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('board' in $$props) $$invalidate(0, board = $$props.board);
+    		if ('currentPlayer' in $$props) currentPlayer = $$props.currentPlayer;
+    		if ('winner' in $$props) winner = $$props.winner;
+    		if ('gameStatus' in $$props) $$invalidate(1, gameStatus = $$props.gameStatus);
+    		if ('winningLine' in $$props) winningLine = $$props.winningLine;
+    		if ('gameOver' in $$props) $$invalidate(2, gameOver = $$props.gameOver);
+    		if ('playerScore' in $$props) $$invalidate(3, playerScore = $$props.playerScore);
+    		if ('computerScore' in $$props) $$invalidate(4, computerScore = $$props.computerScore);
+    		if ('isPlayerTurn' in $$props) $$invalidate(5, isPlayerTurn = $$props.isPlayerTurn);
+    		if ('boardVisible' in $$props) $$invalidate(6, boardVisible = $$props.boardVisible);
+    		if ('cells' in $$props) $$invalidate(7, cells = $$props.cells);
+    		if ('winAnimation' in $$props) $$invalidate(8, winAnimation = $$props.winAnimation);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		board,
+    		gameStatus,
+    		gameOver,
+    		playerScore,
+    		computerScore,
+    		isPlayerTurn,
+    		boardVisible,
+    		cells,
+    		winAnimation,
+    		handleClick,
+    		resetGame,
+    		closeGame,
+    		isWinningCell,
+    		click_handler
+    	];
+    }
+
+    class TicTacToe extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "TicTacToe",
+    			options,
+    			id: create_fragment$a.name
+    		});
+    	}
+    }
+
+    /* src\components\Header.svelte generated by Svelte v3.59.2 */
+    const file$9 = "src\\components\\Header.svelte";
+
+    // (86:2) {#if isMenuOpen}
+    function create_if_block_1$3(ctx) {
+    	let div1;
+    	let div0;
+    	let button;
+    	let span0;
+    	let t1;
+    	let span1;
+    	let t3;
+    	let a;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			button = element("button");
+    			span0 = element("span");
+    			span0.textContent = "Play Tic-Tac-Toe";
+    			t1 = space();
+    			span1 = element("span");
+    			span1.textContent = "🎮";
+    			t3 = space();
+    			a = element("a");
+    			a.textContent = "Order Online";
+    			add_location(span0, file$9, 92, 10, 3800);
+    			attr_dev(span1, "class", "ml-2 text-yellow-300 animate-pulse-slow svelte-q03j7t");
+    			add_location(span1, file$9, 93, 10, 3840);
+    			attr_dev(button, "class", "w-full text-left text-cream-100 hover:text-cream-300 py-2 text-base font-medium flex items-center");
+    			add_location(button, file$9, 88, 8, 3620);
+    			attr_dev(a, "href", "/#order");
+    			attr_dev(a, "class", "block bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 my-2 rounded-lg font-medium text-center");
+    			add_location(a, file$9, 95, 8, 3930);
+    			attr_dev(div0, "class", "px-4 pt-2 pb-4 space-y-3 animate-slide-down svelte-q03j7t");
+    			add_location(div0, file$9, 87, 6, 3554);
+    			attr_dev(div1, "class", "md:hidden bg-coffee-700 overflow-hidden");
+    			add_location(div1, file$9, 86, 4, 3494);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, button);
+    			append_dev(button, span0);
+    			append_dev(button, t1);
+    			append_dev(button, span1);
+    			append_dev(div0, t3);
+    			append_dev(div0, a);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*openTicTacToe*/ ctx[4], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$3.name,
+    		type: "if",
+    		source: "(86:2) {#if isMenuOpen}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (102:0) {#if showTicTacToe}
+    function create_if_block$8(ctx) {
+    	let div;
+    	let tictactoe;
+    	let div_transition;
+    	let current;
+    	tictactoe = new TicTacToe({ $$inline: true });
+    	tictactoe.$on("close", /*closeTicTacToe*/ ctx[3]);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(tictactoe.$$.fragment);
+    			add_location(div, file$9, 102, 2, 4142);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(tictactoe, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(tictactoe.$$.fragment, local);
+
+    			add_render_callback(() => {
+    				if (!current) return;
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, true);
+    				div_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(tictactoe.$$.fragment, local);
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, false);
+    			div_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(tictactoe);
+    			if (detaching && div_transition) div_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$8.name,
+    		type: "if",
+    		source: "(102:0) {#if showTicTacToe}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$9(ctx) {
+    	let header;
+    	let div4;
+    	let div2;
+    	let div0;
+    	let svg;
+    	let path0;
+    	let path1;
+    	let t0;
+    	let div1;
+    	let h1;
+    	let t2;
+    	let p;
+    	let t4;
+    	let nav;
+    	let button0;
+    	let span0;
+    	let t6;
+    	let span1;
+    	let t8;
+    	let a;
+    	let t10;
+    	let button1;
+    	let div3;
+    	let span2;
+    	let span2_class_value;
+    	let t11;
+    	let span3;
+    	let span3_class_value;
+    	let t12;
+    	let span4;
+    	let span4_class_value;
+    	let t13;
+    	let t14;
+    	let if_block1_anchor;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let if_block0 = /*isMenuOpen*/ ctx[0] && create_if_block_1$3(ctx);
+    	let if_block1 = /*showTicTacToe*/ ctx[1] && create_if_block$8(ctx);
+
+    	const block = {
+    		c: function create() {
+    			header = element("header");
+    			div4 = element("div");
+    			div2 = element("div");
+    			div0 = element("div");
+    			svg = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			t0 = space();
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Yoya Coffee";
+    			t2 = space();
+    			p = element("p");
+    			p.textContent = "SPECIALTY COFFEE & PASTRIES";
+    			t4 = space();
+    			nav = element("nav");
+    			button0 = element("button");
+    			span0 = element("span");
+    			span0.textContent = "Play Game";
+    			t6 = space();
+    			span1 = element("span");
+    			span1.textContent = "🎮";
+    			t8 = space();
+    			a = element("a");
+    			a.textContent = "Order Online";
+    			t10 = space();
+    			button1 = element("button");
+    			div3 = element("div");
+    			span2 = element("span");
+    			t11 = space();
+    			span3 = element("span");
+    			t12 = space();
+    			span4 = element("span");
+    			t13 = space();
+    			if (if_block0) if_block0.c();
+    			t14 = space();
+    			if (if_block1) if_block1.c();
+    			if_block1_anchor = empty();
+    			attr_dev(path0, "stroke-linecap", "round");
+    			attr_dev(path0, "stroke-linejoin", "round");
+    			attr_dev(path0, "stroke-width", "2");
+    			attr_dev(path0, "d", "M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path0, file$9, 40, 10, 1204);
+    			attr_dev(path1, "stroke-linecap", "round");
+    			attr_dev(path1, "stroke-linejoin", "round");
+    			attr_dev(path1, "stroke-width", "2");
+    			attr_dev(path1, "d", "M6 1v3M10 1v3M14 1v3");
+    			add_location(path1, file$9, 41, 10, 1354);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "width", "42");
+    			attr_dev(svg, "height", "42");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "class", "text-cream-300");
+    			add_location(svg, file$9, 39, 8, 1053);
+    			attr_dev(div0, "class", "transform transition-transform duration-300 hover:scale-105 animate-bounce-slow svelte-q03j7t");
+    			add_location(div0, file$9, 38, 6, 951);
+    			attr_dev(h1, "class", "heading-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-wide");
+    			add_location(h1, file$9, 47, 8, 1591);
+    			attr_dev(p, "class", "text-xs md:text-sm text-cream-200 font-light tracking-wider");
+    			add_location(p, file$9, 48, 8, 1698);
+    			attr_dev(div1, "class", "animate-slide-in svelte-q03j7t");
+    			add_location(div1, file$9, 46, 6, 1552);
+    			attr_dev(div2, "class", "flex items-center space-x-3");
+    			add_location(div2, file$9, 36, 4, 852);
+    			add_location(span0, file$9, 58, 8, 2186);
+    			attr_dev(span1, "class", "ml-1 text-yellow-300");
+    			add_location(span1, file$9, 59, 8, 2217);
+    			attr_dev(button0, "class", "text-cream-100 hover:text-cream-300 transition-all duration-300 hover:underline decoration-2 underline-offset-4 py-1 text-base font-medium flex items-center");
+    			add_location(button0, file$9, 54, 6, 1955);
+    			attr_dev(a, "href", "/#order");
+    			attr_dev(a, "class", "bg-cream-600 hover:bg-cream-500 text-coffee-900 px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-0.5");
+    			add_location(a, file$9, 61, 6, 2284);
+    			attr_dev(nav, "class", "hidden md:flex items-center space-x-8");
+    			add_location(nav, file$9, 53, 4, 1897);
+
+    			attr_dev(span2, "class", span2_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2]
+    			? 'rotate-45'
+    			: '-translate-y-2'));
+
+    			add_location(span2, file$9, 71, 8, 2853);
+    			attr_dev(span3, "class", span3_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2] ? 'opacity-0' : 'opacity-100'));
+    			add_location(span3, file$9, 74, 8, 3034);
+
+    			attr_dev(span4, "class", span4_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2]
+    			? '-rotate-45'
+    			: 'translate-y-2'));
+
+    			add_location(span4, file$9, 77, 8, 3212);
+    			attr_dev(div3, "class", "w-6 h-6 relative flex justify-center items-center overflow-hidden");
+    			add_location(div3, file$9, 70, 6, 2765);
+    			attr_dev(button1, "class", "md:hidden text-white focus:outline-none p-2 rounded-lg hover:bg-coffee-700 transition-all duration-300");
+    			attr_dev(button1, "aria-label", "Toggle menu");
+    			add_location(button1, file$9, 65, 4, 2562);
+    			attr_dev(div4, "class", "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between");
+    			add_location(div4, file$9, 35, 2, 756);
+    			attr_dev(header, "class", "bg-coffee-800 text-white shadow-soft sticky top-0 z-50");
+    			add_location(header, file$9, 34, 0, 682);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, header, anchor);
+    			append_dev(header, div4);
+    			append_dev(div4, div2);
+    			append_dev(div2, div0);
+    			append_dev(div0, svg);
+    			append_dev(svg, path0);
+    			append_dev(svg, path1);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, h1);
+    			append_dev(div1, t2);
+    			append_dev(div1, p);
+    			append_dev(div4, t4);
+    			append_dev(div4, nav);
+    			append_dev(nav, button0);
+    			append_dev(button0, span0);
+    			append_dev(button0, t6);
+    			append_dev(button0, span1);
+    			append_dev(nav, t8);
+    			append_dev(nav, a);
+    			append_dev(div4, t10);
+    			append_dev(div4, button1);
+    			append_dev(button1, div3);
+    			append_dev(div3, span2);
+    			append_dev(div3, t11);
+    			append_dev(div3, span3);
+    			append_dev(div3, t12);
+    			append_dev(div3, span4);
+    			append_dev(header, t13);
+    			if (if_block0) if_block0.m(header, null);
+    			insert_dev(target, t14, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, if_block1_anchor, anchor);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*openTicTacToe*/ ctx[4], false, false, false, false),
+    					listen_dev(button1, "click", /*animateHamburger*/ ctx[5], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (!current || dirty & /*hamburgerRotate*/ 4 && span2_class_value !== (span2_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2]
+    			? 'rotate-45'
+    			: '-translate-y-2'))) {
+    				attr_dev(span2, "class", span2_class_value);
+    			}
+
+    			if (!current || dirty & /*hamburgerRotate*/ 4 && span3_class_value !== (span3_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2] ? 'opacity-0' : 'opacity-100'))) {
+    				attr_dev(span3, "class", span3_class_value);
+    			}
+
+    			if (!current || dirty & /*hamburgerRotate*/ 4 && span4_class_value !== (span4_class_value = "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out " + (/*hamburgerRotate*/ ctx[2]
+    			? '-rotate-45'
+    			: 'translate-y-2'))) {
+    				attr_dev(span4, "class", span4_class_value);
+    			}
+
+    			if (/*isMenuOpen*/ ctx[0]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_1$3(ctx);
+    					if_block0.c();
+    					if_block0.m(header, null);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (/*showTicTacToe*/ ctx[1]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty & /*showTicTacToe*/ 2) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block$8(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block1);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(header);
+    			if (if_block0) if_block0.d();
+    			if (detaching) detach_dev(t14);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(if_block1_anchor);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$9.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$9($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Header', slots, []);
+    	const dispatch = createEventDispatcher();
+    	let isMenuOpen = false;
+    	let showTicTacToe = false;
+
+    	function toggleMenu() {
+    		$$invalidate(0, isMenuOpen = !isMenuOpen);
+    	}
+
+    	function closeTicTacToe() {
+    		$$invalidate(1, showTicTacToe = false);
+    	}
+
+    	function openTicTacToe() {
+    		$$invalidate(1, showTicTacToe = true);
+    		if (isMenuOpen) toggleMenu();
+    	}
+
+    	// Animation variables
+    	let hamburgerRotate = false;
+
+    	function animateHamburger() {
+    		$$invalidate(2, hamburgerRotate = !hamburgerRotate);
+
+    		setTimeout(
+    			() => {
+    				toggleMenu();
+    			},
+    			100
+    		);
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Header> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$capture_state = () => ({
+    		createEventDispatcher,
+    		fade,
+    		TicTacToe,
+    		dispatch,
+    		isMenuOpen,
+    		showTicTacToe,
+    		toggleMenu,
+    		closeTicTacToe,
+    		openTicTacToe,
+    		hamburgerRotate,
+    		animateHamburger
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('isMenuOpen' in $$props) $$invalidate(0, isMenuOpen = $$props.isMenuOpen);
+    		if ('showTicTacToe' in $$props) $$invalidate(1, showTicTacToe = $$props.showTicTacToe);
+    		if ('hamburgerRotate' in $$props) $$invalidate(2, hamburgerRotate = $$props.hamburgerRotate);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		isMenuOpen,
+    		showTicTacToe,
+    		hamburgerRotate,
+    		closeTicTacToe,
+    		openTicTacToe,
+    		animateHamburger
+    	];
+    }
+
+    class Header extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Header",
+    			options,
+    			id: create_fragment$9.name
+    		});
+    	}
+    }
+
+    /* src\components\MenuItem.svelte generated by Svelte v3.59.2 */
+    const file$8 = "src\\components\\MenuItem.svelte";
+
+    // (72:2) {#if icon === 'coffee'}
+    function create_if_block_6(ctx) {
+    	let div5;
+    	let div4;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let t1;
+    	let div2;
+    	let t2;
+    	let div3;
+
+    	const block = {
+    		c: function create() {
+    			div5 = element("div");
+    			div4 = element("div");
+    			div0 = element("div");
+    			t0 = space();
+    			div1 = element("div");
+    			t1 = space();
+    			div2 = element("div");
+    			t2 = space();
+    			div3 = element("div");
+    			attr_dev(div0, "class", "steam steam-one svelte-ldywu9");
+    			add_location(div0, file$8, 74, 8, 2179);
+    			attr_dev(div1, "class", "steam steam-two svelte-ldywu9");
+    			add_location(div1, file$8, 75, 8, 2223);
+    			attr_dev(div2, "class", "steam steam-three svelte-ldywu9");
+    			add_location(div2, file$8, 76, 8, 2267);
+    			attr_dev(div3, "class", "steam steam-four svelte-ldywu9");
+    			add_location(div3, file$8, 77, 8, 2313);
+    			attr_dev(div4, "class", "steam-container svelte-ldywu9");
+    			add_location(div4, file$8, 73, 6, 2141);
+    			attr_dev(div5, "class", "absolute top-0 right-3 z-10");
+    			add_location(div5, file$8, 72, 4, 2093);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, div4);
+    			append_dev(div4, div0);
+    			append_dev(div4, t0);
+    			append_dev(div4, div1);
+    			append_dev(div4, t1);
+    			append_dev(div4, div2);
+    			append_dev(div4, t2);
+    			append_dev(div4, div3);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div5);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(72:2) {#if icon === 'coffee'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (84:2) {#if showFeedback}
+    function create_if_block_5$1(ctx) {
+    	let div1;
+    	let div0;
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			t = text(/*feedbackMessage*/ ctx[3]);
+    			attr_dev(div0, "class", "bg-coffee-800 text-white px-3 py-2 rounded-full inline-block shadow-lg text-sm");
+    			add_location(div0, file$8, 85, 6, 2531);
+    			attr_dev(div1, "class", "absolute top-2 left-0 right-0 mx-auto text-center z-20 animate-fade-in-out svelte-ldywu9");
+    			add_location(div1, file$8, 84, 4, 2436);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*feedbackMessage*/ 8) set_data_dev(t, /*feedbackMessage*/ ctx[3]);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5$1.name,
+    		type: "if",
+    		source: "(84:2) {#if showFeedback}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (124:8) {:else}
+    function create_else_block$3(ctx) {
+    	let circle;
+
+    	const block = {
+    		c: function create() {
+    			circle = svg_element("circle");
+    			attr_dev(circle, "cx", "12");
+    			attr_dev(circle, "cy", "12");
+    			attr_dev(circle, "r", "10");
+    			add_location(circle, file$8, 124, 10, 4712);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, circle, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(circle);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$3.name,
+    		type: "else",
+    		source: "(124:8) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (122:36) 
+    function create_if_block_4$1(ctx) {
+    	let rect;
+
+    	const block = {
+    		c: function create() {
+    			rect = svg_element("rect");
+    			attr_dev(rect, "x", "3");
+    			attr_dev(rect, "y", "3");
+    			attr_dev(rect, "width", "18");
+    			attr_dev(rect, "height", "18");
+    			attr_dev(rect, "rx", "2");
+    			attr_dev(rect, "ry", "2");
+    			add_location(rect, file$8, 122, 10, 4623);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, rect, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(rect);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4$1.name,
+    		type: "if",
+    		source: "(122:36) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (120:38) 
+    function create_if_block_3$1(ctx) {
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			path = svg_element("path");
+    			attr_dev(path, "d", "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z");
+    			add_location(path, file$8, 120, 10, 4469);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, path, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(path);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3$1.name,
+    		type: "if",
+    		source: "(120:38) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (118:37) 
+    function create_if_block_2$2(ctx) {
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			path = svg_element("path");
+    			attr_dev(path, "d", "M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z");
+    			add_location(path, file$8, 118, 10, 4364);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, path, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(path);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2$2.name,
+    		type: "if",
+    		source: "(118:37) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (116:41) 
+    function create_if_block_1$2(ctx) {
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			path = svg_element("path");
+    			attr_dev(path, "d", "M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z");
+    			add_location(path, file$8, 116, 10, 4241);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, path, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(path);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$2.name,
+    		type: "if",
+    		source: "(116:41) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (110:8) {#if icon === 'coffee'}
+    function create_if_block$7(ctx) {
+    	let path0;
+    	let path1;
+    	let line0;
+    	let line1;
+    	let line2;
+
+    	const block = {
+    		c: function create() {
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			line0 = svg_element("line");
+    			line1 = svg_element("line");
+    			line2 = svg_element("line");
+    			attr_dev(path0, "d", "M18 8h1a4 4 0 010 8h-1");
+    			add_location(path0, file$8, 110, 10, 3919);
+    			attr_dev(path1, "d", "M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path1, file$8, 111, 10, 3970);
+    			attr_dev(line0, "x1", "6");
+    			attr_dev(line0, "y1", "1");
+    			attr_dev(line0, "x2", "6");
+    			attr_dev(line0, "y2", "4");
+    			add_location(line0, file$8, 112, 10, 4039);
+    			attr_dev(line1, "x1", "10");
+    			attr_dev(line1, "y1", "1");
+    			attr_dev(line1, "x2", "10");
+    			attr_dev(line1, "y2", "4");
+    			add_location(line1, file$8, 113, 10, 4091);
+    			attr_dev(line2, "x1", "14");
+    			attr_dev(line2, "y1", "1");
+    			attr_dev(line2, "x2", "14");
+    			attr_dev(line2, "y2", "4");
+    			add_location(line2, file$8, 114, 10, 4145);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, path0, anchor);
+    			insert_dev(target, path1, anchor);
+    			insert_dev(target, line0, anchor);
+    			insert_dev(target, line1, anchor);
+    			insert_dev(target, line2, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(path0);
+    			if (detaching) detach_dev(path1);
+    			if (detaching) detach_dev(line0);
+    			if (detaching) detach_dev(line1);
+    			if (detaching) detach_dev(line2);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$7.name,
+    		type: "if",
+    		source: "(110:8) {#if icon === 'coffee'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$8(ctx) {
+    	let div9;
+    	let t0;
+    	let t1;
+    	let div0;
+    	let img;
+    	let img_src_value;
+    	let img_alt_value;
+    	let t2;
+    	let div8;
+    	let div2;
+    	let div1;
+    	let h3;
+    	let t3_value = /*item*/ ctx[0].name + "";
+    	let t3;
+    	let t4;
+    	let p;
+    	let t5_value = /*item*/ ctx[0].description + "";
+    	let t5;
+    	let t6;
+    	let div3;
+    	let svg;
+    	let t7;
+    	let span0;
+    	let t9;
+    	let div4;
+    	let t10;
+    	let div7;
+    	let div5;
+    	let span1;
+    	let t11_value = /*item*/ ctx[0].price + "";
+    	let t11;
+    	let t12;
+    	let t13;
+    	let div6;
+    	let button0;
+    	let span2;
+    	let button0_class_value;
+    	let t15;
+    	let button1;
+    	let span3;
+    	let button1_class_value;
+    	let mounted;
+    	let dispose;
+    	let if_block0 = /*icon*/ ctx[5] === 'coffee' && create_if_block_6(ctx);
+    	let if_block1 = /*showFeedback*/ ctx[4] && create_if_block_5$1(ctx);
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*icon*/ ctx[5] === 'coffee') return create_if_block$7;
+    		if (/*icon*/ ctx[5] === 'thermometer') return create_if_block_1$2;
+    		if (/*icon*/ ctx[5] === 'droplet') return create_if_block_2$2;
+    		if (/*icon*/ ctx[5] === 'triangle') return create_if_block_3$1;
+    		if (/*icon*/ ctx[5] === 'square') return create_if_block_4$1;
+    		return create_else_block$3;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block2 = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div9 = element("div");
+    			if (if_block0) if_block0.c();
+    			t0 = space();
+    			if (if_block1) if_block1.c();
+    			t1 = space();
+    			div0 = element("div");
+    			img = element("img");
+    			t2 = space();
+    			div8 = element("div");
+    			div2 = element("div");
+    			div1 = element("div");
+    			h3 = element("h3");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			p = element("p");
+    			t5 = text(t5_value);
+    			t6 = space();
+    			div3 = element("div");
+    			svg = svg_element("svg");
+    			if_block2.c();
+    			t7 = space();
+    			span0 = element("span");
+    			span0.textContent = `${/*icon*/ ctx[5].charAt(0).toUpperCase() + /*icon*/ ctx[5].slice(1)}`;
+    			t9 = space();
+    			div4 = element("div");
+    			t10 = space();
+    			div7 = element("div");
+    			div5 = element("div");
+    			span1 = element("span");
+    			t11 = text(t11_value);
+    			t12 = text(" ETB");
+    			t13 = space();
+    			div6 = element("div");
+    			button0 = element("button");
+    			span2 = element("span");
+    			span2.textContent = "❤️";
+    			t15 = space();
+    			button1 = element("button");
+    			span3 = element("span");
+    			span3.textContent = "👎";
+    			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[0].image)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*item*/ ctx[0].name);
+    			attr_dev(img, "class", "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110");
+    			add_location(img, file$8, 93, 4, 2755);
+    			attr_dev(div0, "class", "w-full h-48 overflow-hidden");
+    			add_location(div0, file$8, 92, 2, 2709);
+    			attr_dev(h3, "class", "font-semibold text-lg sm:text-xl text-coffee-800 heading-serif group-hover:text-coffee-600 transition-colors");
+    			add_location(h3, file$8, 101, 8, 3070);
+    			attr_dev(p, "class", "text-coffee-600 text-sm mt-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300");
+    			add_location(p, file$8, 102, 8, 3216);
+    			attr_dev(div1, "class", "flex-1 pr-3");
+    			add_location(div1, file$8, 100, 6, 3036);
+    			attr_dev(div2, "class", "flex justify-between items-start");
+    			add_location(div2, file$8, 98, 4, 2946);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "width", "16");
+    			attr_dev(svg, "height", "16");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "stroke-width", "2");
+    			attr_dev(svg, "stroke-linecap", "round");
+    			attr_dev(svg, "stroke-linejoin", "round");
+    			attr_dev(svg, "class", "text-coffee-600 mr-1 group-hover:text-coffee-800 transition-colors duration-300 group-hover:rotate-12 transform");
+    			add_location(svg, file$8, 108, 6, 3575);
+    			attr_dev(span0, "class", "text-xs text-coffee-700 group-hover:text-coffee-900 transition-colors duration-300");
+    			add_location(span0, file$8, 127, 6, 4786);
+    			attr_dev(div3, "class", "mt-2 inline-flex items-center px-2 py-1 bg-coffee-100 rounded-full group-hover:bg-coffee-200 transition-colors duration-300");
+    			add_location(div3, file$8, 107, 4, 3431);
+    			attr_dev(div4, "class", "my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent group-hover:via-coffee-300 transition-colors duration-500");
+    			add_location(div4, file$8, 131, 4, 5006);
+    			attr_dev(span1, "class", "text-coffee-800 font-bold text-lg group-hover:text-coffee-900 transition-colors duration-300 transform group-hover:scale-105");
+    			add_location(span1, file$8, 136, 8, 5300);
+    			attr_dev(div5, "class", "flex flex-col");
+    			add_location(div5, file$8, 135, 6, 5264);
+    			attr_dev(span2, "class", "text-lg");
+    			add_location(span2, file$8, 147, 10, 5903);
+
+    			attr_dev(button0, "class", button0_class_value = "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 " + (/*liked*/ ctx[1]
+    			? 'bg-red-100 text-red-500 scale-110'
+    			: 'bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400'));
+
+    			attr_dev(button0, "aria-label", "Like this item");
+    			add_location(button0, file$8, 142, 8, 5591);
+    			attr_dev(span3, "class", "text-lg");
+    			add_location(span3, file$8, 156, 10, 6328);
+
+    			attr_dev(button1, "class", button1_class_value = "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 " + (/*disliked*/ ctx[2]
+    			? 'bg-gray-200 text-gray-700 scale-110'
+    			: 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'));
+
+    			attr_dev(button1, "aria-label", "Dislike this item");
+    			add_location(button1, file$8, 151, 8, 6002);
+    			attr_dev(div6, "class", "flex space-x-2");
+    			add_location(div6, file$8, 140, 6, 5525);
+    			attr_dev(div7, "class", "flex justify-between items-center");
+    			add_location(div7, file$8, 134, 4, 5210);
+    			attr_dev(div8, "class", "p-5");
+    			add_location(div8, file$8, 96, 2, 2899);
+    			attr_dev(div9, "class", "menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100 animate-fade-in relative svelte-ldywu9");
+    			add_location(div9, file$8, 69, 0, 1827);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div9, anchor);
+    			if (if_block0) if_block0.m(div9, null);
+    			append_dev(div9, t0);
+    			if (if_block1) if_block1.m(div9, null);
+    			append_dev(div9, t1);
+    			append_dev(div9, div0);
+    			append_dev(div0, img);
+    			append_dev(div9, t2);
+    			append_dev(div9, div8);
+    			append_dev(div8, div2);
+    			append_dev(div2, div1);
+    			append_dev(div1, h3);
+    			append_dev(h3, t3);
+    			append_dev(div1, t4);
+    			append_dev(div1, p);
+    			append_dev(p, t5);
+    			append_dev(div8, t6);
+    			append_dev(div8, div3);
+    			append_dev(div3, svg);
+    			if_block2.m(svg, null);
+    			append_dev(div3, t7);
+    			append_dev(div3, span0);
+    			append_dev(div8, t9);
+    			append_dev(div8, div4);
+    			append_dev(div8, t10);
+    			append_dev(div8, div7);
+    			append_dev(div7, div5);
+    			append_dev(div5, span1);
+    			append_dev(span1, t11);
+    			append_dev(span1, t12);
+    			append_dev(div7, t13);
+    			append_dev(div7, div6);
+    			append_dev(div6, button0);
+    			append_dev(button0, span2);
+    			append_dev(div6, t15);
+    			append_dev(div6, button1);
+    			append_dev(button1, span3);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*handleLike*/ ctx[6], false, false, false, false),
+    					listen_dev(button1, "click", /*handleDislike*/ ctx[7], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*showFeedback*/ ctx[4]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_5$1(ctx);
+    					if_block1.c();
+    					if_block1.m(div9, t1);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (dirty & /*item*/ 1 && !src_url_equal(img.src, img_src_value = /*item*/ ctx[0].image)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*item*/ 1 && img_alt_value !== (img_alt_value = /*item*/ ctx[0].name)) {
+    				attr_dev(img, "alt", img_alt_value);
+    			}
+
+    			if (dirty & /*item*/ 1 && t3_value !== (t3_value = /*item*/ ctx[0].name + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*item*/ 1 && t5_value !== (t5_value = /*item*/ ctx[0].description + "")) set_data_dev(t5, t5_value);
+    			if (dirty & /*item*/ 1 && t11_value !== (t11_value = /*item*/ ctx[0].price + "")) set_data_dev(t11, t11_value);
+
+    			if (dirty & /*liked*/ 2 && button0_class_value !== (button0_class_value = "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 " + (/*liked*/ ctx[1]
+    			? 'bg-red-100 text-red-500 scale-110'
+    			: 'bg-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-400'))) {
+    				attr_dev(button0, "class", button0_class_value);
+    			}
+
+    			if (dirty & /*disliked*/ 4 && button1_class_value !== (button1_class_value = "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 " + (/*disliked*/ ctx[2]
+    			? 'bg-gray-200 text-gray-700 scale-110'
+    			: 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'))) {
+    				attr_dev(button1, "class", button1_class_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div9);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    			if_block2.d();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$8.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function getIconForItem(itemId) {
+    	// Map of item types to suitable Feather icons
+    	const iconMap = {
+    		'espresso': 'coffee',
+    		'americano': 'coffee',
+    		'cappuccino': 'coffee',
+    		'latte': 'coffee',
+    		'mocha': 'coffee',
+    		'hot-chocolate': 'coffee',
+    		'iced-coffee': 'thermometer',
+    		'cold-brew': 'droplet',
+    		'iced-latte': 'thermometer',
+    		'iced-mocha': 'thermometer',
+    		'frappe': 'thermometer',
+    		'caramel-macchiato': 'coffee',
+    		'vanilla-latte': 'coffee',
+    		'chai-latte': 'coffee',
+    		'matcha-latte': 'coffee',
+    		'croissant': 'triangle',
+    		'chocolate-croissant': 'triangle',
+    		'muffin': 'circle',
+    		'cinnamon-roll': 'circle',
+    		'avocado-toast': 'square',
+    		'egg-sandwich': 'square',
+    		'turkey-sandwich': 'square'
+    	};
+
+    	return iconMap[itemId] || 'circle';
+    }
+
+    function instance$8($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('MenuItem', slots, []);
+    	let { item } = $$props;
+
+    	// Like/dislike state
+    	let liked = false;
+
+    	let disliked = false;
+    	let feedbackMessage = "";
+    	let showFeedback = false;
+    	const icon = getIconForItem(item.id);
+
+    	function handleLike() {
+    		if (disliked) $$invalidate(2, disliked = false); // Remove dislike if it was set
+    		$$invalidate(1, liked = !liked); // Toggle like state
+
+    		if (liked) {
+    			$$invalidate(3, feedbackMessage = "Thank you for loving our " + item.name + "! 💕");
+    			$$invalidate(4, showFeedback = true);
+
+    			setTimeout(
+    				() => {
+    					$$invalidate(4, showFeedback = false);
+    				},
+    				3000
+    			);
+    		}
+    	}
+
+    	function handleDislike() {
+    		if (liked) $$invalidate(1, liked = false); // Remove like if it was set
+    		$$invalidate(2, disliked = !disliked); // Toggle dislike state
+
+    		if (disliked) {
+    			$$invalidate(3, feedbackMessage = "We'll work to improve our " + item.name + "! 🙏");
+    			$$invalidate(4, showFeedback = true);
+
+    			setTimeout(
+    				() => {
+    					$$invalidate(4, showFeedback = false);
+    				},
+    				3000
+    			);
+    		}
+    	}
+
+    	$$self.$$.on_mount.push(function () {
+    		if (item === undefined && !('item' in $$props || $$self.$$.bound[$$self.$$.props['item']])) {
+    			console.warn("<MenuItem> was created without expected prop 'item'");
+    		}
+    	});
+
+    	const writable_props = ['item'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<MenuItem> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ('item' in $$props) $$invalidate(0, item = $$props.item);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		item,
+    		liked,
+    		disliked,
+    		feedbackMessage,
+    		showFeedback,
+    		getIconForItem,
+    		icon,
+    		handleLike,
+    		handleDislike
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('item' in $$props) $$invalidate(0, item = $$props.item);
+    		if ('liked' in $$props) $$invalidate(1, liked = $$props.liked);
+    		if ('disliked' in $$props) $$invalidate(2, disliked = $$props.disliked);
+    		if ('feedbackMessage' in $$props) $$invalidate(3, feedbackMessage = $$props.feedbackMessage);
+    		if ('showFeedback' in $$props) $$invalidate(4, showFeedback = $$props.showFeedback);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		item,
+    		liked,
+    		disliked,
+    		feedbackMessage,
+    		showFeedback,
+    		icon,
+    		handleLike,
+    		handleDislike
+    	];
+    }
+
+    class MenuItem extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { item: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "MenuItem",
+    			options,
+    			id: create_fragment$8.name
+    		});
+    	}
+
+    	get item() {
+    		throw new Error("<MenuItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set item(value) {
+    		throw new Error("<MenuItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\MenuCategory.svelte generated by Svelte v3.59.2 */
+    const file$7 = "src\\components\\MenuCategory.svelte";
+
+    function get_each_context$2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[3] = list[i];
+    	return child_ctx;
+    }
+
+    // (49:2) {#if isExpanded}
+    function create_if_block$6(ctx) {
+    	let div;
+    	let div_id_value;
+    	let div_transition;
+    	let current;
+    	let each_value = /*category*/ ctx[0].items;
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+    	}
+
+    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    		each_blocks[i] = null;
+    	});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "id", div_id_value = "category-items-" + /*category*/ ctx[0].id);
+    			attr_dev(div, "class", "grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fadeIn svelte-bsjfp6");
+    			add_location(div, file$7, 49, 4, 2263);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div, null);
+    				}
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*category*/ 1) {
+    				each_value = /*category*/ ctx[0].items;
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$2(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    						transition_in(each_blocks[i], 1);
+    					} else {
+    						each_blocks[i] = create_each_block$2(child_ctx);
+    						each_blocks[i].c();
+    						transition_in(each_blocks[i], 1);
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				group_outros();
+
+    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    					out(i);
+    				}
+
+    				check_outros();
+    			}
+
+    			if (!current || dirty & /*category*/ 1 && div_id_value !== (div_id_value = "category-items-" + /*category*/ ctx[0].id)) {
+    				attr_dev(div, "id", div_id_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			add_render_callback(() => {
+    				if (!current) return;
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 300 }, true);
+    				div_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			each_blocks = each_blocks.filter(Boolean);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 300 }, false);
+    			div_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching && div_transition) div_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$6.name,
+    		type: "if",
+    		source: "(49:2) {#if isExpanded}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (55:6) {#each category.items as item}
+    function create_each_block$2(ctx) {
+    	let menuitem;
+    	let current;
+
+    	menuitem = new MenuItem({
+    			props: { item: /*item*/ ctx[3] },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(menuitem.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(menuitem, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const menuitem_changes = {};
+    			if (dirty & /*category*/ 1) menuitem_changes.item = /*item*/ ctx[3];
+    			menuitem.$set(menuitem_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(menuitem.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(menuitem.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(menuitem, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$2.name,
+    		type: "each",
+    		source: "(55:6) {#each category.items as item}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$7(ctx) {
+    	let section;
+    	let div3;
+    	let div1;
+    	let div0;
+    	let svg0;
+    	let path0;
+    	let path1;
+    	let t0;
+    	let h2;
+    	let t1_value = /*category*/ ctx[0].name + "";
+    	let t1;
+    	let t2;
+    	let div2;
+    	let span;
+    	let t3_value = (/*isExpanded*/ ctx[1] ? 'Hide' : 'Show') + "";
+    	let t3;
+    	let t4;
+    	let svg1;
+    	let polyline;
+    	let svg1_class_value;
+    	let div3_aria_controls_value;
+    	let t5;
+    	let div4;
+    	let t6;
+    	let section_id_value;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let if_block = /*isExpanded*/ ctx[1] && create_if_block$6(ctx);
+
+    	const block = {
+    		c: function create() {
+    			section = element("section");
+    			div3 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			t0 = space();
+    			h2 = element("h2");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			div2 = element("div");
+    			span = element("span");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			svg1 = svg_element("svg");
+    			polyline = svg_element("polyline");
+    			t5 = space();
+    			div4 = element("div");
+    			t6 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(path0, "d", "M6 11l3.05-1.75c.47-.27 1.15-.21 1.5.13l5.03 5.03c.49.49.51 1.3.04 1.8l-3.75 3.75c-.48.48-1.28.48-1.76 0l-4.02-4.02C5.57 15.42 5.57 14.57 6 14l0 0z");
+    			add_location(path0, file$7, 24, 10, 923);
+    			attr_dev(path1, "d", "M10 6l1.95-1.95c.49-.49 1.28-.49 1.77 0l4.02 4.02c.49.49.49 1.28 0 1.77l-2 2");
+    			add_location(path1, file$7, 25, 10, 1099);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "viewBox", "0 0 24 24");
+    			attr_dev(svg0, "fill", "none");
+    			attr_dev(svg0, "stroke", "currentColor");
+    			attr_dev(svg0, "stroke-width", "2");
+    			attr_dev(svg0, "stroke-linecap", "round");
+    			attr_dev(svg0, "stroke-linejoin", "round");
+    			attr_dev(svg0, "class", "w-6 h-6 transform transition-transform duration-500 group-hover:rotate-45");
+    			add_location(svg0, file$7, 23, 8, 672);
+    			attr_dev(div0, "class", "hidden sm:flex mr-3 text-coffee-500");
+    			add_location(div0, file$7, 22, 6, 614);
+    			attr_dev(h2, "class", "heading-serif text-2xl sm:text-3xl font-bold text-coffee-800 group-hover:text-coffee-600 transition-colors");
+    			add_location(h2, file$7, 30, 6, 1281);
+    			attr_dev(div1, "class", "flex items-center");
+    			add_location(div1, file$7, 20, 4, 533);
+    			attr_dev(span, "class", "mr-2 text-sm font-medium");
+    			add_location(span, file$7, 37, 6, 1602);
+    			attr_dev(polyline, "points", "6 9 12 15 18 9");
+    			add_location(polyline, file$7, 39, 8, 1945);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			attr_dev(svg1, "fill", "none");
+    			attr_dev(svg1, "stroke", "currentColor");
+    			attr_dev(svg1, "stroke-width", "2");
+    			attr_dev(svg1, "stroke-linecap", "round");
+    			attr_dev(svg1, "stroke-linejoin", "round");
+    			attr_dev(svg1, "class", svg1_class_value = "w-5 h-5 transform transition-transform duration-300 " + (/*isExpanded*/ ctx[1] ? 'rotate-180' : ''));
+    			add_location(svg1, file$7, 38, 6, 1685);
+    			attr_dev(div2, "class", "flex items-center text-coffee-500 group-hover:text-coffee-700 transition-colors");
+    			add_location(div2, file$7, 36, 4, 1502);
+    			attr_dev(div3, "class", "group flex items-center justify-between cursor-pointer mb-6");
+    			attr_dev(div3, "aria-expanded", /*isExpanded*/ ctx[1]);
+    			attr_dev(div3, "aria-controls", div3_aria_controls_value = "category-items-" + /*category*/ ctx[0].id);
+    			add_location(div3, file$7, 14, 2, 337);
+    			attr_dev(div4, "class", "h-px bg-gradient-to-r from-coffee-200 via-coffee-300 to-coffee-200 mb-6 opacity-70");
+    			add_location(div4, file$7, 45, 2, 2073);
+    			attr_dev(section, "id", section_id_value = /*category*/ ctx[0].id);
+    			attr_dev(section, "class", "menu-category mb-10");
+    			add_location(section, file$7, 12, 0, 227);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, section, anchor);
+    			append_dev(section, div3);
+    			append_dev(div3, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(svg0, path1);
+    			append_dev(div1, t0);
+    			append_dev(div1, h2);
+    			append_dev(h2, t1);
+    			append_dev(div3, t2);
+    			append_dev(div3, div2);
+    			append_dev(div2, span);
+    			append_dev(span, t3);
+    			append_dev(div2, t4);
+    			append_dev(div2, svg1);
+    			append_dev(svg1, polyline);
+    			append_dev(section, t5);
+    			append_dev(section, div4);
+    			append_dev(section, t6);
+    			if (if_block) if_block.m(section, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div3, "click", /*toggleExpanded*/ ctx[2], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if ((!current || dirty & /*category*/ 1) && t1_value !== (t1_value = /*category*/ ctx[0].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*isExpanded*/ 2) && t3_value !== (t3_value = (/*isExpanded*/ ctx[1] ? 'Hide' : 'Show') + "")) set_data_dev(t3, t3_value);
+
+    			if (!current || dirty & /*isExpanded*/ 2 && svg1_class_value !== (svg1_class_value = "w-5 h-5 transform transition-transform duration-300 " + (/*isExpanded*/ ctx[1] ? 'rotate-180' : ''))) {
+    				attr_dev(svg1, "class", svg1_class_value);
+    			}
+
+    			if (!current || dirty & /*isExpanded*/ 2) {
+    				attr_dev(div3, "aria-expanded", /*isExpanded*/ ctx[1]);
+    			}
+
+    			if (!current || dirty & /*category*/ 1 && div3_aria_controls_value !== (div3_aria_controls_value = "category-items-" + /*category*/ ctx[0].id)) {
+    				attr_dev(div3, "aria-controls", div3_aria_controls_value);
+    			}
+
+    			if (/*isExpanded*/ ctx[1]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*isExpanded*/ 2) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$6(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(section, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (!current || dirty & /*category*/ 1 && section_id_value !== (section_id_value = /*category*/ ctx[0].id)) {
+    				attr_dev(section, "id", section_id_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(section);
+    			if (if_block) if_block.d();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$7.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$7($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('MenuCategory', slots, []);
+    	let { category } = $$props;
+    	let isExpanded = true;
+
+    	function toggleExpanded() {
+    		$$invalidate(1, isExpanded = !isExpanded);
+    	}
+
+    	$$self.$$.on_mount.push(function () {
+    		if (category === undefined && !('category' in $$props || $$self.$$.bound[$$self.$$.props['category']])) {
+    			console.warn("<MenuCategory> was created without expected prop 'category'");
+    		}
+    	});
+
+    	const writable_props = ['category'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<MenuCategory> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ('category' in $$props) $$invalidate(0, category = $$props.category);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		MenuItem,
+    		slide,
+    		category,
+    		isExpanded,
+    		toggleExpanded
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('category' in $$props) $$invalidate(0, category = $$props.category);
+    		if ('isExpanded' in $$props) $$invalidate(1, isExpanded = $$props.isExpanded);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [category, isExpanded, toggleExpanded];
+    }
+
+    class MenuCategory extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { category: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "MenuCategory",
+    			options,
+    			id: create_fragment$7.name
+    		});
+    	}
+
+    	get category() {
+    		throw new Error("<MenuCategory>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set category(value) {
+    		throw new Error("<MenuCategory>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\Search.svelte generated by Svelte v3.59.2 */
+
+    const file$6 = "src\\components\\Search.svelte";
+
+    // (52:6) {#if searchQuery}
+    function create_if_block$5(ctx) {
+    	let button;
+    	let div;
+    	let svg;
+    	let line0;
+    	let line1;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			div = element("div");
+    			svg = svg_element("svg");
+    			line0 = svg_element("line");
+    			line1 = svg_element("line");
+    			attr_dev(line0, "x1", "18");
+    			attr_dev(line0, "y1", "6");
+    			attr_dev(line0, "x2", "6");
+    			attr_dev(line0, "y2", "18");
+    			add_location(line0, file$6, 59, 14, 2370);
+    			attr_dev(line1, "x1", "6");
+    			attr_dev(line1, "y1", "6");
+    			attr_dev(line1, "x2", "18");
+    			attr_dev(line1, "y2", "18");
+    			add_location(line1, file$6, 60, 14, 2428);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "width", "18");
+    			attr_dev(svg, "height", "18");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "stroke-width", "2");
+    			attr_dev(svg, "stroke-linecap", "round");
+    			attr_dev(svg, "stroke-linejoin", "round");
+    			add_location(svg, file$6, 58, 12, 2174);
+    			attr_dev(div, "class", "p-1 rounded-full hover:bg-coffee-100");
+    			add_location(div, file$6, 57, 10, 2111);
+    			attr_dev(button, "class", "absolute inset-y-0 right-0 pr-4 flex items-center text-coffee-400 hover:text-coffee-700 transition-colors");
+    			attr_dev(button, "aria-label", "Clear search");
+    			add_location(button, file$6, 52, 8, 1889);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, div);
+    			append_dev(div, svg);
+    			append_dev(svg, line0);
+    			append_dev(svg, line1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*clearSearch*/ ctx[3], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$5.name,
+    		type: "if",
+    		source: "(52:6) {#if searchQuery}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$6(ctx) {
+    	let div3;
+    	let div2;
+    	let label;
+    	let t1;
+    	let div1;
+    	let div0;
+    	let svg;
+    	let circle;
+    	let line;
+    	let svg_class_value;
+    	let t2;
+    	let input;
+    	let t3;
+    	let div1_class_value;
+    	let t4;
+    	let p;
+    	let mounted;
+    	let dispose;
+    	let if_block = /*searchQuery*/ ctx[0] && create_if_block$5(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div3 = element("div");
+    			div2 = element("div");
+    			label = element("label");
+    			label.textContent = "Find your favorite item";
+    			t1 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			svg = svg_element("svg");
+    			circle = svg_element("circle");
+    			line = svg_element("line");
+    			t2 = space();
+    			input = element("input");
+    			t3 = space();
+    			if (if_block) if_block.c();
+    			t4 = space();
+    			p = element("p");
+    			p.textContent = "Type the name of an item or ingredient to find it quickly";
+    			attr_dev(label, "for", "menu-search");
+    			attr_dev(label, "class", "block text-coffee-700 font-medium mb-2 text-sm");
+    			add_location(label, file$6, 24, 4, 438);
+    			attr_dev(circle, "cx", "11");
+    			attr_dev(circle, "cy", "11");
+    			attr_dev(circle, "r", "8");
+    			add_location(circle, file$6, 31, 10, 1075);
+    			attr_dev(line, "x1", "21");
+    			attr_dev(line, "y1", "21");
+    			attr_dev(line, "x2", "16.65");
+    			attr_dev(line, "y2", "16.65");
+    			add_location(line, file$6, 32, 10, 1125);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "width", "20");
+    			attr_dev(svg, "height", "20");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "stroke-width", "2");
+    			attr_dev(svg, "stroke-linecap", "round");
+    			attr_dev(svg, "stroke-linejoin", "round");
+    			attr_dev(svg, "class", svg_class_value = "text-coffee-400 " + (/*isFocused*/ ctx[1] ? 'text-coffee-600' : ''));
+    			add_location(svg, file$6, 30, 8, 822);
+    			attr_dev(div0, "class", "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none");
+    			add_location(div0, file$6, 29, 6, 731);
+    			attr_dev(input, "id", "menu-search");
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "placeholder", "Search for coffee, pastries, sandwiches...");
+    			attr_dev(input, "class", "block w-full bg-white border-2 border-coffee-200 rounded-xl py-3 pl-12 pr-12 placeholder-coffee-400 focus:outline-none focus:ring-2 focus:ring-cream-500 focus:border-cream-400 focus:shadow-soft text-coffee-800 font-medium transition-all duration-300");
+    			add_location(input, file$6, 37, 6, 1246);
+    			attr_dev(div1, "class", div1_class_value = "relative transition-all duration-300 " + (/*isFocused*/ ctx[1] ? 'scale-[1.02]' : ''));
+    			add_location(div1, file$6, 27, 4, 613);
+    			attr_dev(p, "class", "mt-2 text-xs text-coffee-500 text-center");
+    			add_location(p, file$6, 68, 4, 2594);
+    			attr_dev(div2, "class", "relative max-w-2xl mx-auto");
+    			add_location(div2, file$6, 22, 2, 349);
+    			attr_dev(div3, "class", "w-full mb-8");
+    			add_location(div3, file$6, 21, 0, 321);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div2);
+    			append_dev(div2, label);
+    			append_dev(div2, t1);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, svg);
+    			append_dev(svg, circle);
+    			append_dev(svg, line);
+    			append_dev(div1, t2);
+    			append_dev(div1, input);
+    			set_input_value(input, /*searchQuery*/ ctx[0]);
+    			append_dev(div1, t3);
+    			if (if_block) if_block.m(div1, null);
+    			append_dev(div2, t4);
+    			append_dev(div2, p);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[6]),
+    					listen_dev(input, "input", /*handleInput*/ ctx[2], false, false, false, false),
+    					listen_dev(input, "focus", /*handleFocus*/ ctx[4], false, false, false, false),
+    					listen_dev(input, "blur", /*handleBlur*/ ctx[5], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*isFocused*/ 2 && svg_class_value !== (svg_class_value = "text-coffee-400 " + (/*isFocused*/ ctx[1] ? 'text-coffee-600' : ''))) {
+    				attr_dev(svg, "class", svg_class_value);
+    			}
+
+    			if (dirty & /*searchQuery*/ 1 && input.value !== /*searchQuery*/ ctx[0]) {
+    				set_input_value(input, /*searchQuery*/ ctx[0]);
+    			}
+
+    			if (/*searchQuery*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block$5(ctx);
+    					if_block.c();
+    					if_block.m(div1, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (dirty & /*isFocused*/ 2 && div1_class_value !== (div1_class_value = "relative transition-all duration-300 " + (/*isFocused*/ ctx[1] ? 'scale-[1.02]' : ''))) {
+    				attr_dev(div1, "class", div1_class_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div3);
+    			if (if_block) if_block.d();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$6.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$6($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Search', slots, []);
+    	let { searchQuery = '' } = $$props;
+    	let isFocused = false;
+
+    	function handleInput(event) {
+    		$$invalidate(0, searchQuery = event.target.value);
+    	}
+
+    	function clearSearch() {
+    		$$invalidate(0, searchQuery = '');
+    	}
+
+    	function handleFocus() {
+    		$$invalidate(1, isFocused = true);
+    	}
+
+    	function handleBlur() {
+    		$$invalidate(1, isFocused = false);
+    	}
+
+    	const writable_props = ['searchQuery'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Search> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		searchQuery = this.value;
+    		$$invalidate(0, searchQuery);
+    	}
+
+    	$$self.$$set = $$props => {
+    		if ('searchQuery' in $$props) $$invalidate(0, searchQuery = $$props.searchQuery);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		searchQuery,
+    		isFocused,
+    		handleInput,
+    		clearSearch,
+    		handleFocus,
+    		handleBlur
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('searchQuery' in $$props) $$invalidate(0, searchQuery = $$props.searchQuery);
+    		if ('isFocused' in $$props) $$invalidate(1, isFocused = $$props.isFocused);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		searchQuery,
+    		isFocused,
+    		handleInput,
+    		clearSearch,
+    		handleFocus,
+    		handleBlur,
+    		input_input_handler
+    	];
+    }
+
+    class Search extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { searchQuery: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Search",
+    			options,
+    			id: create_fragment$6.name
+    		});
+    	}
+
+    	get searchQuery() {
+    		throw new Error("<Search>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set searchQuery(value) {
+    		throw new Error("<Search>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\Footer.svelte generated by Svelte v3.59.2 */
+
+    const file$5 = "src\\components\\Footer.svelte";
+
+    function create_fragment$5(ctx) {
+    	let footer;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let svg0;
+    	let path0;
+    	let path1;
+    	let path2;
+    	let t1;
+    	let div12;
+    	let div8;
+    	let div4;
+    	let div2;
+    	let svg1;
+    	let path3;
+    	let path4;
+    	let t2;
+    	let h30;
+    	let t4;
+    	let p0;
+    	let t6;
+    	let div3;
+    	let a0;
+    	let span0;
+    	let t8;
+    	let svg2;
+    	let rect;
+    	let path5;
+    	let line;
+    	let t9;
+    	let a1;
+    	let span1;
+    	let t11;
+    	let svg3;
+    	let path6;
+    	let t12;
+    	let a2;
+    	let span2;
+    	let t14;
+    	let svg4;
+    	let path7;
+    	let t15;
+    	let div6;
+    	let h31;
+    	let t17;
+    	let ul0;
+    	let li0;
+    	let span3;
+    	let svg5;
+    	let circle0;
+    	let polyline0;
+    	let t18;
+    	let span5;
+    	let t19;
+    	let span4;
+    	let t21;
+    	let li1;
+    	let span6;
+    	let svg6;
+    	let circle1;
+    	let polyline1;
+    	let t22;
+    	let span8;
+    	let t23;
+    	let span7;
+    	let t25;
+    	let li2;
+    	let span9;
+    	let svg7;
+    	let circle2;
+    	let polyline2;
+    	let t26;
+    	let span11;
+    	let t27;
+    	let span10;
+    	let t29;
+    	let div5;
+    	let p1;
+    	let t31;
+    	let div7;
+    	let h32;
+    	let t33;
+    	let ul1;
+    	let li3;
+    	let span12;
+    	let svg8;
+    	let path8;
+    	let circle3;
+    	let t34;
+    	let span13;
+    	let t35;
+    	let br;
+    	let t36;
+    	let t37;
+    	let li4;
+    	let span14;
+    	let svg9;
+    	let path9;
+    	let t38;
+    	let span15;
+    	let t40;
+    	let li5;
+    	let span16;
+    	let svg10;
+    	let path10;
+    	let polyline3;
+    	let t41;
+    	let a3;
+    	let t43;
+    	let a4;
+    	let t45;
+    	let div11;
+    	let div10;
+    	let p2;
+    	let t49;
+    	let div9;
+    	let a5;
+    	let t51;
+    	let a6;
+    	let t53;
+    	let a7;
+
+    	const block = {
+    		c: function create() {
+    			footer = element("footer");
+    			div0 = element("div");
+    			t0 = space();
+    			div1 = element("div");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			path2 = svg_element("path");
+    			t1 = space();
+    			div12 = element("div");
+    			div8 = element("div");
+    			div4 = element("div");
+    			div2 = element("div");
+    			svg1 = svg_element("svg");
+    			path3 = svg_element("path");
+    			path4 = svg_element("path");
+    			t2 = space();
+    			h30 = element("h3");
+    			h30.textContent = "Yoya Coffee";
+    			t4 = space();
+    			p0 = element("p");
+    			p0.textContent = "Serving premium coffee and delicious food since 2015. Our mission is to create a warm, welcoming place for our community to gather, connect, and enjoy exceptional coffee experiences.";
+    			t6 = space();
+    			div3 = element("div");
+    			a0 = element("a");
+    			span0 = element("span");
+    			span0.textContent = "Instagram";
+    			t8 = space();
+    			svg2 = svg_element("svg");
+    			rect = svg_element("rect");
+    			path5 = svg_element("path");
+    			line = svg_element("line");
+    			t9 = space();
+    			a1 = element("a");
+    			span1 = element("span");
+    			span1.textContent = "Facebook";
+    			t11 = space();
+    			svg3 = svg_element("svg");
+    			path6 = svg_element("path");
+    			t12 = space();
+    			a2 = element("a");
+    			span2 = element("span");
+    			span2.textContent = "Twitter";
+    			t14 = space();
+    			svg4 = svg_element("svg");
+    			path7 = svg_element("path");
+    			t15 = space();
+    			div6 = element("div");
+    			h31 = element("h3");
+    			h31.textContent = "Hours";
+    			t17 = space();
+    			ul0 = element("ul");
+    			li0 = element("li");
+    			span3 = element("span");
+    			svg5 = svg_element("svg");
+    			circle0 = svg_element("circle");
+    			polyline0 = svg_element("polyline");
+    			t18 = space();
+    			span5 = element("span");
+    			t19 = text("Monday - Friday: ");
+    			span4 = element("span");
+    			span4.textContent = "6:30 AM - 8:00 PM";
+    			t21 = space();
+    			li1 = element("li");
+    			span6 = element("span");
+    			svg6 = svg_element("svg");
+    			circle1 = svg_element("circle");
+    			polyline1 = svg_element("polyline");
+    			t22 = space();
+    			span8 = element("span");
+    			t23 = text("Saturday: ");
+    			span7 = element("span");
+    			span7.textContent = "7:00 AM - 8:00 PM";
+    			t25 = space();
+    			li2 = element("li");
+    			span9 = element("span");
+    			svg7 = svg_element("svg");
+    			circle2 = svg_element("circle");
+    			polyline2 = svg_element("polyline");
+    			t26 = space();
+    			span11 = element("span");
+    			t27 = text("Sunday: ");
+    			span10 = element("span");
+    			span10.textContent = "8:00 AM - 6:00 PM";
+    			t29 = space();
+    			div5 = element("div");
+    			p1 = element("p");
+    			p1.textContent = "Holiday hours may vary. Check our social media for updates!";
+    			t31 = space();
+    			div7 = element("div");
+    			h32 = element("h3");
+    			h32.textContent = "Contact";
+    			t33 = space();
+    			ul1 = element("ul");
+    			li3 = element("li");
+    			span12 = element("span");
+    			svg8 = svg_element("svg");
+    			path8 = svg_element("path");
+    			circle3 = svg_element("circle");
+    			t34 = space();
+    			span13 = element("span");
+    			t35 = text("123 Coffee Street");
+    			br = element("br");
+    			t36 = text("Seattle, WA 98101");
+    			t37 = space();
+    			li4 = element("li");
+    			span14 = element("span");
+    			svg9 = svg_element("svg");
+    			path9 = svg_element("path");
+    			t38 = space();
+    			span15 = element("span");
+    			span15.textContent = "(555) 123-4567";
+    			t40 = space();
+    			li5 = element("li");
+    			span16 = element("span");
+    			svg10 = svg_element("svg");
+    			path10 = svg_element("path");
+    			polyline3 = svg_element("polyline");
+    			t41 = space();
+    			a3 = element("a");
+    			a3.textContent = "info@yoyacoffee.com";
+    			t43 = space();
+    			a4 = element("a");
+    			a4.textContent = "Order Online";
+    			t45 = space();
+    			div11 = element("div");
+    			div10 = element("div");
+    			p2 = element("p");
+    			p2.textContent = `© ${new Date().getFullYear()} Yoya Coffee. All rights reserved.`;
+    			t49 = space();
+    			div9 = element("div");
+    			a5 = element("a");
+    			a5.textContent = "Privacy Policy";
+    			t51 = space();
+    			a6 = element("a");
+    			a6.textContent = "Terms of Service";
+    			t53 = space();
+    			a7 = element("a");
+    			a7.textContent = "Accessibility";
+    			attr_dev(div0, "class", "absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-cream-400 to-transparent opacity-60");
+    			add_location(div0, file$5, 2, 2, 101);
+    			attr_dev(path0, "d", "M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path0, file$5, 7, 6, 491);
+    			attr_dev(path1, "d", "M6 1v3M10 1v3M14 1v3");
+    			add_location(path1, file$5, 8, 6, 551);
+    			attr_dev(path2, "d", "M18 8h1a4 4 0 010 8h-1");
+    			add_location(path2, file$5, 9, 6, 591);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "width", "80");
+    			attr_dev(svg0, "height", "80");
+    			attr_dev(svg0, "viewBox", "0 0 24 24");
+    			attr_dev(svg0, "fill", "currentColor");
+    			attr_dev(svg0, "stroke", "none");
+    			add_location(svg0, file$5, 6, 4, 367);
+    			attr_dev(div1, "class", "absolute right-4 -top-10 text-coffee-800 opacity-10 hidden lg:block");
+    			add_location(div1, file$5, 5, 2, 281);
+    			attr_dev(path3, "d", "M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path3, file$5, 20, 12, 1154);
+    			attr_dev(path4, "d", "M6 1v3M10 1v3M14 1v3");
+    			add_location(path4, file$5, 21, 12, 1242);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "width", "32");
+    			attr_dev(svg1, "height", "32");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			attr_dev(svg1, "fill", "none");
+    			attr_dev(svg1, "stroke", "currentColor");
+    			attr_dev(svg1, "stroke-width", "2");
+    			attr_dev(svg1, "stroke-linecap", "round");
+    			attr_dev(svg1, "stroke-linejoin", "round");
+    			attr_dev(svg1, "class", "text-cream-300 mr-3");
+    			add_location(svg1, file$5, 19, 10, 932);
+    			attr_dev(h30, "class", "heading-serif text-2xl font-bold text-cream-100");
+    			add_location(h30, file$5, 23, 10, 1303);
+    			attr_dev(div2, "class", "flex items-center mb-4");
+    			add_location(div2, file$5, 18, 8, 885);
+    			attr_dev(p0, "class", "text-coffee-200 text-sm leading-relaxed mb-6 max-w-md");
+    			add_location(p0, file$5, 25, 8, 1403);
+    			attr_dev(span0, "class", "sr-only");
+    			add_location(span0, file$5, 32, 12, 1915);
+    			attr_dev(rect, "x", "2");
+    			attr_dev(rect, "y", "2");
+    			attr_dev(rect, "width", "20");
+    			attr_dev(rect, "height", "20");
+    			attr_dev(rect, "rx", "5");
+    			attr_dev(rect, "ry", "5");
+    			add_location(rect, file$5, 34, 14, 2185);
+    			attr_dev(path5, "d", "M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z");
+    			add_location(path5, file$5, 35, 14, 2262);
+    			attr_dev(line, "x1", "17.5");
+    			attr_dev(line, "y1", "6.5");
+    			attr_dev(line, "x2", "17.51");
+    			attr_dev(line, "y2", "6.5");
+    			add_location(line, file$5, 36, 14, 2338);
+    			attr_dev(svg2, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg2, "width", "18");
+    			attr_dev(svg2, "height", "18");
+    			attr_dev(svg2, "viewBox", "0 0 24 24");
+    			attr_dev(svg2, "fill", "none");
+    			attr_dev(svg2, "stroke", "currentColor");
+    			attr_dev(svg2, "stroke-width", "2");
+    			attr_dev(svg2, "stroke-linecap", "round");
+    			attr_dev(svg2, "stroke-linejoin", "round");
+    			attr_dev(svg2, "class", "text-cream-200");
+    			add_location(svg2, file$5, 33, 12, 1966);
+    			attr_dev(a0, "href", "/#instagram");
+    			attr_dev(a0, "class", "w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors");
+    			add_location(a0, file$5, 31, 10, 1766);
+    			attr_dev(span1, "class", "sr-only");
+    			add_location(span1, file$5, 40, 12, 2583);
+    			attr_dev(path6, "d", "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z");
+    			add_location(path6, file$5, 42, 14, 2852);
+    			attr_dev(svg3, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg3, "width", "18");
+    			attr_dev(svg3, "height", "18");
+    			attr_dev(svg3, "viewBox", "0 0 24 24");
+    			attr_dev(svg3, "fill", "none");
+    			attr_dev(svg3, "stroke", "currentColor");
+    			attr_dev(svg3, "stroke-width", "2");
+    			attr_dev(svg3, "stroke-linecap", "round");
+    			attr_dev(svg3, "stroke-linejoin", "round");
+    			attr_dev(svg3, "class", "text-cream-200");
+    			add_location(svg3, file$5, 41, 12, 2633);
+    			attr_dev(a1, "href", "/#facebook");
+    			attr_dev(a1, "class", "w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors");
+    			add_location(a1, file$5, 39, 10, 2435);
+    			attr_dev(span2, "class", "sr-only");
+    			add_location(span2, file$5, 46, 12, 3124);
+    			attr_dev(path7, "d", "M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z");
+    			add_location(path7, file$5, 48, 14, 3392);
+    			attr_dev(svg4, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg4, "width", "18");
+    			attr_dev(svg4, "height", "18");
+    			attr_dev(svg4, "viewBox", "0 0 24 24");
+    			attr_dev(svg4, "fill", "none");
+    			attr_dev(svg4, "stroke", "currentColor");
+    			attr_dev(svg4, "stroke-width", "2");
+    			attr_dev(svg4, "stroke-linecap", "round");
+    			attr_dev(svg4, "stroke-linejoin", "round");
+    			attr_dev(svg4, "class", "text-cream-200");
+    			add_location(svg4, file$5, 47, 12, 3173);
+    			attr_dev(a2, "href", "/#twitter");
+    			attr_dev(a2, "class", "w-9 h-9 rounded-full bg-coffee-800 hover:bg-coffee-700 flex items-center justify-center transition-colors");
+    			add_location(a2, file$5, 45, 10, 2977);
+    			attr_dev(div3, "class", "flex space-x-4 mt-6");
+    			add_location(div3, file$5, 30, 8, 1722);
+    			attr_dev(div4, "class", "lg:col-span-2");
+    			add_location(div4, file$5, 17, 6, 849);
+    			attr_dev(h31, "class", "heading-serif text-lg font-semibold mb-5 text-cream-100");
+    			add_location(h31, file$5, 56, 8, 3693);
+    			attr_dev(circle0, "cx", "12");
+    			attr_dev(circle0, "cy", "12");
+    			attr_dev(circle0, "r", "10");
+    			add_location(circle0, file$5, 61, 16, 4127);
+    			attr_dev(polyline0, "points", "12 6 12 12 16 14");
+    			add_location(polyline0, file$5, 62, 16, 4184);
+    			attr_dev(svg5, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg5, "width", "16");
+    			attr_dev(svg5, "height", "16");
+    			attr_dev(svg5, "viewBox", "0 0 24 24");
+    			attr_dev(svg5, "fill", "none");
+    			attr_dev(svg5, "stroke", "currentColor");
+    			attr_dev(svg5, "stroke-width", "2");
+    			attr_dev(svg5, "stroke-linecap", "round");
+    			attr_dev(svg5, "stroke-linejoin", "round");
+    			add_location(svg5, file$5, 60, 14, 3929);
+    			attr_dev(span3, "class", "text-cream-400 mr-2");
+    			add_location(span3, file$5, 59, 12, 3880);
+    			attr_dev(span4, "class", "text-cream-300");
+    			add_location(span4, file$5, 65, 35, 4308);
+    			add_location(span5, file$5, 65, 12, 4285);
+    			attr_dev(li0, "class", "flex items-center");
+    			add_location(li0, file$5, 58, 10, 3837);
+    			attr_dev(circle1, "cx", "12");
+    			attr_dev(circle1, "cy", "12");
+    			attr_dev(circle1, "r", "10");
+    			add_location(circle1, file$5, 70, 16, 4685);
+    			attr_dev(polyline1, "points", "12 6 12 12 16 14");
+    			add_location(polyline1, file$5, 71, 16, 4742);
+    			attr_dev(svg6, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg6, "width", "16");
+    			attr_dev(svg6, "height", "16");
+    			attr_dev(svg6, "viewBox", "0 0 24 24");
+    			attr_dev(svg6, "fill", "none");
+    			attr_dev(svg6, "stroke", "currentColor");
+    			attr_dev(svg6, "stroke-width", "2");
+    			attr_dev(svg6, "stroke-linecap", "round");
+    			attr_dev(svg6, "stroke-linejoin", "round");
+    			add_location(svg6, file$5, 69, 14, 4487);
+    			attr_dev(span6, "class", "text-cream-400 mr-2");
+    			add_location(span6, file$5, 68, 12, 4438);
+    			attr_dev(span7, "class", "text-cream-300");
+    			add_location(span7, file$5, 74, 28, 4859);
+    			add_location(span8, file$5, 74, 12, 4843);
+    			attr_dev(li1, "class", "flex items-center");
+    			add_location(li1, file$5, 67, 10, 4395);
+    			attr_dev(circle2, "cx", "12");
+    			attr_dev(circle2, "cy", "12");
+    			attr_dev(circle2, "r", "10");
+    			add_location(circle2, file$5, 79, 16, 5236);
+    			attr_dev(polyline2, "points", "12 6 12 12 16 14");
+    			add_location(polyline2, file$5, 80, 16, 5293);
+    			attr_dev(svg7, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg7, "width", "16");
+    			attr_dev(svg7, "height", "16");
+    			attr_dev(svg7, "viewBox", "0 0 24 24");
+    			attr_dev(svg7, "fill", "none");
+    			attr_dev(svg7, "stroke", "currentColor");
+    			attr_dev(svg7, "stroke-width", "2");
+    			attr_dev(svg7, "stroke-linecap", "round");
+    			attr_dev(svg7, "stroke-linejoin", "round");
+    			add_location(svg7, file$5, 78, 14, 5038);
+    			attr_dev(span9, "class", "text-cream-400 mr-2");
+    			add_location(span9, file$5, 77, 12, 4989);
+    			attr_dev(span10, "class", "text-cream-300");
+    			add_location(span10, file$5, 83, 26, 5408);
+    			add_location(span11, file$5, 83, 12, 5394);
+    			attr_dev(li2, "class", "flex items-center");
+    			add_location(li2, file$5, 76, 10, 4946);
+    			attr_dev(ul0, "class", "text-sm space-y-3 text-coffee-100");
+    			add_location(ul0, file$5, 57, 8, 3780);
+    			attr_dev(p1, "class", "text-sm text-cream-200 italic");
+    			add_location(p1, file$5, 88, 10, 5574);
+    			attr_dev(div5, "class", "mt-6 p-3 bg-coffee-800 rounded-lg");
+    			add_location(div5, file$5, 87, 8, 5516);
+    			add_location(div6, file$5, 55, 6, 3679);
+    			attr_dev(h32, "class", "heading-serif text-lg font-semibold mb-5 text-cream-100");
+    			add_location(h32, file$5, 96, 8, 5789);
+    			attr_dev(path8, "d", "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z");
+    			add_location(path8, file$5, 101, 16, 6229);
+    			attr_dev(circle3, "cx", "12");
+    			attr_dev(circle3, "cy", "10");
+    			attr_dev(circle3, "r", "3");
+    			add_location(circle3, file$5, 102, 16, 6310);
+    			attr_dev(svg8, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg8, "width", "16");
+    			attr_dev(svg8, "height", "16");
+    			attr_dev(svg8, "viewBox", "0 0 24 24");
+    			attr_dev(svg8, "fill", "none");
+    			attr_dev(svg8, "stroke", "currentColor");
+    			attr_dev(svg8, "stroke-width", "2");
+    			attr_dev(svg8, "stroke-linecap", "round");
+    			attr_dev(svg8, "stroke-linejoin", "round");
+    			add_location(svg8, file$5, 100, 14, 6031);
+    			attr_dev(span12, "class", "text-cream-400 mr-2 mt-1");
+    			add_location(span12, file$5, 99, 12, 5977);
+    			add_location(br, file$5, 105, 35, 6426);
+    			add_location(span13, file$5, 105, 12, 6403);
+    			attr_dev(li3, "class", "flex items-start");
+    			add_location(li3, file$5, 98, 10, 5935);
+    			attr_dev(path9, "d", "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z");
+    			add_location(path9, file$5, 110, 16, 6773);
+    			attr_dev(svg9, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg9, "width", "16");
+    			attr_dev(svg9, "height", "16");
+    			attr_dev(svg9, "viewBox", "0 0 24 24");
+    			attr_dev(svg9, "fill", "none");
+    			attr_dev(svg9, "stroke", "currentColor");
+    			attr_dev(svg9, "stroke-width", "2");
+    			attr_dev(svg9, "stroke-linecap", "round");
+    			attr_dev(svg9, "stroke-linejoin", "round");
+    			add_location(svg9, file$5, 109, 14, 6575);
+    			attr_dev(span14, "class", "text-cream-400 mr-2");
+    			add_location(span14, file$5, 108, 12, 6526);
+    			add_location(span15, file$5, 113, 12, 7111);
+    			attr_dev(li4, "class", "flex items-center");
+    			add_location(li4, file$5, 107, 10, 6483);
+    			attr_dev(path10, "d", "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z");
+    			add_location(path10, file$5, 118, 16, 7455);
+    			attr_dev(polyline3, "points", "22,6 12,13 2,6");
+    			add_location(polyline3, file$5, 119, 16, 7565);
+    			attr_dev(svg10, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg10, "width", "16");
+    			attr_dev(svg10, "height", "16");
+    			attr_dev(svg10, "viewBox", "0 0 24 24");
+    			attr_dev(svg10, "fill", "none");
+    			attr_dev(svg10, "stroke", "currentColor");
+    			attr_dev(svg10, "stroke-width", "2");
+    			attr_dev(svg10, "stroke-linecap", "round");
+    			attr_dev(svg10, "stroke-linejoin", "round");
+    			add_location(svg10, file$5, 117, 14, 7257);
+    			attr_dev(span16, "class", "text-cream-400 mr-2");
+    			add_location(span16, file$5, 116, 12, 7208);
+    			attr_dev(a3, "href", "mailto:info@yoyacoffee.com");
+    			attr_dev(a3, "class", "text-cream-300 hover:text-cream-100 underline");
+    			add_location(a3, file$5, 122, 12, 7664);
+    			attr_dev(li5, "class", "flex items-center");
+    			add_location(li5, file$5, 115, 10, 7165);
+    			attr_dev(ul1, "class", "text-sm space-y-3 text-coffee-100");
+    			add_location(ul1, file$5, 97, 8, 5878);
+    			attr_dev(a4, "href", "/#order");
+    			attr_dev(a4, "class", "mt-6 inline-block px-5 py-3 bg-cream-600 hover:bg-cream-500 text-coffee-900 rounded-lg font-medium text-sm transition-colors");
+    			add_location(a4, file$5, 126, 8, 7826);
+    			add_location(div7, file$5, 95, 6, 5775);
+    			attr_dev(div8, "class", "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10");
+    			add_location(div8, file$5, 15, 4, 746);
+    			attr_dev(p2, "class", "text-coffee-300 text-sm");
+    			add_location(p2, file$5, 135, 8, 8210);
+    			attr_dev(a5, "href", "/#privacy");
+    			attr_dev(a5, "class", "text-coffee-300 hover:text-cream-200 text-sm");
+    			add_location(a5, file$5, 139, 10, 8416);
+    			attr_dev(a6, "href", "/#terms");
+    			attr_dev(a6, "class", "text-coffee-300 hover:text-cream-200 text-sm");
+    			add_location(a6, file$5, 140, 10, 8518);
+    			attr_dev(a7, "href", "/#accessibility");
+    			attr_dev(a7, "class", "text-coffee-300 hover:text-cream-200 text-sm");
+    			add_location(a7, file$5, 141, 10, 8620);
+    			attr_dev(div9, "class", "flex space-x-6 mt-4 md:mt-0");
+    			add_location(div9, file$5, 138, 8, 8364);
+    			attr_dev(div10, "class", "flex flex-col md:flex-row justify-between items-center");
+    			add_location(div10, file$5, 134, 6, 8133);
+    			attr_dev(div11, "class", "mt-10 pt-6 border-t border-coffee-800");
+    			add_location(div11, file$5, 133, 4, 8075);
+    			attr_dev(div12, "class", "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12");
+    			add_location(div12, file$5, 14, 2, 683);
+    			attr_dev(footer, "class", "bg-coffee-900 text-white mt-16 relative");
+    			add_location(footer, file$5, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, footer, anchor);
+    			append_dev(footer, div0);
+    			append_dev(footer, t0);
+    			append_dev(footer, div1);
+    			append_dev(div1, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(svg0, path1);
+    			append_dev(svg0, path2);
+    			append_dev(footer, t1);
+    			append_dev(footer, div12);
+    			append_dev(div12, div8);
+    			append_dev(div8, div4);
+    			append_dev(div4, div2);
+    			append_dev(div2, svg1);
+    			append_dev(svg1, path3);
+    			append_dev(svg1, path4);
+    			append_dev(div2, t2);
+    			append_dev(div2, h30);
+    			append_dev(div4, t4);
+    			append_dev(div4, p0);
+    			append_dev(div4, t6);
+    			append_dev(div4, div3);
+    			append_dev(div3, a0);
+    			append_dev(a0, span0);
+    			append_dev(a0, t8);
+    			append_dev(a0, svg2);
+    			append_dev(svg2, rect);
+    			append_dev(svg2, path5);
+    			append_dev(svg2, line);
+    			append_dev(div3, t9);
+    			append_dev(div3, a1);
+    			append_dev(a1, span1);
+    			append_dev(a1, t11);
+    			append_dev(a1, svg3);
+    			append_dev(svg3, path6);
+    			append_dev(div3, t12);
+    			append_dev(div3, a2);
+    			append_dev(a2, span2);
+    			append_dev(a2, t14);
+    			append_dev(a2, svg4);
+    			append_dev(svg4, path7);
+    			append_dev(div8, t15);
+    			append_dev(div8, div6);
+    			append_dev(div6, h31);
+    			append_dev(div6, t17);
+    			append_dev(div6, ul0);
+    			append_dev(ul0, li0);
+    			append_dev(li0, span3);
+    			append_dev(span3, svg5);
+    			append_dev(svg5, circle0);
+    			append_dev(svg5, polyline0);
+    			append_dev(li0, t18);
+    			append_dev(li0, span5);
+    			append_dev(span5, t19);
+    			append_dev(span5, span4);
+    			append_dev(ul0, t21);
+    			append_dev(ul0, li1);
+    			append_dev(li1, span6);
+    			append_dev(span6, svg6);
+    			append_dev(svg6, circle1);
+    			append_dev(svg6, polyline1);
+    			append_dev(li1, t22);
+    			append_dev(li1, span8);
+    			append_dev(span8, t23);
+    			append_dev(span8, span7);
+    			append_dev(ul0, t25);
+    			append_dev(ul0, li2);
+    			append_dev(li2, span9);
+    			append_dev(span9, svg7);
+    			append_dev(svg7, circle2);
+    			append_dev(svg7, polyline2);
+    			append_dev(li2, t26);
+    			append_dev(li2, span11);
+    			append_dev(span11, t27);
+    			append_dev(span11, span10);
+    			append_dev(div6, t29);
+    			append_dev(div6, div5);
+    			append_dev(div5, p1);
+    			append_dev(div8, t31);
+    			append_dev(div8, div7);
+    			append_dev(div7, h32);
+    			append_dev(div7, t33);
+    			append_dev(div7, ul1);
+    			append_dev(ul1, li3);
+    			append_dev(li3, span12);
+    			append_dev(span12, svg8);
+    			append_dev(svg8, path8);
+    			append_dev(svg8, circle3);
+    			append_dev(li3, t34);
+    			append_dev(li3, span13);
+    			append_dev(span13, t35);
+    			append_dev(span13, br);
+    			append_dev(span13, t36);
+    			append_dev(ul1, t37);
+    			append_dev(ul1, li4);
+    			append_dev(li4, span14);
+    			append_dev(span14, svg9);
+    			append_dev(svg9, path9);
+    			append_dev(li4, t38);
+    			append_dev(li4, span15);
+    			append_dev(ul1, t40);
+    			append_dev(ul1, li5);
+    			append_dev(li5, span16);
+    			append_dev(span16, svg10);
+    			append_dev(svg10, path10);
+    			append_dev(svg10, polyline3);
+    			append_dev(li5, t41);
+    			append_dev(li5, a3);
+    			append_dev(div7, t43);
+    			append_dev(div7, a4);
+    			append_dev(div12, t45);
+    			append_dev(div12, div11);
+    			append_dev(div11, div10);
+    			append_dev(div10, p2);
+    			append_dev(div10, t49);
+    			append_dev(div10, div9);
+    			append_dev(div9, a5);
+    			append_dev(div9, t51);
+    			append_dev(div9, a6);
+    			append_dev(div9, t53);
+    			append_dev(div9, a7);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(footer);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$5.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$5($$self, $$props) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Footer', slots, []);
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Footer> was created with unknown prop '${key}'`);
+    	});
+
+    	return [];
+    }
+
+    class Footer extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Footer",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+    }
+
+    /* src\components\CategoryFilter.svelte generated by Svelte v3.59.2 */
+    const file$4 = "src\\components\\CategoryFilter.svelte";
+
+    function get_each_context_1$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[8] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[8] = list[i];
+    	return child_ctx;
+    }
+
+    // (60:0) {:else}
+    function create_else_block$2(ctx) {
+    	let div3;
+    	let h3;
+    	let t1;
+    	let div0;
+    	let svg0;
+    	let path0;
+    	let path1;
+    	let line0;
+    	let line1;
+    	let line2;
+    	let t2;
+    	let ul;
+    	let li;
+    	let button;
+    	let div1;
+    	let span;
+    	let svg1;
+    	let line3;
+    	let line4;
+    	let line5;
+    	let line6;
+    	let line7;
+    	let line8;
+    	let span_class_value;
+    	let t3;
+    	let button_class_value;
+    	let t4;
+    	let t5;
+    	let div2;
+    	let t6;
+    	let p;
+    	let mounted;
+    	let dispose;
+    	let each_value_1 = /*categories*/ ctx[0];
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div3 = element("div");
+    			h3 = element("h3");
+    			h3.textContent = "Menu Categories";
+    			t1 = space();
+    			div0 = element("div");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			line0 = svg_element("line");
+    			line1 = svg_element("line");
+    			line2 = svg_element("line");
+    			t2 = space();
+    			ul = element("ul");
+    			li = element("li");
+    			button = element("button");
+    			div1 = element("div");
+    			span = element("span");
+    			svg1 = svg_element("svg");
+    			line3 = svg_element("line");
+    			line4 = svg_element("line");
+    			line5 = svg_element("line");
+    			line6 = svg_element("line");
+    			line7 = svg_element("line");
+    			line8 = svg_element("line");
+    			t3 = text("\n            All Categories");
+    			t4 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t5 = space();
+    			div2 = element("div");
+    			t6 = space();
+    			p = element("p");
+    			p.textContent = "Choose a category to filter the menu";
+    			attr_dev(h3, "class", "heading-serif font-semibold text-xl text-coffee-800 mb-4");
+    			add_location(h3, file$4, 62, 4, 2372);
+    			attr_dev(path0, "d", "M18 8h1a4 4 0 010 8h-1");
+    			add_location(path0, file$4, 67, 8, 2761);
+    			attr_dev(path1, "d", "M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path1, file$4, 68, 8, 2810);
+    			attr_dev(line0, "x1", "6");
+    			attr_dev(line0, "y1", "1");
+    			attr_dev(line0, "x2", "6");
+    			attr_dev(line0, "y2", "4");
+    			add_location(line0, file$4, 69, 8, 2877);
+    			attr_dev(line1, "x1", "10");
+    			attr_dev(line1, "y1", "1");
+    			attr_dev(line1, "x2", "10");
+    			attr_dev(line1, "y2", "4");
+    			add_location(line1, file$4, 70, 8, 2927);
+    			attr_dev(line2, "x1", "14");
+    			attr_dev(line2, "y1", "1");
+    			attr_dev(line2, "x2", "14");
+    			attr_dev(line2, "y2", "4");
+    			add_location(line2, file$4, 71, 8, 2979);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "viewBox", "0 0 24 24");
+    			attr_dev(svg0, "fill", "none");
+    			attr_dev(svg0, "stroke", "currentColor");
+    			attr_dev(svg0, "stroke-width", "2");
+    			attr_dev(svg0, "stroke-linecap", "round");
+    			attr_dev(svg0, "stroke-linejoin", "round");
+    			attr_dev(svg0, "class", "w-5 h-5");
+    			add_location(svg0, file$4, 66, 6, 2578);
+    			attr_dev(div0, "class", "absolute top-4 right-4 text-coffee-400");
+    			add_location(div0, file$4, 65, 4, 2519);
+    			attr_dev(line3, "x1", "8");
+    			attr_dev(line3, "y1", "6");
+    			attr_dev(line3, "x2", "21");
+    			attr_dev(line3, "y2", "6");
+    			add_location(line3, file$4, 90, 16, 3901);
+    			attr_dev(line4, "x1", "8");
+    			attr_dev(line4, "y1", "12");
+    			attr_dev(line4, "x2", "21");
+    			attr_dev(line4, "y2", "12");
+    			add_location(line4, file$4, 91, 16, 3960);
+    			attr_dev(line5, "x1", "8");
+    			attr_dev(line5, "y1", "18");
+    			attr_dev(line5, "x2", "21");
+    			attr_dev(line5, "y2", "18");
+    			add_location(line5, file$4, 92, 16, 4021);
+    			attr_dev(line6, "x1", "3");
+    			attr_dev(line6, "y1", "6");
+    			attr_dev(line6, "x2", "3.01");
+    			attr_dev(line6, "y2", "6");
+    			add_location(line6, file$4, 93, 16, 4082);
+    			attr_dev(line7, "x1", "3");
+    			attr_dev(line7, "y1", "12");
+    			attr_dev(line7, "x2", "3.01");
+    			attr_dev(line7, "y2", "12");
+    			add_location(line7, file$4, 94, 16, 4143);
+    			attr_dev(line8, "x1", "3");
+    			attr_dev(line8, "y1", "18");
+    			attr_dev(line8, "x2", "3.01");
+    			attr_dev(line8, "y2", "18");
+    			add_location(line8, file$4, 95, 16, 4206);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			attr_dev(svg1, "fill", "none");
+    			attr_dev(svg1, "stroke", "currentColor");
+    			attr_dev(svg1, "stroke-width", "2");
+    			attr_dev(svg1, "stroke-linecap", "round");
+    			attr_dev(svg1, "stroke-linejoin", "round");
+    			attr_dev(svg1, "class", "w-4 h-4");
+    			add_location(svg1, file$4, 89, 14, 3710);
+
+    			attr_dev(span, "class", span_class_value = "mr-3 " + (!/*activeCategory*/ ctx[1]
+    			? 'text-coffee-800'
+    			: 'text-coffee-400 group-hover:text-coffee-600'));
+
+    			add_location(span, file$4, 88, 12, 3590);
+    			attr_dev(div1, "class", "flex items-center");
+    			add_location(div1, file$4, 86, 10, 3501);
+
+    			attr_dev(button, "class", button_class_value = "group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 " + (!/*activeCategory*/ ctx[1]
+    			? 'bg-cream-600 text-coffee-900 font-medium shadow-sm'
+    			: 'text-coffee-800 hover:bg-coffee-50 hover:pl-5'));
+
+    			add_location(button, file$4, 79, 8, 3164);
+    			add_location(li, file$4, 78, 6, 3151);
+    			attr_dev(ul, "class", "space-y-2");
+    			add_location(ul, file$4, 76, 4, 3083);
+    			attr_dev(div2, "class", "mt-6 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent");
+    			add_location(div2, file$4, 128, 4, 5558);
+    			attr_dev(p, "class", "mt-4 text-xs text-coffee-500 text-center");
+    			add_location(p, file$4, 129, 4, 5656);
+    			attr_dev(div3, "class", "bg-white rounded-2xl shadow-soft p-5 border border-coffee-100 sticky top-24");
+    			add_location(div3, file$4, 61, 2, 2278);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, h3);
+    			append_dev(div3, t1);
+    			append_dev(div3, div0);
+    			append_dev(div0, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(svg0, path1);
+    			append_dev(svg0, line0);
+    			append_dev(svg0, line1);
+    			append_dev(svg0, line2);
+    			append_dev(div3, t2);
+    			append_dev(div3, ul);
+    			append_dev(ul, li);
+    			append_dev(li, button);
+    			append_dev(button, div1);
+    			append_dev(div1, span);
+    			append_dev(span, svg1);
+    			append_dev(svg1, line3);
+    			append_dev(svg1, line4);
+    			append_dev(svg1, line5);
+    			append_dev(svg1, line6);
+    			append_dev(svg1, line7);
+    			append_dev(svg1, line8);
+    			append_dev(div1, t3);
+    			append_dev(ul, t4);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(ul, null);
+    				}
+    			}
+
+    			append_dev(div3, t5);
+    			append_dev(div3, div2);
+    			append_dev(div3, t6);
+    			append_dev(div3, p);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*scrollToTop*/ ctx[4], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*activeCategory*/ 2 && span_class_value !== (span_class_value = "mr-3 " + (!/*activeCategory*/ ctx[1]
+    			? 'text-coffee-800'
+    			: 'text-coffee-400 group-hover:text-coffee-600'))) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+
+    			if (dirty & /*activeCategory*/ 2 && button_class_value !== (button_class_value = "group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 " + (!/*activeCategory*/ ctx[1]
+    			? 'bg-cream-600 text-coffee-900 font-medium shadow-sm'
+    			: 'text-coffee-800 hover:bg-coffee-50 hover:pl-5'))) {
+    				attr_dev(button, "class", button_class_value);
+    			}
+
+    			if (dirty & /*activeCategory, categories, selectCategory*/ 11) {
+    				each_value_1 = /*categories*/ ctx[0];
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(ul, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div3);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$2.name,
+    		type: "else",
+    		source: "(60:0) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (22:0) {#if isMobile}
+    function create_if_block$4(ctx) {
+    	let div4;
+    	let div0;
+    	let t0;
+    	let div2;
+    	let div1;
+    	let button;
+    	let t1;
+    	let button_class_value;
+    	let t2;
+    	let t3;
+    	let div3;
+    	let mounted;
+    	let dispose;
+    	let each_value = /*categories*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div4 = element("div");
+    			div0 = element("div");
+    			t0 = space();
+    			div2 = element("div");
+    			div1 = element("div");
+    			button = element("button");
+    			t1 = text("All Items");
+    			t2 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t3 = space();
+    			div3 = element("div");
+    			attr_dev(div0, "class", "absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-coffee-50 to-transparent z-10 pointer-events-none");
+    			add_location(div0, file$4, 25, 4, 671);
+
+    			attr_dev(button, "class", button_class_value = "px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm " + (!/*activeCategory*/ ctx[1]
+    			? 'bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300'
+    			: 'bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow'));
+
+    			add_location(button, file$4, 31, 8, 982);
+    			attr_dev(div1, "class", "flex space-x-3 min-w-max px-2");
+    			add_location(div1, file$4, 29, 6, 900);
+    			attr_dev(div2, "class", "overflow-x-auto py-2 px-1 hide-scrollbar svelte-1q5wua5");
+    			add_location(div2, file$4, 28, 4, 839);
+    			attr_dev(div3, "class", "absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-coffee-50 to-transparent z-10 pointer-events-none");
+    			add_location(div3, file$4, 57, 4, 2073);
+    			attr_dev(div4, "class", "relative mb-6");
+    			add_location(div4, file$4, 23, 2, 599);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div4, anchor);
+    			append_dev(div4, div0);
+    			append_dev(div4, t0);
+    			append_dev(div4, div2);
+    			append_dev(div2, div1);
+    			append_dev(div1, button);
+    			append_dev(button, t1);
+    			append_dev(div1, t2);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div1, null);
+    				}
+    			}
+
+    			append_dev(div4, t3);
+    			append_dev(div4, div3);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*scrollToTop*/ ctx[4], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*activeCategory*/ 2 && button_class_value !== (button_class_value = "px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm " + (!/*activeCategory*/ ctx[1]
+    			? 'bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300'
+    			: 'bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow'))) {
+    				attr_dev(button, "class", button_class_value);
+    			}
+
+    			if (dirty & /*activeCategory, categories, selectCategory*/ 11) {
+    				each_value = /*categories*/ ctx[0];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div1, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div4);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$4.name,
+    		type: "if",
+    		source: "(22:0) {#if isMobile}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (105:6) {#each categories as category}
+    function create_each_block_1$1(ctx) {
+    	let li;
+    	let button;
+    	let div;
+    	let span;
+    	let svg;
+    	let polyline;
+    	let span_class_value;
+    	let t0;
+    	let t1_value = /*category*/ ctx[8].name + "";
+    	let t1;
+    	let button_class_value;
+    	let t2;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler_1() {
+    		return /*click_handler_1*/ ctx[6](/*category*/ ctx[8]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			li = element("li");
+    			button = element("button");
+    			div = element("div");
+    			span = element("span");
+    			svg = svg_element("svg");
+    			polyline = svg_element("polyline");
+    			t0 = space();
+    			t1 = text(t1_value);
+    			t2 = space();
+    			attr_dev(polyline, "points", "9 18 15 12 9 6");
+    			add_location(polyline, file$4, 117, 18, 5309);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "stroke-width", "2");
+    			attr_dev(svg, "stroke-linecap", "round");
+    			attr_dev(svg, "stroke-linejoin", "round");
+    			attr_dev(svg, "class", "w-4 h-4");
+    			add_location(svg, file$4, 116, 16, 5116);
+
+    			attr_dev(span, "class", span_class_value = "mr-3 " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'text-coffee-800'
+    			: 'text-coffee-400 group-hover:text-coffee-600'));
+
+    			add_location(span, file$4, 115, 14, 4979);
+    			attr_dev(div, "class", "flex items-center");
+    			add_location(div, file$4, 113, 12, 4866);
+
+    			attr_dev(button, "class", button_class_value = "group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'bg-cream-600 text-coffee-900 font-medium shadow-sm'
+    			: 'text-coffee-800 hover:bg-coffee-50 hover:pl-5'));
+
+    			add_location(button, file$4, 106, 10, 4478);
+    			add_location(li, file$4, 105, 8, 4463);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			append_dev(li, button);
+    			append_dev(button, div);
+    			append_dev(div, span);
+    			append_dev(span, svg);
+    			append_dev(svg, polyline);
+    			append_dev(div, t0);
+    			append_dev(div, t1);
+    			append_dev(li, t2);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", click_handler_1, false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*activeCategory, categories*/ 3 && span_class_value !== (span_class_value = "mr-3 " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'text-coffee-800'
+    			: 'text-coffee-400 group-hover:text-coffee-600'))) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+
+    			if (dirty & /*categories*/ 1 && t1_value !== (t1_value = /*category*/ ctx[8].name + "")) set_data_dev(t1, t1_value);
+
+    			if (dirty & /*activeCategory, categories*/ 3 && button_class_value !== (button_class_value = "group w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'bg-cream-600 text-coffee-900 font-medium shadow-sm'
+    			: 'text-coffee-800 hover:bg-coffee-50 hover:pl-5'))) {
+    				attr_dev(button, "class", button_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1$1.name,
+    		type: "each",
+    		source: "(105:6) {#each categories as category}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (43:8) {#each categories as category}
+    function create_each_block$1(ctx) {
+    	let button;
+    	let t0_value = /*category*/ ctx[8].name + "";
+    	let t0;
+    	let t1;
+    	let button_class_value;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[5](/*category*/ ctx[8]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			t0 = text(t0_value);
+    			t1 = space();
+
+    			attr_dev(button, "class", button_class_value = "px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300'
+    			: 'bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow'));
+
+    			add_location(button, file$4, 43, 10, 1496);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, t0);
+    			append_dev(button, t1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", click_handler, false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty & /*categories*/ 1 && t0_value !== (t0_value = /*category*/ ctx[8].name + "")) set_data_dev(t0, t0_value);
+
+    			if (dirty & /*activeCategory, categories*/ 3 && button_class_value !== (button_class_value = "px-5 py-2.5 rounded-xl text-sm whitespace-nowrap font-medium transition-all duration-300 shadow-sm " + (/*activeCategory*/ ctx[1] === /*category*/ ctx[8].id
+    			? 'bg-cream-600 text-coffee-900 shadow-md ring-2 ring-cream-300'
+    			: 'bg-white text-coffee-800 hover:bg-coffee-50 hover:-translate-y-0.5 hover:shadow'))) {
+    				attr_dev(button, "class", button_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(43:8) {#each categories as category}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$4(ctx) {
+    	let if_block_anchor;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*isMobile*/ ctx[2]) return create_if_block$4;
+    		return create_else_block$2;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$4($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('CategoryFilter', slots, []);
+    	let { categories = [] } = $$props;
+    	let { activeCategory = null } = $$props;
+    	let { isMobile = false } = $$props;
+    	const dispatch = createEventDispatcher();
+
+    	function selectCategory(categoryId) {
+    		dispatch('selectCategory', {
+    			category: categoryId === activeCategory ? null : categoryId
+    		});
+    	}
+
+    	function scrollToTop() {
+    		window.scrollTo({ top: 0, behavior: 'smooth' });
+    		dispatch('selectCategory', { category: null });
+    	}
+
+    	const writable_props = ['categories', 'activeCategory', 'isMobile'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<CategoryFilter> was created with unknown prop '${key}'`);
+    	});
+
+    	const click_handler = category => selectCategory(category.id);
+    	const click_handler_1 = category => selectCategory(category.id);
+
+    	$$self.$$set = $$props => {
+    		if ('categories' in $$props) $$invalidate(0, categories = $$props.categories);
+    		if ('activeCategory' in $$props) $$invalidate(1, activeCategory = $$props.activeCategory);
+    		if ('isMobile' in $$props) $$invalidate(2, isMobile = $$props.isMobile);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		createEventDispatcher,
+    		categories,
+    		activeCategory,
+    		isMobile,
+    		dispatch,
+    		selectCategory,
+    		scrollToTop
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('categories' in $$props) $$invalidate(0, categories = $$props.categories);
+    		if ('activeCategory' in $$props) $$invalidate(1, activeCategory = $$props.activeCategory);
+    		if ('isMobile' in $$props) $$invalidate(2, isMobile = $$props.isMobile);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		categories,
+    		activeCategory,
+    		isMobile,
+    		selectCategory,
+    		scrollToTop,
+    		click_handler,
+    		click_handler_1
+    	];
+    }
+
+    class CategoryFilter extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+    			categories: 0,
+    			activeCategory: 1,
+    			isMobile: 2
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "CategoryFilter",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+
+    	get categories() {
+    		throw new Error("<CategoryFilter>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set categories(value) {
+    		throw new Error("<CategoryFilter>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get activeCategory() {
+    		throw new Error("<CategoryFilter>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set activeCategory(value) {
+    		throw new Error("<CategoryFilter>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get isMobile() {
+    		throw new Error("<CategoryFilter>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set isMobile(value) {
+    		throw new Error("<CategoryFilter>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\MusicPlayer.svelte generated by Svelte v3.59.2 */
+
+    const { console: console_1 } = globals;
+    const file$3 = "src\\components\\MusicPlayer.svelte";
+
+    // (183:2) {:else}
+    function create_else_block$1(ctx) {
+    	let div8;
+    	let div4;
+    	let t0;
+    	let div1;
+    	let div0;
+
+    	let t1_value = (/*playing*/ ctx[0]
+    	? /*MUSIC_OPTIONS*/ ctx[5][/*currentTrack*/ ctx[1]].title
+    	: 'Yoya Music') + "";
+
+    	let t1;
+    	let t2;
+    	let div3;
+    	let div2;
+    	let svg0;
+    	let path0;
+    	let t3;
+    	let div5;
+    	let input;
+    	let t4;
+    	let div6;
+    	let button0;
+    	let svg1;
+    	let path1;
+    	let t5;
+    	let button1;
+    	let button1_class_value;
+    	let button1_aria_label_value;
+    	let t6;
+    	let button2;
+    	let svg2;
+    	let path2;
+    	let t7;
+    	let div7;
+    	let t8;
+    	let t9_value = /*currentTrack*/ ctx[1] + 1 + "";
+    	let t9;
+    	let t10;
+    	let t11_value = /*MUSIC_OPTIONS*/ ctx[5].length + "";
+    	let t11;
+    	let mounted;
+    	let dispose;
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*isMobile*/ ctx[4]) return create_if_block_2$1;
+    		return create_else_block_2;
+    	}
+
+    	let current_block_type = select_block_type_1(ctx);
+    	let if_block0 = current_block_type(ctx);
+
+    	function select_block_type_2(ctx, dirty) {
+    		if (/*playing*/ ctx[0]) return create_if_block_1$1;
+    		return create_else_block_1;
+    	}
+
+    	let current_block_type_1 = select_block_type_2(ctx);
+    	let if_block1 = current_block_type_1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div8 = element("div");
+    			div4 = element("div");
+    			if_block0.c();
+    			t0 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			div3 = element("div");
+    			div2 = element("div");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			t3 = space();
+    			div5 = element("div");
+    			input = element("input");
+    			t4 = space();
+    			div6 = element("div");
+    			button0 = element("button");
+    			svg1 = svg_element("svg");
+    			path1 = svg_element("path");
+    			t5 = space();
+    			button1 = element("button");
+    			if_block1.c();
+    			t6 = space();
+    			button2 = element("button");
+    			svg2 = svg_element("svg");
+    			path2 = svg_element("path");
+    			t7 = space();
+    			div7 = element("div");
+    			t8 = text("Track ");
+    			t9 = text(t9_value);
+    			t10 = text("/");
+    			t11 = text(t11_value);
+    			attr_dev(div0, "class", "text-sm font-medium text-coffee-800 truncate");
+    			add_location(div0, file$3, 214, 10, 6826);
+    			attr_dev(div1, "class", "flex-1 px-2 text-center");
+    			add_location(div1, file$3, 213, 8, 6778);
+    			attr_dev(path0, "stroke-linecap", "round");
+    			attr_dev(path0, "stroke-linejoin", "round");
+    			attr_dev(path0, "stroke-width", "2");
+    			attr_dev(path0, "d", "M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z");
+    			add_location(path0, file$3, 223, 14, 7242);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "fill", "none");
+    			attr_dev(svg0, "viewBox", "0 0 24 24");
+    			attr_dev(svg0, "stroke", "currentColor");
+    			add_location(svg0, file$3, 222, 12, 7133);
+    			attr_dev(div2, "class", "w-5 h-5 text-coffee-700");
+    			add_location(div2, file$3, 221, 10, 7083);
+    			attr_dev(div3, "class", "flex items-center");
+    			add_location(div3, file$3, 220, 8, 7041);
+    			attr_dev(div4, "class", "flex items-center justify-between mb-2");
+    			add_location(div4, file$3, 188, 6, 5528);
+    			attr_dev(input, "type", "range");
+    			attr_dev(input, "min", "0");
+    			attr_dev(input, "max", "100");
+    			attr_dev(input, "class", "w-full h-1.5 bg-coffee-200 rounded-full appearance-none cursor-pointer outline-none svelte-t4of7y");
+    			add_location(input, file$3, 232, 8, 7659);
+    			attr_dev(div5, "class", "w-full mb-3");
+    			add_location(div5, file$3, 231, 6, 7625);
+    			attr_dev(path1, "stroke-linecap", "round");
+    			attr_dev(path1, "stroke-linejoin", "round");
+    			attr_dev(path1, "stroke-width", "2");
+    			attr_dev(path1, "d", "M15 19l-7-7 7-7");
+    			add_location(path1, file$3, 251, 12, 8415);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "class", "h-5 w-5 text-coffee-700");
+    			attr_dev(svg1, "fill", "none");
+    			attr_dev(svg1, "viewBox", "0 0 24 24");
+    			attr_dev(svg1, "stroke", "currentColor");
+    			add_location(svg1, file$3, 250, 10, 8276);
+    			attr_dev(button0, "class", "w-10 h-10 flex items-center justify-center rounded-full hover:bg-coffee-100 transition-colors");
+    			attr_dev(button0, "aria-label", "Previous track");
+    			add_location(button0, file$3, 245, 8, 8063);
+    			attr_dev(button1, "class", button1_class_value = "w-12 h-12 flex items-center justify-center rounded-full " + (/*playing*/ ctx[0] ? 'bg-coffee-200' : 'bg-coffee-100') + " hover:bg-coffee-300 transition-colors");
+    			attr_dev(button1, "aria-label", button1_aria_label_value = /*playing*/ ctx[0] ? 'Pause music' : 'Play music');
+    			add_location(button1, file$3, 256, 8, 8595);
+    			attr_dev(path2, "stroke-linecap", "round");
+    			attr_dev(path2, "stroke-linejoin", "round");
+    			attr_dev(path2, "stroke-width", "2");
+    			attr_dev(path2, "d", "M9 5l7 7-7 7");
+    			add_location(path2, file$3, 279, 12, 9978);
+    			attr_dev(svg2, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg2, "class", "h-5 w-5 text-coffee-700");
+    			attr_dev(svg2, "fill", "none");
+    			attr_dev(svg2, "viewBox", "0 0 24 24");
+    			attr_dev(svg2, "stroke", "currentColor");
+    			add_location(svg2, file$3, 278, 10, 9839);
+    			attr_dev(button2, "class", "w-10 h-10 flex items-center justify-center rounded-full hover:bg-coffee-100 transition-colors");
+    			attr_dev(button2, "aria-label", "Next track");
+    			add_location(button2, file$3, 273, 8, 9630);
+    			attr_dev(div6, "class", "flex justify-between items-center");
+    			add_location(div6, file$3, 243, 6, 7975);
+    			attr_dev(div7, "class", "text-xs text-coffee-600 text-center mt-2");
+    			add_location(div7, file$3, 285, 6, 10165);
+    			attr_dev(div8, "class", "bg-white bg-opacity-95 rounded-xl shadow-lg p-3 flex flex-col overflow-hidden relative transition-all duration-300 animate-fadeIn svelte-t4of7y");
+    			add_location(div8, file$3, 184, 4, 5297);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, div4);
+    			if_block0.m(div4, null);
+    			append_dev(div4, t0);
+    			append_dev(div4, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, t1);
+    			append_dev(div4, t2);
+    			append_dev(div4, div3);
+    			append_dev(div3, div2);
+    			append_dev(div2, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(div8, t3);
+    			append_dev(div8, div5);
+    			append_dev(div5, input);
+    			set_input_value(input, /*volume*/ ctx[2]);
+    			append_dev(div8, t4);
+    			append_dev(div8, div6);
+    			append_dev(div6, button0);
+    			append_dev(button0, svg1);
+    			append_dev(svg1, path1);
+    			append_dev(div6, t5);
+    			append_dev(div6, button1);
+    			if_block1.m(button1, null);
+    			append_dev(div6, t6);
+    			append_dev(div6, button2);
+    			append_dev(button2, svg2);
+    			append_dev(svg2, path2);
+    			append_dev(div8, t7);
+    			append_dev(div8, div7);
+    			append_dev(div7, t8);
+    			append_dev(div7, t9);
+    			append_dev(div7, t10);
+    			append_dev(div7, t11);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_input_handler*/ ctx[12]),
+    					listen_dev(input, "input", /*input_change_input_handler*/ ctx[12]),
+    					listen_dev(input, "input", /*input_handler*/ ctx[13], false, false, false, false),
+    					listen_dev(button0, "click", /*playPrevTrack*/ ctx[9], false, false, false, false),
+    					listen_dev(button1, "click", /*togglePlay*/ ctx[6], false, false, false, false),
+    					listen_dev(button2, "click", /*playNextTrack*/ ctx[8], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block0) {
+    				if_block0.p(ctx, dirty);
+    			} else {
+    				if_block0.d(1);
+    				if_block0 = current_block_type(ctx);
+
+    				if (if_block0) {
+    					if_block0.c();
+    					if_block0.m(div4, t0);
+    				}
+    			}
+
+    			if (dirty & /*playing, currentTrack*/ 3 && t1_value !== (t1_value = (/*playing*/ ctx[0]
+    			? /*MUSIC_OPTIONS*/ ctx[5][/*currentTrack*/ ctx[1]].title
+    			: 'Yoya Music') + "")) set_data_dev(t1, t1_value);
+
+    			if (dirty & /*volume*/ 4) {
+    				set_input_value(input, /*volume*/ ctx[2]);
+    			}
+
+    			if (current_block_type_1 !== (current_block_type_1 = select_block_type_2(ctx))) {
+    				if_block1.d(1);
+    				if_block1 = current_block_type_1(ctx);
+
+    				if (if_block1) {
+    					if_block1.c();
+    					if_block1.m(button1, null);
+    				}
+    			}
+
+    			if (dirty & /*playing*/ 1 && button1_class_value !== (button1_class_value = "w-12 h-12 flex items-center justify-center rounded-full " + (/*playing*/ ctx[0] ? 'bg-coffee-200' : 'bg-coffee-100') + " hover:bg-coffee-300 transition-colors")) {
+    				attr_dev(button1, "class", button1_class_value);
+    			}
+
+    			if (dirty & /*playing*/ 1 && button1_aria_label_value !== (button1_aria_label_value = /*playing*/ ctx[0] ? 'Pause music' : 'Play music')) {
+    				attr_dev(button1, "aria-label", button1_aria_label_value);
+    			}
+
+    			if (dirty & /*currentTrack*/ 2 && t9_value !== (t9_value = /*currentTrack*/ ctx[1] + 1 + "")) set_data_dev(t9, t9_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div8);
+    			if_block0.d();
+    			if_block1.d();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(183:2) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (169:2) {#if isCollapsed && isMobile}
+    function create_if_block$3(ctx) {
+    	let div;
+    	let button;
+    	let svg;
+    	let path;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			button = element("button");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			attr_dev(path, "fill-rule", "evenodd");
+    			attr_dev(path, "d", "M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z");
+    			attr_dev(path, "clip-rule", "evenodd");
+    			add_location(path, file$3, 178, 10, 5049);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-6 w-6 text-coffee-800");
+    			attr_dev(svg, "viewBox", "0 0 20 20");
+    			attr_dev(svg, "fill", "currentColor");
+    			add_location(svg, file$3, 177, 8, 4926);
+    			attr_dev(button, "class", "w-12 h-12 flex items-center justify-center rounded-full bg-coffee-100 hover:bg-coffee-300 transition-colors");
+    			attr_dev(button, "aria-label", "Expand music player");
+    			add_location(button, file$3, 172, 6, 4658);
+    			attr_dev(div, "class", "bg-white bg-opacity-95 rounded-full shadow-lg p-2 transition-all duration-300 animate-fadeIn svelte-t4of7y");
+    			add_location(div, file$3, 169, 4, 4533);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, button);
+    			append_dev(button, svg);
+    			append_dev(svg, path);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[10], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(169:2) {#if isCollapsed && isMobile}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (201:8) {:else}
+    function create_else_block_2(ctx) {
+    	let div;
+    	let svg;
+    	let path0;
+    	let path1;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			svg = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			attr_dev(path0, "stroke-linecap", "round");
+    			attr_dev(path0, "stroke-linejoin", "round");
+    			attr_dev(path0, "stroke-width", "2");
+    			attr_dev(path0, "d", "M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path0, file$3, 204, 14, 6396);
+    			attr_dev(path1, "stroke-linecap", "round");
+    			attr_dev(path1, "stroke-linejoin", "round");
+    			attr_dev(path1, "stroke-width", "2");
+    			attr_dev(path1, "d", "M6 1v3M10 1v3M14 1v3");
+    			add_location(path1, file$3, 206, 14, 6567);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			add_location(svg, file$3, 203, 12, 6287);
+    			attr_dev(div, "class", "w-6 h-6 text-coffee-700");
+    			add_location(div, file$3, 202, 10, 6237);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, svg);
+    			append_dev(svg, path0);
+    			append_dev(svg, path1);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_2.name,
+    		type: "else",
+    		source: "(201:8) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (190:8) {#if isMobile}
+    function create_if_block_2$1(ctx) {
+    	let button;
+    	let svg;
+    	let path;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			attr_dev(path, "stroke-linecap", "round");
+    			attr_dev(path, "stroke-linejoin", "round");
+    			attr_dev(path, "stroke-width", "2");
+    			attr_dev(path, "d", "M6 18L18 6M6 6l12 12");
+    			add_location(path, file$3, 197, 14, 6028);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "w-5 h-5");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "stroke", "currentColor");
+    			add_location(svg, file$3, 196, 12, 5903);
+    			attr_dev(button, "class", "w-6 h-6 flex items-center justify-center text-coffee-600 hover:text-coffee-800 transition-colors");
+    			attr_dev(button, "aria-label", "Collapse music player");
+    			add_location(button, file$3, 191, 10, 5659);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, svg);
+    			append_dev(svg, path);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[11], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2$1.name,
+    		type: "if",
+    		source: "(190:8) {#if isMobile}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (266:10) {:else}
+    function create_else_block_1(ctx) {
+    	let svg;
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			attr_dev(path, "fill-rule", "evenodd");
+    			attr_dev(path, "d", "M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z");
+    			attr_dev(path, "clip-rule", "evenodd");
+    			add_location(path, file$3, 267, 14, 9375);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-6 w-6 text-coffee-800");
+    			attr_dev(svg, "viewBox", "0 0 20 20");
+    			attr_dev(svg, "fill", "currentColor");
+    			add_location(svg, file$3, 266, 12, 9248);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, path);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_1.name,
+    		type: "else",
+    		source: "(266:10) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (262:10) {#if playing}
+    function create_if_block_1$1(ctx) {
+    	let svg;
+    	let path;
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			attr_dev(path, "fill-rule", "evenodd");
+    			attr_dev(path, "d", "M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z");
+    			attr_dev(path, "clip-rule", "evenodd");
+    			add_location(path, file$3, 263, 14, 9030);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-6 w-6 text-coffee-800");
+    			attr_dev(svg, "viewBox", "0 0 20 20");
+    			attr_dev(svg, "fill", "currentColor");
+    			add_location(svg, file$3, 262, 12, 8903);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, path);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(262:10) {#if playing}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$3(ctx) {
+    	let div1;
+    	let t;
+    	let div0;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*isCollapsed*/ ctx[3] && /*isMobile*/ ctx[4]) return create_if_block$3;
+    		return create_else_block$1;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			if_block.c();
+    			t = space();
+    			div0 = element("div");
+    			attr_dev(div0, "id", "youtube-player");
+    			attr_dev(div0, "class", "hidden");
+    			add_location(div0, file$3, 292, 2, 10348);
+    			attr_dev(div1, "class", "fixed bottom-4 right-4 z-50 transition-all duration-300");
+    			add_location(div1, file$3, 166, 0, 4357);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			if_block.m(div1, null);
+    			append_dev(div1, t);
+    			append_dev(div1, div0);
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div1, t);
+    				}
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if_block.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$3.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$3($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('MusicPlayer', slots, []);
+
+    	const MUSIC_OPTIONS = [
+    		{
+    			id: 'ytpl2_D_s8-Yg',
+    			title: 'Coffee Shop Ambience'
+    		},
+    		{
+    			id: '1fueZCTYkpA',
+    			title: 'Classical Piano'
+    		},
+    		{ id: 'JEsF1YSibHM', title: 'Jazz Coffee' }
+    	];
+
+    	let playerReady = false;
+    	let playing = false;
+    	let currentTrack = 0;
+    	let volume = 20; // Default low volume
+    	let player;
+    	let isCollapsed = true; // Start collapsed on mobile
+    	let isMobile = false;
+
+    	// Toggle collapsed state
+    	function toggleCollapsed() {
+    		$$invalidate(3, isCollapsed = !isCollapsed);
+    	}
+
+    	// Check if on mobile device
+    	function checkMobile() {
+    		$$invalidate(4, isMobile = window.innerWidth < 768);
+
+    		// On mobile, start collapsed unless playing
+    		if (isMobile && !playing) {
+    			$$invalidate(3, isCollapsed = true);
+    		}
+    	}
+
+    	onMount(() => {
+    		// Check for mobile screen
+    		checkMobile();
+
+    		window.addEventListener('resize', checkMobile);
+
+    		// Check if music was playing in previous session
+    		const savedState = localStorage.getItem('yoyaCoffeeMusic');
+
+    		if (savedState) {
+    			const state = JSON.parse(savedState);
+    			$$invalidate(2, volume = state.volume || 20);
+    			$$invalidate(1, currentTrack = state.track || 0);
+    			$$invalidate(0, playing = state.playing || false);
+
+    			// If was playing previously, we'll uncollapse
+    			if (playing) {
+    				$$invalidate(3, isCollapsed = false);
+    			}
+    		}
+
+    		// Load YouTube API script
+    		const tag = document.createElement('script');
+
+    		tag.src = 'https://www.youtube.com/iframe_api';
+    		const firstScriptTag = document.getElementsByTagName('script')[0];
+    		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    		// Initialize player when API is ready
+    		window.onYouTubeIframeAPIReady = () => {
+    			player = new YT.Player('youtube-player',
+    			{
+    					height: '0',
+    					width: '0',
+    					videoId: MUSIC_OPTIONS[currentTrack].id,
+    					playerVars: {
+    						autoplay: 0, // No autoplay by default
+    						controls: 0,
+    						showinfo: 0,
+    						rel: 0,
+    						fs: 0,
+    						modestbranding: 1,
+    						loop: 1
+    					},
+    					events: {
+    						'onReady': onPlayerReady,
+    						'onStateChange': onPlayerStateChange,
+    						'onError': onPlayerError
+    					}
+    				});
+    		};
+
+    		return () => {
+    			window.removeEventListener('resize', checkMobile);
+    		};
+    	});
+
+    	function onPlayerReady(event) {
+    		playerReady = true;
+
+    		// Set volume to the saved or default level
+    		player.setVolume(volume);
+    	}
+
+    	function onPlayerStateChange(event) {
+    		// Update playing state based on player state
+    		$$invalidate(0, playing = event.data === YT.PlayerState.PLAYING);
+
+    		// Save state to localStorage when status changes
+    		savePlayerState();
+
+    		// If video ended, play next track
+    		if (event.data === YT.PlayerState.ENDED) {
+    			playNextTrack();
+    		}
+    	}
+
+    	function onPlayerError(event) {
+    		console.error('YouTube player error:', event.data);
+
+    		// Try playing the next track if there's an error
+    		playNextTrack();
+    	}
+
+    	function togglePlay() {
+    		if (!playerReady) return;
+
+    		if (playing) {
+    			player.pauseVideo();
+    		} else {
+    			player.playVideo();
+
+    			// When play is pressed, ensure player is expanded
+    			$$invalidate(3, isCollapsed = false);
+    		}
+    	}
+
+    	function changeVolume(newVolume) {
+    		if (!playerReady) return;
+    		$$invalidate(2, volume = newVolume);
+    		player.setVolume(volume);
+    		savePlayerState();
+    	}
+
+    	function playNextTrack() {
+    		if (!playerReady) return;
+    		$$invalidate(1, currentTrack = (currentTrack + 1) % MUSIC_OPTIONS.length);
+    		player.loadVideoById(MUSIC_OPTIONS[currentTrack].id);
+    		savePlayerState();
+    	}
+
+    	function playPrevTrack() {
+    		if (!playerReady) return;
+    		$$invalidate(1, currentTrack = (currentTrack - 1 + MUSIC_OPTIONS.length) % MUSIC_OPTIONS.length);
+    		player.loadVideoById(MUSIC_OPTIONS[currentTrack].id);
+    		savePlayerState();
+    	}
+
+    	function savePlayerState() {
+    		localStorage.setItem('yoyaCoffeeMusic', JSON.stringify({ playing, volume, track: currentTrack }));
+    	}
+
+    	// This function is no longer needed, replaced by toggleCollapsed
+    	onDestroy(() => {
+    		// Clean up player when component is destroyed
+    		if (player && playerReady) {
+    			// Save the current state before stopping
+    			savePlayerState();
+
+    			player.stopVideo();
+    		}
+    	});
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<MusicPlayer> was created with unknown prop '${key}'`);
+    	});
+
+    	const click_handler = () => {
+    		$$invalidate(3, isCollapsed = false);
+    		if (!playing) togglePlay();
+    	};
+
+    	const click_handler_1 = () => $$invalidate(3, isCollapsed = true);
+
+    	function input_change_input_handler() {
+    		volume = to_number(this.value);
+    		$$invalidate(2, volume);
+    	}
+
+    	const input_handler = () => changeVolume(volume);
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		onDestroy,
+    		MUSIC_OPTIONS,
+    		playerReady,
+    		playing,
+    		currentTrack,
+    		volume,
+    		player,
+    		isCollapsed,
+    		isMobile,
+    		toggleCollapsed,
+    		checkMobile,
+    		onPlayerReady,
+    		onPlayerStateChange,
+    		onPlayerError,
+    		togglePlay,
+    		changeVolume,
+    		playNextTrack,
+    		playPrevTrack,
+    		savePlayerState
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('playerReady' in $$props) playerReady = $$props.playerReady;
+    		if ('playing' in $$props) $$invalidate(0, playing = $$props.playing);
+    		if ('currentTrack' in $$props) $$invalidate(1, currentTrack = $$props.currentTrack);
+    		if ('volume' in $$props) $$invalidate(2, volume = $$props.volume);
+    		if ('player' in $$props) player = $$props.player;
+    		if ('isCollapsed' in $$props) $$invalidate(3, isCollapsed = $$props.isCollapsed);
+    		if ('isMobile' in $$props) $$invalidate(4, isMobile = $$props.isMobile);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		playing,
+    		currentTrack,
+    		volume,
+    		isCollapsed,
+    		isMobile,
+    		MUSIC_OPTIONS,
+    		togglePlay,
+    		changeVolume,
+    		playNextTrack,
+    		playPrevTrack,
+    		click_handler,
+    		click_handler_1,
+    		input_change_input_handler,
+    		input_handler
+    	];
+    }
+
+    class MusicPlayer extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "MusicPlayer",
+    			options,
+    			id: create_fragment$3.name
+    		});
+    	}
+    }
+
+    /* src\components\ModeToggle.svelte generated by Svelte v3.59.2 */
+    const file$2 = "src\\components\\ModeToggle.svelte";
+
+    // (39:8) {:else}
+    function create_else_block(ctx) {
+    	let span;
+    	let t;
+    	let span_class_value;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t = text("💰");
+    			attr_dev(span, "class", span_class_value = "text-2xl transform " + (/*isAnimating*/ ctx[1] ? 'scale-125' : '') + " transition-transform duration-300");
+    			add_location(span, file$2, 39, 10, 1117);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*isAnimating*/ 2 && span_class_value !== (span_class_value = "text-2xl transform " + (/*isAnimating*/ ctx[1] ? 'scale-125' : '') + " transition-transform duration-300")) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(39:8) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (37:8) {#if mode === 'menu'}
+    function create_if_block$2(ctx) {
+    	let span;
+    	let t;
+    	let span_class_value;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t = text("🤤");
+    			attr_dev(span, "class", span_class_value = "text-2xl transform " + (/*isAnimating*/ ctx[1] ? 'scale-125' : '') + " transition-transform duration-300");
+    			add_location(span, file$2, 37, 10, 981);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*isAnimating*/ 2 && span_class_value !== (span_class_value = "text-2xl transform " + (/*isAnimating*/ ctx[1] ? 'scale-125' : '') + " transition-transform duration-300")) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(37:8) {#if mode === 'menu'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$2(ctx) {
+    	let div3;
+    	let button;
+    	let div2;
+    	let div0;
+    	let t0;
+    	let div1;
+
+    	let t1_value = (/*mode*/ ctx[0] === 'menu'
+    	? 'Menu Mode'
+    	: 'Payment Mode') + "";
+
+    	let t1;
+    	let button_aria_label_value;
+    	let mounted;
+    	let dispose;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*mode*/ ctx[0] === 'menu') return create_if_block$2;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div3 = element("div");
+    			button = element("button");
+    			div2 = element("div");
+    			div0 = element("div");
+    			if_block.c();
+    			t0 = space();
+    			div1 = element("div");
+    			t1 = text(t1_value);
+    			attr_dev(div0, "class", "w-10 h-10 flex items-center justify-center");
+    			add_location(div0, file$2, 35, 6, 884);
+    			attr_dev(div1, "class", "ml-2 text-coffee-800 font-medium");
+    			add_location(div1, file$2, 43, 6, 1267);
+    			attr_dev(div2, "class", "flex items-center");
+    			add_location(div2, file$2, 34, 4, 846);
+    			attr_dev(button, "class", "bg-white rounded-full shadow-lg p-3 flex items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105");
+
+    			attr_dev(button, "aria-label", button_aria_label_value = /*mode*/ ctx[0] === 'menu'
+    			? 'Switch to payment mode'
+    			: 'Switch to menu mode');
+
+    			add_location(button, file$2, 29, 2, 581);
+    			attr_dev(div3, "class", "fixed bottom-4 left-4 z-50");
+    			add_location(div3, file$2, 28, 0, 538);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, button);
+    			append_dev(button, div2);
+    			append_dev(div2, div0);
+    			if_block.m(div0, null);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, t1);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*handleToggle*/ ctx[2], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div0, null);
+    				}
+    			}
+
+    			if (dirty & /*mode*/ 1 && t1_value !== (t1_value = (/*mode*/ ctx[0] === 'menu'
+    			? 'Menu Mode'
+    			: 'Payment Mode') + "")) set_data_dev(t1, t1_value);
+
+    			if (dirty & /*mode*/ 1 && button_aria_label_value !== (button_aria_label_value = /*mode*/ ctx[0] === 'menu'
+    			? 'Switch to payment mode'
+    			: 'Switch to menu mode')) {
+    				attr_dev(button, "aria-label", button_aria_label_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div3);
+    			if_block.d();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('ModeToggle', slots, []);
+    	const dispatch = createEventDispatcher();
+    	let { mode = 'menu' } = $$props;
+
+    	function toggleMode() {
+    		$$invalidate(0, mode = mode === 'menu' ? 'payment' : 'menu');
+    		dispatch('modeChange', { mode });
+    	}
+
+    	// Emoji animations
+    	let isAnimating = false;
+
+    	function animateEmoji() {
+    		$$invalidate(1, isAnimating = true);
+
+    		setTimeout(
+    			() => {
+    				$$invalidate(1, isAnimating = false);
+    			},
+    			500
+    		);
+    	}
+
+    	function handleToggle() {
+    		animateEmoji();
+    		toggleMode();
+    	}
+
+    	const writable_props = ['mode'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<ModeToggle> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ('mode' in $$props) $$invalidate(0, mode = $$props.mode);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		createEventDispatcher,
+    		dispatch,
+    		mode,
+    		toggleMode,
+    		isAnimating,
+    		animateEmoji,
+    		handleToggle
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('mode' in $$props) $$invalidate(0, mode = $$props.mode);
+    		if ('isAnimating' in $$props) $$invalidate(1, isAnimating = $$props.isAnimating);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [mode, isAnimating, handleToggle];
+    }
+
+    class ModeToggle extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { mode: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "ModeToggle",
+    			options,
+    			id: create_fragment$2.name
+    		});
+    	}
+
+    	get mode() {
+    		throw new Error("<ModeToggle>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set mode(value) {
+    		throw new Error("<ModeToggle>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\SplashScreen.svelte generated by Svelte v3.59.2 */
+    const file$1 = "src\\components\\SplashScreen.svelte";
+
+    // (22:0) {#if visible}
+    function create_if_block$1(ctx) {
+    	let div8;
+    	let div7;
+    	let div6;
+    	let div4;
+    	let svg;
+    	let path0;
+    	let path1;
+    	let t0;
+    	let div3;
+    	let div0;
+    	let t1;
+    	let div1;
+    	let t2;
+    	let div2;
+    	let t3;
+    	let div5;
+    	let h1;
+    	let t5;
+    	let p;
+    	let div8_class_value;
+
+    	const block = {
+    		c: function create() {
+    			div8 = element("div");
+    			div7 = element("div");
+    			div6 = element("div");
+    			div4 = element("div");
+    			svg = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			t0 = space();
+    			div3 = element("div");
+    			div0 = element("div");
+    			t1 = space();
+    			div1 = element("div");
+    			t2 = space();
+    			div2 = element("div");
+    			t3 = space();
+    			div5 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Yoya Coffee";
+    			t5 = space();
+    			p = element("p");
+    			p.textContent = "SPECIALTY COFFEE & PASTRIES";
+    			attr_dev(path0, "stroke-linecap", "round");
+    			attr_dev(path0, "stroke-linejoin", "round");
+    			attr_dev(path0, "stroke-width", "2");
+    			attr_dev(path0, "d", "M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z");
+    			add_location(path0, file$1, 32, 12, 1233);
+    			attr_dev(path1, "stroke-linecap", "round");
+    			attr_dev(path1, "stroke-linejoin", "round");
+    			attr_dev(path1, "stroke-width", "2");
+    			attr_dev(path1, "d", "M6 1v3M10 1v3M14 1v3");
+    			add_location(path1, file$1, 34, 12, 1400);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "stroke", "currentColor");
+    			attr_dev(svg, "class", "w-full h-full text-cream-300 animate-bounce-slow svelte-1uob4xv");
+    			add_location(svg, file$1, 30, 10, 1056);
+    			attr_dev(div0, "class", "w-1 h-3 bg-cream-200 rounded-full opacity-0 animate-steam-1 svelte-1uob4xv");
+    			add_location(div0, file$1, 40, 12, 1694);
+    			attr_dev(div1, "class", "w-1 h-4 bg-cream-200 rounded-full opacity-0 animate-steam-2 svelte-1uob4xv");
+    			add_location(div1, file$1, 41, 12, 1786);
+    			attr_dev(div2, "class", "w-1 h-2 bg-cream-200 rounded-full opacity-0 animate-steam-3 svelte-1uob4xv");
+    			add_location(div2, file$1, 42, 12, 1878);
+    			attr_dev(div3, "class", "absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 flex space-x-1");
+    			add_location(div3, file$1, 39, 10, 1587);
+    			attr_dev(div4, "class", "relative w-24 h-24 mb-3");
+    			add_location(div4, file$1, 28, 8, 978);
+    			attr_dev(h1, "class", "font-serif text-3xl md:text-4xl font-bold mb-1 animate-reveal svelte-1uob4xv");
+    			add_location(h1, file$1, 48, 10, 2092);
+    			attr_dev(p, "class", "text-xs text-cream-300 tracking-wider font-light animate-reveal-delay svelte-1uob4xv");
+    			add_location(p, file$1, 51, 10, 2217);
+    			attr_dev(div5, "class", "text-center");
+    			add_location(div5, file$1, 47, 8, 2056);
+    			attr_dev(div6, "class", "flex flex-col items-center");
+    			add_location(div6, file$1, 27, 6, 929);
+    			attr_dev(div7, "class", "w-full max-w-xs transform transition-all animate-fade-in-up svelte-1uob4xv");
+    			add_location(div7, file$1, 25, 4, 802);
+    			attr_dev(div8, "class", div8_class_value = "fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out " + (/*fadeOut*/ ctx[1] ? 'opacity-0' : 'opacity-100'));
+    			add_location(div8, file$1, 22, 2, 602);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, div7);
+    			append_dev(div7, div6);
+    			append_dev(div6, div4);
+    			append_dev(div4, svg);
+    			append_dev(svg, path0);
+    			append_dev(svg, path1);
+    			append_dev(div4, t0);
+    			append_dev(div4, div3);
+    			append_dev(div3, div0);
+    			append_dev(div3, t1);
+    			append_dev(div3, div1);
+    			append_dev(div3, t2);
+    			append_dev(div3, div2);
+    			append_dev(div6, t3);
+    			append_dev(div6, div5);
+    			append_dev(div5, h1);
+    			append_dev(div5, t5);
+    			append_dev(div5, p);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*fadeOut*/ 2 && div8_class_value !== (div8_class_value = "fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out " + (/*fadeOut*/ ctx[1] ? 'opacity-0' : 'opacity-100'))) {
+    				attr_dev(div8, "class", div8_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div8);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(22:0) {#if visible}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let if_block_anchor;
+    	let if_block = /*visible*/ ctx[0] && create_if_block$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*visible*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block$1(ctx);
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('SplashScreen', slots, []);
+    	let { duration = 2500 } = $$props;
+    	let visible = true;
+    	let fadeOut = false;
+
+    	// When component mounts, set a timeout to hide the splash screen
+    	onMount(() => {
+    		// Start fade out animation after specified duration
+    		setTimeout(
+    			() => {
+    				$$invalidate(1, fadeOut = true);
+    			},
+    			duration - 500
+    		); // Start fade-out animation 500ms before hiding
+
+    		// Hide splash screen completely after the full duration
+    		setTimeout(
+    			() => {
+    				$$invalidate(0, visible = false);
+    			},
+    			duration
+    		);
+    	});
+
+    	const writable_props = ['duration'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<SplashScreen> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ('duration' in $$props) $$invalidate(2, duration = $$props.duration);
+    	};
+
+    	$$self.$capture_state = () => ({ onMount, duration, visible, fadeOut });
+
+    	$$self.$inject_state = $$props => {
+    		if ('duration' in $$props) $$invalidate(2, duration = $$props.duration);
+    		if ('visible' in $$props) $$invalidate(0, visible = $$props.visible);
+    		if ('fadeOut' in $$props) $$invalidate(1, fadeOut = $$props.fadeOut);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [visible, fadeOut, duration];
+    }
+
+    class SplashScreen extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { duration: 2 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "SplashScreen",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+
+    	get duration() {
+    		throw new Error("<SplashScreen>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set duration(value) {
+    		throw new Error("<SplashScreen>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\App.svelte generated by Svelte v3.59.2 */
+    const file = "src\\App.svelte";
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[14] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[17] = list[i];
+    	return child_ctx;
+    }
+
+    // (71:6) {#if !isMobile}
+    function create_if_block_5(ctx) {
+    	let aside;
+    	let div;
+    	let categoryfilter;
+    	let current;
+
+    	categoryfilter = new CategoryFilter({
+    			props: {
+    				categories: /*categories*/ ctx[5],
+    				activeCategory: /*activeCategory*/ ctx[2]
+    			},
+    			$$inline: true
+    		});
+
+    	categoryfilter.$on("selectCategory", /*handleCategorySelect*/ ctx[6]);
+
+    	const block = {
+    		c: function create() {
+    			aside = element("aside");
+    			div = element("div");
+    			create_component(categoryfilter.$$.fragment);
+    			attr_dev(div, "class", "sticky top-4");
+    			add_location(div, file, 72, 10, 2155);
+    			attr_dev(aside, "class", "w-full md:w-64 shrink-0");
+    			add_location(aside, file, 71, 8, 2105);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, aside, anchor);
+    			append_dev(aside, div);
+    			mount_component(categoryfilter, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const categoryfilter_changes = {};
+    			if (dirty & /*activeCategory*/ 4) categoryfilter_changes.activeCategory = /*activeCategory*/ ctx[2];
+    			categoryfilter.$set(categoryfilter_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(categoryfilter.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(categoryfilter.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(aside);
+    			destroy_component(categoryfilter);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(71:6) {#if !isMobile}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (130:67) 
+    function create_if_block_4(ctx) {
+    	let div;
+    	let svg;
+    	let path;
+    	let t0;
+    	let p0;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let t4;
+    	let p1;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t0 = space();
+    			p0 = element("p");
+    			t1 = text("No items found matching \"");
+    			t2 = text(/*searchQuery*/ ctx[0]);
+    			t3 = text("\"");
+    			t4 = space();
+    			p1 = element("p");
+    			p1.textContent = "Try a different search term or browse our menu categories";
+    			attr_dev(path, "stroke-linecap", "round");
+    			attr_dev(path, "stroke-linejoin", "round");
+    			attr_dev(path, "stroke-width", "2");
+    			attr_dev(path, "d", "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z");
+    			add_location(path, file, 132, 14, 6176);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-12 w-12 mx-auto text-coffee-300 mb-4");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "stroke", "currentColor");
+    			add_location(svg, file, 131, 12, 6020);
+    			attr_dev(p0, "class", "text-coffee-600 text-lg");
+    			add_location(p0, file, 134, 12, 6328);
+    			attr_dev(p1, "class", "text-coffee-400 mt-2");
+    			add_location(p1, file, 135, 12, 6419);
+    			attr_dev(div, "class", "mt-6 text-center p-8 bg-white rounded-2xl shadow-soft");
+    			add_location(div, file, 130, 10, 5940);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, svg);
+    			append_dev(svg, path);
+    			append_dev(div, t0);
+    			append_dev(div, p0);
+    			append_dev(p0, t1);
+    			append_dev(p0, t2);
+    			append_dev(p0, t3);
+    			append_dev(div, t4);
+    			append_dev(div, p1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*searchQuery*/ 1) set_data_dev(t2, /*searchQuery*/ ctx[0]);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4.name,
+    		type: "if",
+    		source: "(130:67) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (88:8) {#if searchQuery.trim() && searchResults.length > 0}
+    function create_if_block_3(ctx) {
+    	let div1;
+    	let h2;
+    	let t1;
+    	let div0;
+    	let each_value_1 = /*searchResults*/ ctx[1];
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Search Results";
+    			t1 = space();
+    			div0 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(h2, "class", "text-2xl font-semibold text-coffee-800 mb-4 font-serif");
+    			add_location(h2, file, 89, 12, 2654);
+    			attr_dev(div0, "class", "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6");
+    			add_location(div0, file, 90, 12, 2753);
+    			attr_dev(div1, "class", "mt-6");
+    			add_location(div1, file, 88, 10, 2623);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h2);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div0, null);
+    				}
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*searchResults*/ 2) {
+    				each_value_1 = /*searchResults*/ ctx[1];
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div0, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3.name,
+    		type: "if",
+    		source: "(88:8) {#if searchQuery.trim() && searchResults.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (92:14) {#each searchResults as item}
+    function create_each_block_1(ctx) {
+    	let div9;
+    	let div0;
+    	let img;
+    	let img_src_value;
+    	let img_alt_value;
+    	let t0;
+    	let div8;
+    	let div3;
+    	let div1;
+    	let h3;
+    	let t1_value = /*item*/ ctx[17].name + "";
+    	let t1;
+    	let t2;
+    	let p;
+    	let t3_value = /*item*/ ctx[17].description + "";
+    	let t3;
+    	let t4;
+    	let div2;
+    	let svg0;
+    	let path0;
+    	let t5;
+    	let span0;
+    	let t6_value = /*item*/ ctx[17].rating + "";
+    	let t6;
+    	let t7;
+    	let div4;
+    	let t8;
+    	let div7;
+    	let div5;
+    	let span1;
+    	let t9_value = /*item*/ ctx[17].price + "";
+    	let t9;
+    	let t10;
+    	let t11;
+    	let div6;
+    	let svg1;
+    	let path1;
+    	let t12;
+    	let span2;
+    	let t13_value = /*item*/ ctx[17].rating + "";
+    	let t13;
+    	let t14;
+
+    	const block = {
+    		c: function create() {
+    			div9 = element("div");
+    			div0 = element("div");
+    			img = element("img");
+    			t0 = space();
+    			div8 = element("div");
+    			div3 = element("div");
+    			div1 = element("div");
+    			h3 = element("h3");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			p = element("p");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			div2 = element("div");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			t5 = space();
+    			span0 = element("span");
+    			t6 = text(t6_value);
+    			t7 = space();
+    			div4 = element("div");
+    			t8 = space();
+    			div7 = element("div");
+    			div5 = element("div");
+    			span1 = element("span");
+    			t9 = text(t9_value);
+    			t10 = text(" ETB");
+    			t11 = space();
+    			div6 = element("div");
+    			svg1 = svg_element("svg");
+    			path1 = svg_element("path");
+    			t12 = space();
+    			span2 = element("span");
+    			t13 = text(t13_value);
+    			t14 = space();
+    			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[17].image)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*item*/ ctx[17].name);
+    			attr_dev(img, "class", "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110");
+    			add_location(img, file, 95, 20, 3169);
+    			attr_dev(div0, "class", "w-full h-48 overflow-hidden");
+    			add_location(div0, file, 94, 18, 3107);
+    			attr_dev(h3, "class", "font-semibold text-lg text-coffee-800");
+    			add_location(h3, file, 100, 24, 3501);
+    			attr_dev(p, "class", "text-coffee-600 text-sm mt-1 line-clamp-2");
+    			add_location(p, file, 101, 24, 3592);
+    			attr_dev(div1, "class", "flex-1 pr-3");
+    			add_location(div1, file, 99, 22, 3451);
+    			attr_dev(path0, "d", "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z");
+    			add_location(path0, file, 106, 26, 3995);
+    			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg0, "class", "h-4 w-4 text-yellow-500");
+    			attr_dev(svg0, "viewBox", "0 0 20 20");
+    			attr_dev(svg0, "fill", "currentColor");
+    			add_location(svg0, file, 105, 24, 3856);
+    			attr_dev(span0, "class", "ml-1 text-sm font-medium text-coffee-800");
+    			add_location(span0, file, 108, 24, 4409);
+    			attr_dev(div2, "class", "flex items-center bg-amber-50 px-2 py-1 rounded-full");
+    			add_location(div2, file, 104, 22, 3765);
+    			attr_dev(div3, "class", "flex justify-between items-start");
+    			add_location(div3, file, 98, 20, 3382);
+    			attr_dev(div4, "class", "my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent");
+    			add_location(div4, file, 111, 20, 4561);
+    			attr_dev(span1, "class", "text-coffee-800 font-bold text-lg");
+    			add_location(span1, file, 114, 24, 4797);
+    			attr_dev(div5, "class", "flex flex-col");
+    			add_location(div5, file, 113, 22, 4745);
+    			attr_dev(path1, "d", "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z");
+    			add_location(path1, file, 119, 26, 5210);
+    			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg1, "class", "h-4 w-4 text-yellow-500");
+    			attr_dev(svg1, "viewBox", "0 0 20 20");
+    			attr_dev(svg1, "fill", "currentColor");
+    			add_location(svg1, file, 118, 24, 5071);
+    			attr_dev(span2, "class", "ml-1 text-sm font-medium text-coffee-800");
+    			add_location(span2, file, 121, 24, 5624);
+    			attr_dev(div6, "class", "flex items-center bg-amber-50 px-3 py-1 rounded-full");
+    			add_location(div6, file, 117, 22, 4980);
+    			attr_dev(div7, "class", "flex justify-between items-center");
+    			add_location(div7, file, 112, 20, 4675);
+    			attr_dev(div8, "class", "p-5");
+    			add_location(div8, file, 97, 18, 3344);
+    			attr_dev(div9, "class", "menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100");
+    			add_location(div9, file, 92, 16, 2880);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div9, anchor);
+    			append_dev(div9, div0);
+    			append_dev(div0, img);
+    			append_dev(div9, t0);
+    			append_dev(div9, div8);
+    			append_dev(div8, div3);
+    			append_dev(div3, div1);
+    			append_dev(div1, h3);
+    			append_dev(h3, t1);
+    			append_dev(div1, t2);
+    			append_dev(div1, p);
+    			append_dev(p, t3);
+    			append_dev(div3, t4);
+    			append_dev(div3, div2);
+    			append_dev(div2, svg0);
+    			append_dev(svg0, path0);
+    			append_dev(div2, t5);
+    			append_dev(div2, span0);
+    			append_dev(span0, t6);
+    			append_dev(div8, t7);
+    			append_dev(div8, div4);
+    			append_dev(div8, t8);
+    			append_dev(div8, div7);
+    			append_dev(div7, div5);
+    			append_dev(div5, span1);
+    			append_dev(span1, t9);
+    			append_dev(span1, t10);
+    			append_dev(div7, t11);
+    			append_dev(div7, div6);
+    			append_dev(div6, svg1);
+    			append_dev(svg1, path1);
+    			append_dev(div6, t12);
+    			append_dev(div6, span2);
+    			append_dev(span2, t13);
+    			append_dev(div9, t14);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*searchResults*/ 2 && !src_url_equal(img.src, img_src_value = /*item*/ ctx[17].image)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*searchResults*/ 2 && img_alt_value !== (img_alt_value = /*item*/ ctx[17].name)) {
+    				attr_dev(img, "alt", img_alt_value);
+    			}
+
+    			if (dirty & /*searchResults*/ 2 && t1_value !== (t1_value = /*item*/ ctx[17].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*searchResults*/ 2 && t3_value !== (t3_value = /*item*/ ctx[17].description + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*searchResults*/ 2 && t6_value !== (t6_value = /*item*/ ctx[17].rating + "")) set_data_dev(t6, t6_value);
+    			if (dirty & /*searchResults*/ 2 && t9_value !== (t9_value = /*item*/ ctx[17].price + "")) set_data_dev(t9, t9_value);
+    			if (dirty & /*searchResults*/ 2 && t13_value !== (t13_value = /*item*/ ctx[17].rating + "")) set_data_dev(t13, t13_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div9);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(92:14) {#each searchResults as item}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (141:8) {#if isMobile}
+    function create_if_block_2(ctx) {
+    	let div;
+    	let categoryfilter;
+    	let current;
+
+    	categoryfilter = new CategoryFilter({
+    			props: {
+    				categories: /*categories*/ ctx[5],
+    				activeCategory: /*activeCategory*/ ctx[2],
+    				isMobile: true
+    			},
+    			$$inline: true
+    		});
+
+    	categoryfilter.$on("selectCategory", /*handleCategorySelect*/ ctx[6]);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(categoryfilter.$$.fragment);
+    			attr_dev(div, "class", "mb-6");
+    			add_location(div, file, 141, 10, 6630);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(categoryfilter, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const categoryfilter_changes = {};
+    			if (dirty & /*activeCategory*/ 4) categoryfilter_changes.activeCategory = /*activeCategory*/ ctx[2];
+    			categoryfilter.$set(categoryfilter_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(categoryfilter.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(categoryfilter.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(categoryfilter);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(141:8) {#if isMobile}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (153:8) {#if !searchQuery.trim()}
+    function create_if_block_1(ctx) {
+    	let div;
+    	let current;
+    	let each_value = /*categories*/ ctx[5];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    		each_blocks[i] = null;
+    	});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "class", "space-y-12");
+    			add_location(div, file, 153, 10, 6981);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div, null);
+    				}
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*categories*/ 32) {
+    				each_value = /*categories*/ ctx[5];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    						transition_in(each_blocks[i], 1);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						transition_in(each_blocks[i], 1);
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				group_outros();
+
+    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    					out(i);
+    				}
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			each_blocks = each_blocks.filter(Boolean);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(153:8) {#if !searchQuery.trim()}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (155:12) {#each categories as category}
+    function create_each_block(ctx) {
+    	let div;
+    	let menucategory;
+    	let t;
+    	let current;
+
+    	menucategory = new MenuCategory({
+    			props: { category: /*category*/ ctx[14] },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(menucategory.$$.fragment);
+    			t = space();
+    			attr_dev(div, "id", /*category*/ ctx[14].id);
+    			add_location(div, file, 155, 14, 7063);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(menucategory, div, null);
+    			append_dev(div, t);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(menucategory.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(menucategory.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(menucategory);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(155:12) {#each categories as category}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (175:2) {#if currentMode === 'payment'}
+    function create_if_block(ctx) {
+    	let div12;
+    	let div11;
+    	let div0;
+    	let h2;
+    	let t1;
+    	let button0;
+    	let svg;
+    	let path;
+    	let t2;
+    	let div10;
+    	let div3;
+    	let div1;
+    	let span0;
+    	let t4;
+    	let div2;
+    	let h30;
+    	let t6;
+    	let p0;
+    	let t8;
+    	let div6;
+    	let div4;
+    	let span1;
+    	let t10;
+    	let div5;
+    	let h31;
+    	let t12;
+    	let p1;
+    	let t14;
+    	let div9;
+    	let div7;
+    	let span2;
+    	let t16;
+    	let div8;
+    	let h32;
+    	let t18;
+    	let p2;
+    	let t20;
+    	let button1;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div12 = element("div");
+    			div11 = element("div");
+    			div0 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Payment Options";
+    			t1 = space();
+    			button0 = element("button");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t2 = space();
+    			div10 = element("div");
+    			div3 = element("div");
+    			div1 = element("div");
+    			span0 = element("span");
+    			span0.textContent = "💳";
+    			t4 = space();
+    			div2 = element("div");
+    			h30 = element("h3");
+    			h30.textContent = "Credit/Debit Card";
+    			t6 = space();
+    			p0 = element("p");
+    			p0.textContent = "Pay with any major card";
+    			t8 = space();
+    			div6 = element("div");
+    			div4 = element("div");
+    			span1 = element("span");
+    			span1.textContent = "📱";
+    			t10 = space();
+    			div5 = element("div");
+    			h31 = element("h3");
+    			h31.textContent = "Mobile Money";
+    			t12 = space();
+    			p1 = element("p");
+    			p1.textContent = "Pay with Telebirr or other mobile wallets";
+    			t14 = space();
+    			div9 = element("div");
+    			div7 = element("div");
+    			span2 = element("span");
+    			span2.textContent = "💵";
+    			t16 = space();
+    			div8 = element("div");
+    			h32 = element("h3");
+    			h32.textContent = "Cash";
+    			t18 = space();
+    			p2 = element("p");
+    			p2.textContent = "Pay in-store with cash";
+    			t20 = space();
+    			button1 = element("button");
+    			button1.textContent = "Return to Menu";
+    			attr_dev(h2, "class", "text-2xl font-bold text-coffee-800");
+    			add_location(h2, file, 178, 10, 7780);
+    			attr_dev(path, "stroke-linecap", "round");
+    			attr_dev(path, "stroke-linejoin", "round");
+    			attr_dev(path, "stroke-width", "2");
+    			attr_dev(path, "d", "M6 18L18 6M6 6l12 12");
+    			add_location(path, file, 184, 14, 8143);
+    			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr_dev(svg, "class", "h-6 w-6");
+    			attr_dev(svg, "fill", "none");
+    			attr_dev(svg, "viewBox", "0 0 24 24");
+    			attr_dev(svg, "stroke", "currentColor");
+    			add_location(svg, file, 183, 12, 8018);
+    			attr_dev(button0, "class", "text-coffee-500 hover:text-coffee-700 transition-colors");
+    			add_location(button0, file, 179, 10, 7858);
+    			attr_dev(div0, "class", "flex justify-between items-center mb-6");
+    			add_location(div0, file, 177, 8, 7717);
+    			attr_dev(span0, "class", "text-2xl");
+    			add_location(span0, file, 192, 14, 8496);
+    			attr_dev(div1, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
+    			add_location(div1, file, 191, 12, 8418);
+    			attr_dev(h30, "class", "font-medium text-coffee-800");
+    			add_location(h30, file, 195, 14, 8580);
+    			attr_dev(p0, "class", "text-coffee-600 text-sm");
+    			add_location(p0, file, 196, 14, 8657);
+    			add_location(div2, file, 194, 12, 8560);
+    			attr_dev(div3, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
+    			add_location(div3, file, 190, 10, 8346);
+    			attr_dev(span1, "class", "text-2xl");
+    			add_location(span1, file, 202, 14, 8927);
+    			attr_dev(div4, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
+    			add_location(div4, file, 201, 12, 8849);
+    			attr_dev(h31, "class", "font-medium text-coffee-800");
+    			add_location(h31, file, 205, 14, 9011);
+    			attr_dev(p1, "class", "text-coffee-600 text-sm");
+    			add_location(p1, file, 206, 14, 9083);
+    			add_location(div5, file, 204, 12, 8991);
+    			attr_dev(div6, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
+    			add_location(div6, file, 200, 10, 8777);
+    			attr_dev(span2, "class", "text-2xl");
+    			add_location(span2, file, 212, 14, 9371);
+    			attr_dev(div7, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
+    			add_location(div7, file, 211, 12, 9293);
+    			attr_dev(h32, "class", "font-medium text-coffee-800");
+    			add_location(h32, file, 215, 14, 9455);
+    			attr_dev(p2, "class", "text-coffee-600 text-sm");
+    			add_location(p2, file, 216, 14, 9519);
+    			add_location(div8, file, 214, 12, 9435);
+    			attr_dev(div9, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
+    			add_location(div9, file, 210, 10, 9221);
+    			attr_dev(div10, "class", "space-y-4");
+    			add_location(div10, file, 189, 8, 8312);
+    			attr_dev(button1, "class", "mt-6 w-full py-3 bg-coffee-700 text-white font-medium rounded-xl hover:bg-coffee-800 transition-colors");
+    			add_location(button1, file, 221, 8, 9649);
+    			attr_dev(div11, "class", "bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full mx-4 transform transition-all duration-300 animate-fadeIn svelte-jl3fms");
+    			add_location(div11, file, 176, 6, 7585);
+    			attr_dev(div12, "class", "fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center");
+    			add_location(div12, file, 175, 4, 7490);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div12, anchor);
+    			append_dev(div12, div11);
+    			append_dev(div11, div0);
+    			append_dev(div0, h2);
+    			append_dev(div0, t1);
+    			append_dev(div0, button0);
+    			append_dev(button0, svg);
+    			append_dev(svg, path);
+    			append_dev(div11, t2);
+    			append_dev(div11, div10);
+    			append_dev(div10, div3);
+    			append_dev(div3, div1);
+    			append_dev(div1, span0);
+    			append_dev(div3, t4);
+    			append_dev(div3, div2);
+    			append_dev(div2, h30);
+    			append_dev(div2, t6);
+    			append_dev(div2, p0);
+    			append_dev(div10, t8);
+    			append_dev(div10, div6);
+    			append_dev(div6, div4);
+    			append_dev(div4, span1);
+    			append_dev(div6, t10);
+    			append_dev(div6, div5);
+    			append_dev(div5, h31);
+    			append_dev(div5, t12);
+    			append_dev(div5, p1);
+    			append_dev(div10, t14);
+    			append_dev(div10, div9);
+    			append_dev(div9, div7);
+    			append_dev(div7, span2);
+    			append_dev(div9, t16);
+    			append_dev(div9, div8);
+    			append_dev(div8, h32);
+    			append_dev(div8, t18);
+    			append_dev(div8, p2);
+    			append_dev(div11, t20);
+    			append_dev(div11, button1);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler*/ ctx[10], false, false, false, false),
+    					listen_dev(button1, "click", /*click_handler_1*/ ctx[11], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div12);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(175:2) {#if currentMode === 'payment'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let splashscreen;
+    	let t0;
+    	let div2;
+    	let header;
+    	let t1;
+    	let main;
+    	let div1;
+    	let t2;
+    	let div0;
+    	let search;
+    	let updating_searchQuery;
+    	let t3;
+    	let show_if_1;
+    	let show_if_2;
+    	let t4;
+    	let t5;
+    	let show_if = !/*searchQuery*/ ctx[0].trim();
+    	let t6;
+    	let footer;
+    	let t7;
+    	let musicplayer;
+    	let t8;
+    	let modetoggle;
+    	let updating_mode;
+    	let t9;
+    	let current;
+
+    	splashscreen = new SplashScreen({
+    			props: { duration: 2500 },
+    			$$inline: true
+    		});
+
+    	header = new Header({ $$inline: true });
+    	let if_block0 = !/*isMobile*/ ctx[3] && create_if_block_5(ctx);
+
+    	function search_searchQuery_binding(value) {
+    		/*search_searchQuery_binding*/ ctx[8](value);
+    	}
+
+    	let search_props = {};
+
+    	if (/*searchQuery*/ ctx[0] !== void 0) {
+    		search_props.searchQuery = /*searchQuery*/ ctx[0];
+    	}
+
+    	search = new Search({ props: search_props, $$inline: true });
+    	binding_callbacks.push(() => bind(search, 'searchQuery', search_searchQuery_binding));
+
+    	function select_block_type(ctx, dirty) {
+    		if (dirty & /*searchQuery, searchResults*/ 3) show_if_1 = null;
+    		if (dirty & /*searchQuery, searchResults*/ 3) show_if_2 = null;
+    		if (show_if_1 == null) show_if_1 = !!(/*searchQuery*/ ctx[0].trim() && /*searchResults*/ ctx[1].length > 0);
+    		if (show_if_1) return create_if_block_3;
+    		if (show_if_2 == null) show_if_2 = !!(/*searchQuery*/ ctx[0].trim() && /*searchResults*/ ctx[1].length === 0);
+    		if (show_if_2) return create_if_block_4;
+    	}
+
+    	let current_block_type = select_block_type(ctx, -1);
+    	let if_block1 = current_block_type && current_block_type(ctx);
+    	let if_block2 = /*isMobile*/ ctx[3] && create_if_block_2(ctx);
+    	let if_block3 = show_if && create_if_block_1(ctx);
+    	footer = new Footer({ $$inline: true });
+    	musicplayer = new MusicPlayer({ $$inline: true });
+
+    	function modetoggle_mode_binding(value) {
+    		/*modetoggle_mode_binding*/ ctx[9](value);
+    	}
+
+    	let modetoggle_props = {};
+
+    	if (/*currentMode*/ ctx[4] !== void 0) {
+    		modetoggle_props.mode = /*currentMode*/ ctx[4];
+    	}
+
+    	modetoggle = new ModeToggle({ props: modetoggle_props, $$inline: true });
+    	binding_callbacks.push(() => bind(modetoggle, 'mode', modetoggle_mode_binding));
+    	modetoggle.$on("modeChange", /*handleModeChange*/ ctx[7]);
+    	let if_block4 = /*currentMode*/ ctx[4] === 'payment' && create_if_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			create_component(splashscreen.$$.fragment);
+    			t0 = space();
+    			div2 = element("div");
+    			create_component(header.$$.fragment);
+    			t1 = space();
+    			main = element("main");
+    			div1 = element("div");
+    			if (if_block0) if_block0.c();
+    			t2 = space();
+    			div0 = element("div");
+    			create_component(search.$$.fragment);
+    			t3 = space();
+    			if (if_block1) if_block1.c();
+    			t4 = space();
+    			if (if_block2) if_block2.c();
+    			t5 = space();
+    			if (if_block3) if_block3.c();
+    			t6 = space();
+    			create_component(footer.$$.fragment);
+    			t7 = space();
+    			create_component(musicplayer.$$.fragment);
+    			t8 = space();
+    			create_component(modetoggle.$$.fragment);
+    			t9 = space();
+    			if (if_block4) if_block4.c();
+    			attr_dev(div0, "class", "flex-1");
+    			add_location(div0, file, 82, 6, 2426);
+    			attr_dev(div1, "class", "max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6");
+    			add_location(div1, file, 68, 4, 1950);
+    			attr_dev(main, "class", "flex-1 w-full");
+    			add_location(main, file, 67, 2, 1917);
+    			attr_dev(div2, "class", "min-h-screen flex flex-col bg-amber-50");
+    			add_location(div2, file, 62, 0, 1795);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(splashscreen, target, anchor);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div2, anchor);
+    			mount_component(header, div2, null);
+    			append_dev(div2, t1);
+    			append_dev(div2, main);
+    			append_dev(main, div1);
+    			if (if_block0) if_block0.m(div1, null);
+    			append_dev(div1, t2);
+    			append_dev(div1, div0);
+    			mount_component(search, div0, null);
+    			append_dev(div0, t3);
+    			if (if_block1) if_block1.m(div0, null);
+    			append_dev(div0, t4);
+    			if (if_block2) if_block2.m(div0, null);
+    			append_dev(div0, t5);
+    			if (if_block3) if_block3.m(div0, null);
+    			append_dev(div2, t6);
+    			mount_component(footer, div2, null);
+    			append_dev(div2, t7);
+    			mount_component(musicplayer, div2, null);
+    			append_dev(div2, t8);
+    			mount_component(modetoggle, div2, null);
+    			append_dev(div2, t9);
+    			if (if_block4) if_block4.m(div2, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (!/*isMobile*/ ctx[3]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+
+    					if (dirty & /*isMobile*/ 8) {
+    						transition_in(if_block0, 1);
+    					}
+    				} else {
+    					if_block0 = create_if_block_5(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(div1, t2);
+    				}
+    			} else if (if_block0) {
+    				group_outros();
+
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			const search_changes = {};
+
+    			if (!updating_searchQuery && dirty & /*searchQuery*/ 1) {
+    				updating_searchQuery = true;
+    				search_changes.searchQuery = /*searchQuery*/ ctx[0];
+    				add_flush_callback(() => updating_searchQuery = false);
+    			}
+
+    			search.$set(search_changes);
+
+    			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block1) {
+    				if_block1.p(ctx, dirty);
+    			} else {
+    				if (if_block1) if_block1.d(1);
+    				if_block1 = current_block_type && current_block_type(ctx);
+
+    				if (if_block1) {
+    					if_block1.c();
+    					if_block1.m(div0, t4);
+    				}
+    			}
+
+    			if (/*isMobile*/ ctx[3]) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+
+    					if (dirty & /*isMobile*/ 8) {
+    						transition_in(if_block2, 1);
+    					}
+    				} else {
+    					if_block2 = create_if_block_2(ctx);
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(div0, t5);
+    				}
+    			} else if (if_block2) {
+    				group_outros();
+
+    				transition_out(if_block2, 1, 1, () => {
+    					if_block2 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (dirty & /*searchQuery*/ 1) show_if = !/*searchQuery*/ ctx[0].trim();
+
+    			if (show_if) {
+    				if (if_block3) {
+    					if_block3.p(ctx, dirty);
+
+    					if (dirty & /*searchQuery*/ 1) {
+    						transition_in(if_block3, 1);
+    					}
+    				} else {
+    					if_block3 = create_if_block_1(ctx);
+    					if_block3.c();
+    					transition_in(if_block3, 1);
+    					if_block3.m(div0, null);
+    				}
+    			} else if (if_block3) {
+    				group_outros();
+
+    				transition_out(if_block3, 1, 1, () => {
+    					if_block3 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			const modetoggle_changes = {};
+
+    			if (!updating_mode && dirty & /*currentMode*/ 16) {
+    				updating_mode = true;
+    				modetoggle_changes.mode = /*currentMode*/ ctx[4];
+    				add_flush_callback(() => updating_mode = false);
+    			}
+
+    			modetoggle.$set(modetoggle_changes);
+
+    			if (/*currentMode*/ ctx[4] === 'payment') {
+    				if (if_block4) {
+    					if_block4.p(ctx, dirty);
+    				} else {
+    					if_block4 = create_if_block(ctx);
+    					if_block4.c();
+    					if_block4.m(div2, null);
+    				}
+    			} else if (if_block4) {
+    				if_block4.d(1);
+    				if_block4 = null;
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(splashscreen.$$.fragment, local);
+    			transition_in(header.$$.fragment, local);
+    			transition_in(if_block0);
+    			transition_in(search.$$.fragment, local);
+    			transition_in(if_block2);
+    			transition_in(if_block3);
+    			transition_in(footer.$$.fragment, local);
+    			transition_in(musicplayer.$$.fragment, local);
+    			transition_in(modetoggle.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(splashscreen.$$.fragment, local);
+    			transition_out(header.$$.fragment, local);
+    			transition_out(if_block0);
+    			transition_out(search.$$.fragment, local);
+    			transition_out(if_block2);
+    			transition_out(if_block3);
+    			transition_out(footer.$$.fragment, local);
+    			transition_out(musicplayer.$$.fragment, local);
+    			transition_out(modetoggle.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(splashscreen, detaching);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div2);
+    			destroy_component(header);
+    			if (if_block0) if_block0.d();
+    			destroy_component(search);
+
+    			if (if_block1) {
+    				if_block1.d();
+    			}
+
+    			if (if_block2) if_block2.d();
+    			if (if_block3) if_block3.d();
+    			destroy_component(footer);
+    			destroy_component(musicplayer);
+    			destroy_component(modetoggle);
+    			if (if_block4) if_block4.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('App', slots, []);
+    	let searchQuery = '';
+    	let searchResults = [];
+    	let categories = menuData.categories;
+    	let activeCategory = null;
+    	let isMobile = false;
+    	let currentMode = 'menu';
+    	let showSplash = true; // Control the splash screen visibility
+
+    	function handleCategorySelect(event) {
+    		$$invalidate(2, activeCategory = event.detail.category);
+
+    		// Scroll to the selected category if it's not null
+    		if (activeCategory) {
+    			const element = document.getElementById(activeCategory);
+
+    			if (element) {
+    				element.scrollIntoView({ behavior: 'smooth' });
+    			}
+    		}
+    	}
+
+    	function handleModeChange(event) {
+    		$$invalidate(4, currentMode = event.detail.mode);
+    	}
+
+    	// Check for mobile screen on mount and window resize
+    	onMount(() => {
+    		checkMobileScreen();
+    		window.addEventListener('resize', checkMobileScreen);
+
+    		return () => {
+    			window.removeEventListener('resize', checkMobileScreen);
+    		};
+    	});
+
+    	function checkMobileScreen() {
+    		$$invalidate(3, isMobile = window.innerWidth < 768);
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
+    	});
+
+    	function search_searchQuery_binding(value) {
+    		searchQuery = value;
+    		$$invalidate(0, searchQuery);
+    	}
+
+    	function modetoggle_mode_binding(value) {
+    		currentMode = value;
+    		$$invalidate(4, currentMode);
+    	}
+
+    	const click_handler = () => $$invalidate(4, currentMode = 'menu');
+    	const click_handler_1 = () => $$invalidate(4, currentMode = 'menu');
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		menuData,
+    		searchItems,
+    		Header,
+    		MenuCategory,
+    		Search,
+    		Footer,
+    		CategoryFilter,
+    		MusicPlayer,
+    		ModeToggle,
+    		SplashScreen,
+    		searchQuery,
+    		searchResults,
+    		categories,
+    		activeCategory,
+    		isMobile,
+    		currentMode,
+    		showSplash,
+    		handleCategorySelect,
+    		handleModeChange,
+    		checkMobileScreen
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('searchQuery' in $$props) $$invalidate(0, searchQuery = $$props.searchQuery);
+    		if ('searchResults' in $$props) $$invalidate(1, searchResults = $$props.searchResults);
+    		if ('categories' in $$props) $$invalidate(5, categories = $$props.categories);
+    		if ('activeCategory' in $$props) $$invalidate(2, activeCategory = $$props.activeCategory);
+    		if ('isMobile' in $$props) $$invalidate(3, isMobile = $$props.isMobile);
+    		if ('currentMode' in $$props) $$invalidate(4, currentMode = $$props.currentMode);
+    		if ('showSplash' in $$props) showSplash = $$props.showSplash;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*searchQuery*/ 1) {
+    			// Handle search query changes
+    			{
+    				if (searchQuery.trim()) {
+    					$$invalidate(1, searchResults = searchItems(searchQuery));
+    				} else {
+    					$$invalidate(1, searchResults = []);
+    				}
+    			}
+    		}
+    	};
+
+    	return [
+    		searchQuery,
+    		searchResults,
+    		activeCategory,
+    		isMobile,
+    		currentMode,
+    		categories,
+    		handleCategorySelect,
+    		handleModeChange,
+    		search_searchQuery_binding,
+    		modetoggle_mode_binding,
+    		click_handler,
+    		click_handler_1
+    	];
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment.name
+    		});
+    	}
+    }
+
+    const app = new App({
+            target: document.getElementById('app'),
+            props: {}
+    });
+
+    return app;
+
+})();
 //# sourceMappingURL=bundle.js.map

@@ -21,7 +21,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node server/yoya-server.js"
+args = "node server/basic-server.js"
 waitForPort = 5000
 
 [deployment]
