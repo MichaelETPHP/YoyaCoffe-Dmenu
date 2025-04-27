@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,447 +7,150 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #1a1a1a;
-      color: #fff;
-    }
-
-    /* Splash Screen */
-    #splash-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 1s ease-in-out;
+    @keyframes steamAnimation {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-10px) scale(1.3); opacity: 0.4; }
+      100% { transform: translateY(-20px) scale(1.6); opacity: 0; }
     }
     
-    .splash-logo {
-      width: 200px;
-      height: 200px;
-      animation: pulse 2s infinite;
+    .coffee-steam {
+      animation: steamAnimation 2s infinite ease-out;
+    }
+    
+    .steam-1 {
+      animation-delay: 0.3s;
+    }
+    
+    .steam-2 {
+      animation-delay: 0.6s;
+    }
+    
+    .steam-3 {
+      animation-delay: 0.9s;
     }
     
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-
-    .nav-link {
-      position: relative;
-      padding-bottom: 5px;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 50%;
-      background-color: #c87941;
-      transition: all 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-      left: 0;
-    }
-
-    .nav-link.active::after {
-      width: 100%;
-      left: 0;
-    }
-
-    .menu-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .menu-item {
-      background-color: #2a2a2a;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .menu-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    .menu-img {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .menu-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #c87941;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .menu-title {
-      color: #fff;
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .menu-category {
-      color: #c87941;
-      font-size: 14px;
-    }
-
-    .menu-price {
-      color: #c87941;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .menu-description {
-      color: #b0b0b0;
-      margin-top: 8px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .menu-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 16px;
-    }
-
-    .reaction-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      color: #b0b0b0;
-    }
-
-    .reaction-btn:hover {
-      color: #fff;
-      transform: scale(1.2);
-    }
-
-    .reaction-count {
-      font-size: 12px;
-      color: #b0b0b0;
-      margin-left: 4px;
-    }
-
-    /* Category filters */
-    .filter-container {
-      display: flex;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      gap: 0.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: #c87941 #2a2a2a;
-    }
-
-    .filter-container::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .filter-container::-webkit-scrollbar-track {
-      background: #2a2a2a;
-      border-radius: 4px;
-    }
-
-    .filter-container::-webkit-scrollbar-thumb {
-      background-color: #c87941;
-      border-radius: 4px;
-    }
-
-    .category-filter {
-      background-color: #2a2a2a;
-      color: #b0b0b0;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .category-filter:hover,
-    .category-filter.active {
-      background-color: #c87941;
-      color: white;
-    }
-
-    /* Search bar */
-    .search-container {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 10px 16px;
-      padding-left: 40px;
-      background-color: #2a2a2a;
-      border: 1px solid #3a3a3a;
-      border-radius: 8px;
-      color: #fff;
-      transition: all 0.3s ease;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #c87941;
-      box-shadow: 0 0 0 2px rgba(200, 121, 65, 0.25);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #b0b0b0;
-    }
-
-    /* Music Player */
-    #music-player {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgba(42, 42, 42, 0.95);
-      border-top: 1px solid #3a3a3a;
-      color: white;
-      padding: 12px;
-      z-index: 100;
-      transition: transform 0.3s ease;
+    
+    .pulse {
+      animation: pulse 2s infinite ease-in-out;
     }
     
-    #music-player.collapsed {
-      transform: translateY(calc(100% - 60px));
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-
-    .player-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    
+    .fadeInUp {
+      animation: fadeInUp 0.5s ease-out;
     }
-
-    .player-title {
-      font-weight: 600;
-      color: #c87941;
-    }
-
-    .player-toggle {
-      background: none;
-      border: none;
-      color: #b0b0b0;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .player-toggle:hover {
-      color: #c87941;
-    }
-
-    .player-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-    }
-
-    .track-button {
-      background: none;
-      border: none;
-      color: #b0b0b0;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .track-button:hover {
-      color: #c87941;
-      transform: scale(1.1);
-    }
-
-    .track-button.play-pause {
-      color: #c87941;
-    }
-
-    .volume-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .volume-label {
-      color: #b0b0b0;
-      font-size: 12px;
-    }
-
-    .volume-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      height: 4px;
-      flex-grow: 1;
-      background: #3a3a3a;
-      border-radius: 2px;
-      outline: none;
-    }
-
-    .volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 12px;
-      height: 12px;
-      background: #c87941;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .volume-slider::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
-      background: #c87941;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .track-list-container {
-      margin-top: 1rem;
-    }
-
-    .track-list-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #b0b0b0;
-      font-size: 12px;
-    }
-
-    .track-list {
-      list-style: none;
-      padding: 0;
-      margin: 8px 0 0;
-    }
-
-    .track-list li {
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      color: #b0b0b0;
-      font-size: 14px;
-    }
-
-    .track-list li:hover {
-      background-color: #3a3a3a;
-    }
-
-    .track-list li.active {
-      color: #c87941;
-      font-weight: 500;
-    }
-
-    /* Toast notification */
-    .toast {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      padding: 12px 20px;
-      background-color: rgba(42, 42, 42, 0.9);
-      color: white;
-      border-left: 4px solid #c87941;
-      border-radius: 4px;
-      transform: translateY(100px);
+    
+    .menu-item-enter {
       opacity: 0;
-      transition: all 0.5s ease;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     
-    .toast.show {
-      transform: translateY(0);
+    .menu-item-visible {
       opacity: 1;
+      transform: translateY(0);
     }
-
-    /* Loading skeleton */
-    .skeleton {
-      background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-      background-size: 200% 100%;
-      animation: skeleton-loading 1.5s infinite;
+    
+    .rating span {
+      transition: color 0.2s ease;
     }
-
-    @keyframes skeleton-loading {
-      0% {
-        background-position: 200% 0;
-      }
-      100% {
-        background-position: -200% 0;
-      }
+    
+    .like-btn:hover .heart, .like-btn.active .heart {
+      fill: rgba(239, 68, 68, 0.8);
+      color: rgba(239, 68, 68, 0.8);
+    }
+    
+    .dislike-btn:hover .thumbs-down, .dislike-btn.active .thumbs-down {
+      fill: rgba(59, 130, 246, 0.8);
+      color: rgba(59, 130, 246, 0.8);
     }
   </style>
 </head>
-<body>
+<body class="bg-amber-50 text-gray-800 min-h-screen font-[Poppins]">
   <!-- Splash Screen -->
-  <div id="splash-screen">
-    <svg class="splash-logo" width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#c87941"/>
-      <path d="M30 30H70V60C70 71 60 80 50 80C40 80 30 71 30 60V30Z" fill="#D4D0C1"/>
-      <path d="M30 20H70V30H30V20Z" fill="#EDEDED"/>
-      <path d="M75 20C75 22.7614 72.7614 25 70 25C67.2386 25 65 22.7614 65 20C65 17.2386 67.2386 15 70 15C72.7614 15 75 17.2386 75 20Z" fill="#674E06"/>
-      <path d="M50 75C44.4772 75 40 69.5228 40 64H60C60 69.5228 55.5228 75 50 75Z" fill="#A7740C"></path>
-    </svg>
+  <div id="splash-screen" class="fixed inset-0 bg-amber-800 flex justify-center items-center z-50 transition-opacity duration-1000">
+    <div class="relative">
+      <!-- Coffee Cup -->
+      <div class="pulse">
+        <svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background Circle -->
+          <circle cx="50" cy="50" r="50" fill="#8B4513" />
+          
+          <!-- Coffee Cup -->
+          <rect x="30" y="30" width="40" height="40" rx="3" fill="#EADDCA" />
+          <rect x="28" y="30" width="44" height="5" rx="2" fill="#D2B48C" />
+          
+          <!-- Handle -->
+          <path d="M70 40c5 0 10 4 10 10s-5 10-10 10" stroke="#EADDCA" stroke-width="5" fill="none" />
+          
+          <!-- Coffee inside cup -->
+          <rect x="33" y="35" width="34" height="30" rx="1" fill="#3E2723" />
+          
+          <!-- Steam -->
+          <path d="M40 25c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-1" />
+          <path d="M50 20c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-2" />
+          <path d="M60 25c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-3" />
+        </svg>
+      </div>
+      <div class="absolute inset-0 flex justify-center items-center">
+        <span class="text-white font-bold text-xl">Yoya Coffee</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Header -->
-  <header class="bg-gray-900 border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex justify-between items-center">
+  <!-- Header/Navbar (Sticky) -->
+  <header class="sticky top-0 bg-amber-800 text-white shadow-md z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
         <div class="flex items-center space-x-3">
-          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="50" fill="#c87941"/>
-            <path d="M30 30H70V60C70 71 60 80 50 80C40 80 30 71 30 60V30Z" fill="#D4D0C1"/>
-            <path d="M30 20H70V30H30V20Z" fill="#EDEDED"/>
-            <path d="M75 20C75 22.7614 72.7614 25 70 25C67.2386 25 65 22.7614 65 20C65 17.2386 67.2386 15 70 15C72.7614 15 75 17.2386 75 20Z" fill="#674E06"/>
-            <path d="M50 75C44.4772 75 40 69.5228 40 64H60C60 69.5228 55.5228 75 50 75Z" fill="#A7740C"></path>
-          </svg>
-          <h1 class="text-2xl font-bold text-white">Yoya Coffee</h1>
+          <!-- Coffee Logo -->
+          <div class="relative w-10 h-10">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="50" fill="#EADDCA" />
+              <rect x="30" y="30" width="40" height="40" rx="3" fill="#EADDCA" />
+              <rect x="28" y="30" width="44" height="5" rx="2" fill="#D2B48C" />
+              <path d="M70 40c5 0 10 4 10 10s-5 10-10 10" stroke="#EADDCA" stroke-width="5" fill="none" />
+              <rect x="33" y="35" width="34" height="30" rx="1" fill="#3E2723" />
+              <path d="M40 25c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-1" />
+              <path d="M50 20c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-2" />
+              <path d="M60 25c0-3 4-3 4 0" stroke="#FFFFFF" stroke-width="2" class="coffee-steam steam-3" />
+            </svg>
+          </div>
+          <h1 class="text-xl font-bold">Yoya Coffee</h1>
         </div>
         
-        <nav class="hidden md:flex space-x-6">
-          <a href="#" class="nav-link active text-white">Home</a>
-          <a href="#" class="nav-link text-gray-300 hover:text-white">About</a>
-          <a href="#" class="nav-link text-gray-300 hover:text-white">Contact</a>
-          <a href="/admin" class="nav-link text-gray-300 hover:text-white">Admin</a>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#" class="relative font-medium text-amber-100 hover:text-white transition-colors duration-200 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-amber-200 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">Home</a>
+          <a href="#" class="relative font-medium text-amber-100 hover:text-white transition-colors duration-200 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-amber-200 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">Menu</a>
+          <a href="#" class="relative font-medium text-amber-100 hover:text-white transition-colors duration-200 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-amber-200 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">About</a>
+          <a href="/admin" class="relative font-medium text-amber-100 hover:text-white transition-colors duration-200 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-amber-200 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">Admin</a>
         </nav>
         
         <div class="flex items-center space-x-4">
-          <button id="music-toggle" class="text-gray-300 hover:text-white">
+          <!-- Music Toggle -->
+          <button id="music-toggle" class="text-amber-100 hover:text-white transition-colors duration-200 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
           </button>
           
-          <button class="md:hidden text-gray-300 hover:text-white">
+          <!-- Mobile Menu Toggle -->
+          <button class="md:hidden text-amber-100 hover:text-white focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -459,125 +162,143 @@
 
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <!-- Header Section -->
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Coffee Menu</h2>
-      <p class="text-gray-400 max-w-3xl mx-auto">
+    <!-- Hero Section -->
+    <div class="text-center mb-12 fadeInUp">
+      <h2 class="text-3xl md:text-4xl font-bold text-amber-900 mb-3">Our Coffee Menu</h2>
+      <p class="text-amber-800 max-w-3xl mx-auto">
         Discover our carefully crafted selection of premium coffee drinks, prepared with freshly roasted beans and expert barista skills.
       </p>
     </div>
     
-    <!-- Search and Filters -->
-    <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
-      <div class="search-container">
-        <div class="search-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+    <!-- Search & Filters -->
+    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0 fadeInUp" style="animation-delay: 0.1s">
+      <!-- Search Bar -->
+      <div class="relative w-full md:w-auto md:min-w-[280px]">
+        <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
           </svg>
         </div>
-        <input id="search-input" type="text" placeholder="Search our menu..." class="search-input" />
+        <input id="search-input" type="text" placeholder="Search our menu..." class="w-full pl-10 pr-4 py-2 rounded-2xl border border-amber-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 shadow-sm" />
       </div>
       
-      <div class="filter-container" id="category-filters">
-        <button class="category-filter active" data-category="all">All Coffee</button>
-        <!-- Category filters will be added here -->
+      <!-- Category Filters -->
+      <div class="flex space-x-2 overflow-x-auto pb-2 w-full md:w-auto" id="category-filters">
+        <button class="category-filter active whitespace-nowrap px-4 py-2 rounded-2xl bg-amber-800 text-white shadow-md transition-all duration-200 hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2" data-category="all">All Coffee</button>
+        <!-- Category buttons will be added here -->
       </div>
     </div>
     
-    <!-- Menu Items Grid -->
-    <div id="menu-container" class="menu-container">
-      <!-- Loading skeletons -->
-      <div class="menu-item skeleton">
-        <div class="h-48"></div>
-        <div class="p-4">
-          <div class="h-6 w-2/3 rounded mb-2"></div>
-          <div class="h-4 w-1/3 rounded mb-4"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-5/6 rounded"></div>
+    <!-- Menu Grid -->
+    <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Skeleton loaders will be replaced with menu items -->
+      <div class="rounded-2xl bg-white shadow-lg overflow-hidden fadeInUp animate-pulse" style="animation-delay: 0.2s">
+        <div class="h-48 bg-gray-200"></div>
+        <div class="p-5">
+          <div class="h-6 bg-gray-200 rounded-md mb-3 w-3/4"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-3 w-1/3"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-2 w-full"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-5 w-full"></div>
+          <div class="flex justify-between">
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+          </div>
         </div>
       </div>
       
-      <div class="menu-item skeleton">
-        <div class="h-48"></div>
-        <div class="p-4">
-          <div class="h-6 w-2/3 rounded mb-2"></div>
-          <div class="h-4 w-1/3 rounded mb-4"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-5/6 rounded"></div>
+      <div class="rounded-2xl bg-white shadow-lg overflow-hidden fadeInUp animate-pulse" style="animation-delay: 0.3s">
+        <div class="h-48 bg-gray-200"></div>
+        <div class="p-5">
+          <div class="h-6 bg-gray-200 rounded-md mb-3 w-3/4"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-3 w-1/3"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-2 w-full"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-5 w-full"></div>
+          <div class="flex justify-between">
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+          </div>
         </div>
       </div>
       
-      <div class="menu-item skeleton">
-        <div class="h-48"></div>
-        <div class="p-4">
-          <div class="h-6 w-2/3 rounded mb-2"></div>
-          <div class="h-4 w-1/3 rounded mb-4"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-full rounded mb-2"></div>
-          <div class="h-4 w-5/6 rounded"></div>
+      <div class="rounded-2xl bg-white shadow-lg overflow-hidden fadeInUp animate-pulse" style="animation-delay: 0.4s">
+        <div class="h-48 bg-gray-200"></div>
+        <div class="p-5">
+          <div class="h-6 bg-gray-200 rounded-md mb-3 w-3/4"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-3 w-1/3"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-2 w-full"></div>
+          <div class="h-4 bg-gray-200 rounded-md mb-5 w-full"></div>
+          <div class="flex justify-between">
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+            <div class="h-6 bg-gray-200 rounded-md w-20"></div>
+          </div>
         </div>
       </div>
     </div>
   </main>
 
   <!-- Music Player -->
-  <div id="music-player" class="collapsed">
-    <div class="player-header">
-      <div class="player-title" id="track-title">Coffee Shop Vibes</div>
-      <button id="player-toggle" class="player-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-        </svg>
-      </button>
-    </div>
-    
-    <div id="player-controls" class="hidden">
-      <div class="player-controls">
-        <button class="track-button prev-track">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <button class="track-button play-pause">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </button>
-        
-        <button class="track-button next-track">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-      
-      <div class="volume-container">
-        <span class="volume-label">Volume</span>
-        <input type="range" min="0" max="100" value="50" id="volume-control" class="volume-slider">
-      </div>
-      
-      <div class="track-list-container">
-        <div class="track-list-header">
-          <span>Track List</span>
-          <span id="track-number">1/3</span>
+  <div id="music-player" class="fixed bottom-0 left-0 w-full bg-white/95 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] border-t border-amber-200 z-40 transition-transform duration-300 transform collapsed">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <!-- Player Header -->
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <span class="text-amber-800 font-medium" id="track-title">Coffee Shop Vibes</span>
         </div>
-        <ul class="track-list" id="track-list">
-          <li class="active">☕ Morning Coffee Jazz</li>
-          <li>☕ Afternoon Acoustic Cafe</li>
-          <li>☕ Evening Espresso Lounge</li>
-        </ul>
+        <button id="player-toggle" class="text-amber-600 hover:text-amber-800 focus:outline-none transition-colors duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Expanded Controls -->
+      <div id="player-controls" class="hidden mt-3 pb-2">
+        <!-- Playback Controls -->
+        <div class="flex justify-center space-x-8 items-center my-4">
+          <button class="track-button prev-track text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button class="track-button play-pause text-amber-700 hover:text-amber-900 transition-all duration-200 hover:scale-110 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+          
+          <button class="track-button next-track text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Volume Control -->
+        <div class="flex items-center space-x-3 max-w-md mx-auto mb-4">
+          <span class="text-xs text-amber-800">Volume</span>
+          <input type="range" min="0" max="100" value="50" id="volume-control" class="w-full h-2 bg-amber-200 rounded-full appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-amber-700">
+        </div>
+        
+        <!-- Track List -->
+        <div class="max-w-md mx-auto">
+          <div class="flex justify-between items-center mb-1">
+            <p class="text-xs text-amber-800 font-medium">Track List</p>
+            <span id="track-number" class="text-xs text-amber-700">1/3</span>
+          </div>
+          <ul class="space-y-1" id="track-list">
+            <li class="px-3 py-1.5 bg-amber-100/60 rounded-md text-sm text-amber-900 cursor-pointer transition-colors duration-200 hover:bg-amber-200/60 active">☕ Morning Coffee Jazz</li>
+            <li class="px-3 py-1.5 bg-amber-50/60 rounded-md text-sm text-amber-700 cursor-pointer transition-colors duration-200 hover:bg-amber-200/60">☕ Afternoon Acoustic Cafe</li>
+            <li class="px-3 py-1.5 bg-amber-50/60 rounded-md text-sm text-amber-700 cursor-pointer transition-colors duration-200 hover:bg-amber-200/60">☕ Evening Espresso Lounge</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
   
   <!-- Toast Notification -->
-  <div id="toast" class="toast">
-    This is a toast notification
-  </div>
+  <div id="toast" class="fixed right-4 bottom-20 px-4 py-3 rounded-lg bg-amber-800 text-white shadow-lg opacity-0 -translate-y-6 transition-all duration-300 z-50"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', init);
@@ -625,6 +346,29 @@
       
       // Setup search
       setupSearch();
+      
+      // Setup scroll animation
+      setupScrollAnimation();
+    }
+    
+    function setupScrollAnimation() {
+      // Add intersection observer for fade-in animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('menu-item-visible');
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px'
+      });
+      
+      // Observe all menu items
+      document.querySelectorAll('.menu-item-enter').forEach(item => {
+        observer.observe(item);
+      });
     }
     
     function setupEventListeners() {
@@ -632,6 +376,8 @@
       document.getElementById('music-toggle').addEventListener('click', () => {
         const player = document.getElementById('music-player');
         player.classList.toggle('collapsed');
+        player.classList.toggle('translate-y-full');
+        player.classList.toggle('translate-y-0');
         saveMusicPlayerState();
       });
       
@@ -643,9 +389,9 @@
         
         // Change the arrow icon
         if (controls.classList.contains('hidden')) {
-          playerToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>';
+          playerToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>';
         } else {
-          playerToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>';
+          playerToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>';
         }
         
         saveMusicPlayerState();
@@ -695,11 +441,14 @@
           
           if (!state.isCollapsed) {
             document.getElementById('player-controls').classList.remove('hidden');
-            document.getElementById('player-toggle').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>';
+            document.getElementById('player-toggle').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>';
           }
           
           if (!state.isPlayerCollapsed) {
-            document.getElementById('music-player').classList.remove('collapsed');
+            const player = document.getElementById('music-player');
+            player.classList.remove('collapsed');
+            player.classList.remove('translate-y-full');
+            player.classList.add('translate-y-0');
           }
           
           updateTrackInfo();
@@ -790,8 +539,12 @@
       trackItems.forEach((item, index) => {
         if (index === musicPlayerState.currentTrackIndex) {
           item.classList.add('active');
+          item.classList.add('bg-amber-100/60', 'text-amber-900');
+          item.classList.remove('bg-amber-50/60', 'text-amber-700');
         } else {
           item.classList.remove('active');
+          item.classList.add('bg-amber-50/60', 'text-amber-700');
+          item.classList.remove('bg-amber-100/60', 'text-amber-900');
         }
       });
       
@@ -840,16 +593,18 @@
         
         // Update active state
         document.querySelectorAll('.category-filter').forEach(btn => {
-          btn.classList.remove('active');
+          btn.classList.remove('active', 'bg-amber-800', 'text-white');
+          btn.classList.add('bg-amber-100', 'text-amber-800');
         });
         
-        allButton.classList.add('active');
+        allButton.classList.add('active', 'bg-amber-800', 'text-white');
+        allButton.classList.remove('bg-amber-100', 'text-amber-800');
       });
       
       // Add other category buttons
       categories.forEach(category => {
         const button = document.createElement('button');
-        button.className = 'category-filter';
+        button.className = 'category-filter whitespace-nowrap px-4 py-2 rounded-2xl bg-amber-100 text-amber-800 shadow-md transition-all duration-200 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2';
         button.setAttribute('data-category', category.id);
         button.textContent = category.name;
         
@@ -858,10 +613,12 @@
           
           // Update active state
           document.querySelectorAll('.category-filter').forEach(btn => {
-            btn.classList.remove('active');
+            btn.classList.remove('active', 'bg-amber-800', 'text-white');
+            btn.classList.add('bg-amber-100', 'text-amber-800');
           });
           
-          button.classList.add('active');
+          button.classList.add('active', 'bg-amber-800', 'text-white');
+          button.classList.remove('bg-amber-100', 'text-amber-800');
         });
         
         filterContainer.appendChild(button);
@@ -915,6 +672,31 @@
       });
     }
     
+    function generateRatingStars(rating) {
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+      
+      let starsHtml = '';
+      
+      // Full stars
+      for (let i = 0; i < fullStars; i++) {
+        starsHtml += '<span class="text-amber-500">★</span>';
+      }
+      
+      // Half star
+      if (halfStar) {
+        starsHtml += '<span class="text-amber-500">★</span>';
+      }
+      
+      // Empty stars
+      for (let i = 0; i < emptyStars; i++) {
+        starsHtml += '<span class="text-gray-300">★</span>';
+      }
+      
+      return starsHtml;
+    }
+    
     function renderMenuItems(items) {
       const container = document.getElementById('menu-container');
       
@@ -923,68 +705,79 @@
       
       if (items.length === 0) {
         const noResults = document.createElement('div');
-        noResults.className = 'col-span-full text-center py-8 text-gray-400';
+        noResults.className = 'col-span-full text-center py-10 text-amber-800';
         noResults.textContent = 'No coffee items found matching your criteria.';
         container.appendChild(noResults);
         return;
       }
       
-      items.forEach(item => {
+      items.forEach((item, index) => {
         const menuItem = document.createElement('div');
-        menuItem.className = 'menu-item relative';
+        menuItem.className = 'rounded-2xl bg-white shadow-lg overflow-hidden menu-item-enter';
+        menuItem.style.transitionDelay = `${index * 0.1}s`;
+        
+        // Generate rating display (convert likes to a 5-star rating for display)
+        const rating = item.likes > 0 ? Math.min(5, 1 + (item.likes / 10)) : 0;
+        const ratingStars = generateRatingStars(rating);
         
         // Featured badge
         let featuredBadge = '';
         if (item.featured) {
-          featuredBadge = `<div class="menu-badge">Featured</div>`;
+          featuredBadge = `<div class="absolute top-2 right-2 bg-amber-600 text-white text-xs font-bold py-1 px-2 rounded-full shadow-md">Featured</div>`;
         }
         
         menuItem.innerHTML = `
           <div class="relative">
-            <img src="${item.image}" alt="${item.name}" class="menu-img">
+            <img src="${item.image}" alt="${item.name}" class="h-48 w-full object-cover">
             ${featuredBadge}
           </div>
-          <div class="p-4">
+          <div class="p-5">
             <div class="flex justify-between items-start mb-1">
-              <h3 class="menu-title">${item.name}</h3>
-              <span class="menu-price">$${item.formattedPrice}</span>
+              <h3 class="text-amber-900 font-bold text-lg">${item.name}</h3>
+              <span class="text-amber-600 font-bold">$${item.formattedPrice}</span>
             </div>
-            <p class="menu-category">${item.categoryName}</p>
-            <p class="menu-description">${item.description}</p>
             
-            <div class="menu-actions">
-              <div class="flex items-center">
-                <button class="reaction-btn like-btn" data-id="${item.id}">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                  </svg>
-                  <span class="reaction-count">${item.likes}</span>
-                </button>
-              </div>
+            <div class="flex items-center mb-2">
+              <span class="text-xs text-amber-600 font-medium mr-2">${item.categoryName}</span>
+              <div class="rating text-sm">${ratingStars}</div>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-4">${item.description}</p>
+            
+            <div class="flex justify-between items-center">
+              <button class="like-btn flex items-center space-x-1 text-gray-400 hover:text-amber-600 transition-colors duration-200" data-id="${item.id}">
+                <span class="heart text-red-400 text-lg">❤️</span>
+                <span class="text-xs font-medium">${item.likes}</span>
+              </button>
               
-              <div class="flex items-center">
-                <button class="reaction-btn dislike-btn" data-id="${item.id}">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2" />
-                  </svg>
-                  <span class="reaction-count">${item.dislikes}</span>
-                </button>
-              </div>
+              <button class="dislike-btn flex items-center space-x-1 text-gray-400 hover:text-amber-600 transition-colors duration-200" data-id="${item.id}">
+                <span class="thumbs-down text-blue-400 text-lg">👎</span>
+                <span class="text-xs font-medium">${item.dislikes}</span>
+              </button>
             </div>
           </div>
         `;
         
         // Add event listeners
-        menuItem.querySelector('.like-btn').addEventListener('click', async () => {
+        menuItem.querySelector('.like-btn').addEventListener('click', async (e) => {
+          e.currentTarget.classList.add('active');
           await handleReaction(item.id, 'like');
         });
         
-        menuItem.querySelector('.dislike-btn').addEventListener('click', async () => {
+        menuItem.querySelector('.dislike-btn').addEventListener('click', async (e) => {
+          e.currentTarget.classList.add('active');
           await handleReaction(item.id, 'dislike');
         });
         
         container.appendChild(menuItem);
       });
+      
+      // Trigger animation for newly added items
+      setTimeout(() => {
+        document.querySelectorAll('.menu-item-enter').forEach(item => {
+          item.classList.add('menu-item-visible');
+        });
+      }, 100);
     }
     
     async function handleReaction(itemId, reactionType) {
@@ -1008,9 +801,9 @@
             
             // Show success message
             if (reactionType === 'like') {
-              showToast(`Thanks for liking ${menuItem.name}!`);
+              showToast(`❤️ Thanks for loving ${menuItem.name}!`);
             } else {
-              showToast(`Thanks for your feedback on ${menuItem.name}`);
+              showToast(`👎 Thanks for your feedback on ${menuItem.name}`);
             }
           }
         } else {
@@ -1027,16 +820,14 @@
       toast.textContent = message;
       
       if (type === 'error') {
-        toast.style.borderLeftColor = '#ef4444';
+        toast.className = 'fixed right-4 bottom-20 px-4 py-3 rounded-lg bg-red-500 text-white shadow-lg transform translate-y-0 opacity-100 transition-all duration-300 z-50';
       } else {
-        toast.style.borderLeftColor = '#c87941';
+        toast.className = 'fixed right-4 bottom-20 px-4 py-3 rounded-lg bg-amber-800 text-white shadow-lg transform translate-y-0 opacity-100 transition-all duration-300 z-50';
       }
-      
-      toast.classList.add('show');
       
       // Hide the toast after 3 seconds
       setTimeout(() => {
-        toast.classList.remove('show');
+        toast.className = 'fixed right-4 bottom-20 px-4 py-3 rounded-lg bg-amber-800 text-white shadow-lg transform -translate-y-6 opacity-0 transition-all duration-300 z-50';
       }, 3000);
     }
   </script>
