@@ -21,16 +21,16 @@
 
 {#if visible}
   <div 
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-coffee-800 text-white transition-opacity duration-500 ease-in-out {fadeOut ? 'opacity-0' : 'opacity-100'}"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-coffee-900 via-coffee-800 to-coffee-700 text-white transition-opacity duration-500 ease-in-out {fadeOut ? 'opacity-0' : 'opacity-100'}"
   >
     <div class="w-full max-w-sm transform transition-all animate-fade-in-up">
       <!-- Logo image -->
       <div class="flex flex-col items-center">
         <div class="relative w-48 h-48 mb-2">
           <img 
-            src="/images/yoya-logo.jpg" 
+            src="/images/yoya-logo-transparent.png" 
             alt="Yoya Coffee Logo" 
-            class="w-full h-full object-contain animate-bounce-slow rounded-lg shadow-lg"
+            class="w-full h-full object-contain animate-bounce-slow"
           />
         </div>
         
@@ -40,7 +40,7 @@
             Yoya Coffee
           </h1>
           <p class="text-sm text-cream-200 tracking-wider italic font-light animate-reveal-delay">
-            Sip The spirit of connection!
+            Sip The sprint of connection!
           </p>
         </div>
       </div>
