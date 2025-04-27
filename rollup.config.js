@@ -16,9 +16,10 @@ function serve() {
   }
 
   return {
-    writeBundle() {
+    writeBundle: async function () {
       if (server) return;
-      server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+      const { spawn } = await import('child_process');
+      server = spawn('npm', ['run', 'start', '--', '--dev'], {
         stdio: ['ignore', 'inherit', 'inherit'],
         shell: true
       });
@@ -82,23 +83,24 @@ export default [
   }
 },
 // Admin application build
-{
-  input: 'src/admin-main.js',
-  output: {
-    sourcemap: true,
-    format: 'iife',
-    name: 'adminApp',
-    file: 'public/build/admin.js'
-  },
-  plugins: [
-    resolve({
-      browser: true
-    }),
-    commonjs(),
-    !production && livereload('public'),
-    production && terser()
-  ],
-  watch: {
-    clearScreen: false
-  }
-}];
+// {
+//   input: 'src/admin-main.js',
+//   output: {
+//     sourcemap: true,
+//     format: 'iife',
+//     name: 'adminApp',
+//     file: 'public/build/admin.js'
+//   },
+//   plugins: [
+//     resolve({
+//       browser: true
+//     }),
+//     commonjs(),
+//     !production && livereload('public'),
+//     production && terser()
+//   ],
+//   watch: {
+//     clearScreen: false
+//   }
+// }
+];
