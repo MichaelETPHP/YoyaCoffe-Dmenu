@@ -314,9 +314,22 @@
             <div class="flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full">
               <span class="text-2xl">📱</span>
             </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-coffee-800">Telebirr</h3>
+              <p class="text-coffee-600 text-sm">Scan with Telebirr app to pay</p>
+            </div>
+            <div class="flex-shrink-0 ml-2">
+              <img src="/images/payment/telebirr-qr.png" alt="Telebirr QR Code" class="w-24 h-24 rounded-lg border border-coffee-100" />
+            </div>
+          </div>
+          
+          <div class="flex items-center p-4 bg-coffee-50 rounded-xl">
+            <div class="flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full">
+              <span class="text-2xl">🏦</span>
+            </div>
             <div>
-              <h3 class="font-medium text-coffee-800">Mobile Money</h3>
-              <p class="text-coffee-600 text-sm">Pay with Telebirr or other mobile wallets</p>
+              <h3 class="font-medium text-coffee-800">CBE Money Account</h3>
+              <p class="text-coffee-600 text-sm">Account Number: 1000123456789</p>
             </div>
           </div>
           
