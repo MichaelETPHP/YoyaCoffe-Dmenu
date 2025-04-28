@@ -22,7 +22,7 @@ app.get('/api/cors-test', (req, res) => {
 
 // Middleware
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'https://yo1-git-main-michaeletphps-projects.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: [
     'Content-Type',
@@ -460,7 +460,7 @@ setInterval(async () => {
 
 // Start server
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Yoya Coffee MySQL server running at http://0.0.0.0:${PORT}/`);
+  console.log(`Yoya Coffee MySQL server running at https://yo1-git-main-michaeletphps-projects.vercel.app/:${PORT}/`);
 });
 
 // Handle process termination
