@@ -25,7 +25,7 @@
     try {
       // Add a timestamp to prevent caching
       const timestamp = new Date().getTime();
-      const response = await fetch(`http://localhost:5000/api/categories?_=${timestamp}`, {
+      const response = await fetch(`https://yoyaserver-db.onrender.com/api/categories?_=${timestamp}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@
     try {
       // Add a timestamp to prevent caching
       const timestamp = new Date().getTime();
-      const response = await fetch(`http://localhost:5000/api/menu?_=${timestamp}`, {
+      const response = await fetch(`https://yoyaserver-db.onrender.com/api/menu?_=${timestamp}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
