@@ -8,7 +8,7 @@
     "start": "sirv public --single",
     "build": "npx rollup -c",
     "build:watch": "npx rollup -c -w",
-    "postinstall": "chmod +x node_modules/.bin/* || true"
+    "postinstall": "chmod +x node_modules/.bin/* || true" 
   },
   "keywords": [],
   "author": "",
