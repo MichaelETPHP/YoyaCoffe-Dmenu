@@ -39,6 +39,6 @@
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
-   "rollup": "^2.79.2"
+    "rollup": "^4.40.0"
   }
 }
