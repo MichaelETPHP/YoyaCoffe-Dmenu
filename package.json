@@ -6,7 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
     "start": "sirv public --single",
-    "build": "npx rollup -c"
+    "build": "npx rollup -c",
+    "build:watch": "npx rollup -c -w",
+    "postinstall": "chmod +x node_modules/.bin/* || true"
   },
   "keywords": [],
   "author": "",
