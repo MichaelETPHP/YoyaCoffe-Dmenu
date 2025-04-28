@@ -4,6 +4,7 @@ require('./config/env');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +16,27 @@ const dbStorage = require('./models/db-storage');
 // User credentials (for demo purposes)
 const sessions = {}; // Will be replaced with database sessions
 
+app.get('/api/cors-test', (req, res) => {
+  res.json({ message: 'CORS is working!' });
+});
+
 // Middleware
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'Cache-Control',
+    'Pragma',
+    'Expires',
+    'Accept'
+  ],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

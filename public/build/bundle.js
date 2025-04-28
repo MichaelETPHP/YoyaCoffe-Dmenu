@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -6878,7 +6878,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (188:6) {#if !isMobile}
+    // (190:6) {#if !isMobile}
     function create_if_block_8(ctx) {
     	let aside;
     	let div;
@@ -6901,9 +6901,9 @@ var app = (function () {
     			div = element("div");
     			create_component(categoryfilter.$$.fragment);
     			attr_dev(div, "class", "sticky top-4");
-    			add_location(div, file, 189, 10, 5894);
+    			add_location(div, file, 191, 10, 6000);
     			attr_dev(aside, "class", "w-full md:w-64 shrink-0");
-    			add_location(aside, file, 188, 8, 5844);
+    			add_location(aside, file, 190, 8, 5950);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, aside, anchor);
@@ -6936,14 +6936,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(188:6) {#if !isMobile}",
+    		source: "(190:6) {#if !isMobile}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (247:67) 
+    // (249:67) 
     function create_if_block_7(ctx) {
     	let div;
     	let svg;
@@ -6973,19 +6973,19 @@ var app = (function () {
     			attr_dev(path, "stroke-linejoin", "round");
     			attr_dev(path, "stroke-width", "2");
     			attr_dev(path, "d", "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z");
-    			add_location(path, file, 249, 14, 9915);
+    			add_location(path, file, 251, 14, 10021);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "h-12 w-12 mx-auto text-coffee-300 mb-4");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "stroke", "currentColor");
-    			add_location(svg, file, 248, 12, 9759);
+    			add_location(svg, file, 250, 12, 9865);
     			attr_dev(p0, "class", "text-coffee-600 text-lg");
-    			add_location(p0, file, 251, 12, 10067);
+    			add_location(p0, file, 253, 12, 10173);
     			attr_dev(p1, "class", "text-coffee-400 mt-2");
-    			add_location(p1, file, 252, 12, 10158);
+    			add_location(p1, file, 254, 12, 10264);
     			attr_dev(div, "class", "mt-6 text-center p-8 bg-white rounded-2xl shadow-soft");
-    			add_location(div, file, 247, 10, 9679);
+    			add_location(div, file, 249, 10, 9785);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7011,14 +7011,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(247:67) ",
+    		source: "(249:67) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (205:8) {#if searchQuery.trim() && searchResults.length > 0}
+    // (207:8) {#if searchQuery.trim() && searchResults.length > 0}
     function create_if_block_6(ctx) {
     	let div1;
     	let h2;
@@ -7045,11 +7045,11 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "text-2xl font-semibold text-coffee-800 mb-4 font-serif");
-    			add_location(h2, file, 206, 12, 6393);
+    			add_location(h2, file, 208, 12, 6499);
     			attr_dev(div0, "class", "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6");
-    			add_location(div0, file, 207, 12, 6492);
+    			add_location(div0, file, 209, 12, 6598);
     			attr_dev(div1, "class", "mt-6");
-    			add_location(div1, file, 205, 10, 6362);
+    			add_location(div1, file, 207, 10, 6468);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -7098,14 +7098,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(205:8) {#if searchQuery.trim() && searchResults.length > 0}",
+    		source: "(207:8) {#if searchQuery.trim() && searchResults.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (209:14) {#each searchResults as item}
+    // (211:14) {#each searchResults as item}
     function create_each_block_1(ctx) {
     	let div9;
     	let div0;
@@ -7190,51 +7190,51 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[24].image)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*item*/ ctx[24].name);
     			attr_dev(img, "class", "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110");
-    			add_location(img, file, 212, 20, 6908);
+    			add_location(img, file, 214, 20, 7014);
     			attr_dev(div0, "class", "w-full h-48 overflow-hidden");
-    			add_location(div0, file, 211, 18, 6846);
+    			add_location(div0, file, 213, 18, 6952);
     			attr_dev(h3, "class", "font-semibold text-lg text-coffee-800");
-    			add_location(h3, file, 217, 24, 7240);
+    			add_location(h3, file, 219, 24, 7346);
     			attr_dev(p, "class", "text-coffee-600 text-sm mt-1 line-clamp-2");
-    			add_location(p, file, 218, 24, 7331);
+    			add_location(p, file, 220, 24, 7437);
     			attr_dev(div1, "class", "flex-1 pr-3");
-    			add_location(div1, file, 216, 22, 7190);
+    			add_location(div1, file, 218, 22, 7296);
     			attr_dev(path0, "d", "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z");
-    			add_location(path0, file, 223, 26, 7734);
+    			add_location(path0, file, 225, 26, 7840);
     			attr_dev(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg0, "class", "h-4 w-4 text-yellow-500");
     			attr_dev(svg0, "viewBox", "0 0 20 20");
     			attr_dev(svg0, "fill", "currentColor");
-    			add_location(svg0, file, 222, 24, 7595);
+    			add_location(svg0, file, 224, 24, 7701);
     			attr_dev(span0, "class", "ml-1 text-sm font-medium text-coffee-800");
-    			add_location(span0, file, 225, 24, 8148);
+    			add_location(span0, file, 227, 24, 8254);
     			attr_dev(div2, "class", "flex items-center bg-amber-50 px-2 py-1 rounded-full");
-    			add_location(div2, file, 221, 22, 7504);
+    			add_location(div2, file, 223, 22, 7610);
     			attr_dev(div3, "class", "flex justify-between items-start");
-    			add_location(div3, file, 215, 20, 7121);
+    			add_location(div3, file, 217, 20, 7227);
     			attr_dev(div4, "class", "my-4 h-px bg-gradient-to-r from-transparent via-coffee-200 to-transparent");
-    			add_location(div4, file, 228, 20, 8300);
+    			add_location(div4, file, 230, 20, 8406);
     			attr_dev(span1, "class", "text-coffee-800 font-bold text-lg");
-    			add_location(span1, file, 231, 24, 8536);
+    			add_location(span1, file, 233, 24, 8642);
     			attr_dev(div5, "class", "flex flex-col");
-    			add_location(div5, file, 230, 22, 8484);
+    			add_location(div5, file, 232, 22, 8590);
     			attr_dev(path1, "d", "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z");
-    			add_location(path1, file, 236, 26, 8949);
+    			add_location(path1, file, 238, 26, 9055);
     			attr_dev(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg1, "class", "h-4 w-4 text-yellow-500");
     			attr_dev(svg1, "viewBox", "0 0 20 20");
     			attr_dev(svg1, "fill", "currentColor");
-    			add_location(svg1, file, 235, 24, 8810);
+    			add_location(svg1, file, 237, 24, 8916);
     			attr_dev(span2, "class", "ml-1 text-sm font-medium text-coffee-800");
-    			add_location(span2, file, 238, 24, 9363);
+    			add_location(span2, file, 240, 24, 9469);
     			attr_dev(div6, "class", "flex items-center bg-amber-50 px-3 py-1 rounded-full");
-    			add_location(div6, file, 234, 22, 8719);
+    			add_location(div6, file, 236, 22, 8825);
     			attr_dev(div7, "class", "flex justify-between items-center");
-    			add_location(div7, file, 229, 20, 8414);
+    			add_location(div7, file, 231, 20, 8520);
     			attr_dev(div8, "class", "p-5");
-    			add_location(div8, file, 214, 18, 7083);
+    			add_location(div8, file, 216, 18, 7189);
     			attr_dev(div9, "class", "menu-item group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-coffee-100");
-    			add_location(div9, file, 209, 16, 6619);
+    			add_location(div9, file, 211, 16, 6725);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div9, anchor);
@@ -7297,14 +7297,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(209:14) {#each searchResults as item}",
+    		source: "(211:14) {#each searchResults as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (258:8) {#if isMobile}
+    // (260:8) {#if isMobile}
     function create_if_block_5(ctx) {
     	let div;
     	let categoryfilter;
@@ -7326,7 +7326,7 @@ var app = (function () {
     			div = element("div");
     			create_component(categoryfilter.$$.fragment);
     			attr_dev(div, "class", "mb-6");
-    			add_location(div, file, 258, 10, 10369);
+    			add_location(div, file, 260, 10, 10475);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7358,14 +7358,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(258:8) {#if isMobile}",
+    		source: "(260:8) {#if isMobile}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (270:8) {#if !searchQuery.trim()}
+    // (272:8) {#if !searchQuery.trim()}
     function create_if_block_1(ctx) {
     	let current_block_type_index;
     	let if_block;
@@ -7440,14 +7440,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(270:8) {#if !searchQuery.trim()}",
+    		source: "(272:8) {#if !searchQuery.trim()}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (304:10) {:else}
+    // (306:10) {:else}
     function create_else_block(ctx) {
     	let div;
     	let current;
@@ -7472,7 +7472,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "space-y-12");
-    			add_location(div, file, 304, 12, 12868);
+    			add_location(div, file, 306, 12, 12974);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7542,14 +7542,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(304:10) {:else}",
+    		source: "(306:10) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (296:44) 
+    // (298:44) 
     function create_if_block_4(ctx) {
     	let div;
     	let svg;
@@ -7574,19 +7574,19 @@ var app = (function () {
     			attr_dev(path, "stroke-linejoin", "round");
     			attr_dev(path, "stroke-width", "2");
     			attr_dev(path, "d", "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z");
-    			add_location(path, file, 298, 16, 12317);
+    			add_location(path, file, 300, 16, 12423);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "h-12 w-12 mx-auto text-coffee-300 mb-4");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "stroke", "currentColor");
-    			add_location(svg, file, 297, 14, 12159);
+    			add_location(svg, file, 299, 14, 12265);
     			attr_dev(h3, "class", "text-xl font-semibold text-coffee-800 mb-2");
-    			add_location(h3, file, 300, 14, 12638);
+    			add_location(h3, file, 302, 14, 12744);
     			attr_dev(p, "class", "text-coffee-600");
-    			add_location(p, file, 301, 14, 12737);
+    			add_location(p, file, 303, 14, 12843);
     			attr_dev(div, "class", "mt-8 p-8 bg-white rounded-2xl shadow-md text-center");
-    			add_location(div, file, 296, 12, 12079);
+    			add_location(div, file, 298, 12, 12185);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7609,14 +7609,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(296:44) ",
+    		source: "(298:44) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (280:33) 
+    // (282:33) 
     function create_if_block_3(ctx) {
     	let div1;
     	let div0;
@@ -7651,23 +7651,23 @@ var app = (function () {
     			attr_dev(path, "stroke-linejoin", "round");
     			attr_dev(path, "stroke-width", "2");
     			attr_dev(path, "d", "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z");
-    			add_location(path, file, 283, 18, 11451);
+    			add_location(path, file, 285, 18, 11557);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "h-6 w-6 mr-2");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "stroke", "currentColor");
-    			add_location(svg, file, 282, 16, 11317);
+    			add_location(svg, file, 284, 16, 11423);
     			attr_dev(h3, "class", "font-medium");
-    			add_location(h3, file, 285, 16, 11617);
+    			add_location(h3, file, 287, 16, 11723);
     			attr_dev(div0, "class", "flex items-center text-red-600 mb-4");
-    			add_location(div0, file, 281, 14, 11251);
+    			add_location(div0, file, 283, 14, 11357);
     			attr_dev(p, "class", "text-coffee-700 mb-4");
-    			add_location(p, file, 287, 14, 11700);
+    			add_location(p, file, 289, 14, 11806);
     			attr_dev(button, "class", "px-4 py-2 bg-coffee-600 text-white rounded-lg hover:bg-coffee-700 transition-colors");
-    			add_location(button, file, 288, 14, 11765);
+    			add_location(button, file, 290, 14, 11871);
     			attr_dev(div1, "class", "mt-8 p-6 bg-white rounded-2xl shadow-md border border-red-100");
-    			add_location(div1, file, 280, 12, 11161);
+    			add_location(div1, file, 282, 12, 11267);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -7703,14 +7703,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(280:33) ",
+    		source: "(282:33) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (271:10) {#if isLoading}
+    // (273:10) {#if isLoading}
     function create_if_block_2(ctx) {
     	let div4;
     	let div3;
@@ -7729,15 +7729,15 @@ var app = (function () {
     			div2 = element("div");
     			div2.textContent = "Loading menu...";
     			attr_dev(div0, "class", "coffee-loading svelte-5a7tol");
-    			add_location(div0, file, 274, 18, 10944);
+    			add_location(div0, file, 276, 18, 11050);
     			attr_dev(div1, "class", "absolute top-0 left-0 w-full h-full");
-    			add_location(div1, file, 273, 16, 10876);
+    			add_location(div1, file, 275, 16, 10982);
     			attr_dev(div2, "class", "mt-28 text-coffee-700");
-    			add_location(div2, file, 276, 16, 11018);
+    			add_location(div2, file, 278, 16, 11124);
     			attr_dev(div3, "class", "inline-block relative w-20 h-20");
-    			add_location(div3, file, 272, 14, 10814);
+    			add_location(div3, file, 274, 14, 10920);
     			attr_dev(div4, "class", "py-12 text-center");
-    			add_location(div4, file, 271, 12, 10768);
+    			add_location(div4, file, 273, 12, 10874);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -7759,14 +7759,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(271:10) {#if isLoading}",
+    		source: "(273:10) {#if isLoading}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (306:14) {#each categories as category}
+    // (308:14) {#each categories as category}
     function create_each_block(ctx) {
     	let div;
     	let menucategory;
@@ -7785,7 +7785,7 @@ var app = (function () {
     			create_component(menucategory.$$.fragment);
     			t = space();
     			attr_dev(div, "id", div_id_value = /*category*/ ctx[21].id);
-    			add_location(div, file, 306, 16, 12954);
+    			add_location(div, file, 308, 16, 13060);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7821,14 +7821,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(306:14) {#each categories as category}",
+    		source: "(308:14) {#each categories as category}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (327:2) {#if currentMode === 'payment'}
+    // (329:2) {#if currentMode === 'payment'}
     function create_if_block(ctx) {
     	let div16;
     	let div15;
@@ -7951,81 +7951,81 @@ var app = (function () {
     			button1 = element("button");
     			button1.textContent = "Return to Menu";
     			attr_dev(h2, "class", "text-2xl font-bold text-coffee-800");
-    			add_location(h2, file, 330, 10, 13695);
+    			add_location(h2, file, 332, 10, 13801);
     			attr_dev(path, "stroke-linecap", "round");
     			attr_dev(path, "stroke-linejoin", "round");
     			attr_dev(path, "stroke-width", "2");
     			attr_dev(path, "d", "M6 18L18 6M6 6l12 12");
-    			add_location(path, file, 336, 14, 14058);
+    			add_location(path, file, 338, 14, 14164);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "h-6 w-6");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "viewBox", "0 0 24 24");
     			attr_dev(svg, "stroke", "currentColor");
-    			add_location(svg, file, 335, 12, 13933);
+    			add_location(svg, file, 337, 12, 14039);
     			attr_dev(button0, "class", "text-coffee-500 hover:text-coffee-700 transition-colors");
-    			add_location(button0, file, 331, 10, 13773);
+    			add_location(button0, file, 333, 10, 13879);
     			attr_dev(div0, "class", "flex justify-between items-center mb-6");
-    			add_location(div0, file, 329, 8, 13632);
+    			add_location(div0, file, 331, 8, 13738);
     			attr_dev(span0, "class", "text-2xl");
-    			add_location(span0, file, 344, 14, 14411);
+    			add_location(span0, file, 346, 14, 14517);
     			attr_dev(div1, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
-    			add_location(div1, file, 343, 12, 14333);
+    			add_location(div1, file, 345, 12, 14439);
     			attr_dev(h30, "class", "font-medium text-coffee-800");
-    			add_location(h30, file, 347, 14, 14495);
+    			add_location(h30, file, 349, 14, 14601);
     			attr_dev(p0, "class", "text-coffee-600 text-sm");
-    			add_location(p0, file, 348, 14, 14572);
-    			add_location(div2, file, 346, 12, 14475);
+    			add_location(p0, file, 350, 14, 14678);
+    			add_location(div2, file, 348, 12, 14581);
     			attr_dev(div3, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
-    			add_location(div3, file, 342, 10, 14261);
+    			add_location(div3, file, 344, 10, 14367);
     			attr_dev(span1, "class", "text-2xl");
-    			add_location(span1, file, 354, 14, 14842);
+    			add_location(span1, file, 356, 14, 14948);
     			attr_dev(div4, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
-    			add_location(div4, file, 353, 12, 14764);
+    			add_location(div4, file, 355, 12, 14870);
     			attr_dev(h31, "class", "font-medium text-coffee-800");
-    			add_location(h31, file, 357, 14, 14941);
+    			add_location(h31, file, 359, 14, 15047);
     			attr_dev(p1, "class", "text-coffee-600 text-sm");
-    			add_location(p1, file, 358, 14, 15009);
+    			add_location(p1, file, 360, 14, 15115);
     			attr_dev(div5, "class", "flex-1");
-    			add_location(div5, file, 356, 12, 14906);
+    			add_location(div5, file, 358, 12, 15012);
     			if (!src_url_equal(img.src, img_src_value = "/images/payment/telebirr-qr.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Telebirr QR Code");
     			attr_dev(img, "class", "w-24 h-24 rounded-lg border border-coffee-100");
-    			add_location(img, file, 361, 14, 15156);
+    			add_location(img, file, 363, 14, 15262);
     			attr_dev(div6, "class", "flex-shrink-0 ml-2");
-    			add_location(div6, file, 360, 12, 15109);
+    			add_location(div6, file, 362, 12, 15215);
     			attr_dev(div7, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
-    			add_location(div7, file, 352, 10, 14692);
+    			add_location(div7, file, 354, 10, 14798);
     			attr_dev(span2, "class", "text-2xl");
-    			add_location(span2, file, 367, 14, 15486);
+    			add_location(span2, file, 369, 14, 15592);
     			attr_dev(div8, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
-    			add_location(div8, file, 366, 12, 15408);
+    			add_location(div8, file, 368, 12, 15514);
     			attr_dev(h32, "class", "font-medium text-coffee-800");
-    			add_location(h32, file, 370, 14, 15570);
+    			add_location(h32, file, 372, 14, 15676);
     			attr_dev(p2, "class", "text-coffee-600 text-sm");
-    			add_location(p2, file, 371, 14, 15647);
-    			add_location(div9, file, 369, 12, 15550);
+    			add_location(p2, file, 373, 14, 15753);
+    			add_location(div9, file, 371, 12, 15656);
     			attr_dev(div10, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
-    			add_location(div10, file, 365, 10, 15336);
+    			add_location(div10, file, 367, 10, 15442);
     			attr_dev(span3, "class", "text-2xl");
-    			add_location(span3, file, 377, 14, 15923);
+    			add_location(span3, file, 379, 14, 16029);
     			attr_dev(div11, "class", "flex-shrink-0 mr-4 bg-coffee-100 p-3 rounded-full");
-    			add_location(div11, file, 376, 12, 15845);
+    			add_location(div11, file, 378, 12, 15951);
     			attr_dev(h33, "class", "font-medium text-coffee-800");
-    			add_location(h33, file, 380, 14, 16007);
+    			add_location(h33, file, 382, 14, 16113);
     			attr_dev(p3, "class", "text-coffee-600 text-sm");
-    			add_location(p3, file, 381, 14, 16071);
-    			add_location(div12, file, 379, 12, 15987);
+    			add_location(p3, file, 383, 14, 16177);
+    			add_location(div12, file, 381, 12, 16093);
     			attr_dev(div13, "class", "flex items-center p-4 bg-coffee-50 rounded-xl");
-    			add_location(div13, file, 375, 10, 15773);
+    			add_location(div13, file, 377, 10, 15879);
     			attr_dev(div14, "class", "space-y-4");
-    			add_location(div14, file, 341, 8, 14227);
+    			add_location(div14, file, 343, 8, 14333);
     			attr_dev(button1, "class", "mt-6 w-full py-3 bg-coffee-700 text-white font-medium rounded-xl hover:bg-coffee-800 transition-colors");
-    			add_location(button1, file, 386, 8, 16201);
+    			add_location(button1, file, 388, 8, 16307);
     			attr_dev(div15, "class", "bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full mx-4 transform transition-all duration-300 animate-fadeIn svelte-5a7tol");
-    			add_location(div15, file, 328, 6, 13500);
+    			add_location(div15, file, 330, 6, 13606);
     			attr_dev(div16, "class", "fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center");
-    			add_location(div16, file, 327, 4, 13405);
+    			add_location(div16, file, 329, 4, 13511);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div16, anchor);
@@ -8100,7 +8100,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(327:2) {#if currentMode === 'payment'}",
+    		source: "(329:2) {#if currentMode === 'payment'}",
     		ctx
     	});
 
@@ -8215,13 +8215,13 @@ var app = (function () {
     			t9 = space();
     			if (if_block4) if_block4.c();
     			attr_dev(div0, "class", "flex-1");
-    			add_location(div0, file, 199, 6, 6165);
+    			add_location(div0, file, 201, 6, 6271);
     			attr_dev(div1, "class", "max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6");
-    			add_location(div1, file, 185, 4, 5689);
+    			add_location(div1, file, 187, 4, 5795);
     			attr_dev(main, "class", "flex-1 w-full");
-    			add_location(main, file, 184, 2, 5656);
+    			add_location(main, file, 186, 2, 5762);
     			attr_dev(div2, "class", "min-h-screen flex flex-col bg-amber-50");
-    			add_location(div2, file, 179, 0, 5534);
+    			add_location(div2, file, 181, 0, 5640);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8460,14 +8460,15 @@ var app = (function () {
     			// Add a timestamp to prevent caching
     			const timestamp = new Date().getTime();
 
-    			const response = await fetch(`/api/categories?_=${timestamp}`, {
+    			const response = await fetch(`http://localhost:5000/api/categories?_=${timestamp}`, {
     				headers: {
     					'Accept': 'application/json',
     					'Content-Type': 'application/json',
     					'Cache-Control': 'no-cache, no-store, must-revalidate',
     					'Pragma': 'no-cache',
     					'Expires': '0'
-    				}
+    				},
+    				credentials: 'include'
     			});
 
     			if (!response.ok) {
@@ -8497,14 +8498,15 @@ var app = (function () {
     			// Add a timestamp to prevent caching
     			const timestamp = new Date().getTime();
 
-    			const response = await fetch(`/api/menu?_=${timestamp}`, {
+    			const response = await fetch(`http://localhost:5000/api/menu?_=${timestamp}`, {
     				headers: {
     					'Accept': 'application/json',
     					'Content-Type': 'application/json',
     					'Cache-Control': 'no-cache, no-store, must-revalidate',
     					'Pragma': 'no-cache',
     					'Expires': '0'
-    				}
+    				},
+    				credentials: 'include'
     			});
 
     			if (!response.ok) {

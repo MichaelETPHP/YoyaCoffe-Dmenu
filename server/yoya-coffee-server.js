@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -52,7 +53,7 @@ let categories = [
   { id: 2, name: 'Iced Coffee' },
   { id: 3, name: 'Espresso' },
   { id: 4, name: 'Tea' },
-  { id: 5, name: 'Pastries' }
+  { id: 5, name: 'TEST' }
 ];
 
 // User credentials (for demo purposes)
@@ -66,6 +67,7 @@ const sessions = {};
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 // Serve static files from public directory
 app.use(express.static('public'));

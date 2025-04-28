@@ -25,14 +25,15 @@
     try {
       // Add a timestamp to prevent caching
       const timestamp = new Date().getTime();
-      const response = await fetch(`/api/categories?_=${timestamp}`, {
+      const response = await fetch(`http://localhost:5000/api/categories?_=${timestamp}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
           'Expires': '0'
-        }
+        },
+        credentials: 'include'
       });
       
       if (!response.ok) {
@@ -60,14 +61,15 @@
     try {
       // Add a timestamp to prevent caching
       const timestamp = new Date().getTime();
-      const response = await fetch(`/api/menu?_=${timestamp}`, {
+      const response = await fetch(`http://localhost:5000/api/menu?_=${timestamp}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
           'Expires': '0'
-        }
+        },
+        credentials: 'include'
       });
       
       if (!response.ok) {
